@@ -42,6 +42,9 @@ Compiler Errors vs. Linker Errors:
 		- Some function definition doesnt exist or cant be found
 		- Some library (and its functions) doesnt exist or cant be found.
 
-8:25
+Declaration
+- Creates an identifier that can be referenced elsewhere in our code
+- Identifieres are the variables, functions, and user-defined types (clases) we need to make our program work.
+- Referencing an identifier that doesn't exist is a compiler error
 
  */
