@@ -3,11 +3,11 @@
 
 #include <iostream>
 
-int demo1();
+int demo2();
 
 int main()
 {
-    demo1();
+    demo2();
     return 0;
 }
 

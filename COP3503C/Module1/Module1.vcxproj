@@ -130,6 +130,7 @@
     <ClCompile Include="..\ConsoleApplication1\LECTURE1.1.txt" />
     <ClCompile Include="..\ConsoleApplication1\LECTURE1.2.txt" />
     <ClCompile Include="Demo1.cpp" />
+    <ClCompile Include="Demo2.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
