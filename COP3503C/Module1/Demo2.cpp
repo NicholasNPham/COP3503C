@@ -1,8 +1,28 @@
 #include <iostream>
 using namespace std;
 
+int get_numbers();
+void positive_or_negative(int sum);
+
+int demo2()
+{
+
+	// Task: Get user input for array of values
+	int sum = get_numbers();
+	// Check to see if the sum is positive or negative
+	positive_or_negative(sum);
+
+	// >> Extraction operator
+	// << Insertion operator
+	
+
+
+	return 0;
+
+}
+
 int get_numbers()
-{ 
+{
 
 	int numbers[3];
 
@@ -26,29 +46,13 @@ int get_numbers()
 }
 
 void positive_or_negative(int sum)
-{ 
+{
+
 	if (sum > 0)
 		cout << "Sum is positive!" << endl;
 	else if (sum < 0)
 		cout << "Sum is negative!" << endl;
 	else
 		cout << "Sum is equal to zero!" << endl;
-
-}
-
-int demo2()
-{
-
-	// Task: Get user input for array of values
-	int sum = get_numbers();
-	// Check to see if the sum is positive or negative
-	positive_or_negative(sum);
-
-	// >> Extraction operator
-	// << Insertion operator
-	
-
-
-	return 0;
 
 }
