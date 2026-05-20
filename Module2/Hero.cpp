@@ -54,3 +54,8 @@ int Hero::get_power_level()
 {
 	return _level * 5 +_strength;
 }
+
+void Hero::set_name(string name)
+{
+	_name = name;
+}
