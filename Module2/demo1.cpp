@@ -12,6 +12,13 @@ int hero()
 	int level;      // What level are they?
 	int experience; // Get experience points to level up!
 
+	// Take Damage
+	hitpoints -= 5;
+
+	// Get Experience
+	experience += 100;
+
+
 	return 0;
 
 }
