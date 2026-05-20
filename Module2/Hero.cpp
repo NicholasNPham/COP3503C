@@ -28,9 +28,9 @@ Hero::Hero(string name, int strength, int hitpoints)
 
 void Hero::PrintInfo()
 {
-	cout << "Name " << _name << endl;
-	cout << "Strength " << _strength << endl;
-	cout << "Hitpoints " << _hitpoints << endl;
-	cout << "level " << _level << endl;
-	cout << "experience " << _experience << endl;
+	cout << "Name: " << _name << endl;
+	cout << "Strength: " << _strength << endl;
+	cout << "Hitpoints: " << _hitpoints << endl;
+	cout << "Level: " << _level << endl;
+	cout << "Experience: " << _experience << " / 100" << endl;
 }
