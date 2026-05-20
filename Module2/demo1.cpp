@@ -6,6 +6,8 @@ using namespace std;
 int hero()
 {
 	Hero my_hero("Nick", 10, 25); // An Instance of the Hero Class
+	
+	my_hero.set_name("Nick the Cyborg");
 	my_hero.PrintInfo();
 
 	Hero sidekick("Nick Jr.", 100, 300);
