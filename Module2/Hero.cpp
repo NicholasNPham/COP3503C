@@ -2,16 +2,6 @@
 #include <iostream>
 using namespace std;
 
-// Function Definitions
-Hero::Hero()
-{
-	_name = "Nick";
-	_strength = 1;
-	_hitpoints = 1;
-	_level = 1;
-	_experience = 0;
-}
-
 Hero::Hero(string name, int strength, int hitpoints)
 {
 	// User parameters for initialization
@@ -25,7 +15,6 @@ Hero::Hero(string name, int strength, int hitpoints)
 
 }
 
-
 void Hero::PrintInfo()
 {
 	cout << "Name: " << _name << endl;
@@ -33,4 +22,35 @@ void Hero::PrintInfo()
 	cout << "Hitpoints: " << _hitpoints << endl;
 	cout << "Level: " << _level << endl;
 	cout << "Experience: " << _experience << " / 100" << endl;
+	cout << "Power Level: " << get_power_level() << endl;
+}
+
+string Hero::get_name()
+{
+	return _name;
+}
+
+int Hero::get_strength()
+{
+	return _strength;
+}
+
+int Hero::get_hitpoints()
+{
+	return _hitpoints;
+}
+
+int Hero::get_level()
+{
+	return _hitpoints;
+}
+
+int Hero::get_experience()
+{
+	return _experience;
+}
+
+int Hero::get_power_level()
+{
+	return _level * 5 +_strength;
 }
