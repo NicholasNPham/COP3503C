@@ -4,11 +4,11 @@
 #include <string>
 using namespace std;
 
-int hero();
+int second_hero();
 
 int main()
 {
-    hero();
-    cout << "Working in Demo1" << "\n";
+    second_hero();
+    cout << "\n" << "Working in Demo2" << "\n";
     return 0;
 }
