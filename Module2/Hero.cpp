@@ -20,8 +20,8 @@ Hero::Hero(string name, int strength, int hitpoints)
 	_hitpoints = hitpoints;
 	
 	// Use defaults
-	level = 1;
-	experience = 0;
+	_level = 1;
+	_experience = 0;
 
 }
 
