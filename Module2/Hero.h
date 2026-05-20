@@ -30,5 +30,13 @@ public:
 	int get_power_level();
 
 	/* =============== MUTATORS ===============*/
+
+	// This is actually being used
+	void set_hitpoints(int value);
+
+	// example work
 	void set_name(string name);
+	void set_strength(int value);
+	void set_level(int value);
+	void set_experience(int value);
 };

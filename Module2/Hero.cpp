@@ -59,3 +59,12 @@ void Hero::set_name(string name)
 {
 	_name = name;
 }
+
+void Hero::set_hitpoints(int value)
+{
+	if (value > 500)
+		value = 500;
+	if (value < 1)
+		value = 1;
+	_hitpoints = value;
+}
