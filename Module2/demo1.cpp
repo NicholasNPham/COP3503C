@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-int hero()
+class Hero
 {
 
 	// Data to represent our hero
@@ -12,12 +12,12 @@ int hero()
 	int level;      // What level are they?
 	int experience; // Get experience points to level up!
 
-	// Take Damage
-	hitpoints -= 5;
+};
 
-	// Get Experience
-	experience += 100;
 
+int hero()
+{
+	Hero my_hero;
 
 	return 0;
 
