@@ -15,9 +15,17 @@ class Hero
 
 public:
 	// Prototype == Delcaration
-	Hero(); // Default Constructor
-	Hero(string name, int strength, int hitpoints);
+	
+	Hero(string name = "Nick", int strength = 10, int hitpoints = 25);
 
 	void PrintInfo();
 
+	/* =============== ACCESSORS ===============*/
+	string get_name();
+	int get_strength();
+	int get_hitpoints();
+	int get_level();
+	int get_experience();
+
+	int get_power_level();
 };
