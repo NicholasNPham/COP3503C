@@ -11,6 +11,9 @@ int hero()
 	Hero sidekick("Nick Jr.", 100, 300);
 	sidekick.PrintInfo();
 
+	// How many hitpoint does Nick Jr. Have?
+	cout << "Nick Jr. Hitpoints: " << sidekick.get_hitpoints() << endl;
+
 	return 0;
 
 }
