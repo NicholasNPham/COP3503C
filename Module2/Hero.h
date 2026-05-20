@@ -28,4 +28,7 @@ public:
 	int get_experience();
 
 	int get_power_level();
+
+	/* =============== MUTATORS ===============*/
+	void set_name(string name);
 };
