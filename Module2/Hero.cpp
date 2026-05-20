@@ -8,6 +8,7 @@ Hero::Hero(string name, int strength, int hitpoints)
 	_name = name;
 	_strength = strength;
 	_hitpoints = hitpoints;
+	_max_hitpoints = hitpoints;
 	
 	// Use defaults
 	_level = 1;
@@ -19,7 +20,7 @@ void Hero::PrintInfo()
 {
 	cout << "Name: " << _name << endl;
 	cout << "Strength: " << _strength << endl;
-	cout << "Hitpoints: " << _hitpoints << endl;
+	cout << "Hitpoints: " << _hitpoints << " / " << _max_hitpoints << endl;
 	cout << "Level: " << _level << endl;
 	cout << "Experience: " << _experience << " / 100" << endl;
 	cout << "Power Level: " << get_power_level() << endl;
@@ -67,4 +68,46 @@ void Hero::set_hitpoints(int value)
 	if (value < 1)
 		value = 1;
 	_hitpoints = value;
+}
+
+void Hero::take_damage(int amount)
+{
+	_hitpoints -= amount;
+
+	if (_hitpoints < 0)
+		_hitpoints = 0;
+}
+
+void Hero::get_healing(int amount)
+{
+	_hitpoints += amount;
+
+	if (_hitpoints > _max_hitpoints)
+		_hitpoints = _max_hitpoints;
+}
+
+void Hero::gain_experience(int amount)
+{
+	_experience += amount;
+
+	if (_experience >= 100)
+	{
+		// We've leveled up!
+		level_up();
+		_experience -= 100;
+	}
+}
+
+
+void Hero::level_up()
+{
+	if (_experience >= 100)
+	{
+		_level++;
+		_strength++;
+		_hitpoints += 5;
+		_max_hitpoints += 5;
+		_experience += 5;
+
+	}
 }

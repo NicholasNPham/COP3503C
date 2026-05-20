@@ -7,11 +7,14 @@ class Hero
 {
 
 	// Data to represent our hero
-	string _name;    // Who is this?
-	int _strength;   // How strong are they?
-	int _hitpoints;  // How much damage can they take?
-	int _level;      // What level are they?
-	int _experience; // Get experience points to level up!
+	string _name;       // Who is this?
+	int _strength;      // How strong are they?
+	int _hitpoints;     // How much damage can they take?
+	int _max_hitpoints; // maximum amount of health
+	int _level;         // What level are they?
+	int _experience;    // Get experience points to level up!
+
+	void level_up();
 
 public:
 	// Prototype == Delcaration
@@ -39,4 +42,10 @@ public:
 	void set_strength(int value);
 	void set_level(int value);
 	void set_experience(int value);
+
+	void take_damage(int amount);
+	void get_healing(int amount);
+
+	void gain_experience(int amount);
+	
 };
