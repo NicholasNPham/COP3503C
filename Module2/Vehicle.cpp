@@ -1,4 +1,5 @@
 #include "Vehicle.h"
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -29,5 +30,11 @@ float Vehicle::GetPrice()
 string Vehicle::GetYearMakeModel()
 {
 	return to_string(_year) + " " + _make + " " + _model;
+
+}
+
+void Vehicle::Display()
+{
+	cout << GetYearMakeModel() << " $" << _price << " " << _mileage;
 
 }
