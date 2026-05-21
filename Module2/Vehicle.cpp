@@ -35,6 +35,6 @@ string Vehicle::GetYearMakeModel()
 
 void Vehicle::Display()
 {
-	cout << GetYearMakeModel() << " $" << _price << " " << _mileage;
+	cout << GetYearMakeModel() << " $" << _price << " " << _mileage << endl;
 
 }
