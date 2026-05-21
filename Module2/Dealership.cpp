@@ -37,5 +37,9 @@ float Dealership::GetAveragePrice()
 
 void Dealership::ShowInventory()
 {
-
+	for (int i = 0; i < _showrooms.size(); i++)
+	{
+		_showrooms[i].ShowInventory();
+	}
+	cout << "Average car price: $" << GetAveragePrice() << endl;
 }
