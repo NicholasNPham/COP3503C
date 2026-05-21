@@ -32,14 +32,25 @@ float Dealership::GetAveragePrice()
 	for (int i = 0; i < _showrooms.size(); i++)
 		count += _showrooms[i].GetVehicleList().size();
 
+	if (count == 0)
+		return 0;
+
 	return total / count;
 }
 
 void Dealership::ShowInventory()
 {
-	for (int i = 0; i < _showrooms.size(); i++)
+	if (_showrooms.size() == 0)
 	{
-		_showrooms[i].ShowInventory();
+		cout << _name << " is empty!" << endl;
 	}
-	cout << "Average car price: $" << GetAveragePrice() << endl;
+	else
+	{
+		for (int i = 0; i < _showrooms.size(); i++)
+		{
+			_showrooms[i].ShowInventory();
+			cout << endl;
+		}
+	}
+	cout << "Average car price: $" << GetAveragePrice();
 }
