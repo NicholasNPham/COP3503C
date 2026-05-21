@@ -20,3 +20,8 @@ Vehicle::Vehicle(string make, string model, unsigned int year, float price, unsi
 	_mileage = mileage;
 
 }
+
+float Vehicle::GetPrice()
+{
+	return _price;
+}
