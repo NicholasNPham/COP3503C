@@ -4,11 +4,11 @@
 #include <string>
 using namespace std;
 
-int second_hero();
+int vehicle_main();
 
 int main()
 {
-    second_hero();
+    vehicle_main();
     cout << "\n" << "Working in Demo2" << "\n";
     return 0;
 }
