@@ -24,7 +24,7 @@ vector <Vehicle> Showroom::GetVehicleList()
 
 void Showroom::ShowInventory()
 {
-
+	cout << "Vehicles in " << _name << endl;
 	for (int i = 0; i < _vehicles.size(); i++)
 		_vehicles[i].Display();
 }
