@@ -24,16 +24,23 @@ vector <Vehicle> Showroom::GetVehicleList()
 
 void Showroom::ShowInventory()
 {
-	cout << "Vehicles in " << _name << endl;
-	for (int i = 0; i < _vehicles.size(); i++)
-		_vehicles[i].Display();
+	if (_vehicles.size() == 0)
+	{
+		cout << _name << " is empty!" << endl;
+	}
+	else
+	{
+		cout << "Vehicles in " << _name << endl;
+		for (unsigned int i = 0; i < _vehicles.size(); i++)
+			_vehicles[i].Display();
+	}
 }
 
 float Showroom::GetInventoryValue()
 {
 	float total_price_of_showroom = 0;
 
-	for (int i = 0; i < _vehicles.size(); i++)
+	for (unsigned int i = 0; i < _vehicles.size(); i++)
 		total_price_of_showroom += _vehicles[i].GetPrice();
 
 	return total_price_of_showroom;
