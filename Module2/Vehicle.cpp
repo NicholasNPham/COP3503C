@@ -25,3 +25,9 @@ float Vehicle::GetPrice()
 {
 	return _price;
 }
+
+string Vehicle::GetYearMakeModel()
+{
+	return to_string(_year) + " " + _make + " " + _model;
+
+}
