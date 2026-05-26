@@ -10,6 +10,13 @@ void get_some_even_numbers(int count, vector<int>& copy)
 		copy.push_back(value);
 }
 
+void print_numbers(vector<int>& numbers)
+{
+	for (unsigned int i = 0; i < numbers.size(); i++)
+		cout << numbers[i] << " ";
+}
+
+
 void strongest_hero(Hero* one, Hero& two)
 {
 	
@@ -38,9 +45,7 @@ int demo1()
 	vector<int> numbers;
 	get_some_even_numbers(10, numbers);
 
-	for (unsigned int i = 0; i < numbers.size(); i++)
-		cout << numbers[i] << " ";
-
+	print_numbers(numbers);
 
 	return 0;
 }
