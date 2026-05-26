@@ -4,6 +4,12 @@
 #include "Hero.h"
 using namespace std;
 
+void get_some_even_numbers(int count, vector<int>& copy)
+{
+	for (int i = 0, value = 2; i < count; i++, value += 2)
+		copy.push_back(value);
+}
+
 void strongest_hero(Hero* one, Hero& two)
 {
 	
@@ -24,10 +30,17 @@ int demo1()
 	Hero wolverine("Wolverine", 50, 60);
 	Hero cyclops("Cyclops", 30, 80);
 
-	cout << "Address of Wolverine (in main): " << &wolverine << endl;
-	cout << "Address of Wolverine (in main): " << &cyclops << endl;
+	//cout << "Address of Wolverine (in main): " << &wolverine << endl;
+	//cout << "Address of Wolverine (in main): " << &cyclops << endl;
 
-	strongest_hero(&wolverine, cyclops);
+	//strongest_hero(&wolverine, cyclops);
+	
+	vector<int> numbers;
+	get_some_even_numbers(10, numbers);
+
+	for (unsigned int i = 0; i < numbers.size(); i++)
+		cout << numbers[i] << " ";
+
 
 	return 0;
 }
