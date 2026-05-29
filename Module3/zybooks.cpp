@@ -138,6 +138,16 @@ pass by reference
 - A pass-by-reference parameter does not create a local copy of the argument, but rather the parameter refers directly to the argumenty variables memory location
 - Appending & to a parameters data type makes the parameter pass-by-reference type
 
-
+Remember; 
+- the & (Ampersand) in a function directly affects the variables that are initialized in main.
+- so if main has variables like int it finds the memory address that is located in main and directly affects the variables in main from the function. 
+- ComputeChange uses & because you need 4 values back and return can only give you one
+- GallonsToLiters uses return because only one value comes back, no need to touch main's memory
+- InchToCm uses return because one input one output, you can even skip the variable and return the formula directly
+- GetUserFullName uses void and & because two strings need to come back and return can only handle one, function does the cin internally and fills main's empty boxes directly
+- Circle area and diameter get split into two separate functions with return because they are independent of each other and separately useful, no need for & when each function only outputs one thing
+- Pass by value gives the function a copy of the variable, original is never touched, use it when you only need to read the input and return one thing back
+- MetersToFeetInches uses pass by value for the input userMeters and pass by reference for userFeet and userInches because you need two outputs back and the input never needs to be modified
+- When you see & parameters don't create extra local variables, just use them directly because they already ARE main's variables, if you're assigning back and forth you forgot what & is doing
 
 */
