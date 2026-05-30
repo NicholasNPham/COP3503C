@@ -1,36 +1,29 @@
 #include <iostream>
+#include "DynamicArray.h"
 using namespace std;
 
 int demo1()
 {
-	int count;
-	cin >> count;
-	int* someArray = new int[10];
-	// Assume cool stuff being done with the array
+	DynamicArray array(5); // 1
+	array.Add(9);
+	array.Add(99);
+	array.Add(999);
+	array.Add(9999);
+	array.Add(99999);
 
-	//Goal: Grow the array by 1 element
+	array.Print();
 	
-	int* newArray = new int[11];
+	array.Add(9999999);
 
-	for (int i = 0; i < 10; i++)
-		newArray[i] = someArray[i];
+	array.Print();
 
-	delete[] someArray;
+	array.Remove();
 
-	someArray = newArray;
-	someArray[10] = 500;
+	array.Print();
 
-	//Goal: Grow the array by 1 element
+	array.Clear();
 
-	int* newArray = new int[12];
-
-	for (int i = 0; i < 11; i++)
-		newArray[i] = someArray[i];
-
-	delete[] someArray;
-
-	someArray = newArray;
-	someArray[11] = 200;
+	array.Print();
 
 	return 0;
 }
