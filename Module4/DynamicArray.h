@@ -19,9 +19,9 @@ public:
 	DynamicArray& operator=(const DynamicArray& otherObject);
 
 	// Accessors
-	const int* getData();
-	int getCapacity();
-	int getSize();
+	const int* getData() const;
+	int getCapacity() const;
+	int getSize() const;
 
 	// Mutators
 	void Add(int newItem);
@@ -29,6 +29,6 @@ public:
 	void Clear();
 
 	// Behaviors
-	void Print();
+	void Print() const;
 
 };

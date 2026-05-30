@@ -20,17 +20,17 @@ DynamicArray::~DynamicArray()
 	delete[] _data;
 }
 
-int* DynamicArray::getData()
+const int* DynamicArray::getData() const
 {
 	return _data;
 }
 
-int DynamicArray::getCapacity()
+int DynamicArray::getCapacity() const
 {
 	return _capacity;
 }
 
-int DynamicArray::getSize()
+int DynamicArray::getSize() const
 {
 	return _size;
 }
@@ -83,7 +83,7 @@ void DynamicArray::Clear()
 	Reset(1);
 }
 
-void DynamicArray::Print()
+void DynamicArray::Print() const
 {
 	cout << "size: " << _size << " capacity: " << _capacity << endl;
 	for (int i = 0; i < _size; i++)
