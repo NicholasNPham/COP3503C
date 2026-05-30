@@ -12,8 +12,14 @@ public:
 	DynamicArray(int initialCapacity = 1); // tilda key if you need it ~
 	~DynamicArray();
 
+	// copy constructor
+	DynamicArray(const DynamicArray& otherObject);
+
+	// copy Assignment Operator
+	DynamicArray& operator=(const DynamicArray& otherObject);
+
 	// Accessors
-	int* getData();
+	const int* getData();
 	int getCapacity();
 	int getSize();
 
