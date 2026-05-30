@@ -2,7 +2,7 @@
 #include "DynamicArray.h"
 using namespace std;
 
-void Foo(DynamicArray someArray) // calling the copy constructor for some array
+void Foo(DynamicArray& someArray) // calling the copy constructor for some array
 {
 	someArray.Print();
 }
