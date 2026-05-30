@@ -7,16 +7,21 @@ class DynamicArray
 
 	void Reset(int initialCapacity);
 
+	void CopyFromObject(const DynamicArray& otherObject);
+
 public:
 	// Construction / Destruction
 	DynamicArray(int initialCapacity = 1); // tilda key if you need it ~
 	~DynamicArray();
 
 	// copy constructor
+	// ClassName (const ClassName& otherObject);
 	DynamicArray(const DynamicArray& otherObject);
 
 	// copy Assignment Operator
-	DynamicArray& operator=(const DynamicArray& otherObject);
+	// ClassName& operator(const ClassName& rightHandSide)
+	DynamicArray& operator=(const DynamicArray& rhs);
+
 
 	// Accessors
 	const int* getData() const;

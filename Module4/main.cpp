@@ -1,9 +1,9 @@
 #include <iostream>
 
-int demo1();
+int demo4();
 
 int main()
 {
-    demo1();
+    demo4();
     std::cout << "WORKING WITH DEMO1\n";
 }

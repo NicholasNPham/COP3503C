@@ -140,6 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="demo1.cpp" />
+    <ClCompile Include="demo2.cpp" />
+    <ClCompile Include="demo3.cpp" />
+    <ClCompile Include="demo4.cpp" />
     <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="Lecture1.cpp" />
     <ClCompile Include="Lecture2.cpp" />

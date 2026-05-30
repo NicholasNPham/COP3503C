@@ -10,6 +10,18 @@ void DynamicArray::Reset(int initialCapacity)
 
 }
 
+void DynamicArray::CopyFromObject(const DynamicArray& otherObject)
+{
+	this->_size = 0;
+	this->_capacity = otherObject._capacity;
+
+	// deep copy
+	_data = new int[_capacity];
+
+	for (int i = 0; i < otherObject._size; i++)
+		Add(otherObject._data[i]);
+}
+
 DynamicArray::DynamicArray(int initialCapacity)
 {
 	Reset(initialCapacity);
@@ -19,6 +31,29 @@ DynamicArray::~DynamicArray()
 {
 	delete[] _data;
 }
+
+// copy all of the "other objects data into "this" objects data
+DynamicArray::DynamicArray(const DynamicArray& otherObject)
+{
+	CopyFromObject(otherObject);
+
+}
+
+// 
+DynamicArray& DynamicArray::operator=(const DynamicArray& rhs)
+{
+
+	// 0. Get rid of any old data
+	delete[] _data;
+	_size = 0;
+
+	// 1. copy all the data from the the other object
+	CopyFromObject(rhs);
+
+	return *this; // this line wall always look like this
+
+}
+
 
 const int* DynamicArray::getData() const
 {
@@ -77,6 +112,7 @@ void DynamicArray::Remove()
 
 void DynamicArray::Clear()
 {
+	cout << "Deallocating memory at: " << _data << endl;
 	// get rid of any current/soon-to-be-old data
 	delete[] _data;
 	// reset everything to capacity of 1
