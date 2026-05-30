@@ -36,10 +36,8 @@ DynamicArray::~DynamicArray()
 DynamicArray::DynamicArray(const DynamicArray& otherObject)
 {
 	CopyFromObject(otherObject);
-
 }
 
-// 
 DynamicArray& DynamicArray::operator=(const DynamicArray& rhs)
 {
 
@@ -53,7 +51,6 @@ DynamicArray& DynamicArray::operator=(const DynamicArray& rhs)
 	return *this; // this line wall always look like this
 
 }
-
 
 const int* DynamicArray::getData() const
 {

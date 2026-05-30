@@ -19,7 +19,7 @@ int demo4()
 	copy.Add(300);
 
 	// Reset to original array
-	 //copy = array; // copy assignment operator
+	 copy = array; // copy assignment operator
 
 	array.Print();
 	copy.Print();
