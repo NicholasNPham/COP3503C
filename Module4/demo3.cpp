@@ -2,6 +2,12 @@
 #include "DynamicArray.h"
 using namespace std;
 
+void Foo(DynamicArray someArray) // calling the copy constructor for some array
+{
+	someArray.Print();
+}
+
+
 int demo3()
 {
 	DynamicArray array;
@@ -12,17 +18,11 @@ int demo3()
 	array.Add(299);
 	array.Add(399);
 
-	int* someMemory = new int[100];
-	int* copy = someMemory;
+	array.Print();
+	Foo(array);
+	array.Print();
 
-	cout << someMemory << endl;
-	cout << copy << endl;
 
-	someMemory[0] = 50;
-
-	cout << copy[0] << endl;
-	delete[] someMemory; // delete new int [100]
-	cout << copy[0] << endl;
 
 	return 0;
 }
