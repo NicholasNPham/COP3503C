@@ -1,0 +1,240 @@
+Remember to change the file extension of this file to .cpp instead of .txt and add it to module 4 source file directory
+
+/*
+11.1 ADDITIONAL MATERIAL: DESTRUCTORS (SIMPLE LINKED LISTS)
+	- A destructor:
+		- A special class Member function that is called automatically when a variable of that class type is destroyed
+		- In C++ class objects commonly use dynamically allocated data that is deallocated by the class's destructor
+		- Example:
+			- A linked list class dynamically allocates nodes when adding items to the list
+			- Without a destructor, the link list's nodes are not deallocated.
+			- The linked list class destructor should be implemented to deallocate each node in the list.
+	- Concept 1:
+		- What is a destructor
+			- real-world analogy
+				- A CONSTRUCTOR
+					- A constructor sets up the object after memory has already allocated
+					- "new" goes and find you a house (Allocates memory on the heap), and
+					- The constructor is the "moving truck that furnishes it (initializes the member variables)
+				- A DESTRUCTOR is like moving out.
+					- It cleans up resources the object was responsible for -- Specifically, any heap memory the object allocated during its lifetime
+					- Then after the destructor runs, the memory for the object gets freed.
+	- Concept 1.1:
+		- What is a linked-List
+			- Example Code:
+			
+				class LinkedListNode 
+				{
+				public:
+   				...
+   				int data;
+   				LinkedListNode* next; // The pointer is next itself, and its pointing to another node which is the class LinkedListNode class object itself.
+				};
+
+				class LinkedList // blueprint
+				{
+				public:
+  				 ...
+  				 LinkedListNode* head; // pointer variable name "head" that points to the LinkedListNode class object. just declaring
+				};
+
+				int main() 
+				{
+   				LinkedList* list1; // declares a pointer to linkedlist class object that is named head
+   				list1 = new LinkedList(); // new goes to the heap, creates a linkedList object using the blueprint and RETURNS its address and stores it in list1
+   				... // Add items to list1
+   				delete list1;
+				}
+
+	- IMPLEMENTING THE LINKEDLIST CLASS DESTRUCTOR
+		- The syntax for a class's destructor function is similar to a class's destructor function, but with a "~" (called a "tilde" character) prepended to the function name
+		- A destructor has no parameters and no return value.
+		- So the LinkedListNode and LinkedList class destructor are declared as ~LinkedListNode() and ~LinkedList();. respectively
+		- Summary:
+			- A destructor has three rules:
+				- Named with ~ followed by the class name
+				- No parameters
+				- No return value
+		
+Example Code:
+
+#include <iostream>
+using namespace std;
+
+class LinkedListNode {
+public:
+   LinkedListNode(int dataValue) {
+      cout << "In LinkedListNode constructor (" << dataValue << ")" << endl;
+      data = dataValue;
+   }
+    
+   ~LinkedListNode() {
+      cout << "In LinkedListNode destructor (";
+      cout << data << ")" << endl;
+   }
+    
+   int data;
+   LinkedListNode* next;
+};
+
+class LinkedList {
+public:
+   LinkedList();
+   ~LinkedList();
+   void Prepend(int dataValue);
+    
+   LinkedListNode* head;
+};
+
+LinkedList::LinkedList() {
+   cout << "In LinkedList constructor" << endl;
+   head = nullptr;
+}
+
+LinkedList::~LinkedList() { // the "LinkedList::" is the classname using the scope resolution operator ::
+   cout << "In LinkedList destructor" << endl;
+    
+   // The destructor deletes each node in the linked list
+   while (head) {
+      LinkedListNode* next = head->next; // delcares the pointer var to point to LinkedListNode and sets it to the next node
+      delete head; // frees the heap memory that head is pointing to, which is the whole node both data and next inside of it.
+      head = next; // points to the next node now. 
+   }
+}
+
+void LinkedList::Prepend(int dataValue) {
+   LinkedListNode* newNode = new LinkedListNode(dataValue); // creates a brand new node on the heap and stores its address in New Node
+   newNode->next = head; // takes the new nodes unitialized garbage and overwrites it with whatever the address head is currently holding
+   head = newNode; // NOW move head to new node
+}
+	
+	- WHEN THE DESTRUCTOR IS CALLED:
+		- Using the delete operator on an object allocated with the new operator calls the destructor, as shown in the prvious example
+		- For an objec tthat is not declared by reference or by pointer, the object's destructor is called automatically when the object goes out of scope
+		- SUMMARY
+			- THE RULES OF THE DESTRUCTOR WHEN CALLED
+				- There are exactuly two ways a destructor gets called:
+					- You call delete on a pointer -- Destructor runs manually
+					- Object goes out of scope and its not a pointer or reference -- Destructor runs automatically
+
+			- Scenario 1: it goes out of scope at the end of main() and the destructor fires automatically. No delete needed.
+			- Scenario 2: its a memory leak: the nodes are sitting on the heap with no way to reach them because lsit 2 just disappears when main() ends, but nobody ever called delete list2.
+			- Scenario 3: Even though list 3 looks like a regular variable (no *) its a reference (&) so the destructor does nto get called automatically. The memory leaks just like list2
+			- If it's a pointer OR a reference, destructor is not called automatically. Only plain regualr variables get automatic destructions
+			
+
+	- CHALLENGE ACTIVITY
+
+#include <iostream>
+using namespace std;
+
+class CityNode {
+   public:
+      CityNode(string nameValue, int populationValue);
+      ~CityNode();
+      string name;
+      int population;
+      CityNode* next;
+};
+
+CityNode::CityNode(string nameValue, int populationValue) {
+   name = nameValue;
+   population = populationValue;
+}
+
+
+/* Your code goes here */
+
+CityNode::~CityNode()
+{
+	cout << "Deallocating CityNode " << this->name << "-" << this->population << endl;
+}
+
+
+int main() {
+   CityNode* myCity;
+   string inputString;
+   int inputValue;
+
+   cin >> inputString;
+   cin >> inputValue;
+
+   myCity = new CityNode(inputString, inputValue);
+   delete myCity;
+  
+   return 0;
+}
+
+
+#include <iostream>
+using namespace std;
+
+class RabbitNode {
+   public:
+      RabbitNode(int kittensValue) {
+         kittens = kittensValue;
+      }
+
+      ~RabbitNode() {
+         cout << "RabbitNode with " << kittens << " kittens is deallocated." << endl;
+      }
+
+      int kittens;
+      RabbitNode* next;
+};
+
+class RabbitsList {
+   public:
+      RabbitsList() {
+         head = nullptr;
+      }
+      
+      /* Your code goes here */
+      ~RabbitsList();
+      
+      void Prepend(int kittensValue) {
+         RabbitNode* newNode = new RabbitNode(kittensValue);
+         newNode->next = head;
+         head = newNode;
+      }
+
+   private:
+      RabbitNode* head;
+};
+
+RabbitsList::~RabbitsList()
+{
+	cout << "In RabbitsList destructor" << endl;
+	while (head)
+	{
+		RabbitNode* next = head->next;
+		delete head;
+		head = next;
+	}
+}
+
+int main() {
+   RabbitsList* userRabbits = new RabbitsList();
+   int inputValue;
+   int rabbitCount;
+   int i;
+  
+   cin >> rabbitCount;
+  
+   for (i = 0; i < rabbitCount; i++) {
+      cin >> inputValue;
+      userRabbits->Prepend(inputValue);
+   }
+
+   delete userRabbits;
+  
+   return 0;
+}
+
+
+
+
+
+
+
+*/

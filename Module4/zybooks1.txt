@@ -1,0 +1,156 @@
+Change the extension to .cpp after you are done and put this in Module4
+This is for zybooks study
+
+/*
+REFRESHER
+- FUNDEMENTALS I NEED TO DIAL IN
+	- THE HEAP
+		- The heap is like a neighborhood where you buy the house and you are responsible for it.
+		- no body cleans up after you. you have to call delete when you are done or that house just sits there forever wasting space
+			- THAT IS CALLED MEMORY LEAK.
+	- The Stack
+		- The stack is like a hotel room. you check in automatically, you check out automatically
+
+	- EXAMPLE
+		
+		Sleep record1; // Hotel room -- automatic cleanup 
+		Sleep* record2 = new Sleep(); // You bough a house -- you clean it up
+			1. new Sleep() - builds a brand new house on the heap using the sleep blueprint
+			2. it returns the address of that new house
+			3. record2 -- writes that address down on your piece of paper.
+				
+- DYNAMICALLY ALLOCATING OBJECTS 
+	- Pointer
+		- A pointer is a variable that holds a memory address, rather than holding data like most variables
+		- A pointer is declared by including * before the pointer name
+		- A class pointer is used to point to a dynamically allocated object
+		- A variable that holds a memory Address
+		- Example
+			int age = 25; // this is the house (actual data)
+			int* pointer = &age // This is the paper with the house address on it.
+			- pointer does contain 25. it contains the ADDRESS of where 25 lives.
+	- New Operator
+		- The new operator allocates memory for the given type and returns a pointer to the allocated memory.
+		- If the type is a class, the new operator calls the class after allocating memory for the object.
+		- The new operator returns a pointer to the allocated memory
+		- The operator that allocates memory for the given type and returns a pointer to the allocated memory
+		- When used with a class type, the new operator allocates memory before calling the class constructor		
+		- The new operator allocates, but does not deallocate memory
+		- A dynamically allocated object is created using new. Once created, the object is accessed using a pointer
+	- Constructor
+		- A special class function that is called automatically when a variable of that class type is declared
+		- When an object is dynamically allocated, the new operator calls the class' constructor after allocating memory for the class member variables
+
+	- Member Access Operator
+		- When using a pointer to an object, the member access operator(->) allows acces to the object's members with the syntax a->b
+			- Ex: If sleep record is a pointer to a Sleep Object, then sleepRecord->Print() calls the Print() member function. 
+		- Simple rule to remember
+			- Have an object directly use "."
+				- Example:
+				
+					Sleep record1; // direct object
+					record1.Print()				
+			
+			- Have a pointer to an object use "->"
+				- Example:
+				
+					Sleep* record2 = new Sleep() // pointer, use ->
+					record->Print()		
+	
+	- Dereference Operator
+		- The dereference operator (*) is prpended to a pointer variable name to retrieve the data to which the pointer variable points
+		- The * operator and the . operator maybe combined to acces a dynamically allocated object members as in (*a) .b instead of a->b
+		- Example: if sleepRecord is a pointer to a Sleep object, then both sleepRecord->print() and (*sleepRecord).print() are equivalent
+		- Example code:
+			
+			sleepRecord->Print(); // Go to the address, call print
+			(*sleepRecord).Print(); // go to the address, get object, call print. 
+
+
+		- SleepRecord = The piece of paper (the address)
+		- *sleepRecord = the Actual house (the object itself)
+
+		- sleepRecord.PrintInMinutes() will not work why?
+			- In C++ the . operator has higher precedence than * so the compiler reads left to right and hits . first. 
+			- It sees sleepRecord.PrintInMinutes() -- trys to call print in minutes on sleepRecord directly
+			- But wait -- sleepRecord is a pointer, not an object, you can't use . on a pointer
+			- Error. Never even gets to the *
+
+	- Deleting dynamically allocated objects
+		- Delete Operator
+			- The delete operator deallocates a block of memory that was allocated with the new operator. 
+ 			- If sleepRecord is null, delete has no effect.
+			- After the delete, it should not attempt to dereference the pointer because the pointer that pointed to a memory location that is no longer allocated for use.
+			- Calling delete with a pointer that was not previously set by the new operator has undefined behavior and is a logic error
+			- after you delete an new object you should set the pointer to nullptr to make it safe. 
+
+- 10.9 Memory Regions: Heap/Stack
+	- Code: The Region where the program instructions are stored
+	- Static memory - The region where global variables (Variables declared outside any functions) as well as static local variables (variables declared inside functions starting with the keyword "static") are allocated
+	- The Stack - The region where a function's local variable are allocated during a function call. A function call adds local variables to the stack, and returns removes them. Like adding and removing dishes from a pile; sense the term stack. Because this memory is automatically allocated and deallocated, it is also called automatic memory
+	- The heap - The reason where the "new" operator allocates memory, and where the "delete" operator deallocates memory. The region is also called free store.
+	
+	- Code Analogys
+		- Code = The Recipe book - The instructions, never changes just sits there
+		- Static memory = the Permanent fixtures - The ovens, fridges, always there for the whole resturant life
+		- Stack = The waiters' notepad -- local variables written down when a function is called, erased when done automatic
+		- Heap = The storage room you rent -- unlock it with new, you lock it back up with delete, nobody else manages it for you.
+	
+- 10.11 Memory Leaks
+	- Memory Leak
+		- A memory leak occurs when a program that allocates memory leses the ability to access the allocated memory, typically due to failure to properly destroy/free dynamically allocated memory.
+		- A programs leaking leaking memory becumes unusable.
+		- A memory leak may cause a program to occupy more and more memory as the program runs which slows program runtime.
+		- A memory leak can cause the program to fail if memory becomes completely full and the program is unable to alloate additional memory
+		- A common error is failing that is no longer used, resulting in a memory leak.
+		- Many programs that are commonly left running for long periods like web browsers, suffer from known memory leaks.
+		- Example Analogy:
+			- Memory Leak:
+				- You rented a storage unit, put stuff in it, then lose the key, and forgot the address, the unit is still being charged to you. You just can't get to it anymore. It's gone forever until the program closes 
+		- Example Code:
+	
+			while (expression)
+			{
+				int* newVal = new int; // rent a new storage unit every loop
+				// never delete it
+				// leak leak leak leak
+			}
+		- Example Code: 
+
+			int main() 
+			{
+				MyClass* ptrOne = new MyClass;
+				myClass* ptrTwo = new MyClass;
+
+				ptrOne = ptrTwo;
+				return 0;
+			}
+		
+		- This causes a memory leak aswell because you are overwritting ptrOne memory address with ptrTwo memory address leaving ptrOne still there
+		- For every new we need a delete in most cases, however we can also 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								
+*/

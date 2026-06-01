@@ -1,0 +1,351 @@
+change file extension to .cpp
+
+/*
+11.2 COPY CONSTRUCTORS
+	- SHALLOW COPY
+		- When you pass an object by Value to a function, C++ makes a copy automatically
+		- Without a copy constructor, it does a shallow copy -- copies the pointer's adress, not the data it points to
+		- Both the original and the copy now points to the same heap memory
+		- When the copy destructor runs, it deletes that shared memory
+		- Now the original pointer is dangling -- pointing to freed memory
+		- When the original destructor runs, it tries to delete already-freed memory crash
+	
+11.2.2 Participation Activity Answers
+	- 1. Objects with in sub-object passed by value -- True, no errors
+		- int is just a value, copying it gives two independant values, no heap memory involved no crash
+	- 2. Object with int* sub object passed by value -- false crashes, both pointers share the same heap memory doulbe delete causes crash
+	- 3. Object with int* bassed by value calls the constructor to create a local copy -- false
+		- Shallow copy nevers calls the constructor, no new runs, no new heap memory allocated,just the sameaddress copied over. 
+
+11.2 COPY CONSTRUCTOR CONTINUATION
+	- The solution is to create a copy constructor, a constructor that is automatically called when an object of the class type is passed by value to a function and when it an object is initialized by copying another object during declaration
+	- The copy constructor makes a new copy of all data members (including pointers) known as a deep copy
+	- If the programmer doesnt define a copy constructor, then the compiler implicity defies a constructor with statements that perform a memberwise copy, which simply copies each member using assignment
+	- Creating a copy of an object by copying only the data members values creates a shallow copy of the object
+		- A shallow copy is fine for many classes, but a deep copy is desired for objects that have data members point to dynamically allocated memory
+	- The copy constructor can be called with a single pass-by-reference argument of the class type, representing an original object to be copied to the newly-created object
+	- A programmer may define a copy constructor, typecally having the form
+		- MyClass(const MyClass& origObject);
+			- const: const mean constant which means dont modify the origObject
+			- MyClass&: pass by reference to avoid infinite recursion
+			- origObject : just the name for the object being copied from. 
+	
+	- int* dataObject: holds memory address, nothing else
+	- *dataObject: Goes to the memory address and returns the whats in the memory address.
+
+- Example Challenge Activity
+
+#include <iostream>
+using namespace std;
+
+class CarParkingSpot {
+   public:
+      CarParkingSpot();
+      CarParkingSpot(const CarParkingSpot& origCarParkingSpot);
+      void SetParkingSpot(const int spot) {
+         *parkingSpot = spot;
+      }
+      int GetParkingSpot() const {
+         return *parkingSpot;
+      }
+   private:
+      int* parkingSpot;
+};
+
+CarParkingSpot::CarParkingSpot() {
+   parkingSpot = new int;
+   *parkingSpot = 0;
+}
+
+// FIXME add copy constructor
+
+/* Your solution goes here  */
+CarParkingSpot::CarParkingSpot(const CarParkingSpot& origCarParkingSpot)
+{
+	parkingSpot = new int;
+	*parkingSpot = *(origCarParkingSpot.parkingSpot)	
+}
+
+void ParkingSpotPrinter(CarParkingSpot carParkSpot) {
+   cout << "Parking Spot: " << carParkSpot.GetParkingSpot();
+}
+
+int main() {
+   CarParkingSpot carParkingSpot;
+   int spot;
+
+   cin >> spot;
+
+   carParkingSpot.SetParkingSpot(spot);
+   ParkingSpotPrinter(carParkingSpot);
+
+   return 0;
+}
+
+-SUMMARY
+	- Copy constructorswith multiple pointers members follow the exact same pattern as one pointer, you just repeatit for each one allocate a new house, copy the values insde, move to the next pointer repeat
+	- when copy constructors get called automatically:
+		- passing an object by value to a function
+		- Initialized a new object from an existing one like "AnimalColony copy = original
+	- Why the compiler's default isnt good enough when you have a pointer members.
+		- It just copies the address, shallow copy, both objects point to the same house, double free crash when destructors run.
+	- The deep copy pattern always look like 
+		- member = new type
+		- *member = *(origObject.member);
+
+11.3 COPY ASSIGNMENT OPERATOR
+	- Copy Constructor
+		- Fires when an object is being created from another object
+	- Copy Assignment Operator
+		- fires when an object already exists and you assign another object to it
+		- The analogy
+			- Imagin you have a house, someone hands you a blueprint of their house and says "make your house look like mine" thats assignment. You already have a house, you need to guit it and rebuild it to match
+
+	- The 2 worst cases
+		- Double free crash: Two objects point to the same address, first destructor frees itm second destructor tries to free it again and crashes
+		- Memory leak: The original memory that got overwritten by the assignment is now unreachable and nevered freed.
+
+	- OVERLOADING THE ASSIGNMENT OPERATOR
+		- The assignment operator = can be overloaded to eliminate problems cause by a memberwise assignment during an object copy
+		- The implementation of the assignment operator iterates through each member of the source object.
+		- Each non-pointer member is copied directly from source members to destination member.
+		- For each pointer member, new memory is allocated, the sources reference data is copied to the new memory and the pointer to the new member assignment as the destination membe.
+		- Allocatiing and copying data for the pointer memebers is known as deep copy
+
+- EXAMPLE CHALLENGE ACTIVITY:
+
+#include <iostream>
+using namespace std;
+
+class Conference {
+   public:
+      Conference();
+      ~Conference();
+      void setSpeakerName(string newSpeakerName);
+      void Print() const;
+      Conference& operator=(const Conference& conferenceToCopy);
+   private:
+      string* speakerName;
+};
+
+Conference::Conference() {
+   speakerName = new string;
+	*speakerName = "";
+}
+
+Conference::~Conference() {
+   cout << "Destructor called" << endl;
+   delete speakerName;
+}
+
+/* Your code goes here */
+Conference& Conference::operator=(const Conference& conferenceToCopy) 
+ {
+	if (this != &conferenceToCopy) {
+      delete speakerName;
+		speakerName = new string;
+		*speakerName = *(conferenceToCopy.speakerName);
+   }
+   else {
+      cout << "Self-assignment not permitted" << endl;
+   }
+   
+   return *this;
+}
+
+void Conference::setSpeakerName(string newSpeakerName) {
+	*speakerName = newSpeakerName;
+}
+
+void Conference::Print() const {
+   cout << "speaker " << *speakerName << endl;
+}
+
+int main(){
+   string speakerName;
+   Conference myConference;
+   Conference myConferenceCopy;
+   
+   cin >> speakerName;
+   
+   myConference.setSpeakerName(speakerName);
+   myConference = myConference;  // Test self-assignment
+   myConferenceCopy = myConference;
+   myConference.setSpeakerName("John");
+   
+   cout << "myConference: ";
+   myConference.Print();
+   cout << "myConferenceCopy: ";
+   myConferenceCopy.Print();
+   
+   return 0;
+}
+
+	- SUMMARY
+		- copy Assignment Operator
+			- When does it trigger? When an altready-existing object is assigned to another existing object. obj2 = obj1;
+			- Different from the copy constructor which only triggers on creation
+			Why the default sucks with pointers?
+				- Defaults does memberwise copy, so both objects end up point to the same heap memory this causes:
+					- Double free creash when both destructor runs
+					- Memory leak from the original memory that got orphaned
+				- The fix:
+					- Overload Operator = With a deep copy
+				- Signature
+					- ClassName& operator=(cost ClassName& objToCopy);
+			- Four steps inside the body, in order;
+				1. Check for self-assignment: if (this != &objToCopy)
+				2. Delete old heap from memory: delete memberPointer;
+				3. Allocate Fresh Heap Memory; MemberPointer = new Type;
+				4. Copy the Data; *memberPointer = *(objToCopy.memberPointer);
+			- Always return at the end:
+				- return *this;
+			Why return *this? this is a pointer to the current object
+				- Dereferencing it with * gives the actual object back, which allows chained assignments like a = b = c
+			why check self-assignment first?
+				- if a = a, youd delete your own data in step 2 and try to copy from it in step 4.  crash
+
+
+11.4 RULE OF 3
+	
+- The core Idea:
+	- If your class needs any one of these:
+		- Destructor, Copy Constructor, Copy Assignment Operator
+	- Then it almost certainly needs all three
+	- If you need a custom destructor, you probably have heap memory, if you have heap memory the default copy constructor will shallow copy it
+	- If you have heap memory, the default assignment operator will shallow copy it too.
+	- So you need all three to handle that memory correctly
+	
+- EXAMPLE CODE
+
+#include <iostream>
+using namespace std;
+
+class ActivityTracker{
+   public:
+      ActivityTracker();
+      ~ActivityTracker();
+      ActivityTracker(const ActivityTracker& trackerToCopy);
+      ActivityTracker& operator=(const ActivityTracker& trackerToCopy);
+      
+      int GetTotal();
+      void SetSize(int size);
+      void ReadData();
+      
+   private:
+      int activitiesSize;
+      int* activities;
+};
+
+ActivityTracker::ActivityTracker() {
+   activitiesSize = 0;
+   activities = nullptr;
+}
+
+ActivityTracker::~ActivityTracker() {  // destructor
+   delete[] activities;
+}
+
+ActivityTracker::ActivityTracker(const ActivityTracker& trackerToCopy) { // Copy constructor
+   int i;
+
+   activitiesSize = trackerToCopy.activitiesSize;
+   activities = new int[activitiesSize];
+   for (i = 0; i < activitiesSize; ++i) {
+      activities[i] = trackerToCopy.activities[i];
+   }
+}
+
+ActivityTracker& ActivityTracker::operator=(const ActivityTracker& trackerToCopy) { // Copy assignment operator
+   int i;
+
+   if (this != &trackerToCopy) {
+      delete[] activities;
+      activitiesSize = trackerToCopy.activitiesSize;
+      activities = new int[activitiesSize];
+      for (i = 0; i < activitiesSize; ++i) {
+         activities[i] = trackerToCopy.activities[i];
+      }
+   }
+
+   return *this;
+}
+
+int ActivityTracker::GetTotal() {
+   int total = 0;
+   int i;
+
+   for (i = 0; i < activitiesSize; ++i) {
+      total += activities[i];
+   }
+
+   return total;
+}
+
+void ActivityTracker::SetSize(int size) {
+   if (activities != nullptr) {
+      delete[] activities;
+   }
+   activitiesSize = size;
+   activities = new int[activitiesSize];
+}
+
+void ActivityTracker::ReadData() {
+   int i;
+
+   for (i = 0; i < activitiesSize; ++i) {
+      cin >> activities[i];
+   }
+}
+
+void CompareTwoDays(int day, ActivityTracker trackerYesterday, ActivityTracker trackerToday) {
+   // trackerYesterday and trackerToday are passed by value to demonstrate the use of the copy constructor
+   int totalYesterday;
+   int totalToday;
+
+   totalYesterday = trackerYesterday.GetTotal();
+   totalToday = trackerToday.GetTotal();
+   
+   cout << "Day " << day << " (level=" << totalToday <<  ") is";
+   if (totalToday >= totalYesterday) {
+      cout << " at least as active as";
+   }
+   else {
+      cout << " less active than";
+   }
+   cout << " day " << day - 1 << " (level=" << totalYesterday <<  ")" << endl;
+}
+
+void RunTracker(int numDays, int numActivities) {
+   ActivityTracker trackerToday;
+   ActivityTracker trackerYesterday;
+   int i;
+
+   trackerToday.SetSize(numActivities);
+   trackerToday.ReadData();    
+   
+   for (i = 1; i < numDays; ++i) {
+      trackerYesterday = trackerToday;
+      trackerToday.ReadData();  
+      CompareTwoDays(i + 1, trackerYesterday, trackerToday);
+   }
+}
+
+int main() {
+   int numDays;
+   int numActivities;
+
+   cin >> numDays;
+   cin >> numActivities;
+   RunTracker(numDays, numActivities);
+
+   return 0;
+}
+
+
+
+
+
+
+
+*/

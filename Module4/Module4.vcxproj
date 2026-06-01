@@ -151,6 +151,11 @@
   <ItemGroup>
     <ClInclude Include="DynamicArray.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="zbooks2.txt" />
+    <Text Include="zybooks1.txt" />
+    <Text Include="zybooks3.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
