@@ -152,6 +152,7 @@
     <ClInclude Include="DynamicArray.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="studyguide.txt" />
     <Text Include="zbooks2.txt" />
     <Text Include="zybooks1.txt" />
     <Text Include="zybooks3.txt" />

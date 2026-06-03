@@ -55,5 +55,6 @@
     <Text Include="zybooks3.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="studyguide.txt" />
   </ItemGroup>
 </Project>
