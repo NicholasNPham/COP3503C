@@ -1,0 +1,15 @@
+MODULE 5: Templates and Data Structures
+
+9.12 Operator Overloading
+- Overview
+	- C++ allows a programmer to redefine the functionality of built-in operators like + - * to poerate on programmer-defined objects, a process known as operator overloading.
+
+- Overloading TimeHrMn's + operator
+	- To overload +, the programmer creates a member function named operator+.
+	- Although + requires left and right operands as in time1 + time2, the member function only requires the right operand (rhs: right hand side) as the parameter, because the left operand is calling object.
+	- In other workds time1 + time 2 is equivalent to the function call time1.operator+(time2)., which is valid syntax but never used, 
+
+- Overloading the + operator multiple times
+	- When an operator like + has been overloaded the compiler determiens which + operation to invoke based on the operand types.
+	- A programmer can define several functions that overload the same opeartor, as long as each involves different types so that the compiler can determine which to invoke
+	
