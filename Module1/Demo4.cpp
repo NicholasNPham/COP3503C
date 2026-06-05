@@ -38,8 +38,6 @@ int demo4()
 
     print_message(name);
 
-
-
     string message = "Hello, World!";
 
     int comma_location = 0;

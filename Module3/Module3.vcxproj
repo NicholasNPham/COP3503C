@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0f7f2252-fc81-4d76-b1d9-4b1d8e3a20e2}</ProjectGuid>
-    <RootNamespace>Module1</RootNamespace>
+    <ProjectGuid>{4f3415de-4df3-4718-9417-422e3fe9f45a}</ProjectGuid>
+    <RootNamespace>Module3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -82,6 +82,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -97,6 +100,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,6 +116,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -125,17 +134,25 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Manifest>
+      <EnableSegmentHeap>true</EnableSegmentHeap>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Demo1.cpp" />
-    <ClCompile Include="Demo2.cpp" />
-    <ClCompile Include="Demo3.cpp" />
-    <ClCompile Include="Demo4.cpp" />
-    <ClCompile Include="Demo5.cpp" />
-    <ClCompile Include="lab1.cpp" />
+    <ClCompile Include="demo1.cpp" />
+    <ClCompile Include="demo2.cpp" />
+    <ClCompile Include="demo3.cpp" />
+    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="Lecture1.cpp" />
     <ClCompile Include="Lecture2.cpp" />
+    <ClCompile Include="Lecture3.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="simple_timer.cpp" />
+    <ClCompile Include="zybooks.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Hero.h" />
+    <ClInclude Include="simple_timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

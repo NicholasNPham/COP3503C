@@ -2,11 +2,11 @@
 #include <string>
 using namespace std;
 
-int demo1();
+int demo3();
 
 int main()
 {
-    demo1();
-    cout << "\nUsing demo1\n";
+    demo3();
+    cout << "\nUsing demo2\n";
     return 0;
 }

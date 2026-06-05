@@ -18,13 +18,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lecture1.cpp">
+    <ClCompile Include="Lecture1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lecture2.cpp">
+    <ClCompile Include="Lecture2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lecture3.cpp">
+    <ClCompile Include="Lecture3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="demo1.cpp">
@@ -36,22 +36,13 @@
     <ClCompile Include="demo2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lab2.1.cpp">
+    <ClCompile Include="demo3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vehicle.cpp">
+    <ClCompile Include="simple_timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Showroom.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lab2.2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dealership.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lab2.3.cpp">
+    <ClCompile Include="zybooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,13 +50,7 @@
     <ClInclude Include="Hero.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vehicle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Showroom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dealership.h">
+    <ClInclude Include="simple_timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

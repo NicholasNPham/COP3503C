@@ -1,15 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\VS Code Projects\\COP3503C\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\phamn\\source\\repos\\COP3503C\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{87D39CFF-3C4C-4588-8CC6-8F24657F1605}|Module4\\Module4.vcxproj|C:\\Users\\phamn\\source\\repos\\COP3503C\\Module4\\studyguide.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{87D39CFF-3C4C-4588-8CC6-8F24657F1605}|Module4\\Module4.vcxproj|solutionrelative:Module4\\studyguide.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D39CFF-3C4C-4588-8CC6-8F24657F1605}|Module4\\Module4.vcxproj|C:\\Users\\phamn\\source\\repos\\COP3503C\\Module4\\zybooks3.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{87D39CFF-3C4C-4588-8CC6-8F24657F1605}|Module4\\Module4.vcxproj|solutionrelative:Module4\\zybooks3.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
+<<<<<<< HEAD
           "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+=======
+          "DockedWidth": 196,
           "SelectedChildIndex": -1,
+>>>>>>> 70af42913054dd23fa5f511f797a596f620b581a
           "Children": [
             {
               "$type": "Bookmark",
@@ -17,11 +31,36 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "zybooks3.txt",
+              "DocumentMoniker": "C:\\Users\\phamn\\source\\repos\\COP3503C\\Module4\\zybooks3.txt",
+              "RelativeDocumentMoniker": "Module4\\zybooks3.txt",
+              "ToolTip": "C:\\Users\\phamn\\source\\repos\\COP3503C\\Module4\\zybooks3.txt",
+              "RelativeToolTip": "Module4\\zybooks3.txt",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAAAI8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-06-03T01:30:32.218Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "studyguide.txt",
+              "DocumentMoniker": "C:\\Users\\phamn\\source\\repos\\COP3503C\\Module4\\studyguide.txt",
+              "RelativeDocumentMoniker": "Module4\\studyguide.txt",
+              "ToolTip": "C:\\Users\\phamn\\source\\repos\\COP3503C\\Module4\\studyguide.txt",
+              "RelativeToolTip": "Module4\\studyguide.txt",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAEUAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-06-01T23:25:40.447Z",
+              "EditorCaption": ""
             }
           ]
         }
