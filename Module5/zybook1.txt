@@ -12,4 +12,68 @@ MODULE 5: Templates and Data Structures
 - Overloading the + operator multiple times
 	- When an operator like + has been overloaded the compiler determiens which + operation to invoke based on the operand types.
 	- A programmer can define several functions that overload the same opeartor, as long as each involves different types so that the compiler can determine which to invoke
+
+9.13 Overloading comparison operators
+- Overloading the eqaulity (==) operator
+	- A programmer can overload the equality operator (==) to allow comparing objects of a programmer-defined class for equality.
+	- To overload the ==, the programmer creates a function named operator== that returns bool and takes two const reference arguments of the class type for the left-hand-side and right-hand-side operands.
+	- The programmer must also determine when two objects are considered equal.
+	- Non-member function = two perameters
+	- Why & (reference) and const?
+		- Passing by value makes a copy of the whole object. For large objects thats wasteful. A reference just points to the original, no copying needed.
+		- Since were just comparing, we dont want to accidentally modify either objects, const makes sure the function cant change them.
+	- Referencing is good practice but not mandatory. If you dont use reference, the function will still work but it will be less efficient because it has to make a copy of the objects.
+
+- Overloading the < operator:
+	- A programmer can also overlaod realtional operators like the less than operator (<).
+	- The < operator should return true if the object on the left side of the < operator is less than the object on the right side of the operator
+	- Syntax:
+		
+		bool operator!=(const ClassName& lhs, const ClassName& rhs) {
+			return !(lhs == rhs); 
+		}
+
+- Overloading all eqaulity and Relational Operators:
+	- A common approach is to first overload the == and the < operators and then overload other comparison operators using == and <.
+		- Overloading != using ==:
+			
+			bool operator!=(const ClassName& lhs, const ClassName& rhs)
+			{
+				return !(lhs == rhs); 
+			}
+
+		- Overloading >, <=, and >= using <:
+			
+			bool operator>(const ClassName& lhs, const ClassName& rhs)
+			{
+				return rhs < lhs; 
+			}
+			bool operator<=(const ClassName& lhs, const ClassName& rhs)
+			{
+				return !(rhs < lhs); 
+			}
+			bool operator>=(const ClassName& lhs, const ClassName& rhs)
+			{
+				return !(lhs < rhs); 
+			}
 	
+	- Example: userReview != bestReview
+		- operator!= is overloaded using operator==, so it returns !(userReview == bestReview)
+			- Basically != calls == which means both operator!= and operator== both get called.
+	- Example: userReview > bestReview
+		- operator> is overloaded using operator<, so it returns bestReview < userReview
+			- Basically > calls < which means both operator> and operator< both get called.
+	- Example: userReview <= bestReview
+		- operator<= is overloaded using operator<, so it returns !(bestReview < userReview)
+			- lhs <= rhs → check !(lhs > rhs) → to get lhs > rhs, check rhs < lhs → done. (5<=3 (False) = !(3<5 (True)) = !True = False)
+
+- Sorting a Vector
+	- The sort() function, defined in the c++ Standard Template Library's (STL) algorithms library, can sort vectors contains objects of programmer defgined classes.
+	- To use sort(), a programmer must
+		- Include the <algorithm> header file
+		- Overload the < operator for the programmer-defined class.
+		- Call the sort() function as sort(myVector.begin(), myVector.end());
+
+	- Sorting a vector of integers does not require overloading the less than oeperator for two int operands because the < operator is already defined for ints.
+	- Only the less than operator needs to be defined to use the sort() algorithm.
+	- the sort() can be used to sort a range of elements wih a vector instad of the entire vector.
