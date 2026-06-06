@@ -139,10 +139,20 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Module5.cpp" />
+    <ClCompile Include="demo1.cpp" />
+    <ClCompile Include="DynamicArray.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="lecture1.txt" />
+    <Text Include="lecture2.txt" />
+    <Text Include="Lecture3.txt" />
     <Text Include="zybook1.txt" />
+    <Text Include="zybooks2.txt" />
+    <Text Include="zybooks3.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DynamicArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
