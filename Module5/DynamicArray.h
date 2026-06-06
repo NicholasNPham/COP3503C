@@ -42,6 +42,9 @@ public:
 	// Behaviors
 	void Print() const;
 
+	// OPERATORS
+	DynamicArray& operator+=(const DynamicArray& rhs);
+
 };
 
 // CLASS MEMBER DEFINITIONS
@@ -176,4 +179,28 @@ void DynamicArray<T>::Print() const
 	cout << "size: " << _size << " capacity: " << _capacity << endl;
 	for (int i = 0; i < _size; i++)
 		cout << _data[i] << endl;
+}
+
+template <typename T>
+DynamicArray<T>& DynamicArray<T>::operator+=(const DynamicArray& rhs)
+{
+
+	T* newArray = new T[_capacity + rhs._capacity];	// Allocate some space that can hold both arrays
+	
+	for (int i = 0; i < _size; i++) // copy array 1 (this) into the array
+
+		newArray[i] = _data[i];
+
+	for (int i = 0; i < rhs._size; i++) // copy array 2 (rhs) into the array
+		newArray[_size + i] = rhs._data[i];
+
+	_size += rhs._size; // make sure _size and _capacity are updated
+	_capacity += rhs._capacity;
+
+	delete[] _data; // delete the old data
+
+	
+	_data = newArray; // redirect the _data pointer to the new (combined) array
+
+	return *this;
 }
