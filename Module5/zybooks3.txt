@@ -1,0 +1,52 @@
+16.1 Function templates
+- Multiple functions may be nearly identical, differing only in their data types, as below.
+- Writing and maintaining redundant functions that only differ by data type can be time-consuming and error-prone. The language supports a better approach.
+
+- A function template is a function definition having a special type parameter that may be used in place of types in the function
+- The function type return type is preceded by template<typename TheType>, where TheType can be any identifier.
+- That type is kown as a type perameter and can be sued throughout the function for any parameter types, return types or local variables types.
+- The identifier is known as a template parameter, and may be various reference types or even another template parameter.
+- The compiler automatically generates a unique function definition for each type appearing in function calls to the function template
+
+- Answer Notes:
+	- This function attempts to averag ijk of MyType what type that is, so should return the same type
+	- T is the identifier being used as the typename for this function template
+	- Function templates support various types
+	- Function templates support various types including strings
+	- TheType is just oneType. The compiler doesnt know hwo to generate a function for two ints and a string. 
+
+- Programmers optionally may explicity specify the type as a specail argument, a function template may have multiple parameters:
+	- Example Syntax
+		
+		template<typename t1, typename t2>
+		ReturnType FunctionName (Parameters){
+			...
+		}
+
+16.2 Class templates
+	- Multiple Classe smay be nearly identical, differing only in their data types.
+	- The following shows a class managing three int numbers, and a nearly identical class managing three short numbers.
+	- The Syntax:
+
+		template<typename TheType>
+		class TripleItem {
+			...
+		};
+
+		TripleItem<int> triInts(9, 5, 6);
+		TripleItem<double> triDoubles(1.1, 2.2, 3.3);
+
+	- Writing and maintaining redundant classes that only differ by data type can be time-consuming and error-prone. The language supports a better approach
+	- A class template is a class definition having a spcial type parameter that may be only used in place of types in the class. A variable declared of that class tpye must indicate a specific type.
+
+	- The class declaration is preceded by template<typename theType> where theType can be any identifer
+	- That type is known as a template parameter and can be used throughout the class, such as for parameter types, functions return types, or local variable types. 
+	- The identifier is known as a template parameter, and may be various items such as an int, double char, or string, or a pointer or reference, or even another template parameter.
+	- Any of hte class's functions defined outside the class declaration must also be preceded by the template declaration, and have the type in angle brackets appended to its name in void 
+		
+		TripleItem<TheType>::Print()
+	
+	- an object of this class can be declared after the class name a specific type in angle brackets.
+
+	- Construct 16.2.1: Class template with multiple parameters.
+		- Earlier versions of C== used the word class rather than typename. Though misleading (the type needs not be a class, but can be int or double, for example. The workd class is still allowed for backwards compatibility and much existing C++ code uses that word.
