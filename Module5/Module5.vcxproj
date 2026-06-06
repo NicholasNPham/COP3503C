@@ -139,8 +139,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Module3\Hero.cpp" />
     <ClCompile Include="demo1.cpp" />
-    <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +152,7 @@
     <Text Include="zybooks3.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Module3\Hero.h" />
     <ClInclude Include="DynamicArray.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

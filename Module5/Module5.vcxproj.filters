@@ -21,7 +21,7 @@
     <ClCompile Include="demo1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DynamicArray.cpp">
+    <ClCompile Include="..\Module3\Hero.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,6 +35,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynamicArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Module3\Hero.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
