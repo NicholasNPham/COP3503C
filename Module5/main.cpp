@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
 
-int demo1();
+int demo2();
 
 int main()
 {
-    demo1();
-    cout << "Using demo1" << endl;
+    demo2();
+    cout << "Using demo2" << endl;
 
     return 0;
 }
