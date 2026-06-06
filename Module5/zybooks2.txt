@@ -1,0 +1,247 @@
+10.8 Additional material: A first linked list
+
+Overview
+	- A common use of pointers is to create a list of items such that an item can be efficently inserted somewhere in the middle of the list, whithout the shifting of later itms as required for a vector.
+	- The following program illustrates how such a list can be created.
+	- A class is defined to represent each list item, kown as a list node.
+	- A node is comprised of the data to be stored in each list item, in this case just one int,
+	- And the pointer to the next node in the list.
+	- A special node named head is created to represent the pront of the list, after which regular items can be inserted. 
+	- An item can be inserted somehwere in the middle of the list without having to shift all subsequent items. 
+	- The purpose of a list's head node is to provide a pointer to the first items node in the list if such an item exists
+
+	The Steps in order for linkedList is:
+		- Save the old next pointer
+		- Point this to the new node
+		- Point the new node to what used to be next 
+	- If you do step 2 before 1m yoiu lose the chain. 
+
+- Challenge activity:
+
+	#include <iostream>
+	using namespace std;
+
+	class RabbitNode {
+	   public:
+		  RabbitNode(int babiesInit = 0, RabbitNode* nextLoc = nullptr);
+		  void InsertAfter(RabbitNode* nodeLoc);
+		  RabbitNode* GetNext();
+		  void PrintNodeData();
+	   private:
+		  int babiesVal;
+		  RabbitNode* nextNodePtr;
+	};
+
+	RabbitNode::RabbitNode(int babiesInit, RabbitNode* nextLoc) {
+	   this->babiesVal = babiesInit;
+	   this->nextNodePtr = nextLoc;
+	}
+
+	void RabbitNode::InsertAfter(RabbitNode* nodeLoc) {
+	   RabbitNode* tmpNext = nullptr;
+
+	   tmpNext = this->nextNodePtr;
+	   this->nextNodePtr = nodeLoc;
+	   nodeLoc->nextNodePtr = tmpNext;
+	}
+
+	RabbitNode* RabbitNode::GetNext() {
+	   return this->nextNodePtr;
+	}
+
+	void RabbitNode::PrintNodeData() {
+	   cout << this->babiesVal << endl;
+	}
+
+	int main() {
+	   RabbitNode* headObj = nullptr;
+	   RabbitNode* firstRabbit = nullptr;
+	   RabbitNode* secondRabbit = nullptr;
+	   RabbitNode* currRabbit = nullptr;
+	   int babies1;
+	   int babies2;
+
+	   cin >> babies1;
+	   cin >> babies2;
+
+	   headObj = new RabbitNode(-1);
+   
+	   firstRabbit = new RabbitNode(babies1);
+	   headObj->InsertAfter(firstRabbit);
+	   secondRabbit = new RabbitNode(babies2);
+	   firstRabbit->InsertAfter(secondRabbit);
+
+	   /* Your code goes here */
+
+	   currRabbit = headObj;
+	   while (currRabbit != nullptr) {
+		  currRabbit->PrintNodeData();
+		  currRabbit = currRabbit->GetNext();
+	   }
+
+	   return 0;
+	}
+
+- Challenge Activity Part 2
+
+	#include <iostream>
+using namespace std;
+  
+class ChestNode {
+   public:
+      ChestNode(string colorInit = "", ChestNode* nextLoc = nullptr);
+      void InsertAfter(ChestNode* nodeLoc);
+      ChestNode* GetNext();
+      void PrintNodeData();
+   private:
+      string colorVal;
+      ChestNode* nextNodePtr;
+};
+
+ChestNode::ChestNode(string colorInit, ChestNode* nextLoc) {
+   this->colorVal = colorInit;
+   this->nextNodePtr = nextLoc;
+}
+
+void ChestNode::InsertAfter(ChestNode* nodeLoc) {
+   ChestNode* tmpNext = nullptr;
+
+   tmpNext = this->nextNodePtr;
+   this->nextNodePtr = nodeLoc;
+   nodeLoc->nextNodePtr = tmpNext;
+}
+
+ChestNode* ChestNode::GetNext() {
+   return this->nextNodePtr;
+}
+
+void ChestNode::PrintNodeData() {
+   cout << this->colorVal << endl;
+}
+
+int main() {
+   ChestNode* headChest = nullptr;
+   ChestNode* currChest = nullptr;
+   ChestNode* lastChest = nullptr;
+   int chestCount;
+   string inputValue;
+   int i;
+
+   cin >> chestCount;
+   
+   headChest = new ChestNode("color");
+   lastChest = headChest;
+
+   for (i = 0; i < chestCount; i++)
+   {
+		cin >> inputValue;
+		currChest = new ChestNode(inputValue);
+
+		lastChest->InsertAfter(currChest);
+		lastChest = currChest;
+   }
+	
+   /* Your code goes here */
+
+   currChest = headChest;
+   while (currChest != nullptr) {
+      currChest->PrintNodeData();
+      currChest = currChest->GetNext();
+   }
+
+   return 0;
+}
+
+- Example 3:
+
+	#include <iostream>
+using namespace std;
+  
+class SeahorseNode {
+   public:
+      SeahorseNode(int babiesInit = 0, SeahorseNode* nextLoc = nullptr);
+      void InsertAfter(SeahorseNode* nodeLoc);
+      SeahorseNode* GetNext();
+      int GetNodeData();
+   private:
+      int babiesVal;
+      SeahorseNode* nextNodePtr;
+};
+
+SeahorseNode::SeahorseNode(int babiesInit, SeahorseNode* nextLoc) {
+   this->babiesVal = babiesInit;
+   this->nextNodePtr = nextLoc;
+}
+
+void SeahorseNode::InsertAfter(SeahorseNode* nodeLoc) {
+   SeahorseNode* tmpNext = nullptr;
+
+   tmpNext = this->nextNodePtr;
+   this->nextNodePtr = nodeLoc;
+   nodeLoc->nextNodePtr = tmpNext;
+}
+
+SeahorseNode* SeahorseNode::GetNext() {
+   return this->nextNodePtr;
+}
+
+int SeahorseNode::GetNodeData() {
+   return this->babiesVal;
+}
+
+int main() {
+   SeahorseNode* headSeahorse = nullptr;
+   SeahorseNode* currSeahorse = nullptr;
+   SeahorseNode* lastSeahorse = nullptr;
+   int count;
+   int inputValue;
+   int i;
+   
+   cin >> count;
+   
+   headSeahorse = new SeahorseNode(count);
+   lastSeahorse = headSeahorse;
+
+   for (i = 0; i < count; ++i) {
+      cin >> inputValue;
+      
+      currSeahorse = new SeahorseNode(inputValue);
+      
+      lastSeahorse->InsertAfter(currSeahorse);
+      lastSeahorse = currSeahorse;
+   }
+
+	currSeahorse = headSeahorse;
+
+   while (currSeahorse!= nullptr) {
+		if (currSeahorse->GetNodeData() == 0) {
+			cout << "Found a solitary seahorse with no babies." << endl;
+			}
+		currSeahorse = currSeahorse->GetNext();
+	}
+
+   /* Your code goes here */
+   
+   return 0;
+}
+
+12.8 Overloading stream operators
+	- Overloading the << operator
+		- The c++ << operator is kown as the insertion operator. 
+		- A C++ class can overload the insertion operator by creating a member function named operator<<.
+		- Answer Notes:
+			- The << operator's implemetation uses case-sensitive string comparisons, so that all-lowercase strings is not recognized
+			- If the operator << function return type were to changed to void the compiler will still compile and produce the same results when ran.
+	- Overloading the >> operator
+		- The C++ >> operator is known as the extraction operator.
+		- A C++ class can overload the extraction operator by creating a member function named operator>>
+		- The extraction operator does not add to the line but rather removes a string from the front of the line
+		- No check for empty list exist, the extraciton operator should not be used if the line is empty. 
+	- Extending cin and cout
+		- By default, a programmers-defined C++ class does not work with cin and cout
+		- The functionality of cin and cout can be extended by implementing certain friend functions in the C++ class
+		- Friend:
+			- It lets a function that's defined outside the class access private members directly as if it were inside the class. 
+			- Cin >>: friend istream& operator>>
+			- Cout <<: friend ostream& operator>>
+
