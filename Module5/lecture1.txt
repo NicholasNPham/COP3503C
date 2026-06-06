@@ -72,7 +72,17 @@ Example:
 
 	if everything returns the same, true
 
-
+RECAP
+- Operators are functions, and functions canbe overloaded
+- Operators can create code shortcuts..
+- You wont overload operators all the time (nor should you!)
+	- Not all languages support overloading operators.
+- In some cases you MUST, for correct functionality.
+	- Assignment operators, when part of the "big three"
+- If it makes logical sense
+	- And it maintains or improves the readability of your code
+	-	 Copy assignment operator: member-to-member copy
+- Dont do it just because
 
 
 
