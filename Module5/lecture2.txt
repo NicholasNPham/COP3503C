@@ -1,0 +1,119 @@
+DATA STRUCTURE AND STORAGE
+
+Every Program needs Storage
+- In the real world, we have lots of stroage options
+	- Bins Boxes, drawers, cabinets, shelves, etc.
+	- Dpending on the item we may store it differently.
+	- Storage large pieces of lumber? Large, open supports to hold alot of weights is necessary
+	- Storing large quanitites of small items, Lots of small drawers might be better
+- In our programs, we use data structures to store information
+	- Like physical containers, they have ideal and not-so-idea situations.
+	- They can have different functionality
+	-Some are more memory efficient; some are faster. 
+
+ARRAYS
+- The simpliest "data structure", the first you learn in most languages
+- Arrays are meant to hold an exact number of something. No more No less
+- Example Code:
+	
+	Player players[4];
+	const int PLAYER_COUNT = 4;
+	Player players[PLAYER_COUNT]
+
+- A simple box that is built with exactly the size that you specified. no bells, no whistles, no special features
+- In some languages, some arrays are classes (which do not have some bells and whitles)
+
+VECTORS
+- More sophisticated, dynamic array. Vectores are good all-around storage
+- Need to hold exactly some number of something?
+- Need to exapnd that to hold 6 later one? they can resize
+- Need to shrink the container to only hold 3?
+- They store count info
+- Have the Big Three implemented for easy copying and cleanup
+- Easier to pass and return, good all-around replacement for arrays
+
+IF VECTORS EXIST, WHY WOULD YOU EVER USE ARRAYS?
+- If you know the exact number you need, and that number wont change, use an array
+- Ask yourself this question: Do you need any vector functionality
+	- Going to expand or remove elements?
+	- Need some kind of complex searching/sorting functionality?
+	- No? than an array works just fine, though there's little downside to using a vector in simple ways
+
+STACKS
+- Last-In, First-Out (LIFO) storage, adding and retrieving follows a specific pattern.
+- Drawing from the top of the deck of cards? A stack is a good fit.
+- A common (and critical!) feature of many programs: undo and redo.
+- You may have a "stack" of actions a program has takened to change something about the program
+- To undo you can "pop" the top action off a stack and reverse the chagnes it made.
+- What to redo that action? When you pop something off the undo stack, "push" it onto a redo stack. 
+
+QUEUE
+- First-In First-Out (FIFO) storage
+- The first item added is the first to be removed.
+- Queues are good for simulating lines, orders, customrs, anything "first come, first served"
+- Beehind the scene, very similar to a stack
+- May be "just" a dynamic array, with some logic to determine order of access. 
+
+LINKED LIST
+- Non-continguous data structure
+- Uses nodes to store information, generic "unit" of a data structures
+	- Nodes are not qnique to linked lists
+	- Notes are tpyically simple classes or structures that may not do much
+	- Primarily for holding data, may contain little functionality
+- Nodes store data, but also connections (pointers) to other nodes.
+	- Some may have a single connection, some kinf of "next" node.
+	- Others may have multiple connections (sometimes without limit!)
+- Node-based data structures use more memory, but are often faster when adding and removing elements. 
+
+CONTINGUOUS DATA VS NON-CONTINGUOUS DATA
+	- Contiguous data is adjacent in memory.
+	- Arrays are continguous-they are a single "block" of memory that is connected, unbrocked
+	- Non-continguous memory is not adjacent
+	- Node-based data structures are non-continguous (basically any data structure that isn't array-based)
+	- Pointers are used to store the location of othe elements
+
+DATA STRUCTURE OPERATIONS
+- Every data structure has common operations you might use
+	- Insertion/Additions
+		- Adding some elements to a container
+	- Deletion/Removal
+		- Removing some elements from a container
+	- Searching/Retrieval
+		- Find somethign from the container
+	- Traversal
+		- Accessing each element in the container for processing
+			- Go through the container and do something with each bit of data
+	- Sorting
+		- Reorder elements in ascending or descending order, for later retrieval
+			- Not all data structures are meant to be sorted
+	- Merging
+		- Combining multiple containers worth of data into one. 
+
+- These operations may be implemented quite differently from one data structure to the next.
+- Learning how just a few data structures work gives you insign to how most will work.
+- The concepts behind each of them will likely be similar
+	- There are only so many ways to allocate memory, redirect pointers, assign valuesm etc.
+- For example all cars "drive" or "turn on" but the engineering for any one car could be very different
+
+OPERATOR TERMINOLOGY
+- Operations arent always named the same thign
+- Computers dont care about names - these are for our benefit
+
+USING DATA STRUCTURES TO IMPLEMENT OTHER DATA STRUCTURES
+- An array is an array
+- A dynamic array is a class we build to be an inflexible array into something flexible - The detials are hidden behind an interface
+- A stack could be a dynamic array we customize to work in a specific way (LIFO)
+- A queue could be a dynamic array we customize to work in a specific way (FIFO)
+- We could implement stacks and queus as linkedf lists as well.
+- Anyone using the class does not have to know about the internal detials - But the person programming to does.
+
+"STANDARD" CONTAINERS
+- Most data structures have a "standard" way of working
+- Queue supports enqueue/dequeue as a standard
+	- enter at the back of the line
+	- Leave from the front of the line
+	- That's how lines work!
+- Stacks supprot push and pop as a standard
+	- Put a card on the top of the deck (push)
+	- Draw a card from the top of the deck (pop)
+- You can add anything you need beyond these common "staples" 
