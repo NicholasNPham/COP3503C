@@ -1,0 +1,85 @@
+Lecture 1: Operator Overloading
+
+- What are operators?
+	- Things you've already used before: + / * += < !=
+	- What are they, really?
+	- Functions with operator in the name.
+	- These functions are used to costomize the way you work with classes
+
+- Overloading Functions
+	- Function overloading is what allows you to create multiple versions of a function, wach with different signautres (different parameter list)
+
+Example:
+	
+	Vector3x, somwDirection(1, 0, 0);
+	x = someDirections; // Whats happening here
+
+	- This is assigning someDirection x by using the copy assignment operator.
+	- Whether you create it as a part of the Big Three, or it;s implicvitly createdf for you.
+
+	- Whats really happening is just a function call. 
+
+	x.operator=(someDirection); // just a function with an odd name...
+
+	- DO NOT WRITE CODE LIKE THE ONE ABOVE
+
+	- Operators can be overloaded as a shortcut and an (aguably clearly-looking alternative to the previous line)
+
+- Operators are shorthand for function
+- What operators can you overload?
+	- Arithmetic Operators, Relational Operators, and assignment and compound operators
+- Overloaded operators should Match Expectations
+	- Example Code:
+
+		// Assignment
+		int a, b = 2, c = 5;
+		a = b + c; // combine b and c into a new integer
+
+		// You should be able to catch the results
+		result = thingA + thingB;
+		thingA = ThingA + thingB; // thingA is changed by assignment
+
+		// Examples: the + operator should not change things
+		int A = b + c;  // don't change b or c
+		int x = 5 + 12; // 5 stays 5, 12 stays 12
+		b + x;			// result; Sums of b and x is discarded
+
+	- This code, applied to primative types shoud have no effect ( and ytour comipler may even ignore it in the end)
+	- For a class, the same behavior should be followed. 
+	- Assignment Equals Change
+	- What if Assignment didn't Equal Change
+	- It is possible to voerload an operator multiple times. 
+	- Alternatives to operators
+		- Use clearly-defined functions names to indicate behaviors
+		- No one should have to guess what an operator really does behindthe scenes
+		- You can create this odd behavior, but you shouldn't 
+	- Other things you can do with Operators
+		- Make them private, so no one can use them
+			- This also applies to thigns like constructors, copy constructors
+	- No limits to the number of overloaded operators
+		- As some point youll hit a soft limit, and you dont need any more.
+		- The language doesn't set a limit - you can implement as many as you want
+		- Math related classed might implement (and use!) the most
+		
+	- Relational Operators
+		- Is it equal to that?
+		- Is this not equal to that?
+		- Is this object greater than or lass than that?
+
+	- Example: operator==
+
+		bool Classname::operator ==(const ClassName& otherClass);
+
+	if everything returns the same, true
+
+
+
+
+
+
+
+
+
+
+
+
