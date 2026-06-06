@@ -11,9 +11,9 @@ int demo1()
 	heroes.Add(Hero("Thor", 100, 250));
 	heroes.Add(Hero());
 	
-	const Hero* heroData = heroes.getData();
-	for (int i = 0; i < heroes.getSize(); i++)
-		heroData[i].PrintInfo();
+	//const Hero* heroData = heroes.getData();
+	//for (int i = 0; i < heroes.getSize(); i++)
+	//	heroData[i].PrintInfo();
 
 	DynamicArray<float> floats;
 	floats.Add(3.14f);
