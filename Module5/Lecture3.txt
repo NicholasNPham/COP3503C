@@ -1,0 +1,105 @@
+LECTURE 3: TEMPLATES
+
+CODE REUSE SPEEDS UP DEVELOPMENT
+- inventing the wheel is hard, but necessary
+- Reinventing the wheel is a waste
+- some systems are nearly identical, but only differ in types that they use.
+- We may have to duplicate code and change the types
+
+TEMPLATES TO THE RESCUE
+- Example Syntax
+
+	template <typename T>
+	T GetNumbericValue(T min, T max)
+	{
+		t Value;
+		// assume proper input code here
+		return value;
+	}
+
+- The compiler will create a new version, or specialization, of this function for each data type that it finds
+
+ISNT THE FUNCTION OVERLOADING?
+- In this particular example, it's very similar, but not the same as overloading a function.
+- Overloading a function is passing different types of parameters (possibly a different number of paremeters)
+
+TEMPLATE BREAKDOWN
+	- template <typename t>
+		- template: defines this as a template
+		- typename: define whatever follows this as a usable data type
+		- T: the newly-defined data type (T is common, but it can be anything)
+
+TEMPLATE SPECIALIZATION
+- For functions, specialization are typically deduced by the compiler, based on parameter types:
+- Specializations of classes are little different. 
+- For template classes, you must provide a type.
+
+TEMPLATES AND CLASSES
+- Class Template Syntax
+
+	//GenericClass.h
+	template <typename t>
+	class GenericClass
+	{
+		T singleObject;
+		T* pointerToT;
+		T lotsofT[100];
+		int otherVariables;
+		char otherStuff[12]'
+	Public:
+		GenericClass(int someValue);
+	};
+
+- Create a specialization of the class
+	- GenericClass<int> intSpecialization;
+
+WHAT ABOUT MULTIPLE TYPENAMES?
+- Example Syntax
+
+	template <typename Type1, typename Type2>
+	void Foo(Type1 obj1, Type2 obj2);
+
+TEMPLATE CLASS FUNCTIONS
+- template has to be above every definition of a class member function, no exceptions
+- the template name has to go after the class name, before the scope-resolution operator, in every function definition
+
+TEMPLATE DEFINITION RULE
+- only 1 file
+	- Template classes must be written entirely in a single file.
+	- Normally its "good practice" to be split classes into .h/.cpp files.
+	- Template classes cannot be split into two files because of the compiler
+	- In order to create specialization, the compiler must know about all of the code your class uses.
+	- To do that, the compiler must be able to "see" all of the code in a class, including function definitions.
+	- Just remember: templates work differently, and they must exist entirely in a single file. 
+
+STILL SPLIT CLASS DECLARATION AND DEFINITIONS
+- define the class itself at the top of the header file
+- You can write the function inside the class
+
+WHAT ABOUT NEST CLASSES
+- the nested class will use the same <T> as its containing class
+
+WHY WRITE TEMPLATE CLASSES?
+- Storage
+- a template class is often like a cardboard box
+	- Store something in it (or remove somehting from it)
+	- Transfer it and its content from point A to B
+- Templates (like boxes) are plain, versatile, dont know about their contents
+- They deal with objects as a whole, not specific detials.
+- A template (or a box) is a bad choice for custom functionality
+
+YOU CANT USE TEMPLATES FOR EVERYTHING
+
+KEEP TEMPLATES GENERIC
+- dont use unique functionality of objects inside a template. 
+- Templates should deal with geneeric, reusable functionality. 
+- Storing some data, not operating on it.
+
+CAN YOU HAVE A TEMPLATE THAT DOESNT WORK WITH EVERYTHING
+- You could write template code that expects a specific interface
+- May be a style you ( or team ) develops
+- C++ cannot limit types you use with a template -- its up to you to do things properly.
+
+WHAT ABOUT TEMPLATES WITHIN TEMPLATES
+	- std::vector<t> is a general purpose, go to storage containers.
+	- it can store any type of data, even std::vector<t>
