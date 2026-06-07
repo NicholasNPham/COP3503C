@@ -29,25 +29,31 @@ public:
 	DynamicArray& operator=(const DynamicArray& rhs);
 
 
-	// Accessors
+	// ================ ACCESSOR =================
 	const T* getData() const;
 	int getCapacity() const;
 	int getSize() const;
+	const T& Get(int index) const;
 
-	// Mutators
+	// ================ MUTATORS =================
 	void Add(T newItem);
 	void Remove();
 	void Clear();
 
-	// Behaviors
+	// ================ BEHAVIORS =================
 	void Print() const;
 
-	// OPERATORS
+	// ================ OPERATORS =================
 	DynamicArray& operator+=(const DynamicArray& rhs);
 	DynamicArray operator+(const DynamicArray& rhs);
-	void Combine(const DynamicArray& rhs);
+	const T& operator[](int index) const;
+	T& operator[](int index);
+	bool operator==(const DynamicArray& rhs);
 
+
+	void Combine(const DynamicArray& rhs);
 };
+
 
 // CLASS MEMBER DEFINITIONS
 
@@ -122,6 +128,12 @@ template <typename T>
 int DynamicArray<T>::getSize() const
 {
 	return _size;
+}
+
+template <typename T>
+const T& DynamicArray<T>::Get(int index) const
+{
+	return _data[index];
 }
 
 template <typename T>
@@ -206,6 +218,32 @@ DynamicArray<T> DynamicArray<T>::operator+(const DynamicArray& rhs)
 
 	return newArray;
 }
+
+template <typename T>
+const T& DynamicArray<T>::operator[](int index) const {
+	return _data[index];
+}
+
+template <typename T>
+T& DynamicArray<T>::operator[](int index) {
+	return _data[index];
+}
+
+//template <typename T>
+//bool DynamicArray<T>::operator==(const DynamicArray& rhs)
+//{
+//	// Quick Test -- are the sizes the same?
+//	if (_size != rhs._size)
+//		return false;
+//
+//	for (int i = 0; i < _size; i++)
+//	{
+//		if (_data[i] != rhs._data[i])
+//			return false;
+//	}
+//
+//	return true;
+//}
 
 template <typename T>
 void DynamicArray<T>::Combine(const DynamicArray& rhs)

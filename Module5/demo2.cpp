@@ -17,6 +17,11 @@ int demo2()
 	marvelHeroes.Add("Mrs. Marvel");
 	marvelHeroes.Add("Thor");
 	
+	//if (heroes == marvelHeroes)
+	//	cout << "The two lists are the same!" << endl;
+	//else
+	//	cout << "the two lists are different!" << endl;
+
 	heroes.Print();
 
 	DynamicArray<string> villains;
