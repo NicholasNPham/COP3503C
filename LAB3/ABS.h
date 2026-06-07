@@ -70,7 +70,7 @@ ABS<T>::ABS(const ABS& d)
 	_data = new T[_capacity]; // DEEP COPY
 
 	// COPY THE DATA OVER
-	for (int i = 0; i < d._size; i++)
+	for (unsigned int i = 0; i < d._size; i++)
 		_data[i] = d._data[i];
 }
 
@@ -89,7 +89,7 @@ ABS<T>& ABS<T>::operator=(const ABS& d)
 		_data = new T[_capacity];
 
 		// COPY THE DATA OVER
-		for (int i = 0; i < d._size; i++)
+		for (unsigned int i = 0; i < d._size; i++)
 			_data[i] = d._data[i];
 	}
 
@@ -112,7 +112,7 @@ void ABS<T>::push(T data)
 		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
 	
 		// COPY DATA OVER
-		for (int i = 0; i < _size; i++)
+		for (unsigned int i = 0; i < _size; i++)
 			newArray[i] = _data[i];
 
 		delete[] _data; // DELETE OLD DATA
@@ -129,7 +129,7 @@ T ABS<T>::pop()
 {
 	if (_size == 0)
 	{
-		throw runtime_error("ARRAY IS EMPTY NOTHING TO REMOVED");
+		throw std::runtime_error("ARRAY IS EMPTY NOTHING TO REMOVED");
 	}
 	T tempVar = _data[_size - 1];
 	_size--;
@@ -141,7 +141,7 @@ T ABS<T>::pop()
 		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
 
 		// COPY DATA OVER
-		for (int i = 0; i < _size; i++)
+		for (unsigned int i = 0; i < _size; i++)
 			newArray[i] = _data[i];
 
 		delete[] _data; // DELETE OLD DATA
@@ -155,7 +155,7 @@ T ABS<T>::peek() const {
 
 	if (_size == 0)
 	{
-		throw runtime_error("ARRAY IS EMPTY NOTHING TO PEEK");
+		throw std::runtime_error("ARRAY IS EMPTY NOTHING TO PEEK");
 	}
 
 	return _data[_size - 1]; // THIS RETURNS THE VALUE ON THE TOP OF THE LIST	
