@@ -104,7 +104,7 @@ ABS<T>::~ABS()
 }
 
 template <typename T>
-void ABS<T>::push(t data)
+void ABS<T>::push(T data)
 {
 	if (_capacity == _size) // CHECK IF FULL
 	{
@@ -135,8 +135,19 @@ T ABS<T>::pop()
 	_size--;
 
 	if (_size < (_capacity / _scaleFactor))
+	{
 		 _capacity /= _scaleFactor;
 
+		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+
+		// COPY DATA OVER
+		for (int i = 0; i < _size; i++)
+			newArray[i] = _data[i];
+
+		delete[] _data; // DELETE OLD DATA
+		_data = newArray; // POINT TO NEW ARRAY
+	}
+	return tempVar;
 }
 
 template <typename T>
@@ -147,6 +158,21 @@ T ABS<T>::peek() const {
 		throw runtime_error("ARRAY IS EMPTY NOTHING TO PEEK");
 	}
 
-	return _data[_size - 1];
+	return _data[_size - 1]; // THIS RETURNS THE VALUE ON THE TOP OF THE LIST	
 
+}
+
+template <typename T>
+unsigned int ABS<T>::getSize() const {
+	return _size;
+}
+
+template <typename T>
+unsigned int ABS<T>::getMaxCapacity() const {
+	return _capacity;
+}
+
+template <typename T>
+T* ABS<T>::getData() const {
+	return _data;
 }
