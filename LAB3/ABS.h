@@ -138,3 +138,15 @@ T ABS<T>::pop()
 		 _capacity /= _scaleFactor;
 
 }
+
+template <typename T>
+T ABS<T>::peek() const {
+
+	if (_size == 0)
+	{
+		throw runtime_error("ARRAY IS EMPTY NOTHING TO PEEK");
+	}
+
+	return _data[_size - 1];
+
+}
