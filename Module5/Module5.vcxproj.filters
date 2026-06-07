@@ -27,6 +27,9 @@
     <ClCompile Include="demo3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="demo4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="zybook1.txt" />

@@ -142,6 +142,7 @@
     <ClCompile Include="..\Module3\Hero.cpp" />
     <ClCompile Include="demo2.cpp" />
     <ClCompile Include="demo3.cpp" />
+    <ClCompile Include="demo4.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
