@@ -74,7 +74,7 @@ ABS<T>::ABS(const ABS& d)
 		_data[i] = d._data[i];
 }
 
-template <typename T>
+template <typename T> // COPY ASSIGNMENT OPERATOR
 ABS<T>& ABS<T>::operator=(const ABS& d)
 {
 	if (this != &d) //DOES THE CURRENT OBJECT LIVE AT THE SAME ADDRESS AS D
@@ -101,4 +101,25 @@ template <typename T> // DESTRUCTOR
 ABS<T>::~ABS()
 {
 	delete[] _data;
+}
+
+template <typename T>
+void ABS<T>::push(t data)
+{
+	if (_capacity == _size) // CHECK IF FULL
+	{
+		_capacity *= _scaleFactor; // INCREASE THE CAPACITY
+		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+	
+		// COPY DATA OVER
+		for (int i = 0; i < _size; i++)
+			newArray[i] = _data[i];
+
+		delete[] _data; // DELETE OLD DATA
+		_data = newArray; // POINT TO NEW ARRAY
+	}
+
+	_data[_size] = data; // ADD TO THE STACK
+	_size++; // UPDATE SIZE
+
 }
