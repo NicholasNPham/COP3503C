@@ -164,7 +164,7 @@ void DynamicArray<T>::Remove()
 
 	if (_size > 0)
 	{
-		_size--;
+		_size--; // This was added before demo4 video so this was the "change"
 		T* newArray = new T[_capacity];
 		for (int i = 0; i < _size; i++)
 			newArray[i] = _data[i];

@@ -90,24 +90,19 @@ void Hero::gain_experience(int amount)
 {
 	_experience += amount;
 
-	if (_experience >= 100)
+	while (_experience >= 100)
 	{
-		// We've leveled up!
 		level_up();
-		_experience -= 100;
 	}
 }
 
 
 void Hero::level_up()
 {
-	if (_experience >= 100)
-	{
-		_level++;
-		_strength++;
-		_hitpoints += 5;
-		_max_hitpoints += 5;
-		_experience += 5;
+	_level++;
+	_strength++;
+	_hitpoints += 5;
+	_max_hitpoints += 5;
+	_experience -= 100;
 
-	}
 }

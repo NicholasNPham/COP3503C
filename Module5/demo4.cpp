@@ -37,10 +37,7 @@ void ExampleTwo()
 int demo4() {
 
 	//ExampleOne();
-	cout << "here" << endl;
 	ExampleTwo();
-	cout << "here" << endl;
-
 
 	return 0;
 }

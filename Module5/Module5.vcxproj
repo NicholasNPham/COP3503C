@@ -143,6 +143,8 @@
     <ClCompile Include="demo2.cpp" />
     <ClCompile Include="demo3.cpp" />
     <ClCompile Include="demo4.cpp" />
+    <ClCompile Include="lab3part1.cpp" />
+    <ClCompile Include="leaker.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="..\Module3\Hero.h" />
     <ClInclude Include="DynamicArray.h" />
+    <ClInclude Include="leaker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
