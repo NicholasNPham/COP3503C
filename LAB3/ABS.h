@@ -123,3 +123,18 @@ void ABS<T>::push(t data)
 	_size++; // UPDATE SIZE
 
 }
+
+template <typename T>
+T ABS<T>::pop()
+{
+	if (_size == 0)
+	{
+		throw runtime_error("ARRAY IS EMPTY NOTHING TO REMOVED");
+	}
+	T tempVar = _data[_size - 1];
+	_size--;
+
+	if (_size < (_capacity / _scaleFactor))
+		 _capacity /= _scaleFactor;
+
+}
