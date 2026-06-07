@@ -44,6 +44,8 @@ public:
 
 	// OPERATORS
 	DynamicArray& operator+=(const DynamicArray& rhs);
+	DynamicArray operator+(const DynamicArray& rhs);
+	void Combine(const DynamicArray& rhs);
 
 };
 
@@ -184,9 +186,32 @@ void DynamicArray<T>::Print() const
 template <typename T>
 DynamicArray<T>& DynamicArray<T>::operator+=(const DynamicArray& rhs)
 {
+	this->Combine(rhs);
 
-	T* newArray = new T[_capacity + rhs._capacity];	// Allocate some space that can hold both arrays
-	
+	return *this;
+}
+
+template <typename T>
+DynamicArray<T> DynamicArray<T>::operator+(const DynamicArray& rhs)
+{
+	DynamicArray<T> newArray(_size + rhs._size); // pre size according to the size of the both arrays
+
+	// copy this data into new array;
+	for (int i = 0; i < _size; i++)
+		newArray.Add(_data[i]); // use existing functionality
+
+	// copy rhs data into newArray;
+	for (int i = 0; i < rhs._size; i++)
+		newArray.Add(rhs._data[i]);
+
+	return newArray;
+}
+
+template <typename T>
+void DynamicArray<T>::Combine(const DynamicArray& rhs)
+{
+	T* newArray = new T[_size + rhs._size];	// Allocate some space that can hold both arrays
+
 	for (int i = 0; i < _size; i++) // copy array 1 (this) into the array
 
 		newArray[i] = _data[i];
@@ -195,12 +220,11 @@ DynamicArray<T>& DynamicArray<T>::operator+=(const DynamicArray& rhs)
 		newArray[_size + i] = rhs._data[i];
 
 	_size += rhs._size; // make sure _size and _capacity are updated
-	_capacity += rhs._capacity;
+	_capacity = _size;
 
 	delete[] _data; // delete the old data
 
-	
+
 	_data = newArray; // redirect the _data pointer to the new (combined) array
 
-	return *this;
 }
