@@ -108,3 +108,80 @@ ABQ<T>::~ABQ()
 	delete[] _data;
 }
 
+template <typename T>
+void ABQ<T>::enqueue(T data)
+{
+	if (_capacity == _size) // CHECK IF FULL
+	{
+		_capacity *= _scaleFactor; // INCREASE THE CAPACITY
+		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+	
+		// COPY DATA OVER
+		for (unsigned int i = 0; i < _size; i++)
+			newArray[i] = _data[(_front + i) % _capacity];
+
+		_front = 0; // SET FRONT TO INDEX 0
+		delete[] _data; // DELETE OLD DATA
+		_data = newArray; // POINT TO NEW ARRAY
+	}
+
+	_data[(_front + _size) % _capacity] = data; // ADD TO THE STACK IN THE BACK
+	_size++; // UPDATE SIZE
+
+}
+
+template <typename T>
+T ABQ<T>::dequeue()
+{
+	if (_size == 0)
+	{
+		throw std::runtime_error("ARRAY IS EMPTY NOTHING TO REMOVED");
+	}
+	T tempVar = _data[_front];
+	_front = (_front + 1) % _capacity; // FRONT IS WHATEVER THE NEXT INDEX IS
+	_size--; // SHRINK THE SIZE
+
+	if (_size < (_capacity / _scaleFactor))
+	{
+		unsigned int oldCapacity = _capacity;
+		_capacity /= _scaleFactor;
+
+		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+
+		// COPY DATA OVER
+		for (unsigned int i = 0; i < _size; i++)
+			newArray[i] = _data[(_front + i) % oldCapacity];
+
+		_front = 0; // FRONT IS NOW INDEX 0
+		delete[] _data; // DELETE OLD DATA
+		_data = newArray; // POINT TO NEW ARRAY
+	}
+	return tempVar;
+}
+
+template <typename T>
+T ABQ<T>::peek() const {
+
+	if (_size == 0)
+	{
+		throw std::runtime_error("ARRAY IS EMPTY NOTHING TO PEEK");
+	}
+
+	return _data[_front]; // THIS RETURNS THE VALUE ON THE TOP OF THE LIST	
+
+}
+
+template <typename T>
+unsigned int ABQ<T>::getSize() const {
+	return _size;
+}
+
+template <typename T>
+unsigned int ABQ<T>::getMaxCapacity() const {
+	return _capacity;
+}
+
+template <typename T>
+T* ABQ<T>::getData() const {
+	return _data;
+}
