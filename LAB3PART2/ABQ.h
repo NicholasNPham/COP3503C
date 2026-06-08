@@ -113,12 +113,15 @@ void ABQ<T>::enqueue(T data)
 {
 	if (_capacity == _size) // CHECK IF FULL
 	{
+
+		unsigned int oldCapacity = _capacity; // SAVE THE OLD CAPACITY BEFORE CHANGE
+
 		_capacity *= _scaleFactor; // INCREASE THE CAPACITY
 		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
-	
+
 		// COPY DATA OVER
 		for (unsigned int i = 0; i < _size; i++)
-			newArray[i] = _data[(_front + i) % _capacity];
+			newArray[i] = _data[(_front + i) % oldCapacity];
 
 		_front = 0; // SET FRONT TO INDEX 0
 		delete[] _data; // DELETE OLD DATA
@@ -143,7 +146,7 @@ T ABQ<T>::dequeue()
 
 	if (_size < (_capacity / _scaleFactor))
 	{
-		unsigned int oldCapacity = _capacity;
+		unsigned int oldCapacity = _capacity; // SAVE THE OLD CAPACITY BEFORE CHANGE
 		_capacity /= _scaleFactor;
 
 		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
