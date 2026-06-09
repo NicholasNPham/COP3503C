@@ -1,0 +1,270 @@
+TEMPLATES:
+
+What is a template, and why do we use them?
+- What is a template?
+	- A template is a blueprintthat lets the compiler generate the function or class for whatever type you actually use it with.
+- Why do we use them?
+	- A template is used to reduce repetitive code and allows the compiler to work with multiple types without rewriting the same logic. 
+
+How do you declare a template class?
+- To declare a template class, "template <typename T>" (T is just a generic convention and can be named anything)
+- It goes above the class
+- Example Syntax for Class
+
+	template <typename T>
+	class className {
+		// definition
+	};
+
+- When the method is defined outside of the class
+- Example Syntax for Class Method
+
+	template <typename T>
+	class Classname {
+		// definition
+	};
+
+	template <typename T>
+	T className<T>::methodName(T a, T b) {
+		// definitions
+	}
+
+	// if the return value is constant
+	template <typename T>
+	T className<T>::methodName(T a, T b) const {
+		// definitions
+	}
+
+How do you declare a template function?
+- To declare a template function, you must type the syntax "template <typename T>" (T is just a generic convention and can be named anything)
+- It goes above the function.
+- Example Syntax for Function
+
+	template <typename T>
+    T functionName(T a, T b) {
+		// definition
+    };
+
+- NOTES:
+	- the templates class definitions live only on the .h file. The compiler needs to see the full template definition at the point where it instantiates it, so everything - declaration AND implementation you will get linker errors
+
+OPERATOR OVERLOADING
+
+What is operator overloading?
+- The What:
+	- Operator overloading is when you define or redefine what an opeator does for your custom class.
+	- Youre assentially telling the compiler "when you see {OPERATOR} used on my class, here's what to actually do.\
+- The Why:
+	- The compiler doesn't know what an operator means for your custom class, so you define it yourself
+
+How do you overload an operator?
+	- depending on the operator the syntax for operator is:
+
+		operator{operator} = operator= , operator+
+
+	- what is the full function signature looks like for overloading + on a Vector2D class that has x and y values.
+
+		Vector2D Vector2D::operator+(const Vector2D& other) {
+		// definition
+		}
+
+	- Vector2D: The return type.
+	- Vector2D::operator+: Overloading the + operator for Vector2D class
+	- const: Constant passed in
+	- Vector2D&: is the reference to the another object 
+	- Other: is the variable name of the reference to the Vector2D object that is constant.
+
+	- method definition
+
+		Vector2D Vector2D::operator+(const Vector2D& other) {
+			
+			Vector2D result;
+
+			result.x = this->x + other.x;
+			result.y = this->y + other.y;
+
+			return result; // return type is by value not reference
+		}
+
+Why would you overload operators for your classes?
+- We use it so custom classes behave intuitivelty -- v1 + v2 is cleaner than v1.add(v2) and the compiler needs to know what that means for your type.
+
+DATA STRUCTURES
+
+What is a stack, and how does it work?
+- A stack is a linear data structure taht follows LIFO order
+	- LIFO: elements are added and removed from the same end, called the top
+- Think of it as an array or linked list where you only over interact with one end.
+
+What terms do we use for adding and removing elements from a stack?
+- push:
+	- push Syntax:
+
+		template <typename T>
+		void ABS<T>::push(T data)
+		{
+			if (_capacity == _size) // CHECK IF FULL
+			{
+				_capacity *= _scaleFactor; // INCREASE THE CAPACITY
+				T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+	
+				// COPY DATA OVER
+				for (unsigned int i = 0; i < _size; i++)
+					newArray[i] = _data[i];
+
+				delete[] _data; // DELETE OLD DATA
+				_data = newArray; // POINT TO NEW ARRAY
+			}
+
+			_data[_size] = data; // ADD TO THE STACK
+			_size++; // UPDATE SIZE
+
+		}
+
+	- the push method is basically checking if the list is full, if it then increase the capacity, create a new array, copy the data over, delete the old data, point to the new array, then add to the stack and update the size, otherwise add to the size and update the size. 
+
+- pop:
+	- pop Syntax:
+
+		template <typename T>
+		T ABS<T>::pop()
+		{
+			if (_size == 0)
+			{
+				throw std::runtime_error("ARRAY IS EMPTY NOTHING TO REMOVED");
+			}
+			T tempVar = _data[_size - 1];
+			_size--;
+
+			if (_size < (_capacity / _scaleFactor))
+			{
+				 _capacity /= _scaleFactor;
+
+				T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+
+				// COPY DATA OVER
+				for (unsigned int i = 0; i < _size; i++)
+					newArray[i] = _data[i];
+
+				delete[] _data; // DELETE OLD DATA
+				_data = newArray; // POINT TO NEW ARRAY
+			}
+			return tempVar;
+		}
+
+		- check if empty, throw if so, save top element, decrement size, check if shrink is needed if so shrink then copy and return tempvar. 
+
+- peek
+	- peek syntax:
+		
+		template <typename T>
+		T ABS<T>::peek() const {
+
+			if (_size == 0)
+			{
+				throw std::runtime_error("ARRAY IS EMPTY NOTHING TO PEEK");
+			}
+
+			return _data[_size - 1]; // THIS RETURNS THE VALUE ON THE TOP OF THE LIST	
+
+		}
+
+	- basically if the size is zero return error, else return the top value of the array. 
+
+What is a queue, and how does it work?
+- A queue is a linear data structure that folow FIFO
+	- FIFO (first in first out): elements are added to teh back and removed from the front
+- Think of it as an array or linked list where you interact with both ends. 
+
+What terms do we use for adding and removing elements from a queue?
+
+- enqueue
+	- enqueue syntax:
+
+		template <typename T>
+		void ABQ<T>::enqueue(T data)
+		{
+			if (_capacity == _size) // CHECK IF FULL
+			{
+
+				unsigned int oldCapacity = _capacity; // SAVE THE OLD CAPACITY BEFORE CHANGE
+
+				_capacity *= _scaleFactor; // INCREASE THE CAPACITY
+				T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+
+				// COPY DATA OVER
+				for (unsigned int i = 0; i < _size; i++)
+					newArray[i] = _data[(_front + i) % oldCapacity];
+
+				_front = 0; // SET FRONT TO INDEX 0
+				delete[] _data; // DELETE OLD DATA
+				_data = newArray; // POINT TO NEW ARRAY
+			}
+
+			_data[(_front + _size) % _capacity] = data; // ADD TO THE STACK IN THE BACK
+			_size++; // UPDATE SIZE
+
+}
+
+	- enqueue notes:
+		- Check if full
+		- if full: save old capacity, increase capacity, create new array, copy data over using cirular indexing (_front + i) % oldCapacity, reset front to 0, delete old array, point to new array
+		- add to the back using (_front + _size) % _capacity
+		- increment size
+
+- dequeue
+	- dequeue syntax:
+
+		template <typename T>
+		T ABQ<T>::dequeue()
+		{
+			if (_size == 0)
+			{
+				throw std::runtime_error("ARRAY IS EMPTY NOTHING TO REMOVED");
+			}
+			T tempVar = _data[_front];
+			_front = (_front + 1) % _capacity; // FRONT IS WHATEVER THE NEXT INDEX IS
+			_size--; // SHRINK THE SIZE
+
+			if (_size < (_capacity / _scaleFactor))
+			{
+				unsigned int oldCapacity = _capacity; // SAVE THE OLD CAPACITY BEFORE CHANGE
+				_capacity /= _scaleFactor;
+
+				T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+
+				// COPY DATA OVER
+				for (unsigned int i = 0; i < _size; i++)
+					newArray[i] = _data[(_front + i) % oldCapacity];
+
+				_front = 0; // FRONT IS NOW INDEX 0
+				delete[] _data; // DELETE OLD DATA
+				_data = newArray; // POINT TO NEW ARRAY
+			}
+			return tempVar;
+		}
+
+	- dequeue notes:
+		- check if empty, throw runtime_error if so
+		- save the front element in tempVar
+		- Move front  to next index using (_front + 1) % _capacity( circular indexing)
+		- decrement size
+		- check if shrink is needed; if _size < capacity / scaleFactor
+		- if so: save old capacity, half the capacity, create an new array, copy data over using (_front + i) % oldcapacity, reset front to 0, delete old array, point to new array
+		- return tempVar
+- peek
+	- peek syntax:
+		
+		template <typename T>
+		T ABS<T>::peek() const {
+
+			if (_size == 0)
+			{
+				throw std::runtime_error("ARRAY IS EMPTY NOTHING TO PEEK");
+			}
+
+			return _data[_size - 1]; // THIS RETURNS THE VALUE ON THE TOP OF THE LIST	
+
+		}
+
+	- basically if the size is zero return error, else return the top value of the array. 
