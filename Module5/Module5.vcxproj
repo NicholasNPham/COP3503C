@@ -149,6 +149,7 @@
     <Text Include="lecture1.txt" />
     <Text Include="lecture2.txt" />
     <Text Include="Lecture3.txt" />
+    <Text Include="study.txt" />
     <Text Include="zybook1.txt" />
     <Text Include="zybooks2.txt" />
     <Text Include="zybooks3.txt" />

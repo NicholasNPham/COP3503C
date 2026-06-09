@@ -38,6 +38,7 @@
     <Text Include="lecture1.txt" />
     <Text Include="lecture2.txt" />
     <Text Include="Lecture3.txt" />
+    <Text Include="study.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynamicArray.h">
