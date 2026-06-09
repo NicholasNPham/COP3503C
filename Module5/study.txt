@@ -268,3 +268,92 @@ What terms do we use for adding and removing elements from a queue?
 		}
 
 	- basically if the size is zero return error, else return the top value of the array. 
+
+	VECTORS
+
+	- A linear data structure that is dynamically resizeable and you can access any element from the index
+	- A vector has no enforced access pattern
+	- Operators:
+		- Push_back: adds to the back of the vector
+		- Pop_back: removes from the back
+		- at(i): get the value of that i index
+		- size(): return the size of the vector
+		- empty(): check to see if the vector is empty. 
+
+	- Example Syntax:
+		
+		vector<int> myVec;
+		vector<string> names;
+
+	- Push_back and Pop_back are fundementally the samething as push and pop class methods from the stack class methods. 
+
+LINKED LISTS
+- 
+- Operations
+	- insert: add a node
+	- delete: remove a node
+
+
+- Syntax: 
+
+	- Structure of Node
+
+		struct Node
+		{
+			int _data;
+			Node* _nextNode;
+		};
+
+	- nextNode Constructor
+
+		Node(int data)
+		{
+		_data = data;
+		_nextNode = nullptr;
+		};
+
+	-head node
+
+	class LinkedList
+	{
+	private:
+		Node* _head;
+	};
+
+	LinkedList()
+	{
+		_head = nullptr;
+	}
+
+- Add Node function
+	1. Set new node's _nextNode to _head
+	2. Set _head to the new node
+
+	void LinkedList::insertFront(int value){
+		Node* newNode = new Node(value);
+		newNode->_nextNode = _head;
+		_head = newNode;
+	}
+
+- traversal
+
+	current = head;
+	
+	while (current != nullptr) {
+
+		cout << current->_data;
+		current = current->_nextNode;
+	};
+	
+- delete
+
+	void LinkedList::deleteFront(){
+		
+		if (_head == nullptr){
+			throw std::runtime_error("message")
+		}
+		node* tempPointer = _head;
+		_head = _head->_nextNode;
+		delete tempPointer;
+	}
+
