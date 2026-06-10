@@ -1,0 +1,161 @@
+
+3.15 DEBUGGING
+- DEBUGGING: is the process of determining and fixing the cause of a problem in a computer program
+- TROUBLESHOOTING: is another word for debugging.
+- Far from being an occasional nuisance, dubugging is a core programmers task, like diagnosing is a core medical doctor task
+- Skill in carrying out a methodical debugging process can improve a programmer's productivity
+- A common error amoung new programmers is to try to debug without a methodical process, instead of staring at the program, or making random changes to see if the output is improved.
+
+- QnA Notes
+	- The first step in debugging is to come up with a methodical process with prediciting the problem
+	- A common predicted-problem testing approach is to insert print statements
+	- The language is case sensitive, so using uppercase referes to a different variable
+	- The list of all possible probelms is typically huge. A programmer thinks of a few possible problems, then test the most likely first. Testing may lead to new predictions
+	- In contrast, beginning programmers commonly stare at the code or make random changes. A good skill to develop is to think methodically. Predict likely problems, then carefully test to validate each prediction
+
+- THE METHODICAL PROCESS
+	- Predict a possible cause, conduct a test to validate it, repeat
+	- A common beginner mistake is staring at code or making random hoping something improves
+	
+- COMMON DEBUGGING TECHNIQUES
+	- Insert print statements to observe variable values
+	- Manually set a variable to a known value to isolate a section
+	- Comment out unused code temporarily
+	- Mark temporary debug statements with //FIXME DELETE so you dont forget to remove them 
+
+- KEY TAKEAWAYS 
+	- Dont list every possible problem first: pick the ost likely ones and test the first. Testing often leads to new predictions
+	- Integer overflow is a silent bug
+		- The program compiles and runs but produces wrong output when a value exceeds the data type's max capacity. Fix it by choosing a data type with enough range like "long long"
+
+10.8 ADDITIONAL MATERIAL: A FIRST LINKED LIST 
+- KEY ADVANTAGES OVER ARRAYS/VECTORS
+	- A linked list allows items to be inserted anywhere in the list without shifting subsequent elements unlike arrays or vectors
+
+- NODE STRUCTURE
+	- Each node holds two things: the actual data value, and a pointer to the next node in the list
+
+- HEAD NODE
+	- A special node that marks the front of the list. It doesnt store real data (holds - 1 as a sentinel). The last node's nextNodePtr is set to nullptr to signify the end
+
+- DEFINITION
+	- A linked list is a linear data structure that contains nodes. Each node holds a data vlaue and a pointer to the next node. The head node marks the start, and the last node's pointer is set to nullptr to make the end:
+
+- InsertAfter (3 STEPS)
+	- Save the original next pointer (C) into tempNext
+	- Point current node (A) to the new node (B)
+	- Point new node (B) to C using tempNext
+
+- KEY TAKEAWAY
+	- When inserting a node, no elements move in memory. Only pointer values are update. This makes linked list more efficent for insertion than arrays or vectors. 
+
+- MANAGING LARGE NUMBERS OF NODES:
+	- Instead of declaring a named variable for every node (which is unscalable), you cna use poitner variables 
+		- CurrObj
+		- lastObj
+	
+	- lastObj acts as a bookmark that always tracks the last node in the list (the tails) so you never have to traverse the whole list to find where to append 
+
+	- THE LOOP DOES THREE THINGS EVERY ITERATION
+
+		// Assume currentObj, head, and lastObj is init already
+
+		for (i = 0; i < 20; ++i) {        
+		  currObj = new IntNode(rand()); // 1. Create a new node
+      
+		  lastObj->InsertAfter(currObj); // Append to the end
+		  lastObj = currObj;             // Update the tail
+		}
+
+	- This scales to any number of nodes without adding new variables
+	
+ZyDE 10.8.1: Managing a linked list
+
+	#include <iostream>
+	#include <cstdlib>
+	using namespace std;
+
+	class IntNode {
+	public:
+	   IntNode(int dataInit = 0, IntNode* nextLoc = nullptr);
+	   void InsertAfter(IntNode* nodeLoc);
+	   IntNode* GetNext();
+	   void PrintNodeData();
+	   int GetDataVal();
+	private:
+	   int dataVal;
+	   IntNode* nextNodePtr;
+	};
+
+	// Constructor
+	IntNode::IntNode(int dataInit, IntNode* nextLoc) {
+	   this->dataVal = dataInit;
+	   this->nextNodePtr = nextLoc;
+	}
+
+	/* Insert node after this node.
+	 * Before: this -- next
+	 * After:  this -- node -- next
+	 */
+	void IntNode::InsertAfter(IntNode* nodeLoc) {
+	   IntNode* tmpNext = nullptr;
+   
+	   tmpNext = this->nextNodePtr;    // Remember next
+	   this->nextNodePtr = nodeLoc;    // this -- node -- ?
+	   nodeLoc->nextNodePtr = tmpNext; // this -- node -- next
+	}
+
+	// Print dataVal
+	void IntNode::PrintNodeData() {
+	   cout << this->dataVal << endl;
+	}
+
+	// Grab location pointed by nextNodePtr
+	IntNode* IntNode::GetNext() {
+	   return this->nextNodePtr;
+	}
+
+	int IntNode::GetDataVal() {
+	   return this->dataVal;
+	}
+
+	int main() {
+	   IntNode* headObj = nullptr; // Create IntNode pointers
+	   IntNode* currObj = nullptr;
+	   IntNode* lastObj = nullptr;
+	   int i;            
+   
+	   headObj = new IntNode(-1);        // Front of nodes list
+	   lastObj = headObj;
+   
+	   for (i = 0; i < 20; ++i) {        // Append 20 rand nums
+		  currObj = new IntNode(rand());
+      
+		  lastObj->InsertAfter(currObj); // Append curr
+		  lastObj = currObj;             // Curr is the new last item
+	   }
+   
+	   currObj = headObj;                // Print the list
+	   currObj = currObj->GetNext();
+	   while (currObj != nullptr) {
+		  currObj->PrintNodeData();
+		  currObj = currObj->GetNext();
+	   }
+
+	   // FIXME: Loop through list and find minimum dataVal
+
+	   int smallestNum = headObj->GetNext()->GetDataVal();
+	   currObj = headObj->GetNext();
+
+	   while (currObj != nullptr)
+	   {
+			if (currObj->GetDataVal() < smallestNum)
+			{
+				smallestNum = currObj->GetDataVal();
+			}
+			currObj = currObj->GetNext();
+	   }
+
+	   cout << "Smallest Num :" << smallestNum << endl;
+	   return 0;
+	}
