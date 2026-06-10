@@ -159,3 +159,100 @@ ZyDE 10.8.1: Managing a linked list
 	   cout << "Smallest Num :" << smallestNum << endl;
 	   return 0;
 	}
+
+14.4 ADDING OUTPUT STATEMENTS FOR DEBUGGING	
+
+- Recursive functions can be particularly challenging to debug. Adding output statements can be helpful
+- Furthermore, an additional trick is to indent the print statments to show the current depth ofrecusion.
+
+- NOTES
+	- debugging recursive functions is hard because the same function runs multiple times on the call stack at different depths so a wall of identical print statments gives you no idea which call produced which output
+	- The trick is to track recursion depth visually by adding an indentAmt paremeter to the function. Every print statement prepends indentAmt so you can see which depth you are at.
+	- Each recursive call concatenates more spaces ontin indentAmt (like indentAmt + "   "), so each level deeper gets more indenting in the output
+	- The indentation is basically a visual call stack
+		- Deeper indent means deeper in the recusion, and as the function returns back up the indentation shrinks, shwoing the stack unwinding.
+	- Some programmers leave the debug print statement in the code and just comment them out with // when not in use, since they also serve a documentation
+
+ZyDE 14.4.1: OUTPUT STATEMENTS IN A RECURSIVE FUNCTION
+	
+		#include <iostream>
+		#include <string>
+		#include <vector>
+
+		using namespace std;
+
+		/* Finds index of string in vector of strings, else -1.
+		   Searches only with index range low to high
+		   Note: Upper/lower case characters matter
+		*/
+
+		int FindMatch(vector<string> stringsList, string itemMatch,
+					  int lowVal, int highVal, string indentAmt) { // indentAmt used for print debug
+   
+		   int midVal;        // Midpoint of low and high values
+		   int itemPos;       // Position where item found, -1 if not found
+		   int rangeSize;     // Remaining range of values to search for match
+   
+		   cout << indentAmt << "Find() range " << lowVal << " " << highVal << endl;
+   
+		   rangeSize = (highVal - lowVal) + 1;
+		   midVal = (highVal + lowVal) / 2;
+   
+		   if (itemMatch == stringsList.at(midVal)) {   // Base case 1: item found at midVal position
+			  cout << indentAmt << "Found person." << endl;
+			  itemPos = midVal;
+		   }
+		   else if (rangeSize == 1) {                   // Base case 2: match not found
+			  cout << indentAmt << "Person not found." << endl;
+			  itemPos = 0;
+		   }
+		   else {                                       // Recursive case: Search lower or upper half
+			  if (itemMatch < stringsList.at(midVal)) { // Search lower half, recursive call
+				 cout << indentAmt << "Searching lower half." << endl;
+				 itemPos = FindMatch(stringsList, itemMatch, lowVal, midVal, indentAmt + "   ");
+			  }
+			  else {                                    // Search upper half, recursive call
+				 cout << indentAmt << "Searching upper half." << endl;
+				 itemPos = FindMatch(stringsList, itemMatch, midVal + 1, highVal, indentAmt + "   ");
+			  }
+		   }
+
+		   cout << indentAmt << "Returning pos = " << itemPos << "." << endl;
+		   return itemPos;
+		}
+
+		int main() {
+		   vector<string> attendeesList(0); // List of attendees
+		   string attendeeName;             // Name of attendee to match
+		   int matchPos;                    // Matched position in attendee list
+   
+		   // Omitting part of program that adds attendees
+		   // Instead, we insert some sample attendees in sorted order
+		   attendeesList.push_back("Adams, Mary");
+		   attendeesList.push_back("Carver, Michael");
+		   attendeesList.push_back("Domer, Hugo");
+		   attendeesList.push_back("Fredericks, Carlos");
+		   attendeesList.push_back("Li, Jie");
+   
+		   // Find "Aaron, Joe"
+		   attendeeName = "Aaron, Joe";
+   
+		   // Call function to match name, output results
+		   matchPos = FindMatch(attendeesList, attendeeName, 0,
+								attendeesList.size() - 1, "   ");
+		   if (matchPos >= 0) {
+			  cout << "Found at position " << matchPos << "." << endl;
+		   }
+		   else {
+			  cout << "Not found. " << endl;
+		   }
+   
+		   return 0;
+		}
+
+- 14.4 ADDING OUTPUT STATEMENTS FOR DEBUGGING
+	- running the correct code, searching for "Aaron, Joe" keeps going lower half until it hits a range of 0 0 and correctly returns -1 (not found)
+	- -1 is a sentinal value, meaning a special agreed-upon value that signals "not found" rather than a real position.
+	- When you change itemPos = -1 to itemPos = 0 the function no longer has a way to communicate failure. Instead it returns 0, which is a real position, so the caller thinks the search succeeded.
+	- The bug isnt in the search logic itself, its's in how the result is communicated back up the call stack
+	- The indented debug output made the bug traceable. Without it you'd you see "found at position 0" with no idea where in the recursion it went wrong. With it you can pinpoint exactly which depth and which case produced the bad value.
