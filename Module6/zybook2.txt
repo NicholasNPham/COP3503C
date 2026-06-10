@@ -1,0 +1,68 @@
+17.6 DEBUGGING EXAMPLE: REVERSING AN ARRAY
+
+- The Goal:
+	- Reverse an array in place using swap
+		- Swap the first and last, then second and second to last, keep going until you hit the middle.
+		
+- Bug 1: Out of bounds access
+	- THe first attempt used "userVals[NUM_ELEMENTS - i".
+	- When i = 0 it tires to access userVals[8] which doesn't exist since valid indices are only 0-7
+	- Fix:
+		- change to NUM_ELEMENTS - 1 - i
+- Bug 2: Not actually swapping, just copying
+	- Doing "userVals[i] = userVals[NUM_ELEMENTS - 1 - i]" overwrites the original value at usersVal[i] and its gone forever.
+	- Fix:
+		- use a tempVal variable to hold the original value before overwriting it. PRoper swap is three lines 
+			- 1. tempVal = userVals[i]
+			- 2. userVals[i] = userVals[NUM_ELEMENTS - 1 - i]
+			- 3. userVals[NUM_ELEMENTS - 1 - i] = tempVal
+
+- bug 3: Loop goes to far
+	- Iterating over the full array means once you hit the halfway point is already reversed, and continuing just undoes all the swaps
+	- Fix:
+		- Change loop to condition to i < (NUM_ELEMENTS / 2) so it stops at the middle. 
+
+17.15 MODULAR COMPILATION
+- Using separate files to organize code can also help to make the compiliation process more efficent
+- So fat, we used a single-step compiliation approacj in which all source files are compiled at the same time to create the executable e.g
+
+	g++ main.cpp threenumsfcts.cpp
+
+- This approach as significant drawback. Anytime one of the source files is modified, all files must be recompiled.
+- Even a small change, such as modifying a cout statement to fix a spelling error, would require all files to be recompiled
+
+- MODULAR COMPILATIONS:
+	- Break the build process into two steps:
+		- COMPILE:
+			- Each .cpp file in independently compiled into its own object file (.o) Object files contains machine instructions for that file plus reference/placeholders for functions or variables defined in other files 
+		- LINK:
+			- The linker takes all the .o files and connects the placeholder together, then produces the fine exectuable
+	- WHy it saves time
+		- When you change one file, only that one .cpp gets into a new .o. All the other .o files are still valid from before, so the linker just reuses them. You're not recompiling everything from scratch
+
+17.16 Makefiles
+- While modular compilation offers many advantages, manually compiling and likig a program with numerous sorces and header files can be chanllenging
+- For example, a change within a single header file will require recompiling all soruces files that include that header file.
+- Keeping track of these depenencies to determine which files need to be recompiled is not rivial and can require considerable effor, if done manually. For larger programs, programmers often utilize Project Management Tools to automate the the compilation and linking process.
+- Make is one project management tool taht is commonly used on unix and linux computer systems
+
+- The make utility uses a make file to recompile and link a program whenever changes are made to the source or header fields
+- The makefile consist of sets of rules and commands.
+- Make rules are used to specify depenencies between a target file (e.g. object files and executable) and a set of prerequisites fils that are needed to generate the target  file (e.g source and header files).
+- a make rule can include one or more commands -- referred to as make recipe -- that will be executed in order to generate the target file.
+- The following shows the general form for a make rule.
+- The make rule;s target and prerequisites are defined on a single line. The commands for the ake rule should be specific one per line starting with a single tab character. 
+
+- MAKE RULE STRUCTURE	
+	- 1. TARGET: the file you want to build (e.g. main.o, myprog.exe)
+	- 2. PREREQUISITES: the iles the target depends on (e.g. main.cpp, threeintsfcts.h)
+	- 3. COMMANDS (RECIPE): The commands to run if any prerequisites changed. Must be indented with a tab not spaces
+
+	- Example rule in plain English:
+		
+		main.o : main.cpp threeintsfcts.h
+			g++ -Wall -c main.cpp
+
+	- to build main.o you need main.cpp and threeintsfcts.h. IF either of thse changed, recompile main.cpp into new main.o
+	- -c tells g++ to only compile, not link : proces an .o file
+	- -o tells the linker what name to name the finle executable
