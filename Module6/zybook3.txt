@@ -65,3 +65,16 @@
 - The location of an input file or output file may not be known before writing a program.
 - Instead, a program can be used command0line arguments to allow the user to specify the location of an input or output file as shown in the following program
 - Assuming two test files exist in the same directory as the source code named words1.txt and words2.txt with the contnets shown.
+
+- NOTES:
+	- Instead of passing simple values like names or numbers, you can pass a filename as a command-line argument
+	- The program then uses that filename to open and read an actual file at runtime with inFS.open(argv[1])
+	- This is way more useful than hardcoding a filename in your source code
+		- If the filename changes or you want to run the program on a different file, you dont have to recompile.
+		- The same executable works on any file you throw at it
+
+	- Good practices still apply from 24.1:
+		- check argc first to make sure the right number of arguments was passed.
+		- If not, print a usage message and return 1.
+		- Also check if the file actually opened with inFS.is_open()
+			- The file might not exist, like words3.txt in the example, which gave "could not open file"
