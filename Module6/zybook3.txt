@@ -1,0 +1,67 @@
+24.1 COMMAND LINE ARGUMENTS
+
+- Command-line arguments are values entered by a user when running ap rogram from a command line.
+- A command line exists in some program execution environment, wherein a user types a program's name and any arguments at a command prompt.
+- To access those arguements. main() can be defined with two special parameters argc and argv
+
+- When a program is run, the ststem passes an int perameter argc to main(), indicating the number of command-line arguments (argc is short for argument count).
+- The numbers included the program name itself, so argc is 2 forthe command line: myprog.exe myfile.txt
+- When the program is run, the system passes a second parameter argv to main() (argv is short for agument vector), defined as an array of string: char* arg[].
+- argv[] consists of one string for each command-line argument, with argv[0] being the program name. 
+
+- NOTES:
+	- Command-line arguements are values a user passed to a program at the time they run it, directly from the terminal
+	- Instead of the program asking for input after it starts, everything is handed to to it upfront
+		- which makes automation possible (running a program 1000 times in a script without a human typing anything)
+
+	- Main() can accept two special parameters to grab these arguments:
+		- int argc : argument count : holds the total number of arguments passed in, including the program name itself. So ./myprog Hello gives you argc = 2
+		- char* argv[] : argument vector : An array of strings, on per argument. argv[0] is always the program name. argv[1] is the first user argument, argv[2] is the second, and so one.
+
+	- IMPORTANT: 
+		- everything in argv is a string, even if it looks like a number.
+		- "42" is not the integer 42. 
+		- If you need to do math with it, you ahve to convert it first.
+
+
+- There is no guarentee a user will type two command-line arguments. 
+- Extra arguments, like "HEY" above are ignored.
+- Conversely two few arguments can cause a progblem
+- In particular, a common error is to access elements in argv without first checking argc to ensure the user entered enough arguments, resulting in an out-of-range array access.
+- When a program uses command line arguments, good practice is to check argc for the correct number of arguments.
+- If the number of command-line arguments is incorrect, good practice is to print a usage message. 
+- A usage message lists a programs's expected command-line arguments. 
+- The program should then return 1, indicating to the system that an error occurred (whereas 0 means no error)
+
+- NOTES:
+
+	- There is no guarentee a user will pass the right number of arguments
+	- Too many extra arguments get ignored, but too few can cause a segfault because you're accessing argv out of bounds.
+	
+	- Good practice when using command-lines arguments:
+		- Always check argc first to make sure the right number of arguments was passed.
+		- If the count is wrong (too many or two few), print a usage message so the user knows exactly how to run the program correctly:
+			- like "Usage: myprog.exe name age"
+		- Then return 1 to signal to the system that something went wrong. Return 0 only on success.
+
+	- This matters for automation
+		- If your program is being called by a script, returning 1 lets the script detect the failure instead of silently continuing with bad data. 
+
+
+24.1 COMMAND LINE ARGUMENTS : STRING TO INTEGER CONVERSION
+- Everything in argv is a string, even if it looks like a number
+- so "42" is not the integer 42
+	- You cant do math with it directly
+- To convert it, you must use atoi() (ascii to integer)
+	- It takes a C-style string and retuns the integer version. So "42" becomes 42.
+- But there is a catch:
+	- atoi only understand C-style strings (char*), not C++ string objects.
+	- So if your argumetns is stored in C++ string, you first call .c_str() on it to convert it to a char*, then pass that to atoi.
+- The full chain:
+	- C++ string -> .c_str() -> char* -> atoi() -> int
+- Need #include <cstdlib> to use atoi
+
+24.2 COMMAND-LINE ARGUMENTS AND FILES
+- The location of an input file or output file may not be known before writing a program.
+- Instead, a program can be used command0line arguments to allow the user to specify the location of an input or output file as shown in the following program
+- Assuming two test files exist in the same directory as the source code named words1.txt and words2.txt with the contnets shown.
