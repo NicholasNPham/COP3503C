@@ -1,0 +1,150 @@
+COMMAND LINE COMPILING 
+
+COMPILING FROM THE COMMAND LINE
+- You dont have to wirte code in an IDE (integrated Development Environment)
+- It makes some aspects of development easier and convenient, but it's not strictly necessary
+	- For some tasks, or progects of certain size, it can be difficult to work effectively without one
+- The compiler determines whether or not you've written valid code.
+- Behind the scenes, your IDE uses the same compiler	
+- The compiling features of your IDE can be executed "by hand" from the command line
+
+USING THE COMPILER
+- Fundementally, your code is compiled by this process:
+	- Run NameOfCompilerProgram, indicating which file you want to use to build a program
+	- Those files are then sent through the states of C++ build process (Preprocessor, Compiler, Linker)
+	- Assuming no errors, the output is an executable, the program you write
+
+g++: THE C++ COMPILER FROM GCC (THE GNU COMPILER COLLECTION)
+- g++, or g++.exe is the name of the comipler program
+- It accepts arguments in the form of code files as well as compiler options
+	- We'll talk more about command-line arguments later
+- On a bsic level, thats it. Run g++ and tell it what code you want to build. Everything else is just options
+
+BUILDING WITH MULTIPLE FILES
+- In a directory with file:
+	- main.cpp, vehicle.cpp, and vehicle.h
+
+		g++ main.cpp vehicle.cpp
+
+- OR:
+  
+		g++ *.cpp
+
+RENAMING THE OUTPUT EXECUTABLE
+- The argument -o [filename] lets you specify the name of the executable that ets create.
+
+	- g++ -o myprogram main.cpp vehicle.cpp
+
+- OR:
+
+	- g++ -o myprogram *.cpp
+
+THERE ARE LOTS OF ARGUMENTS AND OPTIONS YOU CAN USE
+- This will do a "full build" and generate an executable.
+- What if you had dozens, hundrreds of files. Build times can be long (hours!) for large projects.
+- What if you wanted to see if a single class (or function) merely compiles?
+
+AFTER COMPILING COMES LINKING
+- Build the executable from a single object file (not a code file)
+	g++ -o myprogram main.o
+- Build an executable from multiple object files (assuming they exist
+	g++ -o myprogram main.o vehicle.o
+- Or use wild cards agian
+	g++ -o myprogram *.o
+
+WHAT ABOUT OTHER COMPILERS?
+- Microsoft C++ compiler (called MSVC, or Microsoft Visual C++) uses an executable called cl.exe
+- Using it is similar (but not identical to using g++)
+- The overall concept behind these two separate compilers is the same.
+- The actual details whne it comes to various options can be quite different!
+
+QUICK AND EASY
+- In a directory with a source file called main.cpp:
+
+	g++ main.cpp // GCC
+	cl main.cpp // MSVC
+
+RENAMING AN EXECUTABLE
+- In a directory with a source file called main.cpp:
+	
+	g++ -o program main.cpp // GCC
+	cl /Fe: program main.cpp // MSVC
+
+WHAT ABOUT COMPLEX BUILDS?
+- cl /EHsc /Fe: RPG.exe *.cpp /link /LIBPATH:c:/pdcurses/wincon pdcurses.lib
+
+	- cl : The base command
+	- /EHsc : Turn on exception handling
+	- /Fe : Name the executable
+	- *.cpp : Wildcard, use any file with .cpp extension
+	- /link Make use of a library, which contains additional code
+	- LIBPATH : Where to find some or all libraries
+	- pdcurses.lib : The actual library being linked
+
+WHAT ABOUT LARGER PROJECTS? COMPLEX PROJECTS?
+- Multiple files, multiple folder, external libraries, different build types (x86 vs x64, Debug vs Release), etc...
+- How do you keep track of everything to build all of those?
+- Either get really god at remembering typing lots of complex commands (was it /Fo or /Fe that I needed?), or?
+
+WHAT'S A MAKE FILE
+- A make file is a file that contains a list of operations to perform ( kind of a "to do" list).
+- The makefile itself is just the instructions (the operating system and compile will do the work).
+- Makefiles are often used to help compile code and build large programs.
+- A make program will read a makefile and pass those instructions to the appropriate program.
+
+WHAT'S INSIDE A MAKEFILE
+- it contains one or more rules that each contain a set of instructions.
+- Rules can be named anything you wnat
+- The first rule is ececuted by default, if nothing else is specified.
+- Code underneath a rule must be indented with a TAB (spaces will generate errors!)
+
+HOW DO YOU CREATE A MAKE FILE?
+- a make file is just a plain text file, with these properties.
+	- Its name is (usually) just: makefile.
+	- It has no extension - not makefile.txt, not makefile.make, just plain old "makefile"
+
+HOW DO YOU RUN A MAKEFILE
+- From a command-line interface, navigate to a folder containing a make file
+- Run a "make" program - not all make programs have the same name!
+
+WHATS A MAKE PROGRAM
+- A program to open and read a makefile, and then execute the instructions contained within.
+- There are many that do similar things (like compilers)
+- It's often called make (generally) but you make encounter:
+	- make : The "standard" version, used by g++
+	- mingw32-make : Make equivalent for G++ on Windows (if you installed minGW)
+	- nmake : A version for Microsoft's compiler, MSVC
+	- CMake : A different, but similar tool (used by Clin, can be used as a standalone tool as well)
+
+RUNNING DIFFERENT RULES
+- Just "make" without a rule will run the first rule, whatever it's called.
+- make clean : Search for a rule named "clean" and execute its commands
+- RTeplace "make" with the name of your make program (nmake, mingw32-make, etc)
+
+USING A MAKE PROGRAM
+- makefile
+	- Build Program
+	- Create Folder
+	- Copy files
+	- ETC
+- The process for a user to execute all of the instructions is simple:
+	- Just type the name of the make program
+
+MAKEFILES CAN BE QUITE COMPLEX
+- would you rather type all of commandf each time you build
+- or type make or mingw32-make
+- You can do alot more with this kind of system beyond what we have covered
+- A makefile can have conditions, OS-specific options, directory locations, command-line arguments, etc
+- Its a bit overwhelming initially, but very powerful and very versatile.
+
+IDEs USE MAKE BEHIND THE SCENES
+- Your IDE's interface is just a mask covering up the command-line functionality
+- Most settings and properties you can change have some quivalent in a makefile
+
+RECAP
+- Building code with a command-line interface is just another option
+- In some cases, it might be faster than using an IDE
+- And IDE is really just a shell around a compiler -- command-line compiling bypasses the "middleman" thats is the IDE
+- You may have to learn a lot of options that are typically "done for you" in your IDE -- but this can lead to alot of power and flexibility.
+- Makefiles allow you to simplify the build process by storing complex sequences of commands in a file.
+- A make program will execute the commands in these files with a simple command, often just "make"
