@@ -1,0 +1,221 @@
+EMBRACE "I DONT KNOW"
+- Use this as a starting point.
+- I dont know...
+	- But I will try to figure it out
+	- And I will do some research to change that. 
+	- But im working on it
+	- Yet.
+- Dont sell yourself short - You know something about the problem
+- The big Secret: Everyone has a list of things they don't know
+
+PROBLEM-SOLVING INVOLVES QUESTIONS
+- What have you tried so far?
+- What were the results?
+- What worked
+- What worked?
+- What do you know about the problem?
+	- What can you infer from that information
+- What do you not know about the problem?
+	- Could these gaps contain possible solutions.
+
+WHAT HAVE TOU TRIED SO FAR?
+- "my program crashes"
+- "my program crashes when attempting to do X."
+- "Myprogram crashes when attempting to do X. Ive ruled out (i think) these possibilities, and I think i;ve narrowed it down to one function, but I dont know why exactly that function is still breaking
+- "I've tracked the bug down to this particular line it's breaking because X is a null pointer, or -2 when it should be 0, etc... but I don't know how it got to be that way
+
+DO YOU UNDERSTAND THE PROBLEM (OR PROBLEM SPACE)
+- Can you describe what you're working towards?
+	- What youre trying to solve overall
+	- What the current problem is?
+- Can you explain the major parts of the current situation?
+- How confident are you in your understanding of those parts
+	- If not then first focus on gaining an understanding 
+
+EXPLAINING YOUR CODE
+- can you explain your code to someone else
+- Do you know how it works?
+- Do you know how its working?
+- Can you interpret what is happening?
+- Understanding underlying processes matter
+- Even "simple" terminology matters
+
+SOLVING COMMON PROGRAMMING PROBLEMS
+- Code wont compile? (syntax error)
+- Code won't execute properly? (semantic error)
+- Syntax errros are usually easier to deal with
+	- The compiler points out the error, sometimes eve nsuggests how to fix it. 
+	- Syntax is well-documented
+- Semantic errors are more challenging to deal with.
+	- Your code does something... Just not what you want
+	- You will spend most of your time fixing these errors
+
+SYNTAX ERRORS (COMPILER ERRORS)
+- These are easy(ish) -- the compiler says "hey, your code's busted."
+- The where is easy! The error references a line, gives you a message about the error
+	- Sometimes the message is even helpful!
+	- Some languages are better about this than others.
+- Fix it, or learn how to
+- Fun twist: The issue may be acutally be elsewhere
+	- Line 514 didn't compile? 514 could be the disease, or just a symptom 
+	- The probelm with your code could be 3 files over, on line 6.
+
+SEMANTIC ERRORS
+- What happens when this code compiles, but doesnt work
+- Where in all of this code, is the problem
+- So how can we start to tackle this problem? asking questions can help:
+- What are you expecting to happen? What is actually happening?
+
+SIMPLIFY THE PROBLEM 
+- What if all this code results in no output?
+- Sinmplify! Does this do anything?
+- If not, simplify! What about this?
+
+SLOWLY COMPLEX... IFY... THE PROBLEM
+- Gradually reintroduce one function, one class at a time.
+- Keep going until you reintroduce the problem
+- The answers, "where"
+	- The most recently added code is the "problem" code
+	- The issue might still be a combination of separate elements
+
+TRYING TO UNDERSTAND THE PROBLEM?
+- Sketch it out.
+- Buy a black sketchbook as a "scribble pad"
+	- Use a stylus/penenabled screen if you want"
+	- Dry-erase boards are the best $30-$40 youll ever spend
+- Something to get ideas out of your head
+	- "just stare at the screen harder is not an effective strategy.
+- Important: you arent making art
+	- They may be cryptic to anyone looking at them (including yourself late onr)
+- If you dont do this already, start"
+
+THINK ABOUT YOUR CODE
+- You will spend more time readyin code then writing it
+- Think about what you (or someone else) wrote
+- No, reall. Think. What does it do? How does it work?
+- If you think your thinking about it, think again You aren't
+- This takes time. Real teime spend on a problem
+
+READING VS WRITING
+- How many times have you spent time tracking down a bug, only to discover...
+- The error was some "off by 1" by mistake
+- You wrote (x = 10) instead of (x == 10) in an if statement
+- Or some other trival thing?
+- Time spend finding the bug: hours
+- Time spend fixing the bug: seconds
+
+RUBBER DUCK DEBUGGING
+- Having problems with your code? Explain it, line by line, to a rubber duck
+- Forces you to think about your code
+	- Cant explain it if you dont know what it does
+- Also forces you to speak it, and hear it 
+	- This uses different parts of your brain.
+- Doesnt have to be a rubber duck
+	- Action figure, potted plan, annoyed coworkers...
+
+SPACE OUT YOUR CODE 
+- it may be easier to read
+
+SOMETIME, OUR OWN EYES SEEM TO BETRAY US...
+- Code that looks very similar to other code...
+- Your eyes glance over this with very little effort
+
+YOUR BRAIN IGNORES YOUR EYES
+- Its not about what are code looks like
+- Its about what the code actually does
+
+ THE WORST ENEMY WHEN DEBUGGING?
+- Lack of information
+- What do you want your code to do?
+- What happens on our before this line of code?
+	- What value are you expecting
+- Is it being passed by value or by reference. Which do you want
+- Lack of infromation leads to... "what tdo I type to make it work?"
+
+PRINT DEBUGGING
+- Sprinkle "print" statements throughout your code.
+	- cout in C++ 
+	- Console.WriteLine in C#
+	- print() in others
+- Time consuming
+- Have to clean it all up later
+- Tried and true - been around forever, still helpful
+
+USING A DEBUGGER
+- intimidating at first, but very powerful
+- Much of the power is in a few simple oeprations:
+	- Set breakpoints
+		- Stop your program here, pause for a moment
+	- Step Over
+		- Execute this line of code
+	- Step Into
+		- Jump into this function for closer inspection
+	- Step Out
+		- Exit a function and return to calling function
+- Every debugger should have these, and larning to use them is vital
+
+DEBUGGER INFORMATION WINDOWS
+- Debuggers have other windows to provide information.
+- Watch: Show information about variables
+- Call Stack: See what functions are awaiting execution
+
+LEARN. TO. USE. A. DEBUGGER.
+- No matter your IDE of choice (VS, CLion, Eclipse, etc...)
+- At the very least
+	- How do you start ( and stop ) debugging?
+	- How do you set.disable a breakpoint
+	- How do you step through your code one line at a time 
+	- How do you view variables (and their values) in the current scope?
+	- How can you view the call stack?
+- Most IDEs have a "debug" menu that contains some or all of these -- start exploring
+- Do it. Do it today, the sooner you start, the better
+
+DEBUGGING IS JUST ASKING MORE QUESTIONS
+- The process of answering of answering such questions in this example is the same as it would be in more complex scenarioes
+
+ANOTHER THING
+- It's okay to write code that isn't perfect!
+- Don't be afraid to write code that's 
+	- busted
+	- incomplete
+	- obviouslyt inefficent
+	- ugly
+	- on the way to writing better code
+
+IN OTHER WORDS 
+- Solve the problem first - figure out how things work
+- Later you can solve the problem:
+	- Elegantly
+	- Efficently
+	- Ingeniously
+	- ETC..
+- Dont get stuck repeating the first step over and over until it's perfect
+
+YOU WILL SCREW IT UP SOMETIMES
+- And that is okay.
+- as long as you fix that mess you made its all good!
+- Everyone who has ever programmed has screwed something up.
+- It's not about being flawless
+- It's about identifying problems, the source of those problems,. and then devising solutions
+- Then... implementing and verifying those solutions
+- Then do it all over again, for the next problem.
+
+GIVE YOURSELF TIME
+- No one learns programming in one day
+- Some concepts take a long time to "click"
+- 10 Years for now? no one wil lcare:
+	 - If it took you months to really understand what a pointer was?
+	 - If it took you 6 days to complete an assignment while your classmate got it done in 4
+- As children we take a long time to learn how to walk, talk, tie our shoes
+- Learning to program? much harder than all that!
+
+RECAP
+- Problem solving is about finding answers, not just having them
+- To solve problems effectively, we need information
+- To get information, we have to ask questions (and answer them)
+- Reading code is just as important as writing code - reading code give you information!
+- There are many debugging techniques to get us more information
+	- Using a debugger
+	- print debugging
+	- Rubber duck debugging
+- They all have a place, and learning to use them is critical. 
