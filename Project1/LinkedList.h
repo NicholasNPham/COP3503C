@@ -8,11 +8,6 @@ using std::endl;
 template <typename T>
 class LinkedList
 {
-private:
-	// HEAD
-	// TAIL
-	// COUNT
-
 public:
 	// NESTED NODE CLASS
 	struct Node
@@ -20,11 +15,37 @@ public:
 		// ============== STRUCT DEFAULT PUBLIC ==============
 		T data;
 		Node* next;
-		// ============== CONSTRUCTORS ============== 
-		Node(const T& value);
+		// ============== STRUCT CONSTRUCTOR ============== 
+		Node(const T& value)
+		{
+			data = value;
+			next = nullptr;
+		}
 
 	};
 
+	// ============== BEHAVIORS ============== 
+	void PrintForward() const;
+	void PrintReverse() const;
 
+	// ============== ACCESSORS ============== 
+	unsigned int NodeCount() const;
+
+	// ============== INSERTIONS ============== 
+	void AddHead(const T& data);
+	void AddTail(const T& data);
+	void AddNodesHead(const T* data, unsigned int count);
+	void AddNodesTail(const T* data, unsigned int count);
+
+	// ============== CONSTRUCTORS ============== 
+	LinkedList();
+
+	// ============== DESTRUCTOR ============== 
+	~LinkedList();
+
+private:
+	Node* head; // HEAD
+	Node* tail; // TAIL
+	unsigned int count;  // COUNT
 
 };
