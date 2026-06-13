@@ -25,7 +25,7 @@ public:
 	};
 
 	// ============== BEHAVIORS ============== 
-	void PrintForward() const;
+	void PrintForward() const; // BEHAVIOR 1
 	void PrintReverse() const;
 
 	// ============== ACCESSORS ============== 
@@ -51,7 +51,18 @@ private:
 };
 
 template <typename T>
-unsigned int LinkedList<T>::NodeCount() const {
+void LinkedList<T>::PrintForward() const { // BEHAVIOR 1
+	Node* currentNode = _head; // START AT HEAD NODE
+
+	while (currentNode != nullptr) // WHILE THE CURRENT NODE IS NOT NULLPTR
+	{
+		cout << currentNode->data << endl;
+		currentNode = currentNode->next;
+	}
+}
+
+template <typename T> 
+unsigned int LinkedList<T>::NodeCount() const { // ACCESSOR
 	return _count;
 }
 
