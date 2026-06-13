@@ -1,0 +1,185 @@
+LINKED LIST
+- a non-continguous data structure that stores nodes 
+	- Node is a generic term for some unit of data in a data structure.
+- Unlike arrays, there is no random access to any element.
+- Data is accessed linearly, one node at a time, typically starting from the first node in the list.
+	- Want to access the 3rd node? Start from the first, then go to the second, then the 3rd.
+- This is often described as iterating through the list or traversing the list.
+
+PEOPLE IN A LINE
+- what would this look like in an array?
+	- Pretty Standard Stuff
+- People in a line: Linked List Edition
+	- In a linked list, the data will likely be fragmented, and non-continguous
+	- How can we access data if we dont know where it is?
+	- Solution: Store the pointers to those location
+	- Each person in the line will know only who follows them
+	- We can store that connection as a pointer.
+	
+NODES
+- A node is just a generic piece of some complex structure.
+	- It will be implemented as a class/struct
+- A node will generally contain:
+	- Some amount of data (the stuff you  really care about)/
+	- A connection (pointer) to one or more other nodes.
+- Example Syntax:
+
+	struct Node
+	{
+		SomeDataType theData; // What are we storing? ------------------ The actual data inside a node is ultimately the most important part - Nodes, and pointers to nodes, are a means to an end.
+		Node* next; // What node comes after this one? ----------------- All linked list operations involved using Node pointers to create, delete, or acess existing Nodes
+																	L_______ Nodes will be dynamically allocated and deallocated with new and delete.
+	};
+
+CREATING A LINKED LIST
+- The first node:
+	- Linked lists start by accessing some first node, often called the head.
+	- To access this (or any other node), we use a node poitner
+	- Example Syntax:
+
+		Node* head = nullptr; // The start of everything!
+		head = new Node; // Create the first node in the list
+
+	- Since it's a pointer, it doesnt actually have any data itself... we have to allocate a Node object, with new
+	- For every piece of data:
+		1. A new Node must be allocated
+		2. It must be connected to one more more other Nodes (if there are any others)
+
+CREATING NODES TO STORE NUMBERS
+- How to store {1, 2, 3} with nodes?
+- Example syntax:
+
+	struct Node
+	{
+		int data;
+		Node* next;
+	};
+
+	Node* head = new Node;
+	head->data = 1;
+	head->next = nullptr;
+
+	Node* secondNode = newNode;
+	secondNode->data = 2;
+	secondNode->next = nullptr;
+
+QUICK DETOUR TO TALK ABOUT CONSTRUCTORS!
+- Example syntax:
+
+	struct Node
+	{
+		int data;
+		Node* next;
+		Node(int value);
+	};
+	Node::Node(int value) // DEFAULT CONSTRUCTOR
+	{
+		data = value;
+		next = nullptr;
+	}
+
+	Node* head = new Node;
+	head->data = 1; // REPEAT
+	head->next = nullptr; // REPEAT
+
+	------------------------------------
+	Node* secondNode = new Node;
+	secondNode->data = 2; // REPEAT
+	secondNode->next = nullptr; // REPEAT
+	------------------------------------
+			TURNS INTO THIS
+	------------------------------------
+	Node* secondNode = newNode(2);
+	------------------------------------
+
+CONNECTING TWO NODFES TOGETHOR
+- Example syntax:
+
+	Node* head = new Node(1);
+
+	Node* head = new Node(2);
+
+	head->next = second; // Connect the two nodes together and Now, the first node "knows" about the second node
+
+MOVING FROM VARIABLES TO UNNAMED NODES
+- We make arrays to avoid having lots of "loose" variables:
+- The same concept exists with nodes in a linked list.
+
+BACK TO OUR LIST OF NUMBERS
+
+	Node* head = new Node;
+	head->data = 1;
+
+	// Create the second node WITHOUT creating another Node* variable
+	// (We use the one each node already has)
+	head->next = new Node:
+	head->next->data = 2;
+	
+	// Create the third node
+	head->next->next = new Node:
+	head->next->next->data = 3;
+
+GETTING THE END OF THE LIST
+- Only tracking the head node is not idea - adding new nodes requires traversing, or "traveling" to the end
+- How do we write code that can handle any of these scenarios
+- We have two options:
+	1. Traverse over all nodes until we reach the last node - The one with a next pointer that points to nullptr (i.e., no one follows them in line)
+	2. Store and update a pointer to the last node, a tail pointer. (generally the better choice!)
+
+BACK TO OUR LIST OF NUMBERS
+- Why not use a loop? or while loop
+
+	// Start at the beginning
+	Node* currentNode = head;
+
+	// While we aren't yet at the LAST node
+	// (all nodes but the last have a valid -> next)
+	while (currentNode->next != nullptr)
+	currentNode = currentNode->next;
+
+	currentNode-> = new Node(100);
+
+TRAVERSING THE LIST
+- Many linked list oeprations will involve moving through some (or all) of the nodes, one at a time.
+- No matter what we want to do with the data, we have to first get to it.
+- The general algorithm for that is
+	1. Start by creating a pointer to the first node // Remember: you want to create a pointer to something that already exists. You do not want to allocate a "new" Node or craete a copy of something
+	2. If were pointing to a valid node... (or some other condition)
+	3. Use the node and/or move to the next node (pointer = pointer->next).
+	4. Go to step 2.
+
+SINGLY-LINKED LIST OR DOUBLE-LINKED LIST?
+- Two implementating: singly linked, or double linked.
+- A singly-linked list is unidirectional access
+	- Node have a single connectioppn, a next pointer
+	- A pointer to the head (maybe a tail pointer)
+	- Start from the beginnning, traverse in one direction
+- A doubly-linked list is bidirectional.
+	- Node have a double connection, next and previous pointers.
+	- A head pointer ,and a tail pointer, and previous pointers.
+	- A head pointer, and a tail pointer (to the start at the end)
+	- Start at either end, traverse in either direction
+- Optional (for either): The list could be circular
+	- The last node's next points to the first (instead of nullptr)
+	- Doubly linked list: First node's previous points to the last. 
+
+CLASS STRUCTURE IS BASICALLY THE SAME
+
+MANY DATA STRUCTURES ARE TEMPLATES
+- Templates often make for better containers - They're reusable for any data types.
+- A nested class (or struct) can alos use the template type from the class.
+- You might someday build a conceptual "linked list" that isnt a template, that doesnt use a literal Node, etc
+- The concepts behind a linked list are applicable (and integral!) to lots of advanced systems.
+
+TRADE OFFS
+- LINKED LISTS VS ARRAYS
+	- Linked Lists
+		- Adding or removing a node requires changing a small number of pointers "near" that node
+		- Iterating over nodes one at a time to "walk to" a specific node can be slow, especially for large lists
+		- Nodes store data and pointers to nodes
+			- Though small, extra pointers means extra memeory (may be negligible)
+
+	- Arrays
+		- Requires creating an entirely new array for the new size and copying all elements
+		- Random access of an array let's you jump to any elements - doesnt get much faster than this!
+		- As efficent as you can get, just the elements themselves, (plus the array variable - a pointer)
