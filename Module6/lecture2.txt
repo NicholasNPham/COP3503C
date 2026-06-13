@@ -1,0 +1,74 @@
+COMMAND LINE INTERFACE (CLI)
+- Text-based method of communicating with a program or your operating system (OS)
+	- You can type the commands you want to execute.
+- For programs (or users) that don't require a graphic user interface (GUI)
+	- Typing a command is closer to "speaking computer" than clicking images on the screen
+	- Command-line interfaces were first; guis game later
+- Executing core operations of the OS (Creating, Deleting, Moving files, etc)
+- Execute non-OS Programs (the things you write)
+
+COMMAND LINE ENVIRONMENTS
+- Your operating System will have (atleast) one.
+- Various programs may also install their own version
+	- Command Prompt
+	- Powershell
+	- Git CMD (if you have git installed)
+	- Terminal, Bash, ETC
+-They all serve the same purpose:
+	- Let you communicate with the operating system
+
+COMMAND LINE BASICS
+- In windows from the start menu you can search for "command" or "cmd" to oppen the Command Prompt
+- MacOS will be terminal, on another OS it may be called something else.
+- Either way, a default folder is opened, and the system waits for you.
+
+BASIC COMMAND LINE COMMANDS
+- cd : Change directory. Everyone should know this
+- dir : Show the contents of the current directory (on windows)
+- ls : Same thing, but for Unix-based systems
+- mkdir : create a directory
+- rmdir Remove a directory
+- Copy x, y : Copy file x to directory y
+- del : Delete a file
+- Exit : Exit the command prompt
+- cls/clear : Clear the CLI window
+- And so on... every OS has a list of commands, many unique to that OS
+- Everyone should know cd and dir/ls - basic navigation
+
+RUNNING PROGRAMS FROM CLI
+- Just type the name of the executable
+
+OPERATING SYSTEMS MAY DIFFER SLIGHTLY
+
+CASE SENSITIVITY
+- Windows is not case sensitive for things like filenames, paths, and CLI commands
+	- dir == DIR == DiR == DiR, etc...
+	- DATAFILE.txt == datafile.txt == DaTaFILE.txt, etc...
+	- Unix-based environments are case-sensitive:
+		- ls != LS != Ls
+		- myprogram != MyProgram
+		- folder/subfolder != folder/SubFolder
+
+COMMAND LINE ARGUMENTS
+- Executing commands via command line can be aided by passing arguments to the executable.
+- Just like arguments to a function - and programs are essentially just functinos
+- argc : How many arguments are there. There will always be atleast one - the name of the program itself
+- argv : An asrray of char* (strings), each of the arguments passed to the program
+
+EXAMPLE
+- Passing a single argument to a program
+- Passing a string as an argument requires double quotes
+- No double quotes? one argument becomes many
+
+
+
+
+
+
+
+
+
+
+
+
+

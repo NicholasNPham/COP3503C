@@ -10,4 +10,5 @@
   <Project Path="Module3/Module3.vcxproj" Id="4f3415de-4df3-4718-9417-422e3fe9f45a" />
   <Project Path="Module4/Module4.vcxproj" Id="87d39cff-3c4c-4588-8cc6-8f24657f1605" />
   <Project Path="Module5/Module5.vcxproj" Id="190d4567-38d5-4d26-91a1-125cd749cc9d" />
+  <Project Path="Module6/Module6.vcxproj" Id="3a6e796a-5193-44ce-9a9c-2cf30fb43998" />
 </Solution>
