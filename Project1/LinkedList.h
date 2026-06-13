@@ -44,8 +44,16 @@ public:
 	~LinkedList();
 
 private:
-	Node* head; // HEAD
-	Node* tail; // TAIL
-	unsigned int count;  // COUNT
+	Node* _head; // HEAD
+	Node* _tail; // TAIL
+	unsigned int _count;  // COUNT
 
 };
+
+template <typename T>
+LinkedList<T>::LinkedList()
+{
+	_head = nullptr;
+	_tail = nullptr;
+	_count = 0;
+}
