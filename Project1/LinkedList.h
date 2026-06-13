@@ -41,7 +41,7 @@ public:
 	LinkedList();
 
 	// ============== DESTRUCTOR ============== 
-	~LinkedList();
+	~LinkedList(); // DEFAULT CONSTRUCTOR
 
 private:
 	Node* _head; // HEAD
@@ -51,9 +51,22 @@ private:
 };
 
 template <typename T>
-LinkedList<T>::LinkedList()
+LinkedList<T>::LinkedList() // DEFAULT CONSTRUCTOR
 {
 	_head = nullptr;
 	_tail = nullptr;
 	_count = 0;
+}
+
+template <typename T>
+LinkedList<T>::~LinkedList() // DESTRUCTOR
+{
+	Node* currentNode = _head; // START AT HEAD NODE
+
+	while (currentNode != nullptr) // WHILE THE CURRENT NODE IS NOT NULLPTR
+	{
+		Node* nextNode = currentNode->next; // SAVE THE NEXT NODE POINTER
+		delete currentNode; // DELETE THE CURRENT NODE
+		currentNode = nextNode; // SET CURRENTNODE TO THE NEXT NODE
+	}
 }
