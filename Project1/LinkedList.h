@@ -51,6 +51,11 @@ private:
 };
 
 template <typename T>
+unsigned int LinkedList<T>::NodeCount() const {
+	return _count;
+}
+
+template <typename T>
 void LinkedList<T>::AddHead(const T& data) // INSERTION 1
 {
 	Node* newNode = new Node(data); // CREATE A NEW NODE ALWAYS TO THE FRONT
