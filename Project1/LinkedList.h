@@ -4,15 +4,27 @@
 using std::cout;
 using std::endl;
 
+// ============== CLASS DEFINITION ============== 
 template <typename T>
 class LinkedList
 {
-Private:
+private:
 	// HEAD
 	// TAIL
 	// COUNT
 
-Public:
-	// NODE STRUCT
+public:
+	// NESTED NODE CLASS
+	struct Node
+	{
+		// ============== STRUCT DEFAULT PUBLIC ==============
+		T data;
+		Node* next;
+		// ============== CONSTRUCTORS ============== 
+		Node(const T& value);
+
+	};
+
+
 
 };
