@@ -62,6 +62,26 @@ void LinkedList<T>::AddHead(const T& data) // INSERTION 1
 	_head = newNode; // HEAD POINTS TO NEW NODE
 	_count++; // INCREMENT COUNT. 
 }
+
+template <typename T>
+void LinkedList<T>::AddTail(const T& data) // INSERTION 2
+{
+	Node* newNode = new Node(data); // CREATE A NEW NODE ALWAYS TO THE BACK
+
+
+	if (_head == nullptr) // IF LIST WAS EMPTY 
+	{
+		_head = newNode; // HEAD POINTS TO NEW NODE
+		_tail = newNode; // TAIL POINTS TO NEW NODE
+	}
+	else // IF LIST HAS NODES
+	{
+		_tail->next = newNode; // THE PREVIOUS TAIL NEXT NODE POINTS TO THE NEW NODE
+		_tail = newNode; // SET TAIL TO NEW NODE
+	}
+	_count++; // INCREMENT COUNT.
+}
+
 template <typename T>
 LinkedList<T>::LinkedList() // DEFAULT CONSTRUCTOR
 {
