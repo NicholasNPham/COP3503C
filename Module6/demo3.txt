@@ -1,0 +1,79 @@
+LINKED LIST OPERATIONS
+
+TRAVERSING A LIST
+
+	// Start at the beginning (with a node*)
+	currentNode = head;
+
+	// Check if we should keep iterating
+	while currentNode is valid (i.e. not nullptr)
+
+		// do something with current node
+		// move our "current" pointer to the next in the list
+		currentNode = currentNode->next;
+
+INSERTING A NODE INTO A EXISTING LIST
+- a big advantage a linked list has over arrays is the ability to add and remove nodes quickly.
+- Arrays have to destroy and rebuild an entire array.
+- A linked list only needs to update a few pointers.
+
+ADDING TO THE FRONT OF THE LIST
+1. Create a new node.
+2. Set its next node to the start of hte list (i.e., the head)
+3. Set the current head pointer to the new node.
+- Head may point somewhere different now, but it still represents the first node in the list.
+
+ADDING MORE NODES TO THE FRONT
+- in the end, head is still pointing to the first node in the list
+- You can still traverse the list with the same algorithm as before.
+- The path may be different now, but the steps to follow that path are the exactly the same
+
+ADDING NODES TO THE END
+- Similar to adding to the front of the list:
+	1. Create a new node.
+	2. Set the next pointer of the "tail" to this new node
+	3. If you have a tail pointer, set the tail pointer itself to this new node
+
+STORING HEAD AND TAIL POINTERS
+- A basic Linked List implementation might only store the first node:
+- You could also store a tail pointer
+
+INSERTING A NODE IN BETWEEN TWO NODES
+1. Creating a new node
+2. Set its "next" pointer to the node that will ultimately follow it
+3. Set the "previous" node's next pointer to the new node
+- You might traverse a fixed number of nodes (ie InsertNodeAfterNodeIndex(1))
+- You might traverse and search for a node with a specific value (ie InsertNodeAfterValue(200))
+
+USE CASE: MOVEMENT / PATHFINDING
+
+REMOVING THE HEAD NODE
+1. Create a pointer to the node after the head.
+2. Delete the head node.
+3. Set the head node to the pointer you created
+
+REMOVING A NODE
+1. Get a pointer to the node before the one to delete
+2. Set its "next" pointer to the node that will ultimately follow it (the one after the deleted node)
+3. delete the node
+- If this is a temporary variable declared in a function somewhere, it will fall out of scope eventually
+
+CHECKING FOR NODE VALIDITY!
+
+CHANGING WITH A DOUBLY-LINKED LIST
+- The overal algorithms for any operations is largely the same.
+- You have to account for a "previous" pointer in nodes.
+	- initialize them - to nullptr if nothing else.
+- Some algorithms may be easier to implement if you have previous pointers
+
+EDGE CASES
+- Many algorithms in our code works correctly in almost all cases.
+- Edge cases are the spcial curcumstances that need specific code
+- Common edge cases
+	- An empty list or full one
+	- An operation on the first or last node
+	- If a value is at some minimum (often zero)m some maximum or nullptr
+
+DRAW DIAGRAMS TO PLAN AND DEBUG!
+-You dont have to be "good enough" to remember all of it
+- Draw a diagram to represent the current state of your list
