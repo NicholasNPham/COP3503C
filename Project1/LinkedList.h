@@ -32,8 +32,8 @@ public:
 	unsigned int NodeCount() const;
 
 	// ============== INSERTIONS ============== 
-	void AddHead(const T& data);
-	void AddTail(const T& data);
+	void AddHead(const T& data); // INSERTION 1
+	void AddTail(const T& data); // INSERTION 2
 	void AddNodesHead(const T* data, unsigned int count);
 	void AddNodesTail(const T* data, unsigned int count);
 
@@ -50,6 +50,18 @@ private:
 
 };
 
+template <typename T>
+void LinkedList<T>::AddHead(const T& data) // INSERTION 1
+{
+	Node* newNode = new Node(data); // CREATE A NEW NODE ALWAYS TO THE FRONT
+	newNode->next = _head; // SET NEWNODE NEXT POINTER TO WHATEVER _HEAD WAS
+	if (newNode->next == nullptr) // IF LIST WAS EMPTY 
+	{
+		_tail = newNode; // TAIL POINTS TO NEW NODE
+	}
+	_head = newNode; // HEAD POINTS TO NEW NODE
+	_count++; // INCREMENT COUNT. 
+}
 template <typename T>
 LinkedList<T>::LinkedList() // DEFAULT CONSTRUCTOR
 {
