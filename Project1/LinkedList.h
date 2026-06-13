@@ -35,14 +35,14 @@ public:
 	// ============== INSERTIONS ============== 
 	void AddHead(const T& data); // INSERTION 1
 	void AddTail(const T& data); // INSERTION 2
-	void AddNodesHead(const T* data, unsigned int count);
-	void AddNodesTail(const T* data, unsigned int count);
+	void AddNodesHead(const T* data, unsigned int count); // INSERTION 3
+	void AddNodesTail(const T* data, unsigned int count); // INSERTION 4
 
 	// ============== CONSTRUCTORS ============== 
 	LinkedList();
 
 	// ============== DESTRUCTOR ============== 
-	~LinkedList(); // DEFAULT CONSTRUCTOR
+	~LinkedList(); // DEFAULT DESTRUCTOR
 
 private:
 	Node* _head; // HEAD
@@ -120,11 +120,20 @@ void LinkedList<T>::AddTail(const T& data) // INSERTION 2
 }
 
 template <typename T>
-void LinkedList<T>::AddNodesHead(const T* data, unsigned int count)
+void LinkedList<T>::AddNodesHead(const T* data, unsigned int count) // INSERTION 3
 {
 	for (int i = count - 1; i >= 0; i--)
 	{
 		AddHead(data[i]);
+	}
+}
+
+template <typename T>
+void LinkedList<T>::AddNodesTail(const T* data, unsigned int count) // INSERTION 4
+{
+	for (int i = 0; i <= count - 1; i++)
+	{
+		AddTail(data[i]);
 	}
 }
 
