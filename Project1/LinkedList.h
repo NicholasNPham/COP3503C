@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <stack>
 using std::cout;
 using std::endl;
 
@@ -26,7 +27,7 @@ public:
 
 	// ============== BEHAVIORS ============== 
 	void PrintForward() const; // BEHAVIOR 1
-	void PrintReverse() const;
+	void PrintReverse() const; // BEHAVIOR 2
 
 	// ============== ACCESSORS ============== 
 	unsigned int NodeCount() const;
@@ -58,6 +59,26 @@ void LinkedList<T>::PrintForward() const { // BEHAVIOR 1
 	{
 		cout << currentNode->data << endl;
 		currentNode = currentNode->next;
+	}
+}
+
+template <typename T>
+void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
+	
+	std::stack<T> stackObj; // CREATE AN EMPTY STACK OBJECT READY TO STACK (LIFO)
+	
+	Node* currentNode = _head; // START AT HEAD NODE
+
+	while (currentNode != nullptr) // WHILE THE CURRENT NODE IS NOT NULLPTR
+	{
+		stackObj.push(currentNode->data); // PUSH TO STACK
+		currentNode = currentNode->next; // SET CURRENT NODE TO NEXT NODE AND REPEAT
+	}
+
+	while (!stackObj.empty()) // WHILE THE STACK OBJECT IS NOT EMPTY
+	{
+		cout << stackObj.top() << endl; // PRINT TOP OF STACK
+		stackObj.pop(); // POP TOP OF STACK AND REPEAT
 	}
 }
 
