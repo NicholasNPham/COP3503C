@@ -122,18 +122,18 @@ void LinkedList<T>::AddTail(const T& data) // INSERTION 2
 template <typename T>
 void LinkedList<T>::AddNodesHead(const T* data, unsigned int count) // INSERTION 3
 {
-	for (int i = count - 1; i >= 0; i--)
+	for (int i = count - 1; i >= 0; i--) // SET i AS COUNT - 1, WHILE I IS GREATER OR EQUAL TO 0, DECREMENT
 	{
-		AddHead(data[i]);
+		AddHead(data[i]); // ADDED TO FRONT OF LIST WITH DATA i
 	}
 }
 
 template <typename T>
 void LinkedList<T>::AddNodesTail(const T* data, unsigned int count) // INSERTION 4
 {
-	for (int i = 0; i <= count - 1; i++)
+	for (int i = 0; i <= count - 1; i++) // SET i AS 0, WHILE i IS LESS THAN OR EQUAL TO COUNT - 1, INCREMENT
 	{
-		AddTail(data[i]);
+		AddTail(data[i]); // ADD TO THE BACK OF THE LIST WITH DATA i
 	}
 }
 
