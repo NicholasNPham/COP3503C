@@ -139,7 +139,12 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="C:\Users\phamn\Downloads\4b8a0cc9-d436-46ae-99bb-fb9ae609c751\leaker.cpp" />
     <ClCompile Include="Project1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\phamn\Downloads\4b8a0cc9-d436-46ae-99bb-fb9ae609c751\leaker.h" />
+    <ClInclude Include="LinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

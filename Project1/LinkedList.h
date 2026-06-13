@@ -120,6 +120,15 @@ void LinkedList<T>::AddTail(const T& data) // INSERTION 2
 }
 
 template <typename T>
+void LinkedList<T>::AddNodesHead(const T* data, unsigned int count)
+{
+	for (int i = count - 1; i >= 0; i--)
+	{
+		AddHead(data[i]);
+	}
+}
+
+template <typename T>
 LinkedList<T>::LinkedList() // DEFAULT CONSTRUCTOR
 {
 	_head = nullptr;
