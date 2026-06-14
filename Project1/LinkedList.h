@@ -237,7 +237,7 @@ void LinkedList<T>::AddTail(const T& data) // INSERTION 2
 	else // IF LIST HAS NODES
 	{
 		_tail->next = newNode; // THE PREVIOUS TAIL NEXT NODE POINTS TO THE NEW NODE
-		newNode->prev = _tail;
+		newNode->prev = _tail; // SET NEW NODES PREVIOUS TO POINT TO WHAT TAIL IS
 		_tail = newNode; // SET TAIL TO NEW NODE
 		
 	}
