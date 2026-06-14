@@ -32,6 +32,7 @@ public:
 
 	// ============== ACCESSORS ============== 
 	unsigned int NodeCount() const; // ACCESSOR 1
+	void FindAll(std::vector<Node*>& outData, const T& value) const; // ACCESSOR 2
 	const Node* Find(const T& data) const; // ACCESSOR 3
 	Node* Find(const T& data); // ACCESSOR 4
 	const Node* GetNode(unsigned int index) const; // ACCESSOR 5
@@ -98,6 +99,20 @@ void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 template <typename T>
 unsigned int LinkedList<T>::NodeCount() const { // ACCESSOR 1
 	return _count;
+}
+
+template <typename T>
+void LinkedList<T>::FindAll(std::vector<Node*>& outData, const T& value) const {
+	Node* currentNode = _head; // INIT CURRENT NODE TO HEAD OF LIST
+
+	while (currentNode != nullptr) // WHILE CURRENT NODE DOES NOT EQUAL NULLPTR
+	{
+		if (currentNode->data == value) // IF CURRENT NODE DATA EQUALS VALUE
+		{
+			outData.push_back(currentNode); // PUSH CURRENT NODE POINTER TO VECTOR OUTDATA
+		}
+		currentNode = currentNode->next; // CONTINUE KEYWORD "CONTINUE" TILL THE END OF LIST NULLPTR
+	}
 }
 
 template <typename T>
