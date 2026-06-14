@@ -31,8 +31,8 @@ public:
 	// ============== BEHAVIORS ============== 
 	void PrintForward() const; // BEHAVIOR 1
 	void PrintReverse() const; // BEHAVIOR 2
-	void PrintFowardRecursive(const Node* node) const; // BEHAVIOR 3
-	void PrintReversedRecursive(const Node* node) const; // BEHAVIOR 4
+	void PrintForwardRecursive(const Node* node) const; // BEHAVIOR 3
+	void PrintReverseRecursive(const Node* node) const; // BEHAVIOR 4
 
 	// ============== ACCESSORS ============== 
 	unsigned int NodeCount() const; // ACCESSOR 1
@@ -115,7 +115,7 @@ void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 }
 
 template <typename T>
-void LinkedList<T>::PrintFowardRecursive(const Node* node) const { // BEHAVIOR 3
+void LinkedList<T>::PrintForwardRecursive(const Node* node) const { // BEHAVIOR 3
 
 	if (node == nullptr) // BASE CASE: IF NODE IS NULLPTR THATS THE END OF THE LIST
 	{
@@ -124,10 +124,25 @@ void LinkedList<T>::PrintFowardRecursive(const Node* node) const { // BEHAVIOR 3
 	else // OTHERWISE IF 
 	{
 		cout << node->data << endl; // PRINT OUT NODE DATA
-		PrintFowardRecursive(node->next); // CALL THE FUNCTION AGAIN WITH PASSED IN NODE TO THE NEXT NODE
+		PrintForwardRecursive(node->next); // CALL THE FUNCTION AGAIN WITH PASSED IN NODE TO THE NEXT NODE
 	}
-
 }
+
+template <typename T>
+void LinkedList<T>::PrintReverseRecursive(const Node* node) const { // BEHAVIOR 3
+
+	if (node == nullptr) // BASE CASE: IF NODE IS NULLPTR THATS THE END OF THE LIST
+	{
+		return; // RETURN NOTHING
+	}
+	else // OTHERWISE IF 
+	{
+		PrintReverseRecursive(node->next); // CALL THE FUNCTION AGAIN WITH PASSED IN NODE TO THE PREVIOUS NODE
+		cout << node->data << endl; // PRINT OUT NODE DATA
+	}
+}
+
+
 
 // ============== ACCESSORS ============== 
 template <typename T>
