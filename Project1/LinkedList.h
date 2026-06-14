@@ -31,6 +31,8 @@ public:
 	// ============== BEHAVIORS ============== 
 	void PrintForward() const; // BEHAVIOR 1
 	void PrintReverse() const; // BEHAVIOR 2
+	void PrintFowardRecursive(const Node* node) const; // BEHAVIOR 3
+	void PrintReversedRecursive(const Node* node) const; // BEHAVIOR 4
 
 	// ============== ACCESSORS ============== 
 	unsigned int NodeCount() const; // ACCESSOR 1
@@ -110,6 +112,21 @@ void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 		cout << stackObj.top() << endl; // PRINT TOP OF STACK
 		stackObj.pop(); // POP TOP OF STACK AND REPEAT
 	}
+}
+
+template <typename T>
+void LinkedList<T>::PrintFowardRecursive(const Node* node) const { // BEHAVIOR 3
+
+	if (node == nullptr) // BASE CASE: IF NODE IS NULLPTR THATS THE END OF THE LIST
+	{
+		return; // RETURN NOTHING
+	}
+	else // OTHERWISE IF 
+	{
+		cout << node->data << endl; // PRINT OUT NODE DATA
+		PrintFowardRecursive(node->next); // CALL THE FUNCTION AGAIN WITH PASSED IN NODE TO THE NEXT NODE
+	}
+
 }
 
 // ============== ACCESSORS ============== 
