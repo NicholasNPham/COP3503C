@@ -45,6 +45,10 @@ public:
 	void AddNodesHead(const T* data, unsigned int count); // INSERTION 3
 	void AddNodesTail(const T* data, unsigned int count); // INSERTION 4
 
+	// ============== OPERATORS ============== 
+	const T& operator[](unsigned int index) const;
+	T& operator[](unsigned int index); // OPERATOR 2
+
 	// ============== CONSTRUCTORS ============== 
 	LinkedList();
 
@@ -198,6 +202,19 @@ void LinkedList<T>::AddNodesTail(const T* data, unsigned int count) // INSERTION
 	{
 		AddTail(data[i]); // ADD TO THE BACK OF THE LIST WITH DATA i
 	}
+}
+
+template <typename T>
+const T& LinkedList<T>::operator[](unsigned int index) const { // OPERATOR 1
+	Node* nodeData = GetNode(index); // INITIALIZE NODE DATA FROM RETURN FUNCTION GETNODE INDEX
+	return nodeData->data; // RETURN THE NODE DATA FROM POINTER
+}
+
+template <typename T>
+T& LinkedList<T>::operator[](unsigned int index) // OPERATOR 2
+{
+	Node* nodeData = GetNode(index); // INITIALIZE NODE DATA FROM RETURN FUNCTION GETNODE INDEX
+	return nodeData->data; // RETURN THE NODE DATA FROM POINTER
 }
 
 template <typename T>
