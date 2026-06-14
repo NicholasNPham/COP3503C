@@ -53,7 +53,8 @@ public:
 	T& operator[](unsigned int index); // OPERATOR 2
 
 	// ============== CONSTRUCTORS ============== 
-	LinkedList();
+	LinkedList(); // DEFAULT CONSTRUCTOR
+	LinkedList(const LinkedList<T>& list); // COPY CONSTRUCTOR
 
 	// ============== DESTRUCTOR ============== 
 	~LinkedList(); // DEFAULT DESTRUCTOR
@@ -271,6 +272,22 @@ LinkedList<T>::LinkedList() // DEFAULT CONSTRUCTOR
 	_head = nullptr;
 	_tail = nullptr;
 	_count = 0;
+}
+
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList<T>& list)
+{
+	_head = nullptr; // INIT NEW LIST HEAD
+	_tail = nullptr; // INIT NEW LIST TAIL
+	_count = 0; // INIT COUNT AS 0
+
+	Node* currentNode = list._head; // CURRENT NODE OF LIST IS AT HEAD OF LIST
+
+	while (currentNode != nullptr) // WHILE LIST A CURRENT NODE IS NOT NULL POINTER
+	{
+		AddTail(currentNode->data); // ADD THE THE END OF THE LIST AND UPDATE TAIL
+		currentNode = currentNode->next; // SET CURRENT NODE OF LIST AND SET TO NEXT
+	}
 }
 
 template <typename T>
