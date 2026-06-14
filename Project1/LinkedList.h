@@ -137,8 +137,8 @@ void LinkedList<T>::PrintReverseRecursive(const Node* node) const { // BEHAVIOR 
 	}
 	else // OTHERWISE IF 
 	{
-		PrintReverseRecursive(node->next); // CALL THE FUNCTION AGAIN WITH PASSED IN NODE TO THE PREVIOUS NODE
 		cout << node->data << endl; // PRINT OUT NODE DATA
+		PrintReverseRecursive(node->prev); // CALL THE FUNCTION AGAIN WITH PASSED IN NODE TO THE PREVIOUS NODE
 	}
 }
 
