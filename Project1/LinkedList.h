@@ -34,6 +34,10 @@ public:
 	unsigned int NodeCount() const; // ACCESSOR 1
 	const Node* GetNode(unsigned int index) const; // ACCESSOR 2
 	Node* GetNode(unsigned int index); // ACCESSOR 3
+	const Node* Head() const; // ACCESSOR 4
+	Node* Head(); // ACCESSOR 5
+	const Node* Tail() const; // ACCESSOR 6
+	Node* Tail(); // ACCESSOR 7
 
 	// ============== INSERTIONS ============== 
 	void AddHead(const T& data); // INSERTION 1
@@ -122,6 +126,28 @@ typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) // ACCE
 		currentNode = currentNode->next; // SET CURRENT NODE TO NEXT NODE
 	}
 	return currentNode; // AFTER FOR LOOP OF INDEX RETURN ADDRESS OF CURRENT NODE 
+}
+
+template <typename T>
+const typename LinkedList<T>::Node* LinkedList<T>::Head() const { // ACCESSOR 4
+	return _head;
+}
+
+template <typename T>
+typename LinkedList<T>::Node* LinkedList<T>::Head() // ACCESSOR 5
+{
+	return _head;
+}
+
+template <typename T>
+const typename LinkedList<T>::Node* LinkedList<T>::Tail() const { // ACCESSOR 6
+	return _tail;
+}
+
+template <typename T>
+typename LinkedList<T>::Node* LinkedList<T>::Tail() // ACCESSOR 7
+{
+	return _tail;
 }
 
 template <typename T>
