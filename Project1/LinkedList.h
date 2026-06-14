@@ -142,8 +142,6 @@ void LinkedList<T>::PrintReverseRecursive(const Node* node) const { // BEHAVIOR 
 	}
 }
 
-
-
 // ============== ACCESSORS ============== 
 template <typename T>
 unsigned int LinkedList<T>::NodeCount() const { // ACCESSOR 1
