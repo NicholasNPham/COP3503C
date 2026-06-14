@@ -432,6 +432,35 @@ unsigned int LinkedList<T>::Remove(const T& data)
 	return countDeleteNodes; // RETURN COUNT. 
 }
 
+template <typename T>
+bool LinkedList<T>::RemoveAt(unsigned int index) // REMOVAL 4
+{
+	if (index >= _count) // IF INDEX IS GREATER THAN THE COUNT RETURN FALSE
+	{
+		return false; // RETURN FALSE
+	}
+	else if (index == 0) // INDEX IS AT 0
+	{
+		RemoveHead(); // CALL REMOVE HEAD
+		return true; // RETURN TRUE
+	}
+	else if (index == _count - 1) // IF INDEX IS AT THE TOP OF THE LIST
+	{
+		RemoveTail(); // CALL REMOVE TAIL
+		return true; // RETURN TRUE
+	}
+	else // IF IN THE MIDDLE OF THE HEAD AND TAIL
+	{
+
+		Node* currentNode = GetNode(index); // GET THE CURRENT NODE WITH INDEX PASSED IN
+		currentNode->prev->next = currentNode->next; // THE CURRENTS NODES PREVIOUS NODE WILL NOW POINT TO CURRENT NODES NEXT NODE
+		currentNode->next->prev = currentNode->prev; // THE CURRENTS NODES NEXT NODE WILL NOW POINT TO CURRENT NODES PREVIOUS NODE
+		delete currentNode; // DELETE THE NODE BECAUSE WE ALREADY SAVE IT ABOVE
+		_count--; // DECREMENT
+		return true; // RETURN TRUE
+	}
+}
+
 // ============== OPERATORS ============== 
 template <typename T>
 const T& LinkedList<T>::operator[](unsigned int index) const { // OPERATOR 1
