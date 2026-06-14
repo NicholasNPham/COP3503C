@@ -372,6 +372,30 @@ bool LinkedList<T>::RemoveHead() // REMOVAL 1
 	return true; // RETURN TRUE MEANING SUCESSFUL REMOVAL
 }
 
+template <typename T>
+bool LinkedList<T>::RemoveTail() // REMOVAL 2
+{
+	if (_count == 0) // IF COUNT EQUALS TO 0
+	{
+		return false; // RETURN FALSE MEANING THERE IS NOTHING IN THE LIST
+	}
+
+	Node* tempPtr = _tail; // SAVE THE TAIL NODE IN INIT TEMP PTR
+
+	_tail = tempPtr->prev; // THE TAIL NODE IS NOW THE PREVIOUS NODE
+
+	if (_tail != nullptr) // IF TAIL IS NOT NULL PTR
+	{
+		_tail->next = nullptr; // THE NEW TAIL NODE NEXT POINTS TO NULL PTR
+	}
+	else
+	{
+		_head = nullptr; // OTHERWISE (MEANING ONLY ONE NODE AND WAS REMOVED) HEAD NOW POINTS TO NULL PTR
+	}
+
+	_count--; // DECREMENT COUNT
+	return true; // RETURN TRUE MEANING SUCESSFUL REMOVAL
+}
 
 // ============== OPERATORS ============== 
 template <typename T>
