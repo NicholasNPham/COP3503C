@@ -55,6 +55,7 @@ public:
 	// ============== CONSTRUCTORS ============== 
 	LinkedList(); // DEFAULT CONSTRUCTOR
 	LinkedList(const LinkedList<T>& list); // COPY CONSTRUCTOR
+	LinkedList<T>& operator=(const LinkedList<T>& rhs); // ASSIGNMENT OPERATOR
 
 	// ============== DESTRUCTOR ============== 
 	~LinkedList(); // DEFAULT DESTRUCTOR
@@ -275,7 +276,7 @@ LinkedList<T>::LinkedList() // DEFAULT CONSTRUCTOR
 }
 
 template <typename T>
-LinkedList<T>::LinkedList(const LinkedList<T>& list)
+LinkedList<T>::LinkedList(const LinkedList<T>& list) // COPY CONSTRUCTOR
 {
 	_head = nullptr; // INIT NEW LIST HEAD
 	_tail = nullptr; // INIT NEW LIST TAIL
@@ -288,6 +289,37 @@ LinkedList<T>::LinkedList(const LinkedList<T>& list)
 		AddTail(currentNode->data); // ADD THE THE END OF THE LIST AND UPDATE TAIL
 		currentNode = currentNode->next; // SET CURRENT NODE OF LIST AND SET TO NEXT
 	}
+}
+
+template <typename T>
+LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs)
+{
+	if (this == &rhs) // MAKE SURE YOUR NOT COPYING FROM THE SAME THING
+	{
+		return *this; // IF IT DOES == THEN RETURN *THIS
+	}
+	
+	Node* currentNode = _head; // START AT HEAD NODE IF NOT ==
+
+	while (currentNode != nullptr) // WHILE THE CURRENT NODE IS NOT NULLPTR
+	{
+		Node* nextNode = currentNode->next; // SAVE THE NEXT NODE POINTER
+		delete currentNode; // DELETE THE CURRENT NODE
+		currentNode = nextNode; // SET CURRENTNODE TO THE NEXT NODE
+	}
+
+	_head = nullptr; // INIT NEW LIST HEAD
+	_tail = nullptr; // INIT NEW LIST TAIL
+	_count = 0; // INIT COUNT AS 0
+
+	Node* rhsNode = rhs._head; 
+
+	while (rhsNode != nullptr) // WHILE LIST A CURRENT NODE IS NOT NULL POINTER
+	{
+		AddTail(rhsNode->data); // ADD THE THE END OF THE LIST AND UPDATE TAIL
+		rhsNode = rhsNode->next; // SET CURRENT NODE OF LIST AND SET TO NEXT
+	}
+	return *this;
 }
 
 template <typename T>
