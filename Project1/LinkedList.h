@@ -423,6 +423,8 @@ bool LinkedList<T>::RemoveTail() // REMOVAL 2
 		_head = nullptr; // OTHERWISE (MEANING ONLY ONE NODE AND WAS REMOVED) HEAD NOW POINTS TO NULL PTR
 	}
 
+	delete tempPtr; // DELETE THE TEMP PTR
+
 	_count--; // DECREMENT COUNT
 	return true; // RETURN TRUE MEANING SUCESSFUL REMOVAL
 }
