@@ -56,7 +56,7 @@ public:
 	// ============== REMOVALS ============== 
 	bool RemoveHead(); // REMOVAL 1
 	bool RemoveTail(); // REMOVAL 2
-	unsigned int Remove(const t& data); // REMOVAL 3
+	unsigned int Remove(const T& data); // REMOVAL 3
 	bool RemoveAt(unsigned int index); // REMOVAL 4
 	void Clear(); // REMOVAL 5
 
@@ -395,6 +395,41 @@ bool LinkedList<T>::RemoveTail() // REMOVAL 2
 
 	_count--; // DECREMENT COUNT
 	return true; // RETURN TRUE MEANING SUCESSFUL REMOVAL
+}
+
+template <typename T>
+unsigned int LinkedList<T>::Remove(const T& data)
+{
+	unsigned int countDeleteNodes = 0; // INIT COUNT DELETE NODES AND STORE 0
+	Node* currentNode = _head; // INIT CURRENT NODE AS THE HEAD OF THE LIST
+
+	while (currentNode != nullptr) // WHILE CURRENT NODE DOES NOT EQUAL NULL PINTER
+	{
+
+		Node* tempPtrNext = currentNode->next; // SAVE THE NEXT POINTER FROM CURRENT NODE BEFORE WE DELETE IT
+
+		if (currentNode->data == data) // IF CURRENT NODE DATA == DATA PASSED IN
+		{
+			if (currentNode == _head) // IF CURRENT NODE EQUALS _HEAD
+			{
+				RemoveHead(); // REMOVE THE HEAD POINTER AND CALL FUNCTION
+			}
+
+			else if (currentNode == _tail) // IF CURRENT NODE EQUALS _TAIL
+			{
+				RemoveTail(); // REMOVE THE TAIL POINTER AND CALL FUNCTION 
+			}
+			else
+			{
+				currentNode->prev->next = currentNode->next; // THE CURRENTS NODES PREVIOUS NODE WILL NOW POINT TO CURRENT NODES NEXT NODE
+				currentNode->next->prev = currentNode->prev; // THE CURRENTS NODES NEXT NODE WILL NOW POINT TO CURRENT NODES PREVIOUS NODE
+				delete currentNode; // DELETE THE NODE BECAUSE WE ALREADY SAVE IT ABOVE
+			}
+			countDeleteNodes++; // INCREMENT
+		}
+		currentNode = tempPtrNext; // CURRENT NODE NOW IS THE TEMP PTR CURRENT NEXT NODE
+	}
+	return countDeleteNodes; // RETURN COUNT. 
 }
 
 // ============== OPERATORS ============== 
