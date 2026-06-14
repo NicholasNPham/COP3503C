@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <stack>
+#include <stdexcept>
 using std::cout;
 using std::endl;
 
@@ -30,7 +31,9 @@ public:
 	void PrintReverse() const; // BEHAVIOR 2
 
 	// ============== ACCESSORS ============== 
-	unsigned int NodeCount() const;
+	unsigned int NodeCount() const; // ACCESSOR 1
+	const Node* GetNode(unsigned int index) const; // ACCESSOR 2
+	Node* GetNode(unsigned int index); // ACCESSOR 3
 
 	// ============== INSERTIONS ============== 
 	void AddHead(const T& data); // INSERTION 1
@@ -63,6 +66,11 @@ void LinkedList<T>::PrintForward() const { // BEHAVIOR 1
 }
 
 template <typename T>
+unsigned int LinkedList<T>::NodeCount() const { // ACCESSOR 1
+	return _count;
+}
+
+template <typename T>
 void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 	
 	std::stack<T> stackObj; // CREATE AN EMPTY STACK OBJECT READY TO STACK (LIFO)
@@ -82,9 +90,38 @@ void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 	}
 }
 
-template <typename T> 
-unsigned int LinkedList<T>::NodeCount() const { // ACCESSOR
-	return _count;
+template <typename T>
+const typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) const { // ACCESSOR 1
+
+	if (index >= _count) // IF INDEX IS GREATER THAN THE COUNT OF THE LIST
+	{
+		throw std::out_of_range("INDEX NOT VALID OUT OF RANGE"); // THROW OUT OF RANGE ERROR
+	}
+
+	Node* currentNode = _head; // START THE CURRENT NODE AT THE HEAD
+
+	for (unsigned int i = 0; i < index; i++) // START i AT 0, WHILE i IS LESS THAN INDEX, INCREMENT
+	{
+		currentNode = currentNode->next; // SET CURRENT NODE TO NEXT NODE
+	}
+	return currentNode; // AFTER FOR LOOP OF INDEX RETURN ADDRESS OF CURRENT NODE 
+}
+
+template <typename T>
+typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) // ACCESSOR 2
+{
+	if (index >= _count) // IF INDEX IS GREATER THAN THE COUNT OF THE LIST
+	{
+		throw std::out_of_range("INDEX NOT VALID OUT OF RANGE"); // THROW OUT OF RANGE ERROR
+	}
+
+	Node* currentNode = _head; // START THE CURRENT NODE AT THE HEAD
+
+	for (unsigned int i = 0; i < index; i++) // START i AT 0, WHILE i IS LESS THAN INDEX, INCREMENT
+	{
+		currentNode = currentNode->next; // SET CURRENT NODE TO NEXT NODE
+	}
+	return currentNode; // AFTER FOR LOOP OF INDEX RETURN ADDRESS OF CURRENT NODE 
 }
 
 template <typename T>
@@ -157,3 +194,4 @@ LinkedList<T>::~LinkedList() // DESTRUCTOR
 		currentNode = nextNode; // SET CURRENTNODE TO THE NEXT NODE
 	}
 }
+
