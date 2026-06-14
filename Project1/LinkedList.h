@@ -51,7 +51,7 @@ public:
 	void AddNodesTail(const T* data, unsigned int count); // INSERTION 4
 	void InsertAfter(Node* node, const T& data); // INSERTION 5
 	void InsertBefore(Node* node, const T& data); // INSERTION 6
-	void InsertAt(const T& dta, unsigned int index); // INSERTION 7
+	void InsertAt(const T& data, unsigned int index); // INSERTION 7
 
 	// ============== OPERATORS ============== 
 	const T& operator[](unsigned int index) const; // OPERATOR 1
@@ -312,6 +312,26 @@ void LinkedList<T>::InsertBefore(Node* node, const T& data) // INSERTION 5
 	_count++; // INCREMENT
 }
 
+template <typename T>
+void LinkedList<T>::InsertAt(const T& data, unsigned int index) // INSERTION 7
+{
+	if (index > _count) // IF INDEX IS GREATER THAN THE COUNT THROW ERROR
+	{
+		throw out_of_range("INVALID INDEX, THE LIST DOES NOT HAVE THAT MANY INDICES");
+	}
+	else if (index == 0) // IF PASS INDEX IS 0 ADD HEAD FUNCTION IS CALLED TO THE FRONT
+	{
+		AddHead(data);
+	}
+	else if (index == _count) // IF INDEX EQUALS COUNT THEN ADD TAIL FUNCTION IS CALLED TO THE BACK
+	{
+		AddTail(data);
+	}
+	else // ANYWHERE IN BETWEEN INSERT THE NEW NODE BEFORE THE INDEX
+	{
+		InsertBefore(GetNode(index), data);
+	}
+}
 
 template <typename T>
 const T& LinkedList<T>::operator[](unsigned int index) const { // OPERATOR 1
