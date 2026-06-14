@@ -61,12 +61,13 @@ public:
 	LinkedList(); // DEFAULT CONSTRUCTOR
 	LinkedList(const LinkedList<T>& list); // COPY CONSTRUCTOR
 	LinkedList<T>& operator=(const LinkedList<T>& rhs); // ASSIGNMENT OPERATOR
+	bool operator==(const LinkedList<T>& rhs) const; // == OPERATOR OVERLOADING
 
 	// ============== DESTRUCTOR ============== 
 	~LinkedList(); // DEFAULT DESTRUCTOR
 
 private:
-	Node* _head; // HEAD
+	Node* _head; // HEADfind 
 	Node* _tail; // TAIL
 	unsigned int _count;  // COUNT
 
@@ -317,7 +318,7 @@ void LinkedList<T>::InsertAt(const T& data, unsigned int index) // INSERTION 7
 {
 	if (index > _count) // IF INDEX IS GREATER THAN THE COUNT THROW ERROR
 	{
-		throw out_of_range("INVALID INDEX, THE LIST DOES NOT HAVE THAT MANY INDICES");
+		throw std::out_of_range("INVALID INDEX, THE LIST DOES NOT HAVE THAT MANY INDICES");
 	}
 	else if (index == 0) // IF PASS INDEX IS 0 ADD HEAD FUNCTION IS CALLED TO THE FRONT
 	{
@@ -399,6 +400,29 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs)
 		rhsNode = rhsNode->next; // SET CURRENT NODE OF LIST AND SET TO NEXT
 	}
 	return *this;
+}
+
+template <typename T>
+bool LinkedList<T>::operator==(const LinkedList<T>& rhs) const { // == OPERATOR OVERLOADING
+	
+	if (this->_count != rhs._count) // CHECK TO SEE IF A COUNT IS THE SAME AS RHS (B) COUNT
+	{
+		return false; // RETURN FALSE IF IT ISNT THE SAME
+	}
+
+	Node* currentListA = this->_head; // INIT CURRENT LIST A WITH A _HEAD
+	Node* currentListB = rhs._head; // INIT CURRENT LIST B WITH B _HEAD
+
+	while (currentListA != nullptr && currentListB != nullptr) // WHILE LOOP OF LIST A AND LIST B CONTINUE IF ITS NOT NULL PTR
+	{
+		if (currentListA->data != currentListB->data) // IF LIST A DOES NOT EQUAL LIST B
+		{
+			return false; // RETURN FALSE
+		}
+		currentListA = currentListA->next; // LIST A NEXT NODE AND SET IT TO CURRENT LIST A NODE
+		currentListB = currentListB->next; // LIST B NEXT NODE AND SET IT TO CURRENT LIST B NODE
+	}
+	return true; // AFTER ALL THESE CHECKS RETURN TRUE
 }
 
 template <typename T>
