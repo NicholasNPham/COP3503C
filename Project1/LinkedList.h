@@ -32,12 +32,14 @@ public:
 
 	// ============== ACCESSORS ============== 
 	unsigned int NodeCount() const; // ACCESSOR 1
-	const Node* GetNode(unsigned int index) const; // ACCESSOR 2
-	Node* GetNode(unsigned int index); // ACCESSOR 3
-	const Node* Head() const; // ACCESSOR 4
-	Node* Head(); // ACCESSOR 5
-	const Node* Tail() const; // ACCESSOR 6
-	Node* Tail(); // ACCESSOR 7
+	const Node* Find(const T& data) const; // ACCESSOR 3
+	Node* Find(const T& data); // ACCESSOR 4
+	const Node* GetNode(unsigned int index) const; // ACCESSOR 5
+	Node* GetNode(unsigned int index); // ACCESSOR 6
+	const Node* Head() const; // ACCESSOR 7
+	Node* Head(); // ACCESSOR 8
+	const Node* Tail() const; // ACCESSOR 9
+	Node* Tail(); // ACCESSOR 10
 
 	// ============== INSERTIONS ============== 
 	void AddHead(const T& data); // INSERTION 1
@@ -46,7 +48,7 @@ public:
 	void AddNodesTail(const T* data, unsigned int count); // INSERTION 4
 
 	// ============== OPERATORS ============== 
-	const T& operator[](unsigned int index) const;
+	const T& operator[](unsigned int index) const; // OPERATOR 1
 	T& operator[](unsigned int index); // OPERATOR 2
 
 	// ============== CONSTRUCTORS ============== 
@@ -74,11 +76,6 @@ void LinkedList<T>::PrintForward() const { // BEHAVIOR 1
 }
 
 template <typename T>
-unsigned int LinkedList<T>::NodeCount() const { // ACCESSOR 1
-	return _count;
-}
-
-template <typename T>
 void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 	
 	std::stack<T> stackObj; // CREATE AN EMPTY STACK OBJECT READY TO STACK (LIFO)
@@ -99,7 +96,43 @@ void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 }
 
 template <typename T>
-const typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) const { // ACCESSOR 1
+unsigned int LinkedList<T>::NodeCount() const { // ACCESSOR 1
+	return _count;
+}
+
+template <typename T>
+const typename LinkedList<T>::Node* LinkedList<T>::Find(const T& data) const { // ACCESSOR 3
+	Node* currentNode = _head; // INIT CURRENT NODE TO START OF THE LIST
+
+	while (currentNode != nullptr) // WHILE CURRENT NODE DOES NOT EQUAL NULLPTR
+	{
+		if (currentNode->data == data) // IF CURRENT NODE DATA EQUALS DATA FROM PARAMETER
+		{
+			return currentNode; // RETURN CURRENT NODE POINTER 
+		}
+		currentNode = currentNode->next; // IF NOT SET CURRENT NODE TO NEXT NODE
+	}
+	return nullptr; // IF DATA PASSED IN PAREMETER NOT FOUND RETURN NULLPTR
+}
+
+template <typename T>
+typename LinkedList<T>::Node* LinkedList<T>::Find(const T& data) // ACCESSOR 4
+{
+	Node* currentNode = _head; // INIT CURRENT NODE TO START OF THE LIST
+
+	while (currentNode != nullptr) // WHILE CURRENT NODE DOES NOT EQUAL NULLPTR
+	{
+		if (currentNode->data == data) // IF CURRENT NODE DATA EQUALS DATA FROM PARAMETER
+		{
+			return currentNode; // RETURN CURRENT NODE POINTER 
+		}
+		currentNode = currentNode->next; // IF NOT SET CURRENT NODE TO NEXT NODE
+	}
+	return nullptr; // IF DATA PASSED IN PAREMETER NOT FOUND RETURN NULLPTR
+}
+
+template <typename T>
+const typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) const { // ACCESSOR 5
 
 	if (index >= _count) // IF INDEX IS GREATER THAN THE COUNT OF THE LIST
 	{
@@ -116,7 +149,7 @@ const typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) c
 }
 
 template <typename T>
-typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) // ACCESSOR 2
+typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) // ACCESSOR 6
 {
 	if (index >= _count) // IF INDEX IS GREATER THAN THE COUNT OF THE LIST
 	{
@@ -133,23 +166,23 @@ typename LinkedList<T>::Node* LinkedList<T>::GetNode(unsigned int index) // ACCE
 }
 
 template <typename T>
-const typename LinkedList<T>::Node* LinkedList<T>::Head() const { // ACCESSOR 4
+const typename LinkedList<T>::Node* LinkedList<T>::Head() const { // ACCESSOR 7
 	return _head;
 }
 
 template <typename T>
-typename LinkedList<T>::Node* LinkedList<T>::Head() // ACCESSOR 5
+typename LinkedList<T>::Node* LinkedList<T>::Head() // ACCESSOR 8
 {
 	return _head;
 }
 
 template <typename T>
-const typename LinkedList<T>::Node* LinkedList<T>::Tail() const { // ACCESSOR 6
+const typename LinkedList<T>::Node* LinkedList<T>::Tail() const { // ACCESSOR 9
 	return _tail;
 }
 
 template <typename T>
-typename LinkedList<T>::Node* LinkedList<T>::Tail() // ACCESSOR 7
+typename LinkedList<T>::Node* LinkedList<T>::Tail() // ACCESSOR 10
 {
 	return _tail;
 }
