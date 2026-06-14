@@ -17,11 +17,13 @@ public:
 		// ============== STRUCT DEFAULT PUBLIC ==============
 		T data;
 		Node* next;
+		Node* prev;
 		// ============== STRUCT CONSTRUCTOR ============== 
 		Node(const T& value)
 		{
 			data = value;
 			next = nullptr;
+			prev = nullptr;
 		}
 
 	};
@@ -212,6 +214,10 @@ void LinkedList<T>::AddHead(const T& data) // INSERTION 1
 	if (newNode->next == nullptr) // IF LIST WAS EMPTY 
 	{
 		_tail = newNode; // TAIL POINTS TO NEW NODE
+	}
+	else
+	{
+		newNode->next->prev = newNode; // THE OLD HEAD NODE NOW WILL PREVIOUSLY POINT TO THE NEW NODE
 	}
 	_head = newNode; // HEAD POINTS TO NEW NODE
 	_count++; // INCREMENT COUNT. 
