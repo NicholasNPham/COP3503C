@@ -461,6 +461,23 @@ bool LinkedList<T>::RemoveAt(unsigned int index) // REMOVAL 4
 	}
 }
 
+template <typename T>
+void LinkedList<T>::Clear() // REMOVAL 5
+{
+	Node* currentNode = _head; // START AT HEAD NODE
+
+	while (currentNode != nullptr) // WHILE THE CURRENT NODE IS NOT NULLPTR
+	{
+		Node* nextNode = currentNode->next; // SAVE THE NEXT NODE POINTER
+		delete currentNode; // DELETE THE CURRENT NODE
+		currentNode = nextNode; // SET CURRENTNODE TO THE NEXT NODE
+	}
+
+	_head = nullptr; // RESET HEAD
+	_tail = nullptr; // RESET TAIL
+	_count = 0; // RESET COUNT
+}
+
 // ============== OPERATORS ============== 
 template <typename T>
 const T& LinkedList<T>::operator[](unsigned int index) const { // OPERATOR 1
