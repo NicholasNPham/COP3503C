@@ -49,6 +49,9 @@ public:
 	void AddTail(const T& data); // INSERTION 2
 	void AddNodesHead(const T* data, unsigned int count); // INSERTION 3
 	void AddNodesTail(const T* data, unsigned int count); // INSERTION 4
+	void InsertAfter(Node* node, const T& data); // INSERTION 5
+	void InsertBefore(Node* node, const T& data); // INSERTION 6
+	void InsertAt(const T& dta, unsigned int index); // INSERTION 7
 
 	// ============== OPERATORS ============== 
 	const T& operator[](unsigned int index) const; // OPERATOR 1
@@ -260,6 +263,30 @@ void LinkedList<T>::AddNodesTail(const T* data, unsigned int count) // INSERTION
 	{
 		AddTail(data[i]); // ADD TO THE BACK OF THE LIST WITH DATA i
 	}
+}
+
+template <typename T>
+void LinkedList<T>::InsertAfter(Node* node, const T& data)
+{
+	Node* tempPtr = node->next; // INIT TEMP PTR TO SAVE THE NEW NODES PREVIOUS NODE POINTER POINTING TO NEXT NODE
+
+	Node* newNode = new Node(data); // CREATE A NEW NODE 
+
+	newNode->prev = node; // SET NEW NODES PREVIOUS TO POINT TO PASSED NODE
+	newNode->next = tempPtr; // SET NEW NODE TO POINT TO THE SAVED TEMP PTR
+
+	node->next = newNode; // PASSED IN NODE NEXT POINTS TO NEW NODE
+
+	if (tempPtr == nullptr) // IF TEMP PTR IS NULLPTR
+	{
+		_tail = newNode; // TAIL IS SET TO NEW NODE
+	}
+	else
+	{
+		newNode->next->prev = newNode; // OTHERWISE NEWNODES NEXT NODE PREVIOUS POINTS TO THE NEW NODE
+	}
+	
+	_count++; // INCREMENT
 }
 
 template <typename T>
