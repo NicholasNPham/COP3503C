@@ -53,6 +53,13 @@ public:
 	void InsertBefore(Node* node, const T& data); // INSERTION 6
 	void InsertAt(const T& data, unsigned int index); // INSERTION 7
 
+	// ============== REMOVALS ============== 
+	bool RemoveHead(); // REMOVAL 1
+	bool RemoveTail(); // REMOVAL 2
+	unsigned int Remove(const t& data); // REMOVAL 3
+	bool RemoveAt(unsigned int index); // REMOVAL 4
+	void Clear(); // REMOVAL 5
+
 	// ============== OPERATORS ============== 
 	const T& operator[](unsigned int index) const; // OPERATOR 1
 	T& operator[](unsigned int index); // OPERATOR 2
@@ -67,12 +74,13 @@ public:
 	~LinkedList(); // DEFAULT DESTRUCTOR
 
 private:
-	Node* _head; // HEADfind 
+	Node* _head; // HEAD
 	Node* _tail; // TAIL
 	unsigned int _count;  // COUNT
 
 };
 
+// ============== BEHAVIORS ==============
 template <typename T>
 void LinkedList<T>::PrintForward() const { // BEHAVIOR 1
 	Node* currentNode = _head; // START AT HEAD NODE
@@ -83,7 +91,7 @@ void LinkedList<T>::PrintForward() const { // BEHAVIOR 1
 		currentNode = currentNode->next;
 	}
 }
-
+ 
 template <typename T>
 void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 	
@@ -104,6 +112,7 @@ void LinkedList<T>::PrintReverse() const { // BEHAVIOR 2
 	}
 }
 
+// ============== ACCESSORS ============== 
 template <typename T>
 unsigned int LinkedList<T>::NodeCount() const { // ACCESSOR 1
 	return _count;
@@ -210,6 +219,7 @@ typename LinkedList<T>::Node* LinkedList<T>::Tail() // ACCESSOR 10
 	return _tail;
 }
 
+// ============== INSERTIONS ============== 
 template <typename T>
 void LinkedList<T>::AddHead(const T& data) // INSERTION 1
 {
@@ -334,6 +344,36 @@ void LinkedList<T>::InsertAt(const T& data, unsigned int index) // INSERTION 7
 	}
 }
 
+// ============== REMOVALS ============== 
+template <typename T>
+bool LinkedList<T>::RemoveHead() // REMOVAL 1
+{
+	if (_count == 0) // IF COUNT EQUALS TO 0
+	{
+		return false; // RETURN FALSE MEANING THERE IS NOTHING IN THE LIST
+	}
+
+	Node* tempPtr = _head; // SAVE THE HEAD NODE IN INIT TEMP PTR
+
+	_head = tempPtr->next; // THE NEW HEAD IS NOW THE NEXT NODE
+
+	if (_head != nullptr) // IF HEAD IS NOT NULL PTR
+	{
+		_head->prev = nullptr; // THE NEW HEAD NODE PREVIOUS POINTS TO NULL PTR
+	}
+	else 
+	{
+		_tail = nullptr; // OTHERWISE (MEANING ONLY ONE NODE AND WAS REMOVED) TAIL NOW POINTS TO NULL PTR
+	}
+
+	delete tempPtr; // DELETE THE TEMP PTR
+
+	_count--; // DECREMENT COUNT
+	return true; // RETURN TRUE MEANING SUCESSFUL REMOVAL
+}
+
+
+// ============== OPERATORS ============== 
 template <typename T>
 const T& LinkedList<T>::operator[](unsigned int index) const { // OPERATOR 1
 	Node* nodeData = GetNode(index); // INITIALIZE NODE DATA FROM RETURN FUNCTION GETNODE INDEX
@@ -347,6 +387,7 @@ T& LinkedList<T>::operator[](unsigned int index) // OPERATOR 2
 	return nodeData->data; // RETURN THE NODE DATA FROM POINTER
 }
 
+// ============== CONSTRUCTORS ============== 
 template <typename T>
 LinkedList<T>::LinkedList() // DEFAULT CONSTRUCTOR
 {
@@ -425,6 +466,7 @@ bool LinkedList<T>::operator==(const LinkedList<T>& rhs) const { // == OPERATOR 
 	return true; // AFTER ALL THESE CHECKS RETURN TRUE
 }
 
+// ============== DESTRUCTOR ============== 
 template <typename T>
 LinkedList<T>::~LinkedList() // DESTRUCTOR
 {
