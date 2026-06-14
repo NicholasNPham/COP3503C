@@ -131,7 +131,7 @@ void LinkedList<T>::AddNodesHead(const T* data, unsigned int count) // INSERTION
 template <typename T>
 void LinkedList<T>::AddNodesTail(const T* data, unsigned int count) // INSERTION 4
 {
-	for (int i = 0; i <= count - 1; i++) // SET i AS 0, WHILE i IS LESS THAN OR EQUAL TO COUNT - 1, INCREMENT
+	for (unsigned int i = 0; i <= count - 1; i++) // SET i AS 0, WHILE i IS LESS THAN OR EQUAL TO COUNT - 1, INCREMENT
 	{
 		AddTail(data[i]); // ADD TO THE BACK OF THE LIST WITH DATA i
 	}
