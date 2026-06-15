@@ -12,6 +12,7 @@ class ABQ
 	unsigned int _front;
 	unsigned int _size;
 	unsigned int _capacity;
+	unsigned int _total_resizes;
 	T* _data;
 	float _scaleFactor;
 
@@ -20,6 +21,7 @@ public:
 	// ============== CONSTRUCTORS ============== 
 	ABQ();
 	ABQ(int capacity);
+	ABQ(int capacity, float scale_factor);
 	ABQ(const ABQ& d); // BIG THREE
 
 
@@ -37,6 +39,7 @@ public:
 	T peek() const;
 	unsigned int getSize() const;
 	unsigned int getMaxCapacity() const;
+	unsigned int getTotalResizes() const;
 	T* getData() const;
 };
 
@@ -48,6 +51,7 @@ ABQ<T>::ABQ()
 	_front = 0;
 	_size = 0;
 	_capacity = 1;
+	_total_resizes = 0;
 	_scaleFactor = 2.0f;
 	_data = new T[_capacity];
 }
@@ -58,7 +62,19 @@ ABQ<T>::ABQ(int capacity)
 	_front = 0;
 	_size = 0;
 	_capacity = capacity;
+	_total_resizes = 0;
 	_scaleFactor = 2.0f;
+	_data = new T[_capacity];
+}
+
+template <typename T>
+ABQ<T>::ABQ(int capacity, float scale_factor)
+{
+	_front = 0;
+	_size = 0;
+	_capacity = capacity;
+	_total_resizes = 0;
+	_scaleFactor = scale_factor;
 	_data = new T[_capacity];
 }
 
@@ -69,6 +85,7 @@ ABQ<T>::ABQ(const ABQ& d)
 	_front = d._front;
 	_size = d._size;
 	_capacity = d._capacity;
+	_total_resizes = d._total_resizes;
 	_scaleFactor = d._scaleFactor;
 
 	_data = new T[_capacity]; // DEEP COPY
@@ -89,6 +106,7 @@ ABQ<T>& ABQ<T>::operator=(const ABQ& d)
 		_front = d._front;
 		_size = d._size;
 		_capacity = d._capacity;
+		_total_resizes = d._total_resizes;
 		_scaleFactor = d._scaleFactor;
 
 		_data = new T[_capacity];
@@ -126,6 +144,8 @@ void ABQ<T>::enqueue(T data)
 		_front = 0; // SET FRONT TO INDEX 0
 		delete[] _data; // DELETE OLD DATA
 		_data = newArray; // POINT TO NEW ARRAY
+
+		_total_resizes++;
 	}
 
 	_data[(_front + _size) % _capacity] = data; // ADD TO THE STACK IN THE BACK
@@ -158,6 +178,8 @@ T ABQ<T>::dequeue()
 		_front = 0; // FRONT IS NOW INDEX 0
 		delete[] _data; // DELETE OLD DATA
 		_data = newArray; // POINT TO NEW ARRAY
+		
+		_total_resizes++;
 	}
 	return tempVar;
 }
@@ -182,6 +204,11 @@ unsigned int ABQ<T>::getSize() const {
 template <typename T>
 unsigned int ABQ<T>::getMaxCapacity() const {
 	return _capacity;
+}
+
+template <typename T>
+unsigned int ABQ<T>::getTotalResizes() const {
+	return _total_resizes;
 }
 
 template <typename T>

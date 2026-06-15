@@ -20,7 +20,7 @@ public:
 // ============== CONSTRUCTORS ============== 
 	ABS();
 	ABS(int capacity);
-	ABS(int capacity, float scale_factor)
+	ABS(int capacity, float scale_factor);
 	ABS(const ABS& d); // BIG THREE
 
 
