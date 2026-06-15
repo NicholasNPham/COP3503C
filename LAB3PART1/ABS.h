@@ -11,6 +11,7 @@ class ABS
 
 	unsigned int _size;
 	unsigned int _capacity;
+	unsigned int _total_resizes;
 	T* _data;
 	float _scaleFactor;
 
@@ -19,6 +20,7 @@ public:
 // ============== CONSTRUCTORS ============== 
 	ABS();
 	ABS(int capacity);
+	ABS(int capacity, float scale_factor)
 	ABS(const ABS& d); // BIG THREE
 
 
@@ -36,6 +38,7 @@ public:
 	T peek() const;
 	unsigned int getSize() const;
 	unsigned int getMaxCapacity() const;
+	unsigned int getTotalResizes() const;
 	T* getData() const;
 };
 
@@ -46,6 +49,7 @@ ABS<T>::ABS()
 {
 	_size = 0;
 	_capacity = 1;
+	_total_resizes = 0;
 	_scaleFactor = 2.0f;
 	_data = new T[_capacity];
 }  
@@ -55,8 +59,19 @@ ABS<T>::ABS(int capacity)
 {
 		_size = 0;
 		_capacity = capacity;
+		_total_resizes = 0;
 		_scaleFactor = 2.0f;
 		_data = new T[_capacity];
+}
+
+template <typename T>
+ABS<T>::ABS(int capacity, float scale_factor) 
+{
+	_size = 0;
+	_capacity = capacity;
+	_total_resizes = 0;
+	_scaleFactor = scale_factor;
+	_data = new T[_capacity];
 }
 
 template <typename T> // COPY CONSTRUCTOR
@@ -65,6 +80,7 @@ ABS<T>::ABS(const ABS& d)
 	// MEMBER VARIABLES
 	_size = d._size;
 	_capacity = d._capacity;
+	_total_resizes = d._total_resizes;
 	_scaleFactor = d._scaleFactor;
 
 	_data = new T[_capacity]; // DEEP COPY
@@ -85,6 +101,7 @@ ABS<T>& ABS<T>::operator=(const ABS& d)
 		_size = d._size;
 		_capacity = d._capacity;
 		_scaleFactor = d._scaleFactor;
+		_total_resizes = d._total_resizes;
 
 		_data = new T[_capacity];
 
@@ -110,6 +127,7 @@ void ABS<T>::push(T data)
 	{
 		_capacity *= _scaleFactor; // INCREASE THE CAPACITY
 		T* newArray = new T[_capacity]; // CREATE A NEW ARRAY
+		_total_resizes++;
 	
 		// COPY DATA OVER
 		for (unsigned int i = 0; i < _size; i++)
@@ -146,6 +164,7 @@ T ABS<T>::pop()
 
 		delete[] _data; // DELETE OLD DATA
 		_data = newArray; // POINT TO NEW ARRAY
+		_total_resizes++;
 	}
 	return tempVar;
 }
@@ -170,6 +189,11 @@ unsigned int ABS<T>::getSize() const {
 template <typename T>
 unsigned int ABS<T>::getMaxCapacity() const {
 	return _capacity;
+}
+
+template <typename T>
+unsigned int ABS<T>::getTotalResizes() const {
+	return _total_resizes;
 }
 
 template <typename T>
