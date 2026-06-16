@@ -15,8 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab3Analysis.cpp">
+    <ClCompile Include="analysis.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ABQ.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ABS.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
