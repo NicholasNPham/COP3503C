@@ -33,4 +33,36 @@ REACHING THE END OF A STRING NAME
 - There is a small chance that the extraction operator will trigger a read failure.
 - The good() function returns false whether there is read failure or an end-of-file condtion. The alternate way requires some extra lines of code.
 
+NOTES:
+- WHAT AN ISTRINGSTRAM IS
+	- istringstream lets you treat a string like keyboard input. Instead of cin pulling from the keyboard, you pull from a string sitting in memory using the same >> extraction syntax.
+	- This beasts manually parsing with find/substr because >> automatically skips whitespace and grabs the next token regardless of length, no hardcoded index position needed.
+	- declare and load at once:
+		
+		istringstream inSS(mySTRLine);
+	- or declare empty and load later:
+		
+		istringstream inSS;
+		inSS.str(lineString);
+
+- WHY DECLARE IT ONCE OUTSIDE A LOOP INSTEAD OF FRESH EVERY ITERATION
+	- both work, but constructing a new istringstream object every loop iteration means setting up and tearing down that objects repeadly, wasted overhead. Declaring it once outside the loop and refulling it each iteration is more efficient
+
+- str() VS clear()
+	- thiese do two completely different jobs:
+		- .str(lineString) swaps the actaully data in the stream's buffer
+		- .clear() resets the streams internal state flags (like oef/fail), it does not touch data
+	- if you call .str() without .clear() in a loop the stream still thinks it's at eof aor in a fail state from the previous iteration, even though fresh data was just loaded in. That's why both calls are neeeded togethor
+		
+		inSS.clear();
+		inSS.str(lineString);
+
+- THE WHILE  (inSS >> data) PATTERN
+
+	while (inSS >> data) {
+		cout << data << endl;
+	}
+
+	- INss >> data doesnt return a literal true/false, it returns the stream itself, which gets evaluated in a boolean context based on its internal flags. While theres data left, extraction succeeds and the expression acts as true. 
+	- Once you try to extract past the end, the extraction fails, eof flag flips to true, and the expression acts as false, ending the loop
 
