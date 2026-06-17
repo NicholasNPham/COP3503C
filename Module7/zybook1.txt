@@ -1,0 +1,36 @@
+12.2 INPUT STRING STREAM
+
+INPUT STRING STREAM
+- Sometiems a programmer wishes to read input data from a string rather than from a keyboard. 
+- A new input string stream variable of type istringstream can be created that reads input from an associated string instead of the keyboard (standard input).
+- istringstream is derived from istream.
+- An istringstream can be used just like the cin stream
+- istringstream lets you treat a string exactly like a keyboard input, token by token, without you having to slice it apart
+
+USING GETLINE() WITH STRING NAMES
+- A common use of string streams is to process user input line-by-line
+- The program below reads in a line as a string and then extracts individual data items from the string.
+- The getline() function reads an input line into a string, and inSS.str(linestring); uses the str() fuction to initialize the stream's buffer to string lineString.
+- Afterwards, the program extracts input from INSS using >>, The statement inSS.clear();
+- The .clear() necessary to reset the state of the stream so that subsequent extractions start from the beginning of the input strings.
+- In Detail
+	- str() changes the data,
+	- .clear() reset the flags
+
+REACHING THE END OF A STRING NAME
+- a programmer will not always know how much data exists in a user input string, so using multiple individual extractions (Ex: inSS >> data; inSS >> data2;) is not useful for reading all of the input data
+- Input streams have a Boolean function called eof() or end of file that returns true or false depending on whether or note the end of the stream has been reached. 
+- An if statement or while loop can check if the end of input string stream has been reached by using the extraction operator.
+- In detail
+	- eof() and the boolean value of inSS >> data are answering two opposite phrasing of bascially the same situation, that's where the confusion is coming from
+	- eof() returning "true" mean "yes, I have reached the end." That's a statement about the stream's status
+	- inSS >> data evaluating to true or false in the while condition means something is different: it's answering "should the loop keep going?" and the answer to that is "no" once we've hit the end, because there's nothing left to read.
+		- so it resolves to false.
+	- In a sense, while there is still data left to extract, eof() is false and inSS >> data is true (read successed, keep looping).
+		- Once you run out of data and try one more extraction, eof() flips to true AND inSS >> data flips to false
+			- They flip in opposite directions but at exact same moment.	
+- An alternative way is to use the good() boolean
+- There is a small chance that the extraction operator will trigger a read failure.
+- The good() function returns false whether there is read failure or an end-of-file condtion. The alternate way requires some extra lines of code.
+
+
