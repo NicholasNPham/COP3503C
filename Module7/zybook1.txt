@@ -119,3 +119,42 @@ BUILDING OUTPUT IN A LOOP
 	cppitemsOSS << userItem << " ";
 
 - Appends value plus separator each pass, accumulating the full string across iterations.
+
+12.4 FILE INPUT
+
+OPENING AND READING FROM A FILE
+- sometimes a program should get input from a file rather than from a user type on a keyboard,
+- To read file input, a programmer can create a new input stream that comes from a file, rahter than the predefined input stream cin that comes from the standard input (keyboard).
+- an input stram can then be used just like cin
+
+READING UNTIL THE END OF THE FILE
+- A program can ready varing amounts of data in a file by using a loop that reads until the endf of the file has been reached.
+- The eof() function returns true if the previous stram operation reached the end of the file
+- Errors may be encountered while attempting to read from a file, like the inability to read a file, reading corrupt data, etc.
+- So a program should chck that each read was successful before using the variable to which the read data wass assigned. The fail() function retuns true if the previous stream operation had an error.
+
+INPUT STREAM ERRORS
+- A stream error occurs when insertion or extraction fails, causing the stream to enter an error state,
+	- Example:
+		- If a file as the string two but the program attempts to extract an intteger, the extraction will fail and the stream will enter an error state.
+- An input stream may also enter an error state if a value extreacted is too large or small to fit the given variable. 
+- While in an error state, an input stream may: skp extraction, set the given variable to 0, or set the given variable to the maximum (or minimum) value of taht variable's data type
+- A stream internally uses sveral 1-bit error flags to tract the state of the stream
+- A program can check a stream's error state using several stream function that return the current state. A stream error state is cleared using clear. 
+- goodbit
+	- indications no error flags are set and the stream is good
+		- good() returns true if no stream erros have occured
+- eofbit
+	- indicates if end of file reaches on extraction
+		- eof() returns value of eofbit, if end of file reach on extraction
+- failbit
+	- indicates a logical error for the previous extraction or insertion operation.
+		fail() returns true if either failbit or badbit is set, indicating an error for the previous stream operation
+- badbit
+	- indicates an error occurred while readcing or writing the stream, and the stream is bad, Further operation on the stream will fail
+		- bad() returns true if badbit is set, indicating the stream is bad. 
+
+- Key gotcha from the walkthrough
+	- goodbit is not its own independent flag. It just represents "no other flags are currently set." If eofbit, failbit, or badbit is on, goodbit is automatically off.
+	- eofbit means the stream actually ran out of data. failbit means the last operation had a logical error (wrong type, bad parse, etc), even if there's still more data left in the file. These are not the same thing, and mixing them up leads to bugs like infinite loops if you only check eof() when bad data (not end of file) is what's actually breaking the read.
+	- eof() is meaningless on output streams like cout, since output streams don't run out of data to read, there's no source to run dry.
