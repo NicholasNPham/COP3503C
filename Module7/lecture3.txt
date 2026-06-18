@@ -1,0 +1,53 @@
+I/O SERIALIZATION
+
+SERIALIZATION
+- Taking a complex object and 'flattening; it, condensing its memory footprint
+	- for storage in a file
+	or sharing with another system (like transferring across a network)
+- On the recieving end, it must be deserialized before use
+	- Deserialized: "unflattened, assembled constructed, etc
+	- Converted to some appropriate format for use
+- Its like moving
+	1. Pack up your stuff in a box ; serialize it
+	2. transport the box ; move it from location A to location b
+	3. unpack the box ; Deserialize it, put the stuff to use
+- program execution my look like this
+	1. Load data from files (deserialize) or create something new
+	2. Do some work
+	3. Save some data (serialize update object(s) as necessary)
+	4. Repeat step 2 and or 3 as needed until exiting
+	
+HOW DO YOU SERIALIZE SOMETHING
+- It depends on the data- every object is different
+- All objects untimately boil down to primitive dat - integers, characters, etc...
+- Serializing an object to a file is just about writing the essential data of that class
+
+SERIALIZING A LINKED LIST
+- data in memory must be condensed
+	1. Write the count variable
+	2. For each node... serialize the data only (ignore the previous/next pointers)
+
+WHAT IF SERIALIZING SIMPLE OBJECT ISNT SIMPLE
+- what if some or all of the private data wasnt accessible
+- What if it wasnt possible to write this code
+- we could write those accessor..
+
+WHAT IF SERIALIZING SIMPLE OBJECTS ISNT SIMPLE
+
+DESERIALIZATION FOR OBJECTS
+- weve looked at this before - read the data from the file, typically storing in some temporary variables
+- From those temporary variables, put into some sort of long term storage
+	- Create an instance of some class using them (or set data of an existing objects)
+	- Store them in a data structure (vector, linked list, stack, queue, etc)
+- Do whatever the rest of your program needs with that data
+- you can deserialize the same data into multiple containers
+
+RECAP
+- data in our programs is often "spread out" in memory
+- Serialization is condensing data for storage and transportation
+- Deserialization is expanding that data for use in a program
+- Its like moving in the real work
+	- Pack (serialize) on the "shipping end" to get data out of our program
+	- Store, or transport (copy, upload/download files)
+	- upack (deserialize) on the "receiving end" to bring data into a program
+- There isnt a single way to do this, as it all depends on the structure of your data. 
