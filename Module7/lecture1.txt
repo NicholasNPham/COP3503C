@@ -1,0 +1,96 @@
+FILE INPUT AND OUTPUT (I/O)
+- Virtually all data in computer applications is read from/stored in files
+	- Even "cloud" data is just files storede on someone else's computer (google, microsoft, apple, etc)
+- All files are made up of collections of basic data types - ints, floats, characters, etc.
+	- Specific types of files (word doc, excel spreadsheet, etc.) are just collections of data
+- Data can be represented in text or binary
+	- Each with their own advantages/drawbacks
+
+FILE STRUCTURE
+- All files have some structure - some order to that data
+	- Even if you dont know what it is
+- Some files are very simple and staightfoward, others... no so much.
+- Understand that structure allows you to do something with that file (read it, edit it, create new files of that type)
+	- think of File->Save or File->Open in a program
+
+WHY USE FILES FOR DATA
+- Simple application can have all of their data "hard-coded"
+	- Names of variables, numbers of loop iterations, etc. Are stored in source code
+	- Written by a program
+- Many applications are data-driven
+	- Uses external sources of information to define behavior
+
+SCENARIO: ADDRESS BOOK / CONTACT LIST
+- Do you store all of the information of a contact list in source files?
+- How many entries should there be?
+- How would you possibly know in advance what those are?
+- A program like that should allow for adding/deleting entries
+
+FILE BASICS
+- Every file has three things in common:
+	1. Directory
+		- In which folder/directory is this file located?
+	2. Filename
+		- The name of the file
+	3. Extension (optional)
+		- What type of file is this?
+			- Typically hints at: how is this file's data structured
+			- Also used by your operating system to decide what to do with the file
+- Combine all three together for the full path of the file
+
+COMPLETE FILE PATH
+- Multiple folders within a directroy are separated by slashes
+	- Forward or backwards depends more on this later
+- If you're using backslashes in code, you may need to use the escape sequence "\\"
+
+ESCAPE SEQUENCES
+- characters preceded by a backslash
+- \n Newline character: This moves the output cursor to a new line
+- \t tab chracter: Prints a tab characters, or moves the cursor to the next tab stop
+- \0 Nul-terminator: Terminates a string
+- \' single-quote: indicates the apostrophe should be used as a character by itself
+- \" Double-quote: indicates the double-quote characters should be used as a character by itself
+- \\ Backslash: indicates bachslash should be used as a character, not the start of an escape
+
+WHY USE ESCAPE SEQUENES?
+- They might be helpful, or they might be required
+- Take the single quote character (the apostrophe)
+- So.. how to store a single-quote character use \'
+
+DOUBLE-BACKSLASH \\ ESCAPE SEQUENCES
+- When you might get
+	- (some compiler may treat these as warning, some errors)
+
+BACKSLASH? FORWARD SLASH?
+- Depends on the OS (and maybe a program)
+- Linux/MacOS uses forward slashes.
+- Windows uses backslashes, ut forward tends to work everywhere as well.
+- Some programs/OS my recognize "wrong" slashes and convert
+- Other s will just yell at you until you do it right
+
+ABSOLUTE PATH VS RELATIVE PATHS
+- paths can be written in two ways
+- An absoulte path is a fixed unchanged path.
+	- Should be avoided unless you know the location will be there (maybe a program running on your computer
+- a relative path is relative to some other location (and a better alternative
+	- Relative to the executable (by default) or from some other starting point
+
+WHERE DOES MY IDE READ/WRITE FILES
+- Depends on the IDE (theres are default examples)
+	- Visual Studio
+		- Looks in the same folder as your source code (right click on your project on solution explorer then select "open Folder in file explorer"
+
+SHOULD YOU CHANGE YOUR CODE TO ADAPT TO YOUR IDE	
+- no never really dont
+- Change your IDEsettings or move directory/files around if needed - work around proper code!
+- Your code should work in as many situations as possible
+
+RECAP
+- Programs typically revolve around data
+- Most of our data is stroed in ffiles
+- A data-driven program reads and writes those files.
+- We want to avoid "hard-coding" data in our source code files
+- Files have paths that contain information about what and where they are.
+- Paths can be absolute (fixed) or relative to something else (typically an executable)
+	- Relative paths are preferable, and work in more situations
+- IDEs may muck-up paths a little bit but they can be adjuysted to fit our code.
