@@ -67,4 +67,35 @@ THE << OPERATOR
 - the << operator is what allows writing data (strings, numbers, etc.) into any ostream- derived stream, whether that's a file or the console
 
 
+12.7 C++ EXAMPLE: SAVING AND RETRIEVING PROGRAM DATA
 
+ifstream: reading from files
+- ifstream (input file stream) is the reverse of ofstream.
+- It inherits from istream the same way of ofstream inherits from ostream
+- Same family, opposite direction, ofstream writes data out to a file, if stream reads data in from a file
+
+getline() VS >>
+- >> reads a single token, stopping at the first whitespace
+- getline() reads an entire line of text, including spaces, stopping only at a newline..
+- When the data you care about is full lines of text (like resturants reviews containing multiple words), getline() is the right tool, >> whould chop the lines apart at every space
+
+THE READ-AHEAD PATTERN (THIS IS THE IMPORTANT ONE)
+
+	getline(reviesFS, review);			// read attempt 1, BEFORE the loop check
+	while (!reviewFS.fail()) {			// check: did the last read succeed?
+		reviewList.push_back(review);	// only push if last read was good
+		getline(reviewsFS, review);		// read attempt for next iteration
+	}
+
+- fail() only reports on the most recent read attempts, it does not predict anything in advance
+- Before any read has happened, fail() is false (nothing's gone wrong because nothing's been tried yet)
+- If you instead structure it with only getline() call inside the loop body (read, then push, then loop back to check), you'd get a bug: on the final iteration when the file runs out of data, getline() fails (end of file reached), but the pushback() already ran that same iteration before the failure was cuaght.
+- This pushes a phantom empty.garbage entry into your vector that was never actually in the file
+- This pushes a phantom empty.garbage entry into your vector that was never actually in the file
+- The fix is reading once before the loop, checking fail(), pushing only confirmsgood data, then reading again at the bottom of the loop body for the next pass
+- This way push_back() never runs on data from a failed read.
+
+DATA LOSS WITHOUT SAVING
+- The original ReadREeviews/DisplayReviews prgroam only reads file from the file at startup. It nevers writes new users entered revies back on the file.
+- Anything the user types udring a run lives only in the in-memory vector  and is lost the moment the program exits, the file on disk never changes.
+- This is exactly the bug SaveReviews() is meant to fix. 
