@@ -1,0 +1,122 @@
+FILE I/O IN C++
+
+FILE I/O CLASSES
+- In C++, 3 classes will help with file input/output operations:
+	- ofstream: Output file stream, for writing data to a file
+	- ifstream: Input file stream, for reading data from a file
+	- fstream: File stream (input or output [or both!] depending on what you need
+
+FILE I/O 101
+1. open the file
+2. Verify the file was opened - option but do it anyways
+3. Use the file
+	- Read from it: Copy data from the file into your program
+	- Write to it: Copy data from your program to the file.
+	- If you're reading from the file, the data is now "in" your program - do whatever you want with it
+4. Close the file
+	- You aren't required to close them in C++, but might be necessary in some cases
+
+CREATING OUTPUT FILE WITH OFSTREAM
+
+CHECK TO SEE IF FILES ARE OPENED!
+- Use the is_open() function
+- a simple verification before any other work can save you alot of time
+- you might spend alot of time debugging only to discover the file was never opened.
+
+WHY MIGHT A FILE FAIL TO OPEN?
+- Most likely reason
+	- You got a file path wrong
+	- ofstream objects will create the file if it doesnt exist - a "wrong but still valid" path might produce a file
+- The file may be already opened by something else
+	- Another program or another object in your program
+		- Another program or another object in your program
+		- Operating systms may not allow more than "thing to access a file at the same time
+
+OPENING FILES WITH SPECIFIC IO MODELS
+- There are several values (stored in an enum) you can pass as a second parameter to open() or a constructor.
+- They affect how the file is opened, and how read/right operation work
+
+ios_based::in : input (ifstream uses this automatically)
+ios_base::out : output (ofstream uses this automatically
+ios_base::trunc : Truncate (delete) the contents (ofstream uses this by default)
+ios_base::app : append, add files to a file's contents
+ios_base::ate : seek to the end after opening (at the end)
+ios_base::binary : perform operations in binary mode
+
+WRITING TO FILES WITH OFSTREAM
+- use the insertion operator: <<
+- Just like printing something to the screen with cout
+
+DO YOU EVER NEED TO CALL close()?
+- For the most part, no - the destructors of file stream objects call close automatically for you
+- This is part of a concept called Resource Acquisition Is Initialization, or RAII
+	- When an object is initialized, it handles the acquisition of some resource (a file, in this case)
+	- When that object is destroyed, it handles freeing that resource (i.e calling close())
+	- As long as the object is around, the resource is valid
+- If you do call close()? Nothing bad will happen
+
+WRITING COMPLEX OBJECTS
+- You would write them the same as you would print them to the screen
+
+READING FILES WITH IFSTREAM
+- Reading data can be slightly more complicated
+- How you read depends on the format of the data.
+	- Just like using cin and getline()
+
+READING FILES WITH IFSTREAM
+
+ASSEMBLING COMPLEX OBJECTS FROM A FILE
+- We dont read objects from a file.
+	- We read small pieces of data, one at a time
+- To read an object from a file
+	- Read all the parts, then construct an object
+
+- READING UNKNWON QUNATITIES OF DATA
+	- We dont always know how much data is in a file
+	- We could write code that "reads as long as there is data"
+		- This is good fro simple data - one value from a file is one "object in a program"
+
+SOME FILES CONTAIN DATA ABOUT THE DATA
+- Some files might contain quatity values to describe of a file
+- We can read and use this data to help read other data
+- You will often encounter this with file:
+	1. Rea some count/quantity
+	2. Read the quantity of. 
+
+DELIMITERS
+- A character used to indicate some stopping point or boundary between parts of data
+- Used to break data into separate tokens
+- Can be anything you want some may be better choices than others
+- Comma delimiters
+	- Spaces
+	- Commas
+	- Pipe Symbol
+
+COMMA-SEPARATED VALUES (CSV) FILE
+- a CSV file is a very common text-based format to store information
+- The information is separated by using a comma as a dilimiter
+- CSV is often used as a "generic" format for spreadsheets
+- Stores only the "real" data, no formatting or program-specific data
+
+HOW TO READ MULTIPLE VALUES FROM ONE LINE?
+- First
+	- Read a line from a file, using getline()
+- Second
+	- Break the string into multiple parts (tokenize, break into tokens) based on the delimiter.
+- The hard way
+	- Losts of calls to  find_first / last_of() and substr() functions of std::string
+- The easier Way
+	- Use a class called istringstream and gthe getline() function
+
+RECAP
+- c++ like any languages , has (relatively) easy-to-use tools to work with filesx.
+	- These tools copy data into your program or copy data out of it
+- You can use these tools to open a file, work with it and (optionally close it)
+- All files have a structure, and each must be handled according to that:
+	- We can create our own formats if needed.
+	- We may have to learn and work with existing formats (such as CSV)
+- Files are often split up by delimiters, charactes that separate tokens of data.
+	- We have to tokenize the data into smaller pieces before we use it
+
+
+
