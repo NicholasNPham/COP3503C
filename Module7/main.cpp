@@ -1,42 +1,33 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "Hero.h"
 using namespace std;
-
-void writeNumbers(string filePath, vector<int>& numbers, char delimiter)
-{
-	ofstream file(filePath);
-	// DID THE FILE ACTUALLY OPEN?
-	if (file.is_open())
-	{
-		// WRITE DATA OUT
-		for (unsigned int i = 0; i < numbers.size(); i++)
-		{
-			file << numbers[i];
-
-			// IS THIS THE LAST ELEMENT IN THE CONTAINER
-			// IF SO, DONT WRITE THE COMMA
-
-			if (i < numbers.size() - 1)
-				file << delimiter;
-		}
-	}
-	else
-	{
-		cout << "Error File: " << filePath << " was not opened";
-	}
-}
 
 int main()
 {
-	vector<int> numbers;
-	for (int i = 0; i < 20; i++)
+	ofstream outFile("data/heroes.csv");
+	Hero h1("Thor Odinson", 100, 250);
+	Hero h2("Batman", 50, 120);
+	Hero h3;
+
+	vector<Hero> heroes;
+	heroes.push_back(h1);
+	heroes.push_back(h2);
+	heroes.push_back(h3);
+
+	// WRITE HEADER DATA TO THE FILE
+	outFile << "Name," << "Strength" << ',' << "Hitpoints" << "," << "Max Hitpoints" << ',' << "Level" << "," << "Experience" << endl;
+
+	for (unsigned int i = 0; i < heroes.size(); i++)
 	{
-		numbers.push_back(rand() % 50 + 1);
+
+		heroes[i].Serialize(outFile);
+
+		if (i != heroes.size() - 1)
+		{
+			outFile << endl;
+		}
 	}
-
-	writeNumbers("data/file1.txt", numbers, ',');
-	writeNumbers("data/file2.txt", numbers, '|');
-
 	return 0;
 }
