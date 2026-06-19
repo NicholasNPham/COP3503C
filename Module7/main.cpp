@@ -6,16 +6,24 @@ using namespace std;
 void writeNumbers(string filePath, vector<int>& numbers, char delimiter)
 {
 	ofstream file(filePath);
-	// WRITE DATA OUT
-	for (unsigned int i = 0; i < numbers.size(); i++)
+	// DID THE FILE ACTUALLY OPEN?
+	if (file.is_open())
 	{
-		file << numbers[i];
+		// WRITE DATA OUT
+		for (unsigned int i = 0; i < numbers.size(); i++)
+		{
+			file << numbers[i];
 
-		// IS THIS THE LAST ELEMENT IN THE CONTAINER
-		// IF SO, DONT WRITE THE COMMA
+			// IS THIS THE LAST ELEMENT IN THE CONTAINER
+			// IF SO, DONT WRITE THE COMMA
 
-		if (i < numbers.size() - 1)
-			file << delimiter;
+			if (i < numbers.size() - 1)
+				file << delimiter;
+		}
+	}
+	else
+	{
+		cout << "Error File: " << filePath << " was not opened";
 	}
 }
 
@@ -27,8 +35,8 @@ int main()
 		numbers.push_back(rand() % 50 + 1);
 	}
 
-	writeNumbers("file1.txt", numbers, ',');
-	writeNumbers("file2.txt", numbers, '|');
+	writeNumbers("data/file1.txt", numbers, ',');
+	writeNumbers("data/file2.txt", numbers, '|');
 
 	return 0;
 }
