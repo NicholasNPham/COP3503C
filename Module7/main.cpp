@@ -75,9 +75,14 @@ int main()
 
 	ReadFromCSVFile("data/heroes.csv", heroes_csv);
 
-	for (unsigned int i = 0; i < heroes_csv.size(); i++)
+	ifstream csv("data/heroes.csv");
+	string headerLine;
+	getline(csv, headerLine);
+
+	string tokenFromFile;
+	while (getline(csv, tokenFromFile, ','))
 	{
-		heroes_csv[i].PrintInfo();
+		cout << "Token: " << tokenFromFile << endl;
 	}
 
 	return 0;
