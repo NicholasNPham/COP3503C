@@ -22,5 +22,8 @@
   <ItemGroup>
     <Text Include="zybook1.txt" />
     <Text Include="zybook2.txt" />
+    <Text Include="lecture1.txt" />
+    <Text Include="lecture2.txt" />
+    <Text Include="lecture3.txt" />
   </ItemGroup>
 </Project>

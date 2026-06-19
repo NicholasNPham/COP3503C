@@ -142,6 +142,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="lecture1.txt" />
+    <Text Include="lecture2.txt" />
+    <Text Include="lecture3.txt" />
     <Text Include="zybook1.txt" />
     <Text Include="zybook2.txt" />
   </ItemGroup>
