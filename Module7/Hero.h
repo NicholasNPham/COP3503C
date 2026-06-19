@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <fstream>
+#include <sstream>
+using std::istringstream;
 using std::ofstream;
 using std::string;
 
@@ -51,5 +53,6 @@ public:
 	void gain_experience(int amount);
 
 	void Serialize(ofstream& outFile);
+	void Deserialized(istringstream& inFile);
 
 };

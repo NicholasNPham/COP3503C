@@ -1,5 +1,10 @@
 #include "Hero.h"
 #include <iostream>
+#include <sstream>
+using std::istringstream;
+using std::ofstream;
+using std::string;
+
 using namespace std;
 
 Hero::Hero(string name, int strength, int hitpoints)
@@ -114,4 +119,35 @@ void Hero::Serialize(ofstream& outFile)
 	outFile << _max_hitpoints << ",";
 	outFile << _level << ",";
 	outFile << _experience << ",";
+}
+
+void Hero::Deserialized(istringstream& stream)
+{
+	// 4. BREAK THAT STREAM INTO TOKENS (ACCORDING TO ITS DATA)
+	string nameToken;
+	getline(stream, _name, ',');
+
+	string token;
+	getline(stream, token, ',');
+	_strength = stoi(token);
+
+
+	getline(stream, token, ',');
+	_hitpoints = stoi(token);
+
+
+	getline(stream, token, ',');
+	_max_hitpoints = stoi(token);
+
+
+	getline(stream, token, ',');
+	_level = stoi(token);
+
+
+	getline(stream, token, ',');
+	this->_experience = stoi(token);
+
+
+
+
 }

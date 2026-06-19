@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include "Hero.h"
@@ -7,7 +8,6 @@ using namespace std;
 
 void ReadFromHeroesFile(string filePath, vector<Hero>& output)
 {
-
 	// READ A DATA FILE WITH A COUNT
 	ifstream inFile(filePath);
 	if (inFile.is_open())
@@ -43,24 +43,42 @@ void ReadFromHeroesFile(string filePath, vector<Hero>& output)
 		cout << "Error! File " << filePath << " Could not be opened!" << endl;
 	}
 }
+void ReadFromCSVFile(string filepath, vector<Hero>& output)
+{
+	// READ A CSV FILE
+	ifstream csv(filepath);
+
+	// 1. READ THE HEADER FROM THE FILE AND IGNORE IT
+	string lineFromFile;
+	getline(csv, lineFromFile);
+	cout << "Header: " << lineFromFile << endl;
+
+	// 2. GET RAW DATA FROM THE FILE ONE LINE AT A TIME
+	while (getline(csv, lineFromFile))
+	{
+
+		// 3. CONVERT THAT LINE STRING INTO A STREAM OF DATA 
+
+		istringstream stream(lineFromFile);
+		Hero someObject;
+		someObject.Deserialized(stream);
+		output.push_back(someObject);
+
+	}
+}
 
 int main()
 {
 	vector<Hero> heroes;
+	vector<Hero> heroes_csv;
 	ReadFromHeroesFile("data/info.heroes", heroes);
 
-	// 2. FOR (COUNT)
-	for (unsigned int i = 0; i < heroes.size(); i++)
-	{
-		heroes[i].PrintInfo();
-	}
-	
-	// 3. READ INDIVIDUAL OBJECTS
+	ReadFromCSVFile("data/heroes.csv", heroes_csv);
 
-	// READ A CSV FILE
-	ifstream csv("data/heroes.csv");
+	for (unsigned int i = 0; i < heroes_csv.size(); i++)
+	{
+		heroes_csv[i].PrintInfo();
+	}
 
 	return 0;
 }
-
-
