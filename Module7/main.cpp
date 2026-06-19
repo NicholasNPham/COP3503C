@@ -1,33 +1,28 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
-#include "Hero.h"
 using namespace std;
 
 int main()
 {
-	ofstream outFile("data/heroes.csv");
-	Hero h1("Thor Odinson", 100, 250);
-	Hero h2("Batman", 50, 120);
-	Hero h3;
+	vector<int> numbers;
+	ifstream inFile("demo3/file2.txt");
 
-	vector<Hero> heroes;
-	heroes.push_back(h1);
-	heroes.push_back(h2);
-	heroes.push_back(h3);
-
-	// WRITE HEADER DATA TO THE FILE
-	outFile << "Name," << "Strength" << ',' << "Hitpoints" << "," << "Max Hitpoints" << ',' << "Level" << "," << "Experience" << endl;
-
-	for (unsigned int i = 0; i < heroes.size(); i++)
+	int someValue;
+	
+	while (!inFile.eof())
 	{
+		inFile >> someValue;
 
-		heroes[i].Serialize(outFile);
+		numbers.push_back(someValue);
+	}
+	
 
-		if (i != heroes.size() - 1)
-		{
-			outFile << endl;
-		}
+	cout << "numbers from file: " << numbers.size() << endl;
+	for (unsigned int i = 0; i < numbers.size(); i++)
+	{
+		cout << numbers[i] << ' ';
 	}
 	return 0;
 }
