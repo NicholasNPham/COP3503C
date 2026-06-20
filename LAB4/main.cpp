@@ -242,6 +242,34 @@ void priceInfo(vector<LegoSet>& legoSetList)
 	cout << "Piece count: " << maxPriceLegoSet._pieces << endl;
 }
 
+void minifigInfo(vector<LegoSet>& legoSetList)
+{
+	int tempMinifigCount = 0;
+	LegoSet maxMinifigLegoSet = legoSetList[0];
+
+	for (unsigned int i = 0; i < legoSetList.size(); i++)
+	{
+		tempMinifigCount += legoSetList[i]._minifigs;
+
+		if (legoSetList[i]._minifigs > maxMinifigLegoSet._minifigs)
+		{
+			maxMinifigLegoSet = legoSetList[i];
+		}
+
+	}
+
+	cout << "Average number of minifigures: " << (tempMinifigCount / legoSetList.size()) << endl;
+
+	cout << "Set with the most minifigures:" << endl;
+	cout << "Name: " << maxMinifigLegoSet._name << endl;
+	cout << "Number: " << maxMinifigLegoSet._number << endl;
+	cout << "Theme: " << maxMinifigLegoSet._theme << endl;
+	cout << "Price: $" << maxMinifigLegoSet._usprice << endl;
+	cout << "Minifigures: " << maxMinifigLegoSet._minifigs << endl;
+	cout << "Piece count: " << maxMinifigLegoSet._pieces << endl;
+
+}
+
 int main()
 {
 	cout << std::fixed << setprecision(2);
@@ -319,6 +347,11 @@ int main()
 	{
 		priceInfo(legoList);
 	}
+	if (choice == 7)
+	{
+		minifigInfo(legoList);
+	}
+
 
 	return 0;
 }
