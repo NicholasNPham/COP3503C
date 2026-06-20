@@ -44,15 +44,39 @@ void loadFile(vector<LegoSet>& legoSetList, string fileName)
 
 			string minifigsString;
 			getline(ss, minifigsString, ','); // MINIFIGS
-			int minifigs = stoi(minifigsString);
+			int minifigs = 0;
+			try
+			{
+				minifigs = stoi(minifigsString);
+			}
+			catch (invalid_argument & e)
+			{
+				minifigs = 0;
+			}
 
 			string piecesString;
 			getline(ss, piecesString, ','); // PIECES;
-			int pieces = stoi(piecesString);
+			int pieces = 0;
+			try
+			{
+				pieces = stoi(piecesString);
+			}
+			catch (invalid_argument& e)
+			{
+				pieces = 0;
+			}
 
 			string uspriceString;
 			getline(ss, uspriceString);
-			double usprice = stod(uspriceString);
+			double usprice = 0;
+			try
+			{
+				usprice = stod(uspriceString);
+			}
+			catch (invalid_argument& e)
+			{
+				usprice = 0;
+			}
 
 			LegoSet legoSetObject;
 			legoSetObject._number = number;
@@ -83,6 +107,29 @@ int main()
 
 	/*======= Load data from file(s) =======*/
 
+	vector<LegoSet> legoList;
+
+	if (option == 1)
+	{
+		loadFile(legoList, "lego1.csv");
+	}
+	else if (option == 2)
+	{
+		loadFile(legoList, "lego2.csv");
+	}
+	else if (option == 3)
+	{
+		loadFile(legoList, "lego3.csv");
+	}
+	else if (option == 4)
+	{
+		loadFile(legoList, "lego1.csv");
+		loadFile(legoList, "lego2.csv");
+		loadFile(legoList, "lego3.csv");
+	}
+
+	/*======= Print out how many sets were loaded =======*/
+	cout << "Total number of sets: " << legoList.size() << endl;
 
 	cout << "1. Most Expensive set" << endl;
 	cout << "2. Largest piece count" << endl;
@@ -98,7 +145,6 @@ int main()
 	cin >> choice;
 	cin.get();  // Clear newline character for any later input
 
-	/*======= Print out how many sets were loaded =======*/
 	/*======= Based on the choice, execute the appropriate task and show the results =======*/
 
 	return 0;
