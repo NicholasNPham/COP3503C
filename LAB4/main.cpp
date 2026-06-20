@@ -116,6 +116,29 @@ void mostExpensive(vector<LegoSet>& legoSetList)
 
 }
 
+void largestPieceCount(vector<LegoSet>& legoSetList)
+{
+	LegoSet tempLegoObject = legoSetList[0];
+
+	for (unsigned int i = 0; i < legoSetList.size(); i++)
+	{
+		if (legoSetList[i]._pieces > tempLegoObject._pieces)
+		{
+			tempLegoObject = legoSetList[i];
+		}
+	}
+
+	cout << "The set with the highest parts count:" << endl;
+	cout << "Name: " << tempLegoObject._name << endl;
+	cout << "Number: " << tempLegoObject._number << endl;
+	cout << "Theme: " << tempLegoObject._theme << endl;
+	cout << "Price: $" << tempLegoObject._usprice << endl;
+	cout << "Minifigures: " << tempLegoObject._minifigs << endl;
+	cout << "Piece count: " << tempLegoObject._pieces << endl;
+
+}
+
+
 int main()
 {
 	cout << std::fixed << setprecision(2);
@@ -173,6 +196,11 @@ int main()
 	{
 		mostExpensive(legoList);
 	}
+	if (choice == 2)
+	{
+		largestPieceCount(legoList);
+	}
+
 
 
 	return 0;
