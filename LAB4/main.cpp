@@ -200,6 +200,48 @@ void partCountInfo(vector<LegoSet>& legoSetList)
 	cout << "Average part count for " << legoSetList.size() << " sets: " << (int)(tempTotalCount / legoSetList.size()) << endl;
 }
 
+void priceInfo(vector<LegoSet>& legoSetList)
+{
+	double tempTotalCount = 0;
+	LegoSet maxPriceLegoSet = legoSetList[0];
+	LegoSet minPriceLegoSet = legoSetList[0];
+	
+
+	for (unsigned int i = 0; i < legoSetList.size(); i++)
+	{
+		tempTotalCount += legoSetList[i]._usprice;
+
+		if (legoSetList[i]._usprice > maxPriceLegoSet._usprice)
+		{
+			maxPriceLegoSet = legoSetList[i];
+		}
+
+		if (legoSetList[i]._usprice < minPriceLegoSet._usprice)
+		{
+			minPriceLegoSet = legoSetList[i];
+		}
+
+	}
+
+	cout << "Average price for " << legoSetList.size() << " sets: $" << (tempTotalCount / legoSetList.size()) << endl << endl;
+
+	cout << "Least expensive set:" << endl;
+	cout << "Name: " << minPriceLegoSet._name << endl;
+	cout << "Number: " << minPriceLegoSet._number << endl;
+	cout << "Theme: " << minPriceLegoSet._theme << endl;
+	cout << "Price: $" << minPriceLegoSet._usprice << endl;
+	cout << "Minifigures: " << minPriceLegoSet._minifigs << endl;
+	cout << "Piece count: " << minPriceLegoSet._pieces << endl << endl;
+
+	cout << "Most expensive set:" << endl;
+	cout << "Name: " << maxPriceLegoSet._name << endl;
+	cout << "Number: " << maxPriceLegoSet._number << endl;
+	cout << "Theme: " << maxPriceLegoSet._theme << endl;
+	cout << "Price: $" << maxPriceLegoSet._usprice << endl;
+	cout << "Minifigures: " << maxPriceLegoSet._minifigs << endl;
+	cout << "Piece count: " << maxPriceLegoSet._pieces << endl;
+}
+
 int main()
 {
 	cout << std::fixed << setprecision(2);
@@ -270,7 +312,13 @@ int main()
 		searchByTheme(legoList);
 	}
 	if (choice == 5)
+	{
 		partCountInfo(legoList);
+	}
+	if (choice == 6)
+	{
+		priceInfo(legoList);
+	}
 
 	return 0;
 }
