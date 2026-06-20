@@ -188,6 +188,18 @@ void searchByTheme(vector<LegoSet>& legoSetList)
 	}
 }
 
+void partCountInfo(vector<LegoSet>& legoSetList)
+{
+	int tempTotalCount = 0;
+
+	for (unsigned int i = 0; i < legoSetList.size(); i++)
+	{
+		tempTotalCount += legoSetList[i]._pieces;
+	}
+
+	cout << "Average part count for " << legoSetList.size() << " sets: " << (int)(tempTotalCount / legoSetList.size()) << endl;
+}
+
 int main()
 {
 	cout << std::fixed << setprecision(2);
@@ -257,6 +269,8 @@ int main()
 	{
 		searchByTheme(legoList);
 	}
+	if (choice == 5)
+		partCountInfo(legoList);
 
 	return 0;
 }
