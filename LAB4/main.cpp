@@ -138,6 +138,55 @@ void largestPieceCount(vector<LegoSet>& legoSetList)
 
 }
 
+void searchByName(vector<LegoSet>& legoSetList)
+{
+	string userStrInput;
+	getline(cin, userStrInput);
+
+	bool foundMatch = false;
+
+	for (unsigned int i = 0; i < legoSetList.size(); i++)
+	{
+		if (legoSetList[i]._name.find(userStrInput) != string::npos)
+		{
+			if (foundMatch == false)
+			{
+				cout << "Sets matching \"" << userStrInput << "\":" << endl;
+			}
+			foundMatch = true;
+			cout << legoSetList[i]._number << " " << legoSetList[i]._name << " $" << legoSetList[i]._usprice << endl;
+		}
+	}
+	if (foundMatch == false)
+	{
+		cout << "No sets found matching that search term";
+	}
+}
+
+void searchByTheme(vector<LegoSet>& legoSetList)
+{
+	string userStrInput;
+	getline(cin, userStrInput);
+
+	bool foundMatch = false;
+
+	for (unsigned int i = 0; i < legoSetList.size(); i++)
+	{
+		if (legoSetList[i]._theme.find(userStrInput) != string::npos)
+		{
+			if (foundMatch == false)
+			{
+				cout << "Sets matching \"" << userStrInput << "\":" << endl;
+			}
+			foundMatch = true;
+			cout << legoSetList[i]._number << " " << legoSetList[i]._name << " $" << legoSetList[i]._usprice << endl;
+		}
+	}
+	if (foundMatch == false)
+	{
+		cout << "No sets found matching that search term";
+	}
+}
 
 int main()
 {
@@ -200,8 +249,14 @@ int main()
 	{
 		largestPieceCount(legoList);
 	}
-
-
+	if (choice == 3)
+	{
+		searchByName(legoList);
+	}
+	if (choice == 4)
+	{
+		searchByTheme(legoList);
+	}
 
 	return 0;
 }
