@@ -270,6 +270,25 @@ void minifigInfo(vector<LegoSet>& legoSetList)
 
 }
 
+void buyEverything(vector<LegoSet>& legoSetList)
+{
+	double totalCost = 0;
+	int totalPieces = 0;
+	int totalFigures = 0;
+
+	for (unsigned int i = 0; i < legoSetList.size(); i++)
+	{
+		totalCost += legoSetList[i]._usprice;
+		totalPieces += legoSetList[i]._pieces;
+		totalFigures += legoSetList[i]._minifigs;
+	}
+
+	cout << "If you bought one of everything..." << endl;
+	cout << "It would cost: $" << totalCost << endl;
+	cout << "You would have " << totalPieces << " pieces in your collection" << endl;
+	cout << "You would have an army of " << totalFigures << " minifigures!" << endl;
+}
+
 int main()
 {
 	cout << std::fixed << setprecision(2);
@@ -351,7 +370,10 @@ int main()
 	{
 		minifigInfo(legoList);
 	}
-
+	if (choice == 8)
+	{
+		buyEverything(legoList);
+	}
 
 	return 0;
 }
