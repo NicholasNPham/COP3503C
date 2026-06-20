@@ -94,6 +94,28 @@ void loadFile(vector<LegoSet>& legoSetList, string fileName)
 	}
 }
 
+void mostExpensive(vector<LegoSet>& legoSetList)
+{
+	LegoSet tempLegoObject = legoSetList[0];
+
+	for (unsigned int i = 0; i < legoSetList.size(); i++)
+	{
+		if (legoSetList[i]._usprice > tempLegoObject._usprice)
+		{
+			tempLegoObject = legoSetList[i];
+		}
+	}
+
+	cout << "The most expensive set is:" << endl;
+	cout << "Name: " << tempLegoObject._name << endl;
+	cout << "Number: " << tempLegoObject._number << endl;
+	cout << "Theme: " << tempLegoObject._theme << endl;
+	cout << "Price: $" << tempLegoObject._usprice << endl;
+	cout << "Minifigures: " << tempLegoObject._minifigs << endl;
+	cout << "Piece count: " << tempLegoObject._pieces << endl;
+
+}
+
 int main()
 {
 	cout << std::fixed << setprecision(2);
@@ -128,9 +150,6 @@ int main()
 		loadFile(legoList, "lego3.csv");
 	}
 
-	/*======= Print out how many sets were loaded =======*/
-	cout << "Total number of sets: " << legoList.size() << endl;
-
 	cout << "1. Most Expensive set" << endl;
 	cout << "2. Largest piece count" << endl;
 	cout << "3. Search for set name containing..." << endl;
@@ -145,7 +164,16 @@ int main()
 	cin >> choice;
 	cin.get();  // Clear newline character for any later input
 
+	/*======= Print out how many sets were loaded =======*/
+	cout << "Total number of sets: " << legoList.size() << endl << endl;
+
 	/*======= Based on the choice, execute the appropriate task and show the results =======*/
+
+	if (choice == 1)
+	{
+		mostExpensive(legoList);
+	}
+
 
 	return 0;
 }
