@@ -106,3 +106,100 @@ What is an escape sequence?
 	- \\ : literal backslash
 	- \" : literal quote inside a string
 
+WHAT THE QUIZ WANTS
+
+Create a a data-driven application.
+Read data from a CSV file.
+
+- EXAMPLE: STUDENT DATA
+
+- THIS IS THE CSV
+	
+	Name,Grade,Age
+	Nick,95,20
+	John,88,21
+	Sara,72,19
+
+1. Create a struct for the csv/data.
+	
+	struct Student
+	{
+		string _name;
+		int _grade;
+		int _age;
+	};
+
+2. Create a loadFile function 
+
+	void loadFile(vector<Student>& studentList, string filename)
+	{
+	}
+
+3. The body of the function
+
+- note: 
+	- top of the function needs the follow in order to create this function
+		- #include <fstream>
+			- ifstream/ofstream
+		- #include <sstream>
+			- istringstream
+		- #include <vector>
+		- #include <string>
+		
+
+	void loadFile(vector<Student>& studentList, string filename)
+	{
+		
+		ifstream csv(filename);
+		
+		if (!csv.is_open())
+		{
+			return;
+		}
+
+		string headerLine;
+		getline(csv, headerLine);
+
+		string lineFromDataFile;
+		getline(csv, lineFromDataFile);
+
+		while (!csv.fail())
+		{
+
+			istringstream ss(lineFromDataFile);
+
+			string name;
+			getline(ss, name, ',');
+
+			string gradeString;
+			getline(ss, gradeString, ',');
+			int grade = stoi(gradeString);
+
+			string ageString;
+			getline(ss, ageString, ',');
+			int age = stoi(ageString);
+
+			Student studentObject;
+
+			studentObject._name = name;
+			studentObject._grade = grade;
+			studentObject._age = age;
+
+			studentList.push_back(studentObject);
+
+			getline(csv, lineFromDataFile);
+		}
+		csv.close();
+	}
+
+Explain the purpose of escape sequences.
+- The purpose of escape sequences is that the characters like ( \n \t \\ \" ) cannot be represented directly inside a string literal
+- For example
+	- You cant hit enter in the middle of the string, and have it mean new line.
+		- so \n is the way to represent it in code
+
+Explain the purpose of delimiters in files.
+- The purpose of delimiters is to use a character to sparate values or data.
+- In a CSV specifically that delimiter is a comma
+	- WHich is how your program knows where one field ends and the next begins.
+
