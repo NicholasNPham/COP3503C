@@ -36,6 +36,73 @@ What's the difference between a forward slash and a backslash when it comes to f
 FILE I/O IN PRACTICE
 
 What classes can we use to open files for reading and writing?
+- first think of the prefixes
+	- i = input (reading)
+	- o = output (writing)
+	- f = file
 
+- The class we use to open file for reading is
+	- i = input (reading)
+	- f = file
+	- ifstream = input (reading) file stream
 
+- the class we use to open file for writing is
+	- o = output (writing)
+	- f = file
+	- ofstream = output (writing) file stream
+
+What operators can we use to read and write data to and from a file?
+- ofstream uses << to write (just like cout)
+- ifstream uses >> to read tokens (just like cin)
+	- >> reads one token at a time
+		- It stops at whitespaces (spaces, newlines, tabs)
+		- So if you file has "stringname intnumber"
+			- doing file >> name >> age grabs them separately
+
+How can you read an entire line from a file?
+- getline(fileStream, stringVariable) reads the whole line including spaces, stops at the newline.
+- getline has two forms
+	- getline(stream, variables);
+	- getline(stream, variables, delimiters);
+- stream: the thing you're reading from
+	- could be an ifstream, or even a cin, or an istringstream
+- variable, a string where the results gets stored
+- delimiter (optional): the character to stop at
+	- defaults to \n (newline) if you leave it out
+	- you pass in ',' to stop at commas instead
+
+What is a data-driven program?
+- A program that loads its data from an external source (like a file or csv) rather than hardcoding values directly into the source code
+- The advantage is that when data changes, you update the file not the codebase.
+- The program just reads whatever is there.
+
+What are the differences between absolute paths and relative paths?
+- Absolute Path: 
+	- the full path from the root/drive all the way to thefile
+	- Like C:\users\Nick\Documents\data.csv
+	- It works from anywhre but it brittle
+	- If you move the file or run it on a different machine it breaks
+- Relative path
+	- A path relative to wherever the program is currently running from.
+	- Like just data.csv or data/data.csv.
+	- No drive, no full directory chain
+
+Where does a program look for files by default?
+- by default a program will look for files in its working directory
+	- Wherever it is currently being executed from
+- the program looks in where the exe lives the Debug/Release folder
+
+Where does an IDE look for files by default?
+- by default the IDE will look for files in the project directory
+- VS or the IDE will set the working directory to that project folder when you run it from the IDE
+- it looks in the .vcxproj file
+
+What is an escape sequence?
+- An escape sequence is a \ (backslash) followed by a character that represents something you cant other type directly in a string literal.
+- They are needed because certain characters (like newlines, tabs, or backslashes themselves) have no direct keyboard representation inside the string
+- Common ones:
+	- \n : newline
+	- \t : tab
+	- \\ : literal backslash
+	- \" : literal quote inside a string
 
