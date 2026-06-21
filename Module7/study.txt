@@ -1,0 +1,41 @@
+FILES I/O IN GENERAL
+
+What does a full path of a file include?
+- The full filepath requires 3 things
+	- Drive/root (like C:\ or /)
+	- Directory path (the folder leading to the files)
+	- Filename (including the extensions)
+- So something like C:\Users\Nick\Documents\data.csv 
+	- Drive, folder, filename all together thats the full path
+
+What is a delimiter, and what purpose does it serve in a file?
+- A delimiter is just a character used to separate pieces of data
+- In files you'll see commas, spaces, tabs, pipes
+	- Whatever the format uses.
+
+What is a CSV File
+- CSV: Comma Separated Values 
+	- It is a plain text file that separates values with commas.
+	- One record per line typically
+	- Excel just happens to be a common whay to view them
+
+True or false: All formats are the same
+- FALSE
+- Different formats have different structures, rules and purposes.
+- A .csv uses comma-delimited text, a .json uses key-value pairs, a .png is binary image data, and a .docx is a zipped collection of XML files
+- You cannot treat them interchangably
+
+What's the difference between a forward slash and a backslash when it comes to file paths?
+- /: Forward Slash
+- \: Back Slash
+- They are both used for file paths and the backslash specifically (\) for escape characters
+	- /: The forward slash is universal, works on Windows, Mac, and Linux
+	- \: the backslash is Windows-specific for file paths
+	- \: also doubles as the escap character in C++, which is what \n, \t, \\ etc.
+	
+FILE I/O IN PRACTICE
+
+What classes can we use to open files for reading and writing?
+
+
+
