@@ -1,0 +1,37 @@
+3.9 BINARY
+- Normall, a programmer can think in terms of base ten numbers.
+- However, a compiler must allocate some finite quantity of bits (e.g., 32 bits) for a variable, and that quantity of bits limits the range of numbers that the variable can represent
+- Some background on the quantity of bits influences a variable's number range is helpful
+
+- Because each memory location is composed of bits (0s and 1s), a process stroes a nummber using base 2, known as binary number.
+
+- For a number in the more familiar base 10, kown as a decimal number, each digit must be 0-9 and each digit's place is weighed by increasing powers of 10
+
+EXAMPLE:
+	
+	212
+
+- Representation
+	
+	= 2 * 10^2 + 1 * 10^1 + 2 * 10^0
+	= 2 * 100  + 1 * 10   + 2 * 1
+	= 200      + 10       + 2
+	= 212
+
+- In base 2 , each digit must be 0-1 and each digit's place is weighed by increasing power of 2
+
+EXAMPLE:
+
+	1101
+
+- Representation
+
+	= 1 * 2^3 + 1 * 2^2 + 0 * 2^1 + 1 * 2^0
+	= 1 * 8   + 1 * 4   + 0 * 2   + 1 * 1
+	= 8       + 4       + 0       + 1
+	= 13
+
+- The compiler tralnslates decimal numbers into binary numbers before storing the number into a memory location.
+- The compiler would convert the decimal number 212 to the binary number 11010100, meaning 1*128 + 1*64 + 0*32 + 1*16 + 0*8 + 1*4 + 0*2 + 0*1 = 212, and then store that binary number in memory
+
+Note: 8 bits can represent a maximum value of 255 (11111111).
