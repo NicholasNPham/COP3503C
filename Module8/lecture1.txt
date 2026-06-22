@@ -1,0 +1,84 @@
+BINARY FILE I/O
+
+BINARY VS TEXT I/O OPERATIONS
+- text file I/O deal with conversions
+	- The files store characters, relgarless of what the data represents
+	- Numberic values are converted to or from characters
+- Binary file I/O is a direct transfer of data from memory to a file, or vice-versa
+	- No conversion, just copying bytes
+	- Faster transfer to files
+	- Smaller file sizes (usually)
+
+BINARY REPRESENTATION OF VALUES
+
+	int number = 16;
+	int number = 98734;
+
+- Integers are commonly (but not always) 4 byte data types (each data types is made of some number of bytes)
+- Each byte is made of 8 bits (and each bit can be either 1 or 0)
+- Decimal versus hexadecimal versus binary: 
+	- You dont need to know all of these conversions for now
+	- For binary file I/O, just know that everything is made of bytes-That's what we read and write froma a file
+
+TEXT-BASED FILE I/O INVOLVES CONVERSION
+
+MEMORY COMPARED TO TEXT-BASED FILES
+- Characters are at least 1 byte per character
+- There are many ways of encoding a file, each with different character size - we wont cover those here
+
+MEMORY COMPARED TO BINARY FILES
+- In binary I/O bytes are copied directly from memory to the file
+	- We might call these the "raw bytes"
+
+BIG-ENDIAN AND LITTLE-ENDIAN
+- These are both correct, but from different contexts
+	- One is big-endian, and the other is little-endian
+- Computers generally agree on what byte is - it's 8 bit
+- They dont agree on how to order multiple bytes that are grouped together (i.e., a multi-byte value)
+
+BIG-ENDIAN AND LITTLE-ENDIAN EXAMPLE
+- in a numbering system, we can have "big" and "small" place values
+	- numberical value: 1285
+	- The 1 is "bigger than a 2, because its in a larger place the 1000s place
+	- The 5 is the smallest or littlest value in the number
+
+BINARY FILES ARE NOT FORMATTED LIKE TEXT FILES
+- Since they arent for human eyes, binary files dont have a visable format
+	- no delimiters, newline character, etc.
+- The data is all on one "line" one stream of bytes
+	- data is extracted according to bytes counts that you specify
+
+HOW DO YOU DETERMINE A FILES STRUCTURE
+- There are a easy ways to learn a vinary files structure ( i.e. the order of its bytes)"
+	1. You know it because you made it
+	2. You read about it through some documentation
+- If those options aren't available, the not-so-easy way
+	- Reverse-engineering (aka educated guessing)
+
+SOME FORMATS ARE STATIC
+- Some imaginary file with a 4-byte integer, a 2-byte short, and a 4-byte float.
+- Process of reading this file:
+	1. Open file.
+	2. Read 4 bytes for the integer.
+	3. Read 2 bytes for the short.
+	4. Read 4 bytes for the float.
+
+SOLUTION: DATA, TO DESCRIBE THE OTHER DATA
+- Some sort of count data needs to be added to the file (arbitrarily a 2-byte short, in this example)
+- someFile.data: a file with 3 floats, preceded by a 2 byte count
+- other file.data: a file with 4 floats, preceded by a 2-byte count
+- giantfile.data: a file with 30,000 floats
+- This 2 step process works for any type:
+	1. Write the AMOUNT of data
+	2. Write each element of the data (which may have sub-steps for complex objects)
+
+FILES WITH LOSTS OF MIXED DATA
+- Each piece of data would have a description of its purpose, how to use it etc.
+- Thhe size of data is critical.
+- Without those byte counts it's impossible to work with binary
+
+RECAP
+- binary data is computer-readable, but not human-readable
+- Data stored in these files is typically (but not always) smaller
+- Text-based files I/O converts data into characters binary file I/O copies bytes directly.
+- Reading or writing binary data requires we know the bytes counts of our data. 
