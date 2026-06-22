@@ -1,0 +1,116 @@
+BINARY FILE I/O IN C++
+- Classes: the same as text-based input
+	- ofstream output files
+	- ifstream input files
+	- fstream input or output files (or both)
+- The same functions for opening an closing files
+
+READING AND WRITING DATA
+- text-based operations
+	- writing: use the insertion operation <<
+	- reading: getline(), the extraction operator >>
+- Binary operations
+	- Writing: use the write () function
+	- Reading: use the read() function
+
+WRITING WITH WRITE
+
+	write (const char* s, std::streamsize n);
+
+- const char* : a pointer to the address from which the write function starts copying
+- streamsize == long long : how many bytes to copy
+- this points must be a char* regardless what your writing to a file
+- Why must it ba a char*?
+	- Because this operation deals with copying bytes one at a time
+- If you arent writing char data?
+	- Youll have to use a typecast to conver your pointer
+- In C++, the char data type is defined as always 1 byte
+
+C++ TYPECASET
+- There are four different types of C++ cast
+	- static_cast
+	- reinterpret_cast
+	- const_cast
+	- dynamic_cast
+- The overall goal for any cast is the same
+	- convert one data type to another
+- There are idfferent goals for conversions, and these signify the desired coutcome.
+- If used correctly, it might look like theres little to no difference between C and C++ casts
+- Two very important question students ask:
+	- Why bother using C++ casts?
+	- C-Style casts look easier; can i just use those?
+
+YOUR CAST QUESTIONS ANSWERED
+- Some C++ casts perform compile-time checks.
+- If a cost would cause problems, the compiler reports it (before problematic code executes)
+
+WHAT ABOUT CONST_CAST AND DYNAMIC_CAST
+- const_cast allows you to cast away the const-ness of a pointer
+	- Its a bit of niche operation, one you may not use all that often
+	- In those course, we wont need it, so well just move on past it.
+- dynamic_cast is used when were working with inheritance and polymorphism
+	- We arent there yet, so well igore this until then
+	- Even then, you may not use this one much either
+
+WHAT ABOUT WRITING COMPLEX OBJECTS?
+- You should (almost) never write an instance of a class as a single operation
+- Why not?
+	- Objects can be amde of pointers, dynamic memory, maybe other complext objects
+- The memory footprint of any given obejct may not be continuous.
+
+WHAT HAPPENS IF WE TRY TO WRITE THE OBJECT
+- we get data we already dont want plus extra bytes contain unknown values.
+- In general
+	- DO NOT ATTEMPT TO WRITE COMPLEXT OBJECTS AS A SINGLE BLOCK OF MEMORY
+- Instead, use multiple write operations for the relevant member data
+
+WRITING SOME BINARY DATA WITH o/fstream
+- write a string as a 2 step process
+	1. write the length of the string
+	2. write the string data itself
+
+SIZEOF()
+- returns the size, in bytes, of the specified variable or type
+- pointers are always the same size, regardless of data type
+- That size however, could be 4, 8 maybe something else depending on the platform
+	- generally speaking: sizeof(any pointer) == sizeof(int)
+
+C++ SIZES ARE UNUSUAL
+- many common data types (such as int, short) have loosely defined sizes.
+- We might often talk of int as 4 bytes in size (and commonly it is...)
+- Its officially defined as being atleast 16 bits (2 bytes) in size - that's not very specific.
+- A short is often treaded as 2 bytes, but it's also defined as at least 2 bytes
+- This makes some code problematic, as it may not always give the same results
+
+C++ DATA TYPES WITH EXACT TYPES
+- data type : size in bits (8 bits == 1 bytes)
+- if you ever write code (for a job, commerical software, etc.) that mught have to run on more than one platform, use specific sizes.
+- In this course, using int or short will be fine - they should always be 2 or 4 bytes, respectively
+- Just be aware that there are a lot more details that go beyond material we covered in this course.
+
+SIZEOF() AND CLASSES
+- can you use sizeof() on class objects?
+- Yes! will it you give the number you really need? probably nore.
+- classes are containers, often containing pointers or using dynamic memory allocation
+- sizeof() will tell you how big the container is... not necessarily the size of the contents
+
+SIZEOF() ON STL CONTAINERS
+- sizeof() is not the same as size()...
+
+READING WITH READ()
+
+	read(char* s, std::streamsize n)
+
+- char* s : a pointer to teh address at which the read function starts copying 
+- std::streamsize n : how many bytes to copy
+
+RECAP
+- Binary file I/O in C++ uses the same i/o/fstram classes as text-based operations
+- We use the read() and write() functions
+	- not the insertion opeartion << or the extraction operation >>
+- Copying bytes (to or from a file) deals with character pointers
+	- typecasting is required for non character types
+	- C-style casts can work, but more formal C++ casts are recommended 
+- Copying bytes requires exact bytes counts - a single incorrect bytes can ruin everything.
+- The sizeof() operator can be used to determine the size of variables.
+	- Generally not used for class objects, only primitives.
