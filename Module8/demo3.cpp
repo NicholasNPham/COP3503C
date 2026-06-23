@@ -30,7 +30,7 @@ void WriteNumbersToBinaryFile()
 	}
 }
 
-int main()
+int demo3()
 {
 	ifstream inFile("data/numbers.bin", ios_base::binary);
 
@@ -40,15 +40,15 @@ int main()
 	inFile.read(reinterpret_cast<char*>(&count), sizeof(count));
 	cout << "Count: " << count << endl;
 
-	
+
 	vector<int> numbers(count);
-	
+
 	for (int i = 0; i < count; i++)
 	{
 		int number;
 		inFile.read(reinterpret_cast<char*>(&numbers[i]), sizeof(numbers[i]));
 	}
-	
+
 	// Count * 4 bytes - the numbers themselves (each a 4-byte integer)
 
 	return 0;
