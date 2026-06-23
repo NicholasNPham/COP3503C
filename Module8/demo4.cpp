@@ -60,7 +60,7 @@ int main()
 {
 	vector<Hero> heroes;
 	ReadDataFromFile(heroes);
-	
+
 	// use the data for some purpose
 
 

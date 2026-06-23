@@ -122,39 +122,22 @@ void Hero::Serialize(ofstream& outFile)
 	outFile.write(reinterpret_cast<char*>(&_max_hitpoints), sizeof(_max_hitpoints));
 	outFile.write(reinterpret_cast<char*>(&_level), sizeof(_level));
 	outFile.write(reinterpret_cast<char*>(&_experience), sizeof(_experience));
-
-
-
-
 }
 
-void Hero::Deserialized(istringstream& stream)
+void Hero::Deserialized(ifstream& inFile)
 {
-	// 4. BREAK THAT STREAM INTO TOKENS (ACCORDING TO ITS DATA)
-	string nameToken;
-	getline(stream, _name, ',');
+	unsigned int length;
+	inFile.read(reinterpret_cast<char*>(&length), sizeof(length));
 
-	string token;
-	getline(stream, token, ',');
-	_strength = stoi(token);
+	char* tempArray = new char[length];
+	inFile.read(tempArray, length);
 
+	_name = tempArray;
+	delete[] tempArray;
 
-	getline(stream, token, ',');
-	_hitpoints = stoi(token);
-
-
-	getline(stream, token, ',');
-	_max_hitpoints = stoi(token);
-
-
-	getline(stream, token, ',');
-	_level = stoi(token);
-
-
-	getline(stream, token, ',');
-	this->_experience = stoi(token);
-
-
-
-
+	inFile.read(reinterpret_cast<char*>(&_strength), sizeof(_strength));
+	inFile.read(reinterpret_cast<char*>(&_hitpoints), sizeof(_hitpoints));
+	inFile.read(reinterpret_cast<char*>(&_max_hitpoints), sizeof(_max_hitpoints));
+	inFile.read(reinterpret_cast<char*>(&_level), sizeof(_level));
+	inFile.read(reinterpret_cast<char*>(&_experience), sizeof(_experience));
 }

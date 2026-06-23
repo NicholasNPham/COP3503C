@@ -4,6 +4,7 @@
 #include <sstream>
 using std::istringstream;
 using std::ofstream;
+using std::ifstream;
 using std::string;
 
 // Class definition
@@ -53,6 +54,6 @@ public:
 	void gain_experience(int amount);
 
 	void Serialize(ofstream& outFile);
-	void Deserialized(istringstream& inFile);
+	void Deserialized(ifstream& inFile);
 
 };
