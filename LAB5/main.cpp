@@ -91,17 +91,72 @@ void loadShips(vector<Ship>& ShipsList, string filename)
 	}
 }
 
+void printShips(vector<Ship>& ShipList)
+{
+	for (unsigned int i = 0; i < ShipList.size(); i++)
+	{
+		cout << "Name: " << ShipList[i]._shipName << endl;
+		cout << "Class: " << ShipList[i]._shipClass << endl;
+		cout << "Length: " << ShipList[i]._shipLength << endl;
+		cout << "Shield capacity: " << ShipList[i]._shipShield << endl;
+		cout << "Maximum Warp: " << ShipList[i]._shipWarpSpeed << endl;
+		cout << "Armaments:" << endl;
+		unsigned int totalFirepower = 0;
+		
+		if (ShipList[i]._shipWeapons.size() > 0)
+		{
+			for (unsigned int j = 0; j < ShipList[i]._shipWeapons.size(); j++)
+			{
+				cout << ShipList[i]._shipWeapons[j]._weaponName << ", " << ShipList[i]._shipWeapons[j]._weaponPower << ", " << ShipList[i]._shipWeapons[j]._weaponPowerConsumption << endl;
+				totalFirepower += ShipList[i]._shipWeapons[j]._weaponPower;
+			}
+			cout << "Total firepower: " << totalFirepower << endl << endl;
+
+		}
+		else
+		{
+			cout << "Unarmed" << endl << endl;
+		}
+	}
+}
+
 int main()
 {
+	cout << "Which file(s) to open?\n";
+	cout << "1. friendlyships.shp" << endl;
+	cout << "2. enemyships.shp" << endl;
+	cout << "3. Both files" << endl;
+	int option;
+	cin >> option;
 
-	vector<Ship> friendlyShips;
-	loadShips(friendlyShips, "friendlyships.shp");
-	
-	for (unsigned int i = 0; i < friendlyShips.size(); i++)
+	vector<Ship> Ships;
+	if (option == 1)
 	{
-		cout << "Name: " << friendlyShips[i]._shipName << endl;
-		cout << "Class: " << friendlyShips[i]._shipClass << endl;
-		cout << "Length: " << friendlyShips[i]._shipLength << endl;
+		loadShips(Ships, "friendlyships.shp");
+	}
+	else if (option == 2)
+	{
+		loadShips(Ships, "enemyships.shp");
+	}
+	else if (option == 3)
+	{
+		loadShips(Ships, "friendlyships.shp");
+		loadShips(Ships, "enemyships.shp");
 	}
 
+	cout << "1. Print all ships" << endl;
+	cout << "2. Starship with the strongest weapon" << endl;
+	cout << "3. Strongest starship overall" << endl;
+	cout << "4. Weakest ship (ignoring unarmed)" << endl;
+	cout << "5. Unarmed ships" << endl;
+
+	cin >> option;
+
+	if (option == 1)
+	{
+		printShips(Ships);
+	}
+	
+
+	return 0;
 }
