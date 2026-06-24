@@ -120,6 +120,47 @@ void printShips(vector<Ship>& ShipList)
 	}
 }
 
+void printStrongestWeaponShip(vector<Ship>& ShipList)
+{
+	int maxPower = 0;
+	int bestShipIndex = 0;
+
+	for (unsigned int i = 0; i < ShipList.size(); i++)
+	{
+		if (ShipList[i]._shipWeapons.size() > 0)
+		{
+			for (unsigned int j = 0; j < ShipList[i]._shipWeapons.size(); j++)
+			{
+				if (maxPower < ShipList[i]._shipWeapons[j]._weaponPower)
+				{
+					maxPower = ShipList[i]._shipWeapons[j]._weaponPower;
+					bestShipIndex = i;
+				}
+			}
+		}
+	}
+
+	cout << "Name: " << ShipList[bestShipIndex]._shipName << endl;
+	cout << "Class: " << ShipList[bestShipIndex]._shipClass << endl;
+	cout << "Length: " << ShipList[bestShipIndex]._shipLength << endl;
+	cout << "Shield capacity: " << ShipList[bestShipIndex]._shipShield << endl;
+	cout << "Maximum Warp: " << ShipList[bestShipIndex]._shipWarpSpeed << endl;
+	cout << "Armaments:" << endl;
+	unsigned int totalFirepower = 0;
+
+	if (ShipList[bestShipIndex]._shipWeapons.size() > 0)
+	{
+		for (unsigned int j = 0; j < ShipList[bestShipIndex]._shipWeapons.size(); j++)
+		{
+			cout << ShipList[bestShipIndex]._shipWeapons[j]._weaponName << ", " << ShipList[bestShipIndex]._shipWeapons[j]._weaponPower << ", " << ShipList[bestShipIndex]._shipWeapons[j]._weaponPowerConsumption << endl;
+			totalFirepower += ShipList[bestShipIndex]._shipWeapons[j]._weaponPower;
+		}
+		cout << "Total firepower: " << totalFirepower << endl << endl;
+
+	}
+
+}
+
 void printUnarmedShips(vector<Ship>& ShipList)
 {
 	for (unsigned int i = 0; i < ShipList.size(); i++)
@@ -173,7 +214,14 @@ int main()
 	{
 		printShips(Ships);
 	}
-	
+	else if (option == 2)
+	{
+		printStrongestWeaponShip(Ships);
+	}
+	else if (option == 5)
+	{
+		printUnarmedShips(Ships);
+	}
 
 	return 0;
 }
