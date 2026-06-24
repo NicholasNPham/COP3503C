@@ -120,6 +120,23 @@ void printShips(vector<Ship>& ShipList)
 	}
 }
 
+void printUnarmedShips(vector<Ship>& ShipList)
+{
+	for (unsigned int i = 0; i < ShipList.size(); i++)
+	{
+		if (ShipList[i]._shipWeapons.size() == 0)
+		{
+			cout << "Name: " << ShipList[i]._shipName << endl;
+			cout << "Class: " << ShipList[i]._shipClass << endl;
+			cout << "Length: " << ShipList[i]._shipLength << endl;
+			cout << "Shield capacity: " << ShipList[i]._shipShield << endl;
+			cout << "Maximum Warp: " << ShipList[i]._shipWarpSpeed << endl;
+			cout << "Armaments:" << endl;
+			cout << "Unarmed" << endl << endl;
+		}
+	}
+}
+
 int main()
 {
 	cout << "Which file(s) to open?\n";
