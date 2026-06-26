@@ -9,7 +9,7 @@ using namespace std;
 struct Weapon
 {
 	string _weaponName;
-	int _weaponPower;
+	unsigned int _weaponPower;
 	float _weaponPowerConsumption;
 };
 
@@ -123,7 +123,11 @@ void printShips(vector<Ship>& ShipList)
 void printStrongestWeaponShip(vector<Ship>& ShipList)
 {
 	unsigned int maxPower = 0;
+<<<<<<< HEAD
 	unsigned int bestShipIndex = 0;
+=======
+	int bestShipIndex = 0;
+>>>>>>> 154f6463e63f78815772e5808266ce959de1c7b2
 
 	for (unsigned int i = 0; i < ShipList.size(); i++)
 	{
@@ -165,7 +169,11 @@ void printStrongestShip(vector<Ship>& ShipList)
 {
 
 	unsigned int firePowerMax = 0;
+<<<<<<< HEAD
 	unsigned int bestShipIndex = 0;
+=======
+	int bestShipIndex = 0;
+>>>>>>> 154f6463e63f78815772e5808266ce959de1c7b2
 
 	for (unsigned int i = 0; i < ShipList.size(); i++)
 	{
@@ -208,7 +216,11 @@ void printStrongestShip(vector<Ship>& ShipList)
 void printWeakestShip(vector<Ship>& ShipList)
 {
 	unsigned int firePowerMax = 999999;
+<<<<<<< HEAD
 	unsigned int worstShipIndex = 0;
+=======
+	int worstShipIndex = 0;
+>>>>>>> 154f6463e63f78815772e5808266ce959de1c7b2
 
 	for (unsigned int i = 0; i < ShipList.size(); i++)
 	{
