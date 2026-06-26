@@ -1,0 +1,57 @@
+CLASSES QUIZ CORRECTIONS 
+
+- .h files hold the CLASS DEFINITIONS, which includes the class structure and function prototypes inside it.
+	- .cpp files hold the FUNCTION DEFINITIONS, meaning the acutal implementated bodies of those functions.
+- functions that are ACCESSORS get or return a value without modifying the object. They typically start with Get
+- a DEFAULT CONSTRUCTOR is one that can be called with zero arguments. 
+	- This means either all parameters have default values, or there are no parameters at all.
+		- One undefaulted parameter disqualifies it.
+- A CLASS DEFINITION is the entire block starting with the "class" keyword through the closing "};" 
+	- It is written in the ".h" file.
+- A CONSTRUCTOR runs automatically the moment an object is created. 
+	- No explicit call is needed. 
+		- It can execute any code, not just initialize variables 
+
+STUDY GUIDE FOR CLASS
+
+What is encapsulation?
+- Encapsulation is the practice of bundling data and the functions that operate on that data together inside a class, while restricting direct access to that data from outside the class.
+- This is achived using access specifieres like public and private/
+- Private members can only be accessed from within the class itself, while public members can be accessed from anywhere.
+- This protects the internal state of an object from being accidentally or maliciously modified from outside code.
+
+What is the purpose of a constructor?
+- The purpose of a constructor is to ensure that when an object is created, it's member variables are initialized to known, valid values instead of garbage values.
+- The constructor runs automatically the moment the object is created, no explicit call is needed.
+- It can also execute any other setup code the class needs at the time of creation.
+
+What is the name of the pointer of the invoking object?
+
+- "this" is a pointer that points to the specific object that invoked the member function.
+- For example, if stu1.GetScore() is called, inside that function "this" points to "stu1", no the class blueprint or any other object.
+
+- "this" is the pointer itself, it holds the address of the invoking object.
+- "this->" is how you use it to access the members of that object, like "this->score" or "this->name".
+- Same thing just "->" is the dereference operator for pointers to objects.
+- You use "->" instead of "." when working through a pointer.
+
+What is the name of the function that gets called when an object falls out of scope?
+- The name of the function that gets called when an object alls out of scope is called the "DESTRUCTOR"
+- The DESTRUCTOR is a function that runs automatically when an object goes out of scope.
+- It runs for every object regardless of whether it uses heap memory but its most important job is cleaning up any memory that was allocated with "new" inside the class.
+- Without the destructor calling "delete" on that heap memory, the memory would not be freed and you would get a memory leak.
+
+What is an accessor?
+- an is a class member function that retrieves and returns a value from the object without modifying or mutating any of the object's data.
+- Accessors typically follow the naming convention of starting with "Get", for "GetScore()" or "GetName()"
+
+What is a mutator?
+- A mutator is a class member function that modifies or mutates the member variables of an object.
+- Unlike accessors, mutators changes the internal state of the object rather than just reading it.
+- They typically return void and follow the naming convention of starting with "Set", for example SetScore() or SetName()
+
+What are the public/private keywords used for?
+- PUBLIC AND PRIVATE are access specifiers used to control what code can access the member of a class.
+- Members declared as "public" can be accessed from anywhere outside the class.
+- Member declared as "private" can only be accessed from within the class itself. 
+- This ties directly into encapsulation, keeping internal data protected while exposing only what outside code needs through public member functions. 

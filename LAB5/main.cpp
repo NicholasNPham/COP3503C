@@ -122,8 +122,8 @@ void printShips(vector<Ship>& ShipList)
 
 void printStrongestWeaponShip(vector<Ship>& ShipList)
 {
-	int maxPower = 0;
-	int bestShipIndex = 0;
+	unsigned int maxPower = 0;
+	unsigned int bestShipIndex = 0;
 
 	for (unsigned int i = 0; i < ShipList.size(); i++)
 	{
@@ -164,8 +164,8 @@ void printStrongestWeaponShip(vector<Ship>& ShipList)
 void printStrongestShip(vector<Ship>& ShipList)
 {
 
-	int firePowerMax = 0;
-	int bestShipIndex = 0;
+	unsigned int firePowerMax = 0;
+	unsigned int bestShipIndex = 0;
 
 	for (unsigned int i = 0; i < ShipList.size(); i++)
 	{
@@ -207,8 +207,8 @@ void printStrongestShip(vector<Ship>& ShipList)
 
 void printWeakestShip(vector<Ship>& ShipList)
 {
-	int firePowerMax = 999999;
-	int worstShipIndex = 0;
+	unsigned int firePowerMax = 999999;
+	unsigned int worstShipIndex = 0;
 
 	for (unsigned int i = 0; i < ShipList.size(); i++)
 	{
