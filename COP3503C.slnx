@@ -3,7 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="LAB4/LAB4.vcxproj" Id="e1631ec6-cdb4-44ba-83d3-ef931cc8331b" />
-  <Project Path="LAB5/LAB5.vcxproj" Id="06f55048-66a8-4e66-a45c-afc2cda16dd4" />
-  <Project Path="Module8/Module8.vcxproj" Id="cbe10e55-189e-41ba-ac82-8585599ffd8e" />
+  <Project Path="MIDTERM/MIDTERM.vcxproj" Id="1a39beca-7408-42d5-9ed4-a807de0a7569" />
 </Solution>

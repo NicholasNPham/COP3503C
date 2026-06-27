@@ -1,0 +1,98 @@
+STUDY QUIZ REVIEW
+
+1. A copy constructor that does a member-to-member copy of all class variables, including dynamically allocated pointers, is performing what type of copy?
+- Because the answer involves a member-to-member copy of all class variables, all the dynamically allocated pointers. that is performing a shallow copy because its copying the same pointer to the same thing.
+- Member-to-member copy means it copies the pointer itself, not the data that points to it. So both objects end uip pointing to the same memory address, just like Block A. Thats a shallow copy.
+- A deep copy is what Block B does: Allocates a brand new memory and copies the actual values over so the new objects are compltely independent. 
+
+2. Given the following code:
+
+	int input;
+	cin >> input;
+	int* data = new int[input];
+	for (int i = 0; i < input; i++)
+		data[i] = i * 5;
+
+	int* copy = data;
+	delete[] data;
+
+	What is the variable copy considered after deleting data?
+- "copy" and "data" both pointed to the same memory address
+- When you called delete[] data, that memory got freed. But copy still holds that old address, it didn't get set to null, it didn't get updated, its just pointing at memory that no longer belongs to you.
+- Thats the definition of a dangling pointer.
+
+3. Which of the following blocks of code would correctly create a copy of the dynamically allocated data that originalArray is pointing to?
+
+	Quaternion* originalArray = new Quaternion[10];
+	// Assume some cool stuff happens here
+
+	Block A
+
+	Quaternion* copy = originalArray;
+
+	Block B
+
+	Quaternion* copy = new Quaternion[10];
+	for (int i = 0; i < 10; i++)
+		copy[i] = originalArray[i];
+
+	- The difference between a shallow and deep copy
+	- Block A: copies to pointer , meaning both "copy" and "originalArray" point to the same memory. You havent made a real copy at all.
+	- Block B: Allocates a brand new memory and copies each value over one by one, so youj have two completely independant arrays/
+
+MIDTERM REVIEW QUESTIONS
+
+WHAT DOES THE NEW KEYWORD DO?
+- The "new" keyword dynamically allocates memory on the heap at runtime and returns the memory address of that newly allocated memory, which is stored in a pointer.
+- For example:
+	
+	int* ptr = new int;
+
+WHAT DOES THE DELETE KEYWORD DO?
+- The "delete keyword frees up memory that was dynamically allocated on the heap with "new".
+- After calling "delete", you should always set the pointer to "nullptr" to prevent it from becoming a dangling pointer
+- For example:
+
+	delete ptr;
+	ptr = nullptr;
+
+- You cannot call "delete" on stack variables, only on memory that was allocated with "new".
+
+WHAT IS THE PURPOSE OF USING BRACKETS WITH NEW AND DELETE:
+- Brackets are used when dynamically allocating or freeing arrays on the heap.
+- For example, 
+
+	int* arr = new int[10]
+	delete[] arr;
+
+- "new" with brackets allocates enough memory for the entire array on the heap.
+- "delete" with brackets tells the compiler to free all of that allocated memory. 
+- If you use delete without brackets on the array, only the first element gets freed and the rest remains on the heap, causing a memory leak.
+
+WHAT IS A MEMORY LEAK.
+- A memory leak occurs when dynamically allocated memory on the heap is never freed with delete.
+- Overtime the program keeps consuming memory wihtout releasing it back to the system, which can cause the program to crash or slow the entire system down.
+- Memory leaks are silent, the compiler won't warn you, they only show up at runtime.
+- This is why every "new" should always have a corresponding "delete"
+
+WHAT IS A DEEP COPY COMPARED TO A SHALLOW COPY.
+- a "SHALLOW" copy copies the pointer itself, meaning both the original and the copy point to the same memory address. 
+- This is dangerous because if one object gets destroyed and calls "delete" on that memory, the other pointer becomes a dangling pointer.
+- If the second object then tries to "delete" the same memory, it causes undefined behavior and can crash the program
+
+- A "deep" copy allocates brand new memory on the heap and copies the actual data over element byt element, so the original and the copy are completely independent.
+- Destroying one has no effect on the other
+- For example
+
+	int* copy = new int[10];
+	for (int i = 0; i < 10; i++)
+	{
+		copy[i] = original[i];
+	}
+
+
+
+
+
+
+
