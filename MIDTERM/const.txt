@@ -1,0 +1,60 @@
+CONST
+
+QUIZ STUDY REVIEW
+
+1. how to create a const variable?
+- To create a constant variable, use the "const" keyword before the type declaration. For example,
+
+	const double pi = 3.14;
+
+- Once declared as const, the compiler will throw en error if anything attempts to modify that variable later in the code. 
+
+MIDTERM STUDY REVIEW
+
+1. how do you pass a constant parameter to a function.
+- To pass a constant parameter to a function, use const before the type following by "&" in the parameter list.
+- For example:
+
+	void GetName(const string& name) {
+
+	}
+
+- This passes by reference instead of making a copy, which is faster and more memory effcient for larger objects.
+- The "const" ensures the original variable cannot be modified inside the function.
+
+
+2 How to protect a class function from modifying "this".
+- To prevent a class member function from modifying the invoking object, place "const" after the paremeter list in the function signature
+
+	void GetName(const string& name) const {
+
+	}
+
+- The trailing "const" protects "this", meaning if anything insde the function attempts to modify a member variable of the object, such as "this->name = "new name" or _name = "new name", the compiler will through an error
+- Accessors should almost always have this trailing "const" since their job is to read data, not modify it. 
+
+3. What is a constant pointer?
+- A constant pointer has const placed after the type and before the variable name
+
+	int* const ptr = &x;
+
+- this protects the pointer itself from being reassigned to a different address.
+- The value it points to can still be modified
+
+- A pointer to a const has const placed before the type:
+
+	const int* ptr = &x;
+
+- This protects the value at the memory address from being modified.
+- The pointer itself can still be reassigned to point somewhere else.
+
+- You can also combine both
+
+	const int* const ptr = &x;
+
+- This locks down everything, the pointer cannot be reassigned and the value cannot be modifed. 
+
+- The rule C++ follows is that const protects whatever is immediately to the left.
+- So int* const ptr, const is immediately to the left of ptr, so the pointer is protected.
+- in const int* ptr, const is immediately to the left of int, so the value is protected
+
