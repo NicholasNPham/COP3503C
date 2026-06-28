@@ -1,0 +1,22 @@
+MIDTERM STUDY QUESTIONS
+
+WHAT IS THE PURPOSE OF A TEMPLATE:
+- The purpose of a template is to allow you to write a function or class once and reuse it across multiple data types:
+- Without templates, you would have to write a completely suparate function ro class for every data type you ewant to support, one for "int", one for "string, one for "float" and so one.
+- The compiler generates the specific version for whatever type you pass in at compile time. 
+
+WHAT IS THE PURPOSE OF "template <typename Type> IN A CLASS DECLARATION?
+- "template <typename Type>" declares "Type" as a placeholder for any data type.
+- When the template is used, the compiler swaps every instance of "type" with whatever data type is specific
+- For example:
+	
+	template <typename Type>
+	class MyClass {
+		Type Data;
+	};
+
+- "MyClass<int>" makes "Type" become "int", "MyClass<string>" makes "Type" become "string".
+- This line must be placed immediately above the class or function it applies to.
+- Tempalte code must also live entirely in the ".h" file and cannot be split between ".h" and ".cpp", otherwise you will get linker erros.
+
+
