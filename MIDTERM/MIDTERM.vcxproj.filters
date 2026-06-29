@@ -23,5 +23,6 @@
     <Text Include="classes.txt" />
     <Text Include="const.txt" />
     <Text Include="memAlloc.txt" />
+    <Text Include="template.txt" />
   </ItemGroup>
 </Project>

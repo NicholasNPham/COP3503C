@@ -1,0 +1,19 @@
+MIDTERM REVIEW TOPICS 
+
+WHERE DOES "NEW" MEMORY GET ALLOCATED?
+- Memory allocated with "new" goes on the heap.
+- Heap memory must be manually managed, you are responsible for freeing it with "delete" or it becomes a memory leak.
+
+WHERE DO VARIABLES CREATED IN FUNCTION GET ALLOCATED?
+- variables created inside functions go on the stack.
+- When the function returns, those variables immediately go out of scope and are automatically cleaned up.
+- Unlike heap memory, stack memory manages itself.
+
+WHAT IS A STACK OVERFLOW ERROR AND HOW CAN IT HAPPEN?
+- A stack overflow error ouccrs when the stack runs out of space.
+- Every time a function is called, a new stack frame is addded containing that functions's local variables.
+- Two common causes are:
+	1. Infinite or deep recursion
+		- A recursive function that never hits its base case keeps adding stack frames until athe stack runs out of space.
+	2. Very large local variables
+		- Declaring massive variables like large arrays inside functions can eat up stack space quickly, especially combined with deep function call chains. 

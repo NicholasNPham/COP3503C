@@ -145,6 +145,7 @@
     <Text Include="classes.txt" />
     <Text Include="const.txt" />
     <Text Include="memAlloc.txt" />
+    <Text Include="template.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
