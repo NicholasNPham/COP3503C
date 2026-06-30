@@ -1,0 +1,52 @@
+QUIZ REVIEW NOTES
+
+Q1 VS Q4 - COPY CONSTRUCTOR VS COPY ASSIGNMENT OPERATOR
+- "Turrent secondTurrent = mainTurrent;" is a "copy constructor" because "secondTurrent" is being created for the first time from an existing object.
+- "adjacent = transform;" is a copy assignment operator because "adjacent" already existed and is being overwritten by another object.
+- Key distinction:
+	- New object being created = copy constructor
+	- Existing object being overwritten = copy assignment operator
+
+Q5 - DEFAULT COPY ASSIGNMENT OPERATOR
+- The compiler implicitly defines one that does a member-to-member copy.
+- This is dangerous because of your class has pointers, it copies the address not the data, resulting in two objects point to the same heap memory.
+- When one gets destroyed, the other is left with a dangling pointer.
+- If it tries to delete that memory too, it causes undefined behavior and can crash the program
+
+
+Q6 - THE BIG THREE
+- If you define any of the big three, you should define all three.
+- If your class needs a destructor it means it manges heap memory, which means the default copy constructor it means it manages heap memory, which means the default copy constructor and copy assignment operator will do shallow copies causing dangling pointer problems
+
+Q8 - SHALLOW COPY
+- A member-to-member copy that includes dynamically allocated pointers is a "shallow copy", not a deep copy.
+- It copies the pointer address not the actual data
+
+Q13 - TRAILING CONST
+- The trailing const on a member function prevents it from modifying any member variables of the invoking object, protecting "this"
+
+MIDTERM REVIEW
+
+WHAT IS THE RULE OF THREE
+- If you define any one of the Big Three, you should define all three.
+- This is because needing any one of them signals taht your class is managing heap memory, which means the compiler default versions of the other two will perform shallow copies and cause dangling pointer problems 
+
+WHAT ARE THE BIG THREE
+- The big three are the copy constructor, the copy assignment operator and hte destructor
+
+WHAT IS THE PURPOSE OF THE COPY CONSTRUCTOR
+- A copyt constructor is called when a new object is being created from an existing object.
+- We define our own instead of relying on the compiler's default because the default perofrms shallow copy, coping pointer adddressing instead of actual data.
+- This causes dangling pointer problems when one object gets destroyed.
+- A custom copy constructor performs a deep copy, allocating new heap memory and coping the actual data voer so the two objects are completely independant
+
+WHAT IS THE PURPOSE OF THE COPY ASSIGNMENT OPERATOR
+- The copy assignment operator copies one existing object into another existing object. 
+- Unlike the copy constructor the target object already exists and may have heave memory allocated.
+- So the assignment operator must first "delete" the old heap memory to avoid a memory leak, then perform a deep copy of the new data.
+- The compiler default version does a shallow copy which cuases dangling pointer problems which is why we define our own. 
+
+WHAT IS THE PURPOSE OF THE DESTRUCTOR
+- When an object goes out of scope, the destructor runs automatically and cleans up any heap memory the object was managing.
+- Withotu a properly defined destructor, that heap memory never gets freed and causes a memory leak.
+- This is why the destructor is part of hte Big Three, any class managing heap memory needs one. 
