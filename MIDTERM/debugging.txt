@@ -1,0 +1,26 @@
+DEBUGGING METHODS
+
+WHAT IS PRINT DEBUGGING
+- A debugging technique where you insert print/cout statements at key points in your code to check whether a function is executing correctly, whether a certain code path is acutally being reached, or whether a variable holds the value you expect at that point
+- It's useful for quick sanity checks but has downsides: 
+	- It clutters your codebase, and every time you want to inspect something new you have to edit code and recompile, whihc gets slow and tedious for complex bugs.
+
+WHAT IS A BREAKPOINT?
+- A marker you set on a specific line of code that puases (not kills) program execution when reached during a debug run.
+- While paused, the program stays frozen in memory, so you can inspect the current values of all variables in scope at that point.
+- This give you more control that print debugging because you dont have to predict ahead of time what you want to check, you can explore the state of the program interactively once it stops. 
+
+WHAT DOES IT MEAN TO "STEP INTO" OR "STEP OUT OF" A FUNCTION?
+- STEP INTO
+	- Moves your execution pointer one level deeper, into the function being called on the current line, landing you on the first line inside that function so you can debug it line by line.
+- STEP OUT
+	- runs the rest of the current function to completion (including its return), then pops back up to the calling function, landing on the line imeediately after the call that got you there in the first place, not the call line itself, since that line has already finished executing.
+
+WHAT IS THE CALL STACK?
+- A LIFO (last in, first out) structure, simmilar to a stack of plates, that tracks active function calls in memory.
+- When a function is called, a new "stack frame" is pushed onto the stack containing taht function's local variables, parameters, and a return address (where to resume execution once the function finishes).
+- When the function returns, its frame is popped off the stack and execution resumes at the return address in the calling function.
+- This is direcrtly tied to stepping: 
+	- "step into" pushes a new fram onto the call stack, 
+	- "step out" pops the current frame off and returns you to the caller's frame/
+
