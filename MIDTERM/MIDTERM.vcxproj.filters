@@ -24,5 +24,6 @@
     <Text Include="const.txt" />
     <Text Include="memAlloc.txt" />
     <Text Include="template.txt" />
+    <Text Include="stackheap.txt" />
   </ItemGroup>
 </Project>
