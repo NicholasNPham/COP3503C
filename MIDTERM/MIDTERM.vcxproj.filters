@@ -25,5 +25,6 @@
     <Text Include="memAlloc.txt" />
     <Text Include="template.txt" />
     <Text Include="stackheap.txt" />
+    <Text Include="debugging.txt" />
   </ItemGroup>
 </Project>

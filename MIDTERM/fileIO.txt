@@ -1,0 +1,52 @@
+QUIZ REVIEW QUESTIONS
+
+WHEN READING AND WRITING FILES, WHERE IS THE DEFAULT LOCATION FROM WHICH AS PROGRAM WILL OPEN OR CREATE THESE?
+FOR EXAMPLE, IF A FILE WAS CREATED LIKE THIS:
+
+	ofstream exampleFile("test.txt");
+
+WHERE WOULD IT GET CREATED
+- when you open or create a file using just a filename with no path (e.g. ofstream exampleFile("test.txt")), the file is created in the same directory as the program's executable, not the project root and not where your source could lives.
+- In Visual Studio, that means inside the Debug or Release folde that gets generated when you build. 
+- This is why files created by your program can be hard to find if you're looking in the worng place.
+
+A FULL PATH FOR A FILE IS MADE OF WHICH OF THE FOLLOWING (ONE OF WHICH COULD TECHNICALLY HAVE NO VALUE)? MARK ALL TAHT APPLY
+- a directory
+- a name
+- an extension
+- A full file path is made up of three parts:
+	- a directory, a name, and an extension.
+
+WHICH OF THE FOLLOWING CHARACTERS COULD BE USED AS A DELIMITER? MARK ALL THAT APPLY
+- a 
+- , 
+- | 
+- % 
+- $ 
+- ? 
+- a delimiter is any character used to separate data values in a file. 
+- Technically, any character can be a delimiter, including letters, symbols, or punctuation, as long as both the program writing the file and the program reading it agree on what it is.
+- In practice you pick a character that won't appear in your actual data, otherwise the reader will misinterpret it as  separator and break you data appart incorrectly. Common examples include commas (CSV files), pipes and spaces. The letter "a" could technically be a dilimiter but would be a terrible choice since real data almost always contain the letter a
+
+WHAT ARE THE 3 FILE I/O CLASSES WE USE?
+- there are three file I/O classes in C++:
+	- ifstream (input file stream) for reading from files
+	- ofstream (output file stream) for writin files
+	- fstream (file stream) for both reading
+
+READING AND WRITING FILES
+- There are two main ways to read data from a file and one main way to write:
+	- Reading
+		- >> reads one token at a time, stopping at any whitespace (spaces, tabs, newlines).
+			- Use this when you want individual values from a file
+		- getline() reads an entire line at a time, 
+			- Use this when you need the whole line as one string
+	- Writing:
+		- << writes data to a file, works exactly like cout << except the target is your ofstream object instead of the console.
+
+WHAT DO WE USE TO SEPARATE DATA VALUES IN A FILE
+- DELIMITERS
+	- any characters can be a delimiter as long as both the writer and read agree on it.
+	- In practice picks something that wont appear in your actual data. 
+	- Common examples: commas (CSV), pipes, spaces , tabs, etc.
+
