@@ -145,6 +145,7 @@
     <Text Include="classes.txt" />
     <Text Include="const.txt" />
     <Text Include="debugging.txt" />
+    <Text Include="fileIO.txt" />
     <Text Include="memAlloc.txt" />
     <Text Include="stackheap.txt" />
     <Text Include="template.txt" />

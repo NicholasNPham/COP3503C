@@ -26,5 +26,6 @@
     <Text Include="template.txt" />
     <Text Include="stackheap.txt" />
     <Text Include="debugging.txt" />
+    <Text Include="fileIO.txt" />
   </ItemGroup>
 </Project>

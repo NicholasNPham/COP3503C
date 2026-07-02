@@ -1,0 +1,59 @@
+HOW DO ASSIGN A POINTER TO A VARIABLE
+- a pointer stores a memory address, not a value
+- To declare and assign a pointer:
+	
+	var* ptr = &var;
+
+- The * in the declaration makes it a pointe rtpye, and the & operator gets the address of the variable you want to point at
+- These are two different operators:
+	- * is for derferencing, 
+	- & is for getting an address 
+	- Mixing them up is a common mistake
+
+HOW DO YOU DEREFERENCE A POINTER
+- To derefernce a pointer, put a * in front of the pointer name
+	- *ptr
+- This gives you the value stored at the address the pointer is pointing to, not the address itself.
+- So if "ptr = &x", and "x = 5", then "*ptr" gives you 5.
+- The * in the declaration means "this is a pointer", but * used on an existing pointer means "give me what's at the address"
+- Same symbol, two different jobs depending on context. 
+
+HOW DO YOU DEREFERENCE POINTERS TO CLASS OBJECTS
+- To access members of a class object through a pointer, use the arrow operator ->.
+- For example, if ptr is a pointer to an object with a member health, you write ptr->health.
+- This is the standard way to do it
+- The verbose alternative (*ptr).health works too since the parentheses force the dereference before the member access, but -> is clearning and what you'll see in real code.
+- The two are identical under the hood.
+
+HOW DO YOU GET THE ADDRESS OF THE VARIABLE
+- use the & operator in front of a variable name to get its memory address. 
+- For example &x gives you the address of x.
+- This is the same & you use when assigning a pointer:
+
+	int* ptr = &x
+
+HOW DO YOU PASS A POINTER TO A FUNCTION
+- To pass a pointer ot a function, declare the parameter with * in the function signature:
+
+	void Foo(var* ptr)
+
+- When calling function, use & to pass the address of the variable:
+
+	Foo(&x)
+
+- Inside the function, you can then use *ptr to get the value or ptr-> member to access class members.
+
+WHAT IS A NULL POINTER
+- A null pointer is a pointer intentionally set to nullptr, meaning it points to nothing,
+- This protects against holding a garbage addressm, which looks valid to the compiler but points somewhere random in memory and causes undefined behavior or crashes if dereferenced.
+- The real benefit of null is that you can test it for 
+	- if (ptr != nullptr) { ... }
+		- this lets you safely check before using the pointer
+		- You cant do that with a garbage address because the compiler has no way to know it's invalid
+
+WHAT IS A DANGLING POINTER
+- A dangling pointer occurs when you free (delete) the memory a pointer was pointing to, but the pointer still holds that same address.
+- Unlike a null pointer, it isnt pointing to nothing, its pointing at memory that no longer belongs to use. 
+- Dereferencing it causes undefined behavior since that memory could not belong to the OS or another part of your program. leading to crashes or corrupted data.
+- The fix:
+	- Immediately set the pointer to nullptr after deleting it, converting it from a dangling pointer into a safe null pointer you can test against. 
