@@ -142,11 +142,14 @@
     <ClCompile Include="MIDTERM.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="bigThree.txt" />
     <Text Include="classes.txt" />
     <Text Include="const.txt" />
     <Text Include="debugging.txt" />
     <Text Include="fileIO.txt" />
     <Text Include="memAlloc.txt" />
+    <Text Include="pointers.txt" />
+    <Text Include="reference.txt" />
     <Text Include="stackheap.txt" />
     <Text Include="template.txt" />
   </ItemGroup>

@@ -1,0 +1,54 @@
+WHAT A PREPROCESSOR DIRECTIVE IS?
+- A preprocessor directive is any line that starts with #, such as #include or #define, or #ifndef.
+- These are instructions to the preprocessor, not the compiler.
+- The preprocessor runs first, before the compiler ever sees your  code, and handles all # lines via text replacement.
+- The most common example:
+	- #include <iostream>
+		- gets replaced by the entire contents of iostream copy-pased fdirectly into your file
+- By the time the preprocessor is done, there are no # lines left, just one clean file ready for the compiler
+
+THE THREE STAGES OF BUILDING C++ EXEUTABLE
+1. Preprocessor
+	- Runs first, before the compiler sees anything.
+	- Handles all # directives via text replacement.
+	- #include <iostream> gets replaced by the entire contents of iostream copy-pased into your file.
+	- By the times its done, no # lines remain
+2. Compiler
+	- Takes each .cpp file and translates it from human-readable C++ into machine code the CPU can actually execute.
+	- Each file gets compiled independently into its own object file (.obj or .o).
+	- At this stage the files don't know each other.
+3. Linker
+	- Takes all the separate object files, combines them, resolves references between them (like a function call in one file that's defined in another), and proces the final .exe you actually run.
+
+THE PURPOSE AND FORMAT OF A FUNCTION PROTOTYPE
+- A prototype tells the compiler a function exists before it actually sees the full definition.
+- Since C++ compiles top to bottom, calling a function before its defined causes a conmpiler error because the compiler has no idea what it is, what paremeter it takes, or what it returns
+- A prototype fixes that byt declaring the function signatures at the top of the file, 
+- Format
+	- Return type, function name, parameter, and a semilcolon, no boyd, no curly braces
+
+	int calculateTotal(int x, int y);
+
+- The full implementation cal live anywhere below it.
+- The compiler sees the prototype first and knows "this function exists and here's what it looks like, ill find the body later"
+
+HOW TO BREAK UP CODE UP ACROSS MULTIPLE FILES
+- code is split between header fiels (.h) and implementation files (.cpp)
+	- .h files hold
+		- Function prototypes and class declarations, basically anytthing the compiler needs to know about before it can use something
+	- .cpp files hold
+		- The actualy funcction and method implementations
+
+THE PURPOSE AND USE OF THE SCOPE RESOLUTION OPERATOR
+- The :: operator connects a function definition in a .cpp file back to its class declaration in the .h file.
+- Without it, the compiler treasts the function as a random standalone function with no connection to any class
+
+- Format
+
+	int Calculator::calculateTotal(int x, int y)
+	{
+	}
+
+- The pattern is always: returnType ClassName::methodName(parameters) {body}.
+- The :: is what says "this methods belongs to this class"
+
