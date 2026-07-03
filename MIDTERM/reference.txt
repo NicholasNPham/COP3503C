@@ -1,0 +1,39 @@
+HOW DO YOU DECLARE A REFERENCE?
+- To declare a reference: int& x = y.
+	- The & after the type is what makes it a reference.
+	- This is important: & has three different jobs in C++ depending on context:
+
+		- In a declaration (int& x): makes x a reference
+		- On an existing variable (&y): gets the address of y
+		- As a function parameter (voo Foo(int& x)): passed by reference
+
+- A reference must be initialized when declared, you cannot do int& x; and assign it later
+- This is because a reference has no null state, it muist always refer to something.
+- And once bound to a variable, it stays bound foreer, you cannt rebind it to a different variable later.
+- This makes references more restrictive than pointers but also safer
+
+HOW DO YOU ACCESS THE DATA THROUGH A REFERENCE?
+- To access the data a refernce refers to, just use the reference variable name directly..
+- If you have int& x = y. you just write x.
+- No *, no &, nothing extra. 
+- This is one of the key differences from pointers, where you have to explicitly derference with * to get hte value.
+- A reference behaves exactly like the original variable in terms of hwo you use it. 
+
+WHAT ARE THE ADVANTAGES OF USING A REFERENCE?
+- Two main advantages over regular pass by value
+	1. No cop is made.
+		- The function works with the original data directly, which is more efficent espeically for large objects like classes.
+	2. Change persist.
+		- Since youre working with the original variable and not a copy, any modifications made inside a function stick around after the function returns.
+		- This is passed by reference, and its the main reason youd choose a reference over passing by value. 
+
+WHAT ARE THE DISADVANTAGES OF USING A REFERENCE?
+- Two main disadvantages compared to pointers:
+	1. Must be initialized when declared.
+		- int& x; is a compiler error, the compiler wont allow it.
+		- A refernce always has to be bound to something.
+	2. Cannot be rebound.
+		- Once a refernce is set to a varaible its stuck there forever, you cannt reassign it to point at something else later. 
+- Pointers are more flexible
+	- They can be declared without intialization, set to nullptr, and reassigned freely.
+	- References trade that flexibility for cleaner snytax and simpler usage.
