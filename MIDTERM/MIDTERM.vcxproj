@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="bigThree.txt" />
+    <Text Include="building.txt" />
     <Text Include="classes.txt" />
     <Text Include="const.txt" />
     <Text Include="debugging.txt" />

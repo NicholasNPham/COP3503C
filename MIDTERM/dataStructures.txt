@@ -1,0 +1,78 @@
+QUIZ REVIEW QUESTIONS 
+
+Q10. GIVEN THE FOLLOWING CODE, WHAT WILL THE OUTPUT BE?
+
+	Queue<int> q;
+
+	for (int i = 2; i < 10; i += 2)
+		q.enqueue(i);
+
+	cout << q.dequeue();
+	cout << q.dequeue();
+
+- enqueue: 2468
+- dequeue: 24 -> answer
+
+
+Q9. GIVEN THE FOLLOWING CODE, WHAT WILL THE OUPUT BE?
+
+	Stack<int> stack;
+
+	for (int i = 0; i < 5; i ++)
+		stack.push(i);
+
+	int first = stack.pop();
+	cout << first;
+
+- push: 01234
+- pop: 4 <- Answer
+
+MIDTERM REVIEW QUESTIONS
+
+WHAT IS A STACK AND HOW DOES IT WORK?
+- STACK (DATA STRUCTURE)
+	- A stack is a data structure that operates on LIFO (last in, first out).
+	- Think of it as a stack of plates:
+		- You always add and remove from the top only, never the buttom.
+	- Two core operations
+		- push: adds an element to the top of the stack
+		- pop: removes and returns the element from the top of the stack
+	- Because both operations happen at the top, whatever was pushed last is always the first thing poped.
+	- Dont confuse push/pop with push_back/pop_back, those are vector methods, not stack methods
+
+WHAT IS A QUEUE AND HOW DOES IT WORK?
+- QUEUE (DATA STRUCTURE)
+	-A queue is a data structure taht operates on FIFO (first in, first out) order.
+	- Think of it like a line at a store:
+		- The first person in is the first person out.
+	- Two core operations
+		- enqueue: adds an element to the back of the queue
+		- dequeue: removes and returns the element from the fornt of the queue
+	- Unlike a stack where both operations happen at the end, a queue adds one end and removes from the other.
+	- Dont confuse enqueue/dequeue with push/pop, those are stack methods
+
+WHAT IS A LINKED LIST AND HOW DOES IT WORK?
+LINKED LIST (DATA STRUCTURE)
+- a linked list is a data structure made up of nodes, where each node contains two things:
+	- the data itself and a pointer to the next node
+- This is what "links" them together into a lsit.
+- Key points:
+	- A head pointer marks the start of the list and is always present, its how you find the list at all
+	- A tail pointer marks the end and is optional but common
+	- Linked lists supports adding nodes at the front, middle, or back, and removing them from any position as well
+- Unlike arrays, nodes dont have to be stored in continguous memory, each nodes just points wherever the next one lives
+
+WHAT IS TEH DIFFERENCE BETWEEN AN ARRAY AND A DYNAMIC ARRAY (AKA A VECTOR)
+- A regular array has a fixed size set at declaration time and cannot change.
+- If you declare int arr[10] and try to store an 11th element, you're writing to memory you don't ownm which can cause undefined behavior, crashes, or corrupted data at runtime, not a compiler error
+- A vector (dynamic array) grows and shrinks automatically as you add or remove elements.
+- It handles memory resizing behind the scenes so you never have to worry about running out of space or declaring the wrong size upfront.
+- This makes vectors the safer and more flexible choice when you dont know ahead of time how many elements you need. 
+
+ADDITIONAL NOTES: 
+
+- Linked List vs Array
+- The key tradeoff between linked lists and arrays comes down to insertions/deletions vs random access.
+- Linked list wins on insertions and deletions: removing from the front is just updating the head pointer to the next node, one operation. In an array, removing from the front means shifting every single element left to fill the gap, which scales badly as the array grows.
+- Array wins on random access: you can jump directly to any element in one step with an index (array[5]). In a linked list you have to start at the head and traverse node by node until you reach the one you want. That's sequential access and it's slow for large lists.
+- Also worth noting: linked lists use more memory per element than arrays because every node has to store a pointer in addition to the actual data.
