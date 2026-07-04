@@ -1,0 +1,24 @@
+MIDTERM REVIEW
+
+WHAT IS CLI
+- A text based interface where you interact with you computer by typing commands instead of clicking buttons
+- No mouse, no GUI, just typed input and text output
+
+WHAT ARE THE TWO BASIC NAVIGATION COMMANNDS
+- two basic commands everyone should know 
+	- ls: list all files and folders in your current directory.
+		- on windows the equivalent is dir, but ls works in most modern terminals
+	- cd: changes your current directory.
+		- cd foldername moves you into a folder, and cd .. move you up one level to the parent directory
+
+WHAT IS A MAKE FILE, AND WHY WOULD WE USE THEM?
+- a make file stores your build commands so you dont have to retype them every time you want to compile
+- The real advantage though is that it's smart about recompiling:
+	- it tracks which files have changed since the last build and only recompiles those
+- On a big project with 20+ files, changing one file means only that file gets recompiled and relinkedm not everything from scratch
+- This saves a massive amount of time compared to manual compilation
+
+WHAT IS THE MAKE COMMAND
+- make is the CLI command that runs your makefile.
+- You just type make in the directory where your Makefile lives and it handles the rest automatically.
+- No need to specify the filename since the CLI looks for a file name Makefile by default. 
