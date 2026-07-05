@@ -1,0 +1,99 @@
+MIDTERM REVIEW
+
+DEBUGGING
+- print debugging: 
+	- Quick and easy, but clutters code and needs to recompile every time you wnat to check something new
+- Breakpoints:
+	- Pause execution so you can inspect live variable state
+- Step Into:
+	- goes deeper into the function being called
+- Step out:
+	- Finises the current function, lands you right after the call
+- Call stack
+	- LIFO, push on call, pop on return
+
+FILE I/O
+- No path given means the file lands next to the .exe (Debug/Release folder in VS), not your source folder
+- Full path = directory + name + extension
+- Delimiter:
+	- Whatever character splits your data, as long as writer and reader agree on it
+- Three classes
+	- ifstream (read)
+	- ofstream (write)
+	- fstream (both)
+- >> read tokens by token, getline() reads full line
+
+POINTERS
+- Stores an address not a value
+- * in the declaration means "this is a pointer"
+- * on an existing pointer means dereference, give me the value
+- & gets an address
+- -> accesses members through a pointer to an object
+- Null pointer: points to nothing, safe to test with if (ptr != nullptr)
+- Dangling pointer
+	- points to freed memory, fixed by nulling it right after delete
+
+REFERENCES
+- int& x = y binds x to y
+- Must be initialized on declaration, can never be null, can never be rebound
+- Use exactly like the original variable, no * needed
+- Advantages
+	- No copy made, chages persist after the function returns
+
+BUILDING C++
+- Preprocessor strips out all # lines first, pure text replacement
+- Compiler turns each .cpp into a object file independently
+- Linker stitches object files together and resolves cross files calls into the file exe
+- :: connects a .cpp function definition back to its .h class declaration
+
+DATA STRUCTURES
+- Stack: LIFO, push/pop, top only
+- Queue: FIFO, enqueue/dequeue back in front out
+- Dont cofuse with push_back/pop_back, that's vector stuff
+- Linked list wins on insert/delete
+- Array wins on random access
+- Array is fixed size, vector resizes itself
+
+CLASSES
+- .H holds declarations, .cpp holds definitions
+- constructors runs automatically on creation, sets valid inital state
+- this points to whichever object called the function
+- Destructor runs automatically on scope exit, cleans up heap memory
+- Accessor reads (GET), mutator writes (Set, return void)
+
+CONST
+- const before a parem plus & means pss by reference without letting the function modify it
+- Trailing const on a member function locks this, can't touch member vars
+- int* const locks the pointer, value stays free
+- const int* locks the value, pointer stays free
+- const protects whatevers immediately to its left. 
+
+MEMORY ALLOCATION
+- new allocates on heap, gives you an address
+- delete frees it, always null the pointer after
+- Array needs new[]/delete[], skip the brackets and you leak everything but the first element
+- Memory leak: allocated but never freed, silent, no compiler warking
+- Shallow copy: copies the pointer (bad)
+- Deep copy: allocates new memory and copies actual values (correct)
+
+STACK VS HEAP
+- new memory lives on heap, you manage it manually
+- Function-local variables live on stack, cleaned up automatically on return
+- Stack overflow from infinite recursion or huge local variables
+
+TEMPLATES
+- write the function/class once, compiler generates the version for whatever type you pass in at compile time
+- template <typename Type> sits directly above the class/function
+- Must live entirely in the .h file or you get linker errors
+
+COMMAND LINE
+- ls lists, cd navigates
+- Make files store builds commands and only recompiles what changed
+- Make runs it, looks for a file literally name Makefile
+
+BIG THREE
+- need one of copy constructor, copy assignment, destructor, you need all three
+- New object created = copy constructor
+- Existing object overwritten = copy assignment
+- Default versions do shallow copies, which causes dangling pointers whne on object dies
+- Copy assignment deletes old memory first before copying new data in copy constructor doesnt need to since nothing is there yet. 

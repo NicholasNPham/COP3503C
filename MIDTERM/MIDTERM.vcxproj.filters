@@ -27,5 +27,11 @@
     <Text Include="stackheap.txt" />
     <Text Include="debugging.txt" />
     <Text Include="fileIO.txt" />
+    <Text Include="bigThree.txt" />
+    <Text Include="building.txt" />
+    <Text Include="pointers.txt" />
+    <Text Include="reference.txt" />
+    <Text Include="dataStructures.txt" />
+    <Text Include="command.txt" />
   </ItemGroup>
 </Project>
