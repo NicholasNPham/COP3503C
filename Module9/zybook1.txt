@@ -1,0 +1,151 @@
+9.9 CONSTRUCTOR INITIALIZER LISTS
+
+CONSTRUCTOR INITIALIZER LIST
+- is an alternative approach for initializing data member in a constructor, coming after a colon and consisting of a comma-separated list of variableName(initValue) item
+- The approach is important when a data member is a class type that must be explicitly constructed. Otherwise, that data mem ber is by default constructed
+
+CHALLENGE ACTIVITY
+
+    #include <iostream>
+    using namespace std;
+
+    class Candidate {
+       public:
+          Candidate();
+          void SetInformation(string newName, int newExperience, char newFullTime);
+          void Print() const;
+       private:
+          string name;
+          int experience;
+          char fullTime;
+    };
+
+    Students::Students() : numStudents(0) {}
+
+    Candidate::Candidate() : name("Unfilled"), experience(-100), fullTime('-') {
+    }
+
+    void Candidate::SetInformation(string newName, int newExperience, char newFullTime) {
+       name = newName;
+       experience = newExperience;
+       fullTime = newFullTime;
+    }
+
+    void Candidate::Print() const {
+       cout << "Candidate: " << name << ", Experience: " << experience << ", Full Time: " << fullTime << endl;
+    }
+
+    int main() {
+       string newName;
+       int newExperience;
+       char newFullTime;
+       Candidate myCandidate;
+  
+       myCandidate.Print();
+  
+       cin >> newName;
+       cin >> newExperience;
+       cin >> newFullTime;
+       myCandidate.SetInformation(newName, newExperience, newFullTime);
+       myCandidate.Print();
+  
+       return 0;
+    } 
+
+13.1 DERIVED CLASSES
+
+DERIVED CLASS CONCEPT
+- commonly, one class is similar to another class but with some addition or variation.
+
+INHERITANCE
+- a derived class (or subclass) is a class that is derived from another class, balled a base class (or superclass).
+- Any class may serve as a base class.
+- The derived class is said to inherit the properties of the base class, a concept called inheritance.
+- An object declared of a derived class tpye has access to all members of the derived clas as well  as the public and protected members of the base class
+- A derived classed is declared by placing a colon : after the derived clas name, following by a member access specifier like public and a base class name
+
+INHERITANCE SCENARIOES
+- various inheritance variations are possible:
+    - A derived classs can serve as a base class for another class
+    - A class can serve as a base class fro multiple derived classes
+    - A class may be derived from multiple classes
+
+CHALLENGE ACTIVITY:
+
+    #include <iostream>
+    #include <string>
+    using namespace std;
+
+    class Person {
+       public:
+          void SetName(string userName) {
+             lastName  = userName;
+          }
+
+          void SetAge(int numYears) {
+             ageYears = numYears;
+          }
+
+          // Other parts omitted
+
+          void PrintAll() {
+             cout << "Name: " << lastName;
+             cout << ", Age: "  << ageYears;
+          }
+
+       private:
+          int ageYears;
+          string lastName;
+    };
+
+    class Student: public Person {
+       public:
+          void SetID(int studentId) {
+             idNum = studentId;
+          }
+
+          int GetID() {
+             return idNum;
+          }
+
+       private:
+          int idNum;
+    };
+
+    int main() {
+       Student courseStudent;
+
+       courseStudent.SetName("Smith");
+       courseStudent.SetAge(20);
+       courseStudent.SetID(9999);
+
+       courseStudent.PrintAll();
+       cout << ", ID: " << courseStudent.GetID() << endl;
+
+       return 0;
+    }
+
+13.2 ACCESS BY MEMBERS OF DERIVED CLASSES
+
+MEMBER ACCESS
+- The members of a derived class have access to the public members of the base class, but not the private members of the base class.
+- This is logical - Allowing access to all private members of a class merely by creating a derived class would circumbent the idea of private members.
+- Thus, adding the following member functions to the Resutrant class yields a compiler error
+
+- A derived class inherits from teh base class.
+- The base class does not "inherit" from the drived class
+
+PROTECTED MEMBER ACCESS
+- Recall the members of a class may have their access specific as public or private
+- A third access specifier is protected, which provides access to derived classes but not by anyone else.
+
+PROTECTED ACCESS MODIFIER AND ENCAPSULATION
+- Encapsulation is agoal of object-oriented programming
+- Encapsulation is restricting access to data from outside a class
+- The proteced access modifer loosens encapsulation since data may be directly accessed by the base class and any derived classes 
+
+CLASS DEFINITION
+- public inheritance: public stays public, protected stays protected
+- protected inheritance: public AND protected both become protected
+- Private inheritance: public AND protected both become private
+
