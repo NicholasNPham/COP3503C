@@ -19,4 +19,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="zybook1.txt" />
+    <Text Include="zybook2.txt" />
+    <Text Include="zybooks3.txt" />
+  </ItemGroup>
 </Project>

@@ -149,3 +149,7 @@ CLASS DEFINITION
 - protected inheritance: public AND protected both become protected
 - Private inheritance: public AND protected both become private
 
+CALLING A BASE CLASS FUNCTION
+- an overriding function can call the overridden function by prepending the base class name
+- A common error is to leave off the prepended base class name when canting to call the base class's function.
+
