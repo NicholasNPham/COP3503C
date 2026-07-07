@@ -1,0 +1,178 @@
+INHERITANCE
+
+INHERITANCE: WHAT IS IT?
+- One of hte three pillars of object-oriented programming
+	- Encasulation: Group data/functions together as objects
+	- Inheritance: Creating new classes that reuse (inherit) functionality from existing classes
+	- Polymorphism: Use the same interface (i.e. functions) to access different types of objects
+		- Polymorphism uses inheritance, so well cover it another time
+
+INHERITANCE EXAMPLE
+- What if you want to create a class for a Car and an Airplane
+- Thing you might do with each of those
+	- Refuel()
+	- AddPassenger()
+	- LoadCargo()
+- An airplane may do something else like deploy landing gear (which a Car doesnt have)
+- A car my (hypothetically) do somehting like bounce up and down on a custom suspension system
+
+DUPLICATE FUNCTIONALITY == DUPLICATE CODE
+- What if you wnat to change these functions?
+- Duplicate code means changing multiple locations
+- Its all but guaranteed you will forget to update one of those locations
+
+INHERITANCE TO THE RESCUE!
+
+INHERITING LETS US REUSE FUNCTIONALITY
+
+INHERITANCE CLASS TERMINIOLOGY
+- Two classes are required for inheritance
+- BASE class:
+	- The original, with member variables and/or functions to pass one
+- DERIVED class:
+	- iNHERITS THE MEMBER AND FUNCTIONS
+- these are sometimes referred to as PARENT (base) class and CHILD (derived) class
+- You can derived a class from anything, even a class which itself is derived from another
+	A class can be both derived and base (just like a person could be both a child and a parent)
+
+INHERITANCE SYNTAX
+
+	class DerivedClass : public BaseClass
+	{
+		// Whatever class code you want in here
+	};
+
+- public inheritance is the most common
+	- There is also protected and private inheritance, more on those later 
+
+WHAT DOES "INHERITING" ACTUALLY DO?
+- a derived class "gets" all of the data and functionality from the base class
+- All public member variables and functions
+- All protected member variables and functions (we'll) look at the protected more later)
+- Private data stays private = Technically the derived class has them... It just cant access them 
+	- You need public/protected accessiblity in the base class for that
+- The new derived class can use all of the inherited functionality - it "is-a" base class
+
+THE "IS-A" RELATIONSHIP
+- A derived class commonly has a "Is-A" relationship with the base class
+	- A car IS-A Vehicle (car has Vehicle functionality and more)
+	- A Hero IS-A Person (Hero has a Person functionality and more)
+- If the statement <derivedClass> IS-A <BaseClass> doesn't sound right, inheritance may not be a good idea. 
+
+ACCESSIBILITY KEYWORD REVISITED
+- public
+	- any code inside a class or outside the class can access this
+- private
+	- only the defining class can access this
+	- The "hands off, this is mine" keyword
+- protectecd
+	- A base class and any classes derived from it can access this
+	- The "members only" keyword
+- Applicable to data/functions in a class, and to indicate the type of inheritance
+
+HIERARCHIES CAN GET COMPLICATED, REAL FAST!
+- Base class for components of a user inteface system
+- Essentail data like position demensions and component ID, etc
+
+	UIBase
+	- UIContainers
+		- UIPanel
+		-UILayout
+			- HorizontalLayout
+			- VeritcalLayout
+			- GridLayout
+	- UIControl
+		- button
+		- Checkbox
+		- ScrollBar
+	- UIWindow
+		- Dockable Window
+		- DialogBox
+			- Message
+			- YesNo
+			- ProgressBar
+
+CONTAINMENT
+- Object storing objects
+- Containment is used regularly in all languages
+- Some languages (like C++) support other concepts that model containment in slightly different ways
+
+PRIVATE INHERITANCE
+- Models a "has-A" relationship
+
+	// Private inheritance == Has-A relationship
+	class Person : private Car
+	{
+		car _otherCar; // containment == "Has-A" relationship
+	public:
+		void Foo()
+		{
+			cout << "car's make: " ...
+			cout << "car;s make: " ...
+		}
+	};
+
+	car& Person::GetCar()
+	{
+		return _otherCar; // Okay to return using containment
+	}
+
+PROTECTED INHERITANCE
+- a rarely_used oddity
+- Private inherited members stay private as always 
+- Protected inherited members stay protected
+- The main feature: Public inherited members become protected in the derived class
+	- Public members turn into "club members only" access
+- If B inherits A, on derived classes know about this inheritance
+	- Any code outside the "club" doesnt know B derives from A.
+	- Why would this be useful? That's a good questions
+
+INHERITANCE AND OBJECT REATIONS
+- When you instantiate a derived class, it must be constructed (this isnt new!)
+- The base class also must be constructed - objects are instantiated in parts
+
+CONSTRUCTOR INITIALIZIER LIST
+-  A way to call the constructor of the base class ( and pass data if necessary )
+
+INITIALIZER LIST WITHOUT INHERITANCE
+- an alternative, more efficient way to initialize member variables
+	- Perofrmance gains may be minimal for small data
+- Also allows for setting per-object const variables
+
+	class Example
+	{
+		int _x, _y;
+		const int _constValue; // Typically this is initialized here
+	public:
+		Example(int param1, int param2, int param3);
+	};
+	
+	Example::Example(int param1, int param2, int constParam) : _x(param1), _y(param2), _constValue(constParam)
+	{
+		// x = param1; Slower alternative
+		// y = param2; Slower alternative
+		// constValue = param3; Compiler error: can’t change a const value
+	}
+
+MULTIPLE INHERITANCE
+- its possible to derived from multiple base classes
+- Not all languages support this concept - for some, only a single base class is allowed.
+
+	class A {/*Insert cool stuff here*/};
+	class B {/*Insert cool stuff here*/};
+	class C {/*Insert cool stuff here*/};
+	class OmniClass : public A, public B, public C
+	{
+	public:
+		OmniClass(int x, float y, short z);
+	};
+
+	OmniClass::OmniClass(int x, float y, short z) : A(x), C(y, z) // B() is default for this example
+	{
+	}
+
+THE DIAMOND PROBLEM
+
+SOLUTION: VIRTUAL INHERITANCE
+- with virtual inheritance, the "in-between" classes would add the virtual keyword to the inheritance
+- virtual tells the compiler "don't inherit stuff more than once
