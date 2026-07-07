@@ -1,0 +1,22 @@
+13.5 ABSTRACT CLASSES: INTRODUCTION (GENERIC)
+
+ABSTRACT CLASSES
+- Object-Oriented Programming (OOP) is a powerful programming paradigm, consisting of several features.
+- Three key features include
+	- Classes: a Class encapsulates data and behavior to create objects
+	- Inheritance: inheritance allows one class (a subclass) to be based on another class (a base class or superclass). 
+		- Ex: A shape class may encapsulate data and behavior for geometric shapes, like setting/getting the Shape's name and color, while a circle class may be a subclass of a Shape, with additional features like setting.getitng the center point and radious
+	- Abstract Classes: An abstract class is a class that guides the design of subclasses but cannot itself be instantiated as an object
+
+13.6 ABSTRACT CLASSES
+
+ABSTRACT AND CONCRETE CLASSES
+- a pure virtual function is a virtual function that is not implmented in teh base class, thus all derived classes must override the function.
+- A pure virtual function is declared with the "virtual" keyword and is assigned with 0
+- An abstract class is a class that cannot be instantiated as an object, but is the superclass for a subclass and specifies how the subclass must be implmented.
+- Any class with one or more pure virtual function is abstract
+- A concrete class is a class that is not abstract, and hence can be instantiated
+
+13.7 IS-A VERSUS HAS-A RELATIONSHIPS
+- The concept of inheritance is commonly confused with the idea of compositions.
+- Compositions is the idea that one object may be made up of other options
