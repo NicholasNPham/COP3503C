@@ -1,0 +1,299 @@
+POLYMORPHISM
+
+POLYMORPHISM
+- the third pillar of object-oriented programming - it provides access to different types througgh a single interface
+- We often write programs to branch (change behavior) based on data values.
+
+	if (someVariable >= 10 || someBoolean == false)
+		do something
+	else
+		do something else
+
+- We want program to branch based on the dta type of an object. 
+
+	if (someObject is Car)
+		// Do something Car related
+	else if (someObject is Airplane)
+		// Do something Airplane related
+	else if (someObject is FlyingCar)
+		// Do something FlyingCar related
+	// etc for all data types
+
+MULTIPLE SIMILAR DATA TYPES CAN BE A PAIN
+
+	class Car
+	{ /*insert code here*/ };
+
+	class Limousine : public Car {};
+	class Convertible : public Car {};
+	class SUV : public Car {};
+	class Pickup : public Car {}
+
+- if we needed to store a collction of these in a program?
+
+	class Garage
+	{
+		// Everyday storage, nothing new here
+		vector<Limousine> _limos;
+		vector<Convertible> _convertibles;
+		vector<SUV> _utilityVehicles;
+		vector<Pickup> _pickups;
+	}
+
+	// Calculate the total value of all stored vehicles
+	double Garage::GetInventoryValue()
+	{
+		double total = 0;
+		for (unsigned int i = 0; i < _limos.size(); i++)
+			total += _limos[i].GetValue();
+		
+		for (unsigned int i = 0; i < _convertibles.size(); i++)
+			total += _convertibles[i].GetValue();
+		
+		for (unsigned int i = 0; i < _utilityVehicles.size(); i++)
+			total += _utilityVehicles[i].GetValue();
+		
+		for (unsigned int i = 0; i < _pickups.size(); i++)
+			total += _pickups[i].GetValue();
+		
+		return total;
+	}
+
+- What if we 
+	- want to store motorcycles
+	- What to store motercycles?
+- A lot of code may have to change.
+- Poloympphism can bypass all of this
+
+A SIMIPLIFED VERSION
+
+	double Garage::GetInventoryValue()
+	{
+		double total = 0;
+		
+		// One container to rule them all…
+		for (unsigned int i = 0; i < ALL_OUR_VEHICLES.size(); i++)
+			total += ALL_OUR_VEHICLES[i].GetValue();
+		
+		return total;
+	}
+
+- For polymophism to work we need two things
+	- Base class pointers
+	- Virtual functions
+
+WHAT CAN BASE CLASS POINTERS POINT TO?
+- base class pointers can point to an instance of any class derived from it
+- Converting a derived class pointer to a base class is called upcasting
+- Upcasting "just works" and happens automatically
+
+UPCASTING WORKS WITH OBJECTS TOO
+
+	class Person
+	{
+		string name;
+		int age;
+	};
+
+	class Student : public Person
+	{
+		string studentID;
+	};
+
+	Person person;
+	Student student;
+	person = student; // Upcasting
+
+- because Student IS A person, it can be implicitly convered to a Person
+- Derived to base -> copy only base data
+- Were assigning data to a person object, any data beyond a person is just ignored.
+- upcasting works implicity, because student IS A person
+- Downcassting doesn't work Person is NOT A student and is missing data
+- Downcasting can work with some additional code but is something you should aviod
+- Based to derived -> no derived data!
+
+UPCASTING WITH DYNAMIC MEMORY
+
+	class Car {};
+	class Limousine : public Car {};
+	class Convertible : public Car {};
+	class SUV : public Car {};
+	class Pickup : public Car {};
+
+	vector<Car*> allOurCars; // Each pointer can point to ANY class derived from Car
+	allOurCars.push_back(new Limousine);
+	allOurCars.push_back(new SUV);
+	allOurCars.push_back(new Car);
+	allOurCars.push_back(new Convertible);
+	allOurCars.push_back(new Pickup);
+	// Remember: At SOME point, you have to deallocate these with delete!
+
+- One container stores 5 pointers to objects that are "car like" or AT LEAST a car
+- One the surface, we dont know exactly what types of objects we have pointers to
+- With polymorphism, we dont need to know
+
+UPCASTING WITH DYNAMIC MEMORY
+
+	class Vehicle {};
+	class GroundVehicle : public Vehicle{};
+	class Car : public GroundVehicle {};
+	class HeavyTruck : public GroundVehicle {};
+	class TankerTruck : public HeavyTruck {};
+	class DumpTruck : public HeavyTruck {};
+	class Boat : public Vehicle {};
+	class Tugboat : public Boat {};
+
+
+	class IndustrialShop
+	{
+		vector<HeavyTruck*> _trucks;
+		Car _companyCar;
+	};
+
+	class Marina
+	{
+		vector<Boat*> _customerBoats;
+		vector<Tugboat*> _workBoats;
+	};
+
+- Can store (pointers to) HeavyTrucks, TankerTrucks, DumpTrucks but no cars (except the company car!)
+- Mariana can store any type of Boat or tugboat, but no Cars, Trucks, etc
+- Upcasting and storing base_class pointers gives us lots of flexibility
+
+BACK TO THE GARAGE
+
+	class Garage
+	{
+		vector<Car*> _cars;
+		public:
+		void AddVehicle(Car* newCar);
+		double GetInventoryValue();
+	};
+
+	void Garage::AddVehicle(Car* newCar)
+	{
+		_cars.push_back(newCar);
+	}
+
+	double Garage::GetInventoryValue()
+	{
+		double total = 0;
+		for (unsigned int i = 0; i < _cars.size(); i++)
+		total += _cars[i]->GetValue();
+		return total;
+	}
+
+- upcasting lets us store Cars, or any other (or future) class derived from Car!
+- For polymorphism to work, we need two things
+	1. Base Class Pointers (finished)
+	2. Virtual functions
+
+VIRTUAL FUNCTIONS
+- Inheritance lets us reuse code (hooray!)
+- Sometimes we want to override some base class functionality
+- For example:
+	- A car's value is based on milage (a GetValue() function).
+	- A pickup's value is baed on mileage plus how big of a carrying bed it has
+	- Each class does the same thing - they just do things differently
+- A virtual function in the base class enables this behavior
+
+VIRTUAL FUNCTIONS == DIFFERENT BEHAVIORS
+- When a virtual function is called from a base class pointer
+	- your program will gall the version of GetValue() that matches the type of the object taht the pointer points to (i.e. the pointee)
+	
+VIRTUAL FUNCTIONS
+- non_virtual functions are "resolved" at compile time
+	- The compiler checks the type of the invoking object and calls the appropriate version of the function
+- Virtual functions are resolved at run-time
+	- The compiler adds additional data to a class with virtual functions (generally a pointer called a virtual pointer or v-pointer)
+	- This pointer points to somethign in memory called a virtual table, or v-table that tracks the varities of vertual functions
+	- When a function is called, the v-pointer is used, and data from the v-table is retrieved (i.e. the correct function is found)
+- All of this happens for you
+
+VIRTUAL ALTERNATIVES
+
+vector<Car*> vehicles;
+/* Assume initialization with various Car/Pickup/etc pointers */
+double total = 0;
+for (unsigned int i = 0; i < vehicles.size(); i++)
+{
+	// dynamic_cast<> attempts to DOWNCAST the pointer
+	// If the result is nullptr, our original pointer (vehicles[i])
+	// is NOT pointing to that type of object
+	Car* car = dynamic_cast<Car*>(vehicles[i]);
+	Pickup* pickup = dynamic_cast<Pickup*>(vehicles[i]);
+	SUV* suv = dynamic_cast<SUV*>(vehicles[i]);
+	Limousine* limo = dynamic_cast<Limousine*>(vehicles[i]);
+
+	if (car != nullptr) // It’s a Car! Call Car::GetValue()
+		total += car->GetValue();
+	else if (pickup != nullptr) // It’s a Pickup, call Pickup::GetValue()
+		total += pickup->GetValue();
+	else if (suv != nullptr) // Use the SUV version
+		total += suv->GetValue();
+	else if (limo != nullptr) // Use the Limousine version
+		total += limo->GetValue();
+}
+
+VIRTUAL AND NON-VIRTUAL FUNCTIONS CAN CO-EXIST
+
+	class Character
+	{
+		int _maxHitpoints;
+		int _hitpoints;
+		string _name;
+	public:
+		Character(string name = "Bob", int hp = 10);
+	
+		// Non-virtual functions: Derived classes use these in the same way
+		const string& GetName();
+		int GetHP();
+		int GetMaximumHP();
+		
+		// Future classes CAN override some or any of these, IF you want/need to
+		virtual bool IsAlive();
+		virtual void TakeDamage(int amount);
+		virtual void Heal(int amount);
+		virtual int Attack(Character* target);
+	}
+
+- Things like this like simple accessors may not be to be overridden
+- If you want to, that is ... just because a function is marked virtual doesn't mean it must be overridden
+
+VIRTUAL DESTRUCTORS
+- when using inheritance/polymorphism, you should create virtual destructors in the base class
+- Wirtual lets your program determine which function to call, based on data type.
+- Destructors are functions, and follow the saem rules when ti comes to data types and virtual (or non-virtual functions.
+
+	Character* hero = new Wizard;
+	hero->TakeDamage(5); // Call the Wizard version of the function
+
+	delete hero; // Which version of the destructor to call?
+	//hero->~Character(); // delete invokes the (Character) destructor
+
+- The wiszrd destructor is never called, which will likely causes problems
+- Simple solution
+	- Virtual destrctor in the character class
+
+ABSTRACT BASE CLASSES (ABCs)
+- sometime you want to inherit a base class...
+- ... but you never want to use the base class buy itself (i.e. never instantiate the base classs)
+
+CREATING ABSTRACT BASE CLASSES
+- to create an abstract class, we need to create at least one pure virtual function (in C++ - other languages may differ).
+
+- Pure virtual functions in a class:
+	- Mark a class as an Abstract Base Class.
+	- Do not have a definition (i.e., no body)—they don’t DO anything.
+	- All classes that derive from this class must provide a definition (or else they will be ABCs as well).
+	- They provide an interface for future classes—derived classes will have this behavior…
+	- …but the details of the behavior are not specified.
+	- They are a promise of future functionality
+
+PURE VIRTUAL DESTRUCTORS
+- need an abstract base class, but all of your functions have definitions?
+- Destructors cannot, ever, be left without a definition - C++ demands it.
+- Pure virtual destructors will have a vody, as an exception to the rule. 
+
+
+
