@@ -28,16 +28,16 @@ public:
 
 	Hero(string name = "Nick", int strength = 10, int hitpoints = 25);
 
-	void PrintInfo();
+	void PrintInfo(bool verbose) const;
 
 	/* =============== ACCESSORS ===============*/
-	string get_name();
-	int get_strength();
-	int get_hitpoints();
-	int get_level();
-	int get_experience();
+	string get_name() const;
+	int get_strength() const;
+	int get_hitpoints() const;
+	int get_level() const;
+	int get_experience() const;
 
-	int get_power_level();
+	int get_power_level() const;
 
 	/* =============== MUTATORS ===============*/
 
@@ -50,7 +50,7 @@ public:
 	void set_level(int value);
 	void set_experience(int value);
 
-	void take_damage(int amount);
+	virtual void take_damage(int amount);
 	void get_healing(int amount);
 
 	void gain_experience(int amount);
@@ -58,4 +58,5 @@ public:
 	void Serialize(ofstream& outFile);
 	void Deserialized(ifstream& inFile);
 
+	virtual ~Hero();
 };

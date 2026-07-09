@@ -21,42 +21,49 @@ Hero::Hero(string name, int strength, int hitpoints)
 
 }
 
-void Hero::PrintInfo()
-{
-	cout << "Name: " << _name << endl;
-	cout << "Strength: " << _strength << endl;
-	cout << "Hitpoints: " << _hitpoints << " / " << _max_hitpoints << endl;
-	cout << "Level: " << _level << endl;
-	cout << "Experience: " << _experience << " / 100" << endl;
-	cout << "Power Level: " << get_power_level() << endl;
+void Hero::PrintInfo(bool verbose) const {
+	if (verbose)
+	{
+		cout << "Name: " << _name << endl;
+		cout << "Strength: " << _strength << endl;
+		cout << "Hitpoints: " << _hitpoints << " / " << _max_hitpoints << endl;
+		cout << "Level: " << _level << endl;
+		cout << "Experience: " << _experience << " / 100" << endl;
+		cout << "Power Level: " << get_power_level() << endl;
+	}
+	else
+	{
+		cout << "Name: " << _name << endl;
+		cout << "Hitpoints: " << _hitpoints << " / " << _max_hitpoints << endl;
+	}
 }
 
-string Hero::get_name()
+string Hero::get_name()  const
 {
 	return _name;
 }
 
-int Hero::get_strength()
+int Hero::get_strength() const
 {
 	return _strength;
 }
 
-int Hero::get_hitpoints()
+int Hero::get_hitpoints() const
 {
 	return _hitpoints;
 }
 
-int Hero::get_level()
+int Hero::get_level() const
 {
 	return _hitpoints;
 }
 
-int Hero::get_experience()
+int Hero::get_experience() const
 {
 	return _experience;
 }
 
-int Hero::get_power_level()
+int Hero::get_power_level() const
 {
 	return _level * 5 + _strength;
 }
@@ -141,4 +148,9 @@ void Hero::Deserialized(ifstream& inFile)
 	inFile.read(reinterpret_cast<char*>(&_max_hitpoints), sizeof(_max_hitpoints));
 	inFile.read(reinterpret_cast<char*>(&_level), sizeof(_level));
 	inFile.read(reinterpret_cast<char*>(&_experience), sizeof(_experience));
+}
+
+Hero::~Hero()
+{
+
 }
