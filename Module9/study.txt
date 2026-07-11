@@ -1,0 +1,250 @@
+QUIZ 9 REVIEW
+
+WHAT IS INHERITANCE, AND WHY DO WE USE IT?
+- WHAT IS INHERITANCE?
+	- A mechanism in OOP (object oriented programming) where the class (the derived/subclass) is built from an existing class (the base/parent), inheriting its members (data and functions.
+	- The derived class can use the base class's members as-is, override them, or add new ones on top.
+	- It creates a hierarchical relationship between classes rather than each class being writtin in isolation.
+- WHY DO WE USE IT?
+	- Code reuse: don't rewrite the same members over and over for classes that share common behavior
+	- Models real-world relationships: lets your code structure reflect logical relationship like "a Car IS-A Vehicle"
+	- Extensibility: you can build more specific classes on top of general ones without touching the general class's code.
+	- Sets up polymoprhism later on, since related classes can be treated thorugh a common base type. 
+
+WHAT NAMES DO WE USE FOR THE TWO CLASSES INVOLVED IN INHERITANCE?
+- base class / parent class
+	- The existing class bing inherited from
+- derived class / subclass
+	- the new class that inherits from the base class
+- Both sets of terms are used interchangeably in C++ and in the zyBook
+
+WHAT TYPE OF RELATIONSHIP DOES PUBLIC INHERITANCE MODEL. 
+- public inheritance models an IS-A relationship (e.g. Car IS-A Vehicle)
+- IS-A measns substitutability:
+	- A derived class object can be used anywhere a base class object is expected, because it has all the base class's object is expected, because it has all the base class's public/protected members plus its own additions.
+- Example: 
+	- A function takes a Vehicle& parameter can accept a Car object since a Car satisfies "being a Vehicle".
+- A base class pointer/reference can point to a derived class object (this is the foundation for polymorphism, seen later with upcasting).
+- The relationship is one-directional:
+	- A Car IS-A Vehicle, but a Wehicle is not necessarily a Car (not every vehicle is a car)
+	
+WHAT TYPE OF RELATIONSHIP DOES PRIVATE INHERITANCE MODEL
+- Private inheritance models a HAS-A relationship (composition-like)
+- Example:
+	- car privately inherits from Engine, so "Car has an Engine"
+- Syntax class Car : Private Engine {...};
+- Effect on access
+	- Car's own member function can still use Engine's member internally
+	- Outside code (main, other classes) cannot access engine's members though a Car object at all.
+- No substitutability
+	- Unlike public inheritance, you cannot pass a Car object ot a funtion expecting and Engine&, since Engine's interface isn't exposed outside Car
+- No IS-A relationship and no polymorphism here, since Car doesn't "become" an Engine to the outside world.
+	- It just uses Engine as an internal implemntation detail
+- Contract with public inheritance (IS-A)
+	- private inheritance hides the base class entirely from outside users of the derived class.
+
+WHAT CONCEPT IS SIMILAR TO PRIVATE INHERITANCE?
+- COMPOSITION (concept similar to private inheritance)
+	- Coposition (or "object composition") is where one class contains an objects of another class as a member variables, rather than inheriting from it
+	- Example 
+		
+		class Car {
+		private:
+			Enine _engine; // Car HAS-A Engine Via Composition
+		};
+
+	- Like private inheritance, composition models a HAS-A relationship
+		- Car doesn't become an Engine, it just contains one and uses its functionality internally.
+	- Composition is generally preferred over private inheritance in real C++ code, because it;s simplier and more explicit, you don't need inheritance mechanics (contructor chaining, virtual functions, ase class pointers, etc) for something that just "this object contains that object.
+	- Related term:
+		- AGGREGATION: a looser form of HAS-A where the contained object can exist independently of the container (e.g. Car has a Driver, but the driver exists whether or not they;re in that car)
+			- Composition usually implies the contained object's lifetime is tied to the container (the Engine is created and destroyed along with the car)
+
+- PRIVATE INHERITANCE VS COMPOSITION, WHEN TO USE EACH
+	- Both gives a HAS-A relationship with the same external access restriction (outside code can't touch the containing/inherited object's members through the derived/container class).
+	- omposition still allows the containing class's own member functions to freely use the contained object's public members (e.g. _engine.someMethod() works fine inside Car)
+	- Reasons to choose private inheritance over composition.
+		1. VIRTUAL FUNCTION OVERRIDING:
+			- If Engine has a virtua lfunction and Car needs to override it's behavior, this requires actual inheritance.
+			- Composition can't do this since Car and Engin remains separate unrelated objects.
+		2. PROTECTED MEMBERS ACCESS
+			- private inheritance gives Car access to Engine's protected members, not just public ones.
+			- Composition only exposes Enine's public interface.
+		3. Needed other protected-lebels features from the base (e..g. protected constructors)
+	- General rule of thumb
+		- Prefer composition unless you specifically need virtual override capability or protected-level access, in which cases private inheritance is necessary. 
+
+WHAT IS PROTECTED ACCESS, AND HOW DOES IT DIFFER FROM PRIVAT OR PUBLIC ACCESS? (IGNORE PROTECTED INHERITANCE 
+- PUBLIC: accessible from anywhere, inside the class, derived classes, and outside code.
+- PRIVATE: accessible only within the class itself, not even derived classes can access it directly.
+- PROTECTED: accessible within the class itself AND by derived class, but NOT by outside code. 
+- protected sits in the middle: more open than private (derived classes get access), more restricted than public (outside code still can't touch it).
+- Important distinction:
+	- This is about member access specifiers, separate from inheritance type (public/public inheritance), which controls how base class members' access levels change when inherited. DONT CONFLATE THE TWO
+
+- QUICK COMPARISON
+
+	---------------------------------------------------------------------------------------
+	ACCESS SPECIFER | INSIDE SAME CLASS? | INSIDE CHILD CLASS? | OUTSIDE CLASS (MAIN ETC) |
+	public            yes                  yes                   yes
+	protected         yes                  yes                   no
+	private           yes                  no                    no
+	---------------------------------------------------------------------------------------
+
+WHAT IS A CONSTRUCTOR INITALIZER LIST, AND WHAT ARE ITS USES?
+- syntax placed after the constructor's parameter list, before the body, starting with a colon:
+
+	ClassName(...) : member1(value1), member2(value2) {...}
+
+- Use for two main purposes
+	1. Initializing member variables directly (instead of assigning them in the constructor body)
+		- Assigning in the body (_make = make;):
+			- The member is first default-constructed with an empty/default value, then the assignment opeartor overwrites it. Two steps
+		- Initializing in the list (: _make(make):
+			- The member is constructed directly with the given value using its constructor.
+			- One step, no wasted default construction
+		- For simple types (int, string, float) the practical difference is small, but conceptually initalization = setting a value as the object is created, assignment = setting a value after its already exists
+		- This distinction becomes mandatory (not just stylistic) for const member variables and reference member variables, since those can't be reassigned after creatio, they must be set in the initalizer list.
+	2. Calling a speicifc base class constructor when the derived class object is being built, this is the key use for inheritance
+
+- Example from real code:
+
+	TriangularPyramid::TriangularPyramid(float pyramidHeight, float triBase, float triHeight)
+		: Triangle(triBase, triHeight)
+	{
+		_pyramidHeight = pyramidHeight;
+	}
+
+- Why this matters for inheritance:
+	- a deived class object contains a base class "layer" inside it.
+	- That base layer must be constructed before the derived class's own member are set up.
+	- The initializer list controsl exactly which base class construcor runs and what arguments it gets.
+- If you omit the base class constructor from the initializer list:
+	- If the base class has defualt consturctor, C++ silently calls it (base members get default values, not the ones you may have wanted).
+	- If the base class has no default constructor ( only parameterized ones), this is a compiler error, since C++ has no way to build the base part.
+- Order of operations:
+	- Base class constructor (via initializer list) runs first, then the derived class's own constructor body executes.
+
+
+A LIST OF ALL CLASSES AND THE CLASS(ES) THEY INHERIT FROM IS SOMETIMES REFEREED TO AS WHAT?
+- INHERITANCE HIEARCHY
+	- A list/diagram of all classes in which class(es) they inherit from
+	- Structured top-down:
+		- The base class sits at the top (most general), and the derived classes get more specific as you move down the levels
+	- Example
+
+			vehicle
+			   |
+			  Car
+		   /       \
+       SportsCar  Sedan
+	
+	- Each level inhits from the one above it, similar to a family tree or org chart structure
+
+WHAT IS IT CALLED WHEN A CLASS INHERITS FROM MORE THAN ONE OTHER CLASS?
+- MULTUPLE INHERITANCE
+	- When a class inherits from more than one base class at the same time.
+	- Example
+
+		Class FlyingCar : public Car, public Airplane { ... };
+
+	- This is what I mistakely described earlier when I asked about the constructor initializer list, worth remember the distinction since they're separate questions on the quiz
+
+POLYMORPHISM
+
+WHAT IS POLYMORPISM
+- Means "many forms."
+	- The same function call behaves differently depending on the actual runtime type of the object it's called on
+- Works through base class pointers/reference pointing to derived class objects 
+- Example:
+	
+	Vehicle* v1 = new Sedan();
+	vehicle* v2 = newTruck();
+
+	v1->display(); // calls Sedan's version (if virtual)
+	v2->display(); // calls Truck's version (if virtual)
+
+- Why its useful
+	- Lets you write general-purpose code that works with ANY derived types though a common base interface, without needing to know the exact deried type in advance
+
+- Example:
+
+	void inspectVehicle(Vehicle* v)
+	{
+		v->display(); // works correctly for Sedan, Truck, SportsCar, etc, IF display() is virtual
+	}
+
+- Static binding VS Dynamic Binding (why virtual matters)
+	- if diplay() is NOT marked virtual in the base class:
+		- calling v->display() through the base pointer always calls the base classe's version, regardless of the actual object type
+		- This is called static binding, deciding at compile time based on the pointer's declared type.
+- If display() IS marked virtual: calling v->display() calls the version matching the object's actual runtime type
+	- This is called dynamic binding (or runtime binding), and it's what makes real polymorphism work.
+- The virtual keyword exists specifically to enable dynamic binding, without it, polymorphism though base pointers doesn't work correctly
+
+WHAT IS A VIRTUAL FUNCTION 
+- a member function in the base class declares with the virtual keyword in front of the return type, with full implmentation ( a real function body )
+- Example 
+
+	virtual void display();
+
+- Overriding it in a derived class is option, not required (that requirement only applies to pure virtua lfunctions, a separate concept).
+- What virtual actually enables:
+	- Dynamic binding. 
+	- When called though a base class pointer/reference, C++ checks the object's actual runtime type and calls the correclty overridden derived class version, if one exists, instead of the base class version
+	- Without virtual, even if a derived class voerrides the function calling it though the base pointer would still incorrectly call the base class's verison (static binding)
+
+WHAT IS AN ABSTRACT BASE CLASS (ABC)
+- A class tha cannot be instantiated directly ( you can't create an object of that type, e.g. Vehicle V; would be a compiler erorr if Vehicle is abstract
+- Becomes abstract by containing atleast ONE pure virtual function. Only one is needed, not multiple
+- Acts as a blueprint/interface, meant be be inherited from, not used on its own
+- If a derived class des NOT override every pure virtual function it inherits, that derived clas salso remains abstract and cannot be instantiated either. 
+
+WHAT IS A PURE VIRTUAL FUNCTION?
+- A virtual function declared in the base class = 0 at the end, and NO implementation (no function body) in the base class
+- Syntax
+	
+	virtual void display() = 0;
+
+- Forces any deried class to provide its own full implementation of that function.
+- If a derived class does not implement it, that derived class also remains abstract (cannot be instantiated)
+- Once a derived class implements ALL of its inherited pure virtual functions, it becomes a "concrete class" meaning it CAN be instantiated
+- Having even one pure virtual function in a class makes that class an abstract base class.
+
+WHAT IS UPCASTING AND DOWNCASTING
+- UPCASTING
+	- converting a derived class pointer / reference (e.g. Sedan*) into a base class pointer/refernce (e.g. Vehicle*)
+	- Analogy: putting "VEHICLE" STICKY NOTE ON AN ACTUAL SADAN OBJECT. the object itself doesnt change, it still fully a sedan with all its features
+	- What changes is the "lens" youre viewing it with. THough the base class pointer/reference, you can only access base class members, even tough the underlying object actually has more (the derived class's extra stuff)
+	- Always safe and happens implicity ( no special cast syntax needed_ because of the IS-A relationship, a Sedan always IS a Vehicle, so it's always valid to view it as one.
+	- Example
+
+		Sedan * s = new Sedan();
+		Vehicle* v = s; // upcasting, v can only access ehicle's interface
+	- The original pointer (s) is unaffected and still has full access to everything Sedan has, including inherited Vehicle members plus Sedan-specific ones.
+- DOWNCASTING
+	- converting a base class pointer/reference vack into a derived class pointer/reference
+	- Requires an EXPLICIT cat, unlike upcasting, this does NOT happen automatically
+	- Restores full access, but the derived class's own members AND the inherited base class members (Sedan always had both, only the pointers type was the limiting access)
+	- Only safe if the object actually IS that derived type underneath
+	- If you downcast to the WRONG type (e.g. casting a Vehicle* that's actually pointing to Sedan into a Truck*), the code will still compile, but calling functions on it causes undefined behavior, crashes, garbage data, or memory corruption, since the object's actual memory layout doesnt match whats wrong type expects
+
+	- FULL UPCAST.DOWNCAST EXAMPLE
+
+		Sedan* original = new Sedan();
+		original->drive();        // works, inherited Vehicle method
+		original->openTrunk();    // works, Sedan-specific method
+
+		Vehicle* v = original;    // upcasting (implicit, safe)
+		v->drive();                // works, Vehicle method
+		v->openTrunk();            // ERROR, Vehicle* can't see Sedan-specific stuff
+
+		Sedan* s2 = (Sedan*)v;     // downcasting (explicit, risky if wrong type)
+		s2->drive();                // works again
+		s2->openTrunk();            // works again
+
+
+
+
+
+You can use a Car anywhere a Vehicle is expected. Like if you have a function void inspect(Vehicle& v), you can pass it a Car object and it'll work fine, because a Car satisfies "being a Vehicle."

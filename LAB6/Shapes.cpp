@@ -14,7 +14,7 @@ void Shape2D::ShowArea() const
 	// If "this" is a Circle, call Circle::GetName2D() and Circle::Area()
 	// If "this" is a Rectangle, call Rectangle:GetName2D(), etc…
 
-	cout << "The Area of the " << GetName2D() << " is : " << Area() << endl;
+	cout << "The area of the " << GetName2D() << " is : " << Area() << endl;
 }
 
 bool Shape2D::operator> (const Shape2D& rhs) const {
@@ -37,7 +37,7 @@ void Shape3D::ShowVolume() const
 	// If "this" is a Circle, call Circle::GetName2D() and Circle::Area()
 	// If "this" is a Rectangle, call Rectangle:GetName2D(), etc…
 	
-	cout << "The Volume of the " << GetName3D() << " is : " << Volume() << endl;
+	cout << "The volume of the " << GetName3D() << " is : " << Volume() << endl;
 }
 
 bool Shape3D::operator> (const Shape3D& rhs) const {
