@@ -159,13 +159,13 @@ WHAT IS POLYMORPISM
 - Example:
 	
 	Vehicle* v1 = new Sedan();
-	vehicle* v2 = newTruck();
+	vehicle* v2 = new Truck();
 
 	v1->display(); // calls Sedan's version (if virtual)
 	v2->display(); // calls Truck's version (if virtual)
 
 - Why its useful
-	- Lets you write general-purpose code that works with ANY derived types though a common base interface, without needing to know the exact deried type in advance
+	- Lets you write general-purpose code that works with ANY derived types though a common base interface, without needing to know the exact derived type in advance
 
 - Example:
 
@@ -246,6 +246,19 @@ WHAT IS UPCASTING AND DOWNCASTING
 
 QUIZ ASSESSMENT REVIEW QUESTIONS 
 
+EXPLAIN THE CONCEPT OF INHERITANCE
+- Inheritance is a mechanism that allows us to create a subclass derived from an existing base class.
+- The sublcass inherits the base class members and can use them as is, override the,. or add new members on top
+- This allows for code reuse without duplicate code, and it modesl real-world relationships between classes
+- Derived classe scan also be extened further, forming a hiearchy in increasingly speciffic classes
+
+EXTEND EXISTING CLASSES BY DERIVING NEW ONES
+- Example Syntax
+
+	class Car : public Vehicle
+
+- Delcares Car as a derived class, public inheriting from vehicle. 
+
 EXPLAIN THE "IS-A" RELATIONSHIP BETWEEN CLASSES
 - The IS-A relationship means a derived class object can be used anywhere a base class object is expected, since it has access to all of the base class's public methods plus its own additional members.
 - This substitutability is enabled by public inheritance, where the derived class inherits the base class's public interface
@@ -253,4 +266,57 @@ EXPLAIN THE "IS-A" RELATIONSHIP BETWEEN CLASSES
 	- A function that takes a Vehicle reference can accept a Car object because a Car IS-A vehicle. 
 
 IDENFNIFY THE USE AND BENEFITS OF POLYMORPHISM, AND IMPLMENT IT IN A PROGRAM
-- 
+- THE USE
+	- Polymorphism allows you to write general-purpose code that works with any derived type though a common base class interface
+	- When both the base and derived class define a method with the same signature, and the derived class overrides the base class's version, calling that method though a base class pointer.refrence invokes the derived class's overridden verison instead of the base class's as long as the method is marked virtual
+	- This lets a single function work correctly across many different derived types without needing to know which spefici type it's dealing with
+- THE BENEFIT
+	- since a virtual function called though a base class pointer/reference correctly inokes the overridden derived class version at runtime,
+	- The main benefits are 
+		- reduced repetitive code (no need for manual if/else type-checking to decide which version to call)
+		- easier extendability (new derived classes can be added later without modifying existing code that uses the base class inteface)
+		- And cleaner. more maintainable code overall.
+- THE IMPLEMENTATION
+
+	class Vehicle
+	{
+	public:
+		virtual void display() const {
+			// ... Displaying state vehicle
+		}
+	virtual ~Vehicle() {};
+	};
+
+	class Sedan : public Vehicle
+	{
+	public:
+		void display() const override {
+			Vehicle::display();
+			// ... Displaying stats of Car
+		}
+	};
+
+	class Truck : public Vehicle
+	{
+	public:
+		void display() const override {
+			Vehicle::display();
+			// ... Displaying stats of Truck
+		}
+	};
+
+	int main() {
+
+		Vehicle* v1 = new Sedan();
+		Vehicle* v2 = new Truck();
+
+		v1->display();
+		cout << endl;
+		v2->display();
+		cout << endl;
+
+		delete v1;
+		delete v2;
+
+		return 0;
+	}
