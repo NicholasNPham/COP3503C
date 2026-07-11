@@ -244,7 +244,13 @@ WHAT IS UPCASTING AND DOWNCASTING
 		s2->openTrunk();            // works again
 
 
+QUIZ ASSESSMENT REVIEW QUESTIONS 
 
+EXPLAIN THE "IS-A" RELATIONSHIP BETWEEN CLASSES
+- The IS-A relationship means a derived class object can be used anywhere a base class object is expected, since it has access to all of the base class's public methods plus its own additional members.
+- This substitutability is enabled by public inheritance, where the derived class inherits the base class's public interface
+- For example:
+	- A function that takes a Vehicle reference can accept a Car object because a Car IS-A vehicle. 
 
-
-You can use a Car anywhere a Vehicle is expected. Like if you have a function void inspect(Vehicle& v), you can pass it a Car object and it'll work fine, because a Car satisfies "being a Vehicle."
+IDENFNIFY THE USE AND BENEFITS OF POLYMORPHISM, AND IMPLMENT IT IN A PROGRAM
+- 
