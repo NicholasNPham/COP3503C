@@ -1,0 +1,136 @@
+18.2 LIST
+
+LIST CONTAINER
+- the list class defined with the C++ Standard Template Library (STL) defines a container of ordered elements, i.e., a sequence.
+- The list class supports functions for inserting, modifying, and removing elements
+- The list type is an ADT implemented as a templated class that supports different types of elements.
+- A C++ list is implmented as a doubly-linked list.
+- A list can be declared and created as list<T> newList; where T represents the list's type such as an int or string
+- A list supports insertions of elements at the end of the list or at the beginning of the list.
+- The push_back() function adds an element to the end of a list
+	- Ex: 
+
+		authorsList.push_back("Martin"); 
+	
+- adds "Martin" as the last element of the list.
+- The push_front() function adds an element to the front of the list
+	- Ex:
+
+		authorsList.push_front("Butler"); adds "Butler" as the first list element
+
+COMMON LIST FUNCTIONS
+- the "front()" function returns the first element of a list.
+- The "back()" function returns the last element of a list.
+	- ex: 
+		- If the list exList contains the strings "four", "five", exList.front() returns the element "four" and exList.back() returns the element "six".
+- The pop_front() and pop_back functions remove the first and last elements of a list, respectively
+- The remove() function removes specific existing elements from the list.
+- To identify the elements, the remove() function awill start at the first element and then traverse the list by elements until all occurences of the specified value are found and removed. 
+
+- table of common list functions
+	- front() : returns elements at the front of the list
+	- back()  : returns element at the back of the list
+	- push_back()  : adds newElment to the end of the list. List's size is increaed by one
+	- push_front() : adds newElement to the beginning of the list. List's size is increased by one
+	- size() : returns the number of elements in the list.
+	- pop_back()  : removes element from the end of the list. List's size decreased by one
+	- pop_front() : removes element from the front of the list. List's size is decreased by one
+	- remove() : Remove all occurences of elements which are equal to existing elements. List's size is decreased by number of existingElement occurences. 
+
+ITERATING THROUGH A LIST 
+- iteration though a list necessitates keeping track of the current postion in the list without using and index.
+- An iterator is an object that points to a position in a list that can be used to traverse the list bidrectionally.
+- The iterator allows for elements to be added, moved and removed from any position in the list more efficently than other containers such as arrays and vectors.
+- The statement: 
+	
+	list<int>::iterator iter;
+
+- declares a list iterator for a lsit of integers
+- A list has two iterators that point to beginning and end of the list.
+- The begin() function returns an iterator to the first element in the list
+- The end() function returns an iterator to a postion after the last element in the list
+- To iterate though the list from the beginning a loop compares the current list position to the end position.
+- If th end has not been reached, the position can be advanced.
+- Elements pointed to by the iterator are dereferenced to reveal their value.
+- Example: 
+
+	*iter
+
+- dereferences the iterator and evaluates to the element to which the iterator referred. 
+
+INSERTING AND REMOVING ELEMENTS USIGN ITERATORS 
+- using iterators allows for inserting and removing elements from positions other than the front and back of the list.
+- The insert() function adds one or more elements before the specified iterator position.
+- The erase() function canremove one more multiple elements starting at the specified iterator position
+- If erased() is given two iterators as arguements to dictate a range of elements to remove, the elements at the first iterator is removed and all elements until the second iterator are removed
+- The element at the second iterator is not removed
+
+- table list function for inserting and removing elements using iterators
+	- insert()
+		- insert(iteratorPosition, newElement)
+		- inserts newElement into the list before the iterator position
+	- erase()
+		- erase(iteratorPosition)
+			- removes a single element at iteratorPosition
+		- erase(iteratorFirst, iteratorLast)
+			- removes a range of elements from iteratorFirst(inclusive) to iteratorLast(exlusive)
+
+TRAVERSING A LIST WITH RANGE-BASED FOR LOOP
+- a range based for loop can be used to traverse a list without an iterator.
+- Elements of a list can be accessed and modified with a ranged based for loop
+- example
+
+	list<string> teamRoster;
+
+	//adding player names
+	teamRoster.push_back("Mike")
+	teamRoster.push_back("Scottie");
+	teamRoster.push_back("Toni");
+
+	cout << "current roster: " << endl;
+
+	for (string& playerName : teamRoster) 
+	{
+		cout << playerName << endl;
+	}
+
+18.3 PAIR
+
+THE PAIR CLASS
+- The pair class in the C++ standard template Library (STL) defines a container that consiss of two data elements 
+- #include <utility> enables use of the pair class.
+- Many STL containers classes internally use or return pair objects.
+- Ex: A map containing key-value pairs
+- The pair types is and ADT implemented as a templated class that supports different types values.
+- A pair can be declared as as pair<F, S> newPair; where F represents the pair's element type and S represents the pair's second element type.
+- Ex: 
+
+	pair<int, string> newPair; 
+
+- declares a pair with an integer first elements and a string second element
+- The make_pair() function creates a pair with the specificed first and second values, with which a pair variable can be assigned. 
+- Each element in a pair can ba accessed and modified using the pair's first and second members
+
+	#include <iostream>
+	#include <string>
+	#include <utility>
+
+	using namespace std;
+
+	int main() {
+	   pair<string, int> caPair;
+   
+	   // 2013 population data from census.gov
+	   caPair = make_pair("California", 38332521);
+   
+	   cout << "Population of " << caPair.first << " in 2013 was "
+			<< caPair.second << "." << endl ;
+   
+	   // 2010 population data from census.gov
+	   caPair.second = 37253965;
+   
+	   cout << "Population of " << caPair.first << " in 2010 was "
+			<< caPair.second << "." << endl ;
+   
+	   return 0;
+	}
