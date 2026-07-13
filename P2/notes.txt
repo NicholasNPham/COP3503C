@@ -1,0 +1,42 @@
+WHAT A PIXEL ACTUALLY IS (THE THREE CHANNELS, BYTE ORDER)
+- a pixel is 24 bits total = 3 bytes per pixel
+- 3 Channels: red, green, blue, 8 bits (1 byte) each
+- Store in BGR order in the file, not RGB, reversed from the usual assumption
+- Each channel value stored as unsigned char:
+	- exactly 1 byte, range 0-255 matches fa channel's possible value exactly, no wasted space, and it read/writes cleanly byte-for-byte whcih matters since your output must match the examples exactly
+
+THE TWO "GOTCHA TRAPS" 
+- COLOR STORAGE ORDER
+	- Colors stored in BGR order in the file, not RGB, reversed from the usual assumption
+- PIXEL ORIGIN/READ DIRECTION
+	- Pixel index 0 = bottom-left corner of the image
+	- Array reads left to right across a row, then moves up to the next row
+	- Last pixel in the array = top-right corner of the image
+
+WHY THE HEADER STRUCT NEEDS ALL 18 BYTES WORTH OF FIELDS EVEN THOUGH YOU ONLY NEED TWO OF THEM
+- The TGA format is fixed at 18 bytes for the header, thats the file spec, not optional
+- Even though this assignment only uses width and height, all 18 bytes still have to physically be presnet in the file, in the correct position, for it to be a valid/readable TGA
+- "Not using a value" and "not including it in the file" are different things, unused fields (colorMapOrigin, colorMapDepth, etc) still gets written, just with their given/zero values
+- If you only wrote the fields you cared about, the file would be structurally broken, a viewer (or the grading comparison) would misread everything after that point since it expects data at fixed byte offsets
+
+MULTIPLE BLEND MODE
+- Two images combined pixel by pixel, channel by channel (top layer A, bottom layer B)
+- For each channel (R, G, B separately) at matching pixel positions:
+- Normalize: divide each value by 255 to get a 0-1 range (e.g. 140/255 ≈ 0.55, 78/255 ≈ 0.31)
+- Combine: multiply the two normalized values together (0.55 × 0.31 ≈ 0.17)
+- Convert back: multiply result by 255 to get back to 0-255 range (0.17 × 255 ≈ 43)
+- Multiply mode always darkens or matches the darker input, since you're multiplying two fractions ≤1, result is always ≤ the smaller input. Good sanity check on your own output later.
+
+OVERFLOW PROBLEM AND CLAMPING
+- Channel math (adding, subtracting, multiplying) can push a value past the 0-255 range an unsigned char can hold
+- Storing an out-of-range result directly into unsigned char does NOT auto-clamp, it silently overflows/wraps (e.g. 400 stored in unsigned char wraps to 144, not 255), giving wrong data with no error
+- Fix: do the math first in a bigger type (like int), THEN clamp that intermediate result to 0-255 range yourself (if over 255, set to 255; if under 0, set to 0), THEN assign the clamped value into the unsigned char
+- Order matters: calculate → clamp → store, never store first
+
+THE 0.5F ROUND TRICK
+- Converting float to int/unsigned char in C++ does NOT round, it truncates (just chops off the decimal, always rounds down toward zero no matter what)
+- Adding 0.5 before truncating fixes this: it shifts the number up by half a unit first
+- If the decimal part is .5 or higher (e.g. 79.87 + 0.5 = 80.37), the shift pushes it across the next whole number line, truncating then lands on the correct rounded-up value
+- If the decimal part is below .5 (e.g. 79.3 + 0.5 = 79.8), the shift isn't enough to cross the line, truncating still lands correctly on the lower value
+- Net effect: truncate-after-adding-0.5 behaves like proper rounding, even though truncation itself never rounds on its own
+
