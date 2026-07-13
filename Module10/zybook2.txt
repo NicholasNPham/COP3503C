@@ -1,0 +1,108 @@
+18.4 MAP
+
+MAP CONTAINER
+- a programmer may wish to lookup values or elements based on another value, such as looking up an emplotee's record based on an employee ID.
+- The map class within C++ Standard Template Library (STL) defines a container that associates (or maps) keys to values.
+- #include <map> enables use of a map
+- The map type is an ADT implemented a templated class that supports different types of keys and values.
+- Generically, a map can be delcared and created as 
+
+	map<K,  V> newMap;
+
+- where K represents the map's key type and V represents the maps value type.
+- The emplace function associates a key with the specific value
+- If the key does not already exist, a new entry within the map is created.
+- If the key already exists, the associated map entry is not updated
+- Thus, a map associated at most one value for a key
+- The at() function returns the value associated with a key, such as statePopulation.at("CA").
+- A map entry can be updated by assigning the entry with a new value 
+- Ex:
+
+	statePopulation.at("CA") = 39776830;
+
+DETERMINING IF A KEY EXISTS
+- If the map does not contain the specified key, the at() function throws an out_of_range exception.
+- A programmer can use the count() function to check if a map contains the specific key. 
+- count() returns 1 if the key exists and 0 otherwise. In the program above,
+- statePopulation.count("NY") would return 0.
+
+COMMON MAP FUNCTIONS
+
+- emplace()
+	- emplace(key, value)
+	- associates key with specified value.
+	- if key already exists, the map entry is not changed.
+- at() 
+	- at(key)
+	- returns the entry assocaited with key.
+	- if key does not exist, throws an out_of_range exception
+- count()
+	- count(key)
+	- returns 1 if key existsm otherwise return 0;
+- erase()
+	- erase(key)
+	- Removes the map entry for the specified key if the key exists
+- clear()
+	- Removes all map entries
+
+[] OPERATOR
+- the map class' [] can be used to add map entries 
+- ex:
+	
+	exMap["Dan"] = 25;
+
+- and access map entries
+- ex:
+
+	exMap["Dan"]
+
+- However if a map does nto contain the specified key, the [] opeartor creates a new entry in the map with the key and the default value for the map's value for the map's value type
+- ex:
+	- if the key "Bob" does not exist in the map, 
+
+		myVal = exMap["Bob"]; 
+
+	- creates a new map entry wth key "Bob" and value 0;
+- When using the [] operator, if creating a map entry with a default value is not desired, a programmer should first check that the key exists before accessing the map with that key.
+- This material uses emplace() and at() to add and access map entries, but the exambles above can be modified to use the [] operator
+
+
+EMPLACE()
+- Like many C++ containers, the map class has both insert() function and an emplace() function to add new entries to a map.
+- insert() requires that an entry be explicitly constructed before insertion,
+- Emplace() does not have this requirement, and constructs entries of the correct type upon isertion by automatically calling an appropriate constructor.
+- This material uses emplace() for the map class as an intuitive way of adding a pair entry to a map without explicitly constructing the pair before hand. 
+
+18.8 FIND() FUNCTION
+
+THE FIND() FUNCTION
+- the find() function seeks a specific value in a range of elements.
+- find() is defined in the algorithms library of the Standard Template Library(STL) thus adding #include <algorithm> enables use of find().
+- find() can be used with different STL containers such as vectors and list.
+- The container elements can be any C__ data types that supports use of the equality operator(==)
+- The function's notation is 
+	
+		find(iteratorFirst, iteratorLast, value);
+
+	- iteratorFirst: An iterator to the range's first element
+	- iteratorLast: An iterator to one element past the range's last element
+	- value: The valueof the element to be found within the range
+- note that iteratorFrist element is checkedm but iteratorLast's element is not
+- find() returns an iterator to the first element in the range that is equal to value. 
+- If value is not found, find() returns iteratorLast
+
+THE FIND_IF() FUNCTION
+- the find_if() function is a variation of the find() function, defined in the STL algorith, library, that searches a range for an element that satisfies a boolean condition.
+- Adding #include <algorithm> enables the use of find_if().
+- The function notation is
+
+		find_if(iteratorFirst, iteratorLast, boolFunction):
+	
+	- iteratorFirst: An iterator to the range's first element
+	- iteratorLast: An tierator to one element past the range's last element
+	- boolFunction: A function that takes one argument (of the container type) and returns true or false
+- find_if(returns an iterator to the first element in the range that causes boolFunction to return true.
+- If no element satisfies the condition, find_if() returns iteratorLast.
+- find_if() goes through the range sequentailly and passes each element to boolFunction one-by-one
+
+
