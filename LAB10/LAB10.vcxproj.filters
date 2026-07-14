@@ -18,18 +18,8 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demo1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="demo2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="lecture1.txt" />
-    <Text Include="lecture2.txt" />
-    <Text Include="dictionary.txt" />
-    <Text Include="zybook1.txt" />
-    <Text Include="zybook2.txt" />
+    <None Include="states.csv" />
   </ItemGroup>
 </Project>
