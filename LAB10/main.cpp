@@ -94,7 +94,6 @@ void openFile(string filename, map<string, StateData>& stateData)
 
 }
 
-
 int main()
 {
 	cout << "1. Random Numbers\n";
