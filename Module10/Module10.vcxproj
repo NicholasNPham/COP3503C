@@ -140,9 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="demo1.cpp" />
+    <ClCompile Include="demo2.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="dictionary.txt" />
     <Text Include="lecture1.txt" />
     <Text Include="lecture2.txt" />
   </ItemGroup>
