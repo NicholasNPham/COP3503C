@@ -1,0 +1,92 @@
+INTERATION
+
+ITERATION THOUGH CONTINGUOUS CONTAINERS
+- You know how this goes
+
+NON-CONTIGUOUS DATA
+- this normal index based loop won't work in many situations
+- iterators are the solution
+
+ITERATORS
+- a standard interface for iteration
+- iterators provde a standard interface for iterating over the elements of a container
+- The only thing that has to change is how you actually use elements of the container (i.e., the code inside the loop)
+
+ITERATOR CREATION IS EASIER THAN IT LOOKS!
+
+	// essentially just this:
+	classToIterateOver<matchTheType(s)::iterator variableName;
+
+	map<int, int> aMap;
+	map<int, int>::iterator aMapIterator;
+
+- iterators are implemented on a per-class bassis for Standard Template Library (STL) classes
+- Internally a map is different than an unorder_map, and different from a vector
+- Iterators handle these differences and provide an interface, so you dont have to worry (much about the details)
+
+ITERATORS BEGIN() AT THE BEGINNING
+
+	// set the iterator to the first element of some container
+	vector<int>::iterator iter = someVector.begin();
+	// bascially the same thing... in this case
+	unsigned int firstIndex = 0;
+
+- begin() is an abstraction.
+- The outside world doesn't need to know or care how or where the first element is stored.
+- Trust the function works, and should the class ever change internally, your code won't have to.
+
+END()
+- an iterator that is one past the last element
+- take an arrayt with 10 elements -> int someArray[10]
+- valid indices? 0-9, or 0 through (sizeOfArray - 1)
+- 10 woudl be one past the last element
+- You wouldnt use index 10, but ... it cna be helpful as a boundary vlaue
+- its like a pointer set to nullptr - just knowing its nullptr is useful
+
+ACCESSING THE ITERATOR'S CONTENTS
+- iterators are like pointers - but actually class objects
+- You must dereference them in order ot access whatever they're pointing to
+- dereferencing an iterator returns a reference to the data element
+
+WHAT ABOUT NON-PRIMITIVES (I.E. CLASSES)
+- the same comcept applies - dereference the iterator, then use the resulting object
+
+
+-----------------------------------------
+
+THE AUTO KEYWORD
+
+AUTO KEYWORD SIMPLIFIES DECLARATION
+- syntax for many things in C++ can be a bit cumbersome
+- we often have to repeat data types in our code
+- the auto keyword simplifies variable declaration
+- with auto, the compiler determines a variables type, so you dont have to wirte it. 
+
+HOW DOES AUTO WORK
+- Variable type is determined by what's on the right side of the assignment operator
+- This is done at compile time - it has no effect on how your program runs
+- This only has an effect once, during variable definition
+
+	// what type of data is example?
+	// That depends on what someValue is...
+	auto example = someValue;   // is some value an int auto compiles as int. it someValue a vector<float>? auto compiles as vector<float>
+
+- auto requires intitialization of the variable, or you'll get a compiler error
+
+GOOD FOR LIBRARIES WHERE YOU DONT KNOW (OR REMEMBER) THE RETURN DETIALS
+- you know to use the rectangle class, you know what variables and functions it has, itc...
+- Choose the wrong one, its a compiler error that costs you a few seconds
+- But a few seconds, multipled by this same situation dozens, hundreds of times
+
+MAYBE NOT SO GOOD FOR PRIMATIVE TYPES
+- the auto keyword also works for primitive types
+- Do you really need the auto keyword?
+- Forget how to type int, float, char?
+- To lazy to type int or char? (int actually saves you some effort...)
+- There are times when you want control over what happens
+
+AUTO (OR SIMILAR) IN ORTHER LANGUAGES
+- the auto keyword in C++ is just one example of type inference
+	- A variable's type is inferred byt somehting else
+- C# has the var keytword (works similarly to auto
+- Python doesnt require type declaration at all.

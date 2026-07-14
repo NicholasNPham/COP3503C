@@ -1,0 +1,65 @@
+MAP
+
+STD::MAP<<K,V> CLASS
+- a map is a non-continguous, template data structure that stores data in pairs
+- A pair is made of two different parts;
+	- A key: an identifier, some label for other parts of the pair
+	- A valueL: the information being labled, the "real" data in the map
+- internally, a map is implemented as a tpye of a binary tree ( you'll cover treees in later courses)
+- They can very quickly store and retrieve elements
+
+CREATING MAP VARIABLES
+
+	map<key, value> someVariable;
+
+- key: this is how you access it
+- value: this is what we are really interested in.
+
+	map<int, string> myMap;
+
+- storing strings
+- containers holding containers... sure whyt not?
+-think of a box containing smaller boxes. a backpack xontaining a pencil cases, etc
+
+ADDING DATA TO A MAP WITH EMPLACE()
+
+	map <int , string> myMap; // interger keys, string values
+	myMap.emplace(12, "bob"); // add a pair<int, string> to the map
+	myMap.emplace(0, "superman")'; // Add a second pair
+
+	map<string, int> characters;
+	characters.emplace("spider-man", 17); // string ketys, integer values
+	characters.emplace("yoda", 900) // another pair
+
+ADDING AND MODIFIYING DATA WITH OPERATOR []
+- the subscript operator can be used to add key/value pairs, or modify values
+
+	map<int, string> myMap;
+	// if the specified key doesn't already exist, creating a new
+	// pair<int, string> with that key, then assign it a value
+	myMap[41] = "Hello"; // create a pair<41, "hello">
+	myMap[21] = "Thoir Odinson"; // creates a piar <25, "Thor Odison">
+
+- You dont have to pre-allocate space for a map - it can do so dynamically.
+- Maps are node based data structures like a linked list -- each pair is a node
+- The subscript operator returns a reference to the value
+- This allows for fast acces and modifications of existing values
+
+MAP RETRIEVE VALUES BY KEY, NOT INDEX
+- like vectors, the map has operator[] and at().
+- They don't look up elements in array but return a value from a pair that has the provided key (possibly creating a new pair if one doesn't exists
+
+	vector<int> numbers;
+	// assume some initialization
+
+	map<int, int> aMap
+	// assume some initialization
+
+	cout << numbers[0]; // print the first element
+	cout << aMap[0]; // print  the value associated with KEY 0
+	cout << numbers[numbers.size()-1]; // print the last element
+	cout << aMap[aMap.size())-1] // ley might not exist
+	cout << numbers[-20] a negative INDEX is always bad
+	cout << aMap[-20]; // -20 is a valid key (but it might not exist in THIS map
+	cout << numbers.at(-5) // throws an exception (out of range)
+	cout << aMap.at(-5); // MIGHT throw an exception, if the key doesnt exist
