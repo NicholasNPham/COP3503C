@@ -63,3 +63,56 @@ MAP RETRIEVE VALUES BY KEY, NOT INDEX
 	cout << aMap[-20]; // -20 is a valid key (but it might not exist in THIS map
 	cout << numbers.at(-5) // throws an exception (out of range)
 	cout << aMap.at(-5); // MIGHT throw an exception, if the key doesnt exist
+
+
+USING STRINGS AS KEYS 
+- computers can understand index values without issue - they (only!) understand nubmers
+-  Humans tend to use words (strings) as labels instead of numbers.
+- Consider writing a dictionary program:
+
+KEYS IN A MAP MUST BE UNIQUE
+- a map cannot store duplicat keys
+- What if we wanted "multiple values" for a single key?
+- You might not want to "blindly" use a given key - what if it doesn't exist
+- someMap.find(key)
+	- find() returns a iterator to the pair with a matching key.
+	- if no match was found, returns an iterator to map::end()
+- Iterators
+	- A way of accessing elements in complex containers. Well cover this more as a standalone topic
+- map:: end()
+	- return a result you should never use directly, similar to nullptr fgor pointers. 
+
+ITERATION THOUGH MAPS
+- A typicall for loop most likely won't work when it comes to maps
+- They keys of most map objects are will be incompatible, either by dta typers or values
+
+ITERATORS
+- a standard way of iterating through STL containers
+
+	map<string, int> example;
+
+	// create an iterator, using the same template types as the map
+	map<string, int>::iterator iter;
+
+	// set the interator to the beginning
+	iter = example.begin();
+
+	// as long as the iterator isnt at the end..
+	// run the body of the loop, and move to the next element
+	for (; iter != example.end(); ++ iter)
+	{
+		cout << iter->first;
+		cout << iter->second;
+	}
+
+- Having an abstraction like begin() makes it easier to use in the class - you don't need to know all the interal details
+- This process is the same for any kind of map - just change the data typpe of the iterator
+- Much of this process is identicall for any containers that uses iterators
+
+A MAP SOTS BASED ON KEYS
+- the data is sorted by the key, in ascending order
+- wanted to use map, but don't need sorted data? (sorting takes processing power!)
+
+WHEN SHOULDNT WE USE MAPS
+- if you dont have any specific key-value association
+- If your "key" is really just an index
