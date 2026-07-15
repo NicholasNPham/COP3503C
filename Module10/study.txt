@@ -1,14 +1,23 @@
 TRUE OR FALSE
 LIBRARIES ARE EXISTING SOLUTIONS TO PROBLEMS THAT YOU CAN INTERGRATE INTO YOUR OWN PRGRAM
-- true
+- TRUE
+- Libraries exists so you are not reinventing solved problems every time
+- For example
+	- <iostream> already handles the messy, low-level work of talkign to the terminal, so you just call cout <, instead of writing that logic yourself.
+- Same idea applies to any library, someone already solves a problem (string manipulation, map functions, file i/o, networking, whatever), and packages it up so you can integrate it into your program instead of building it from zero
 
 TRUE OR FALSE
 LIBRARIES, ONCE SETUP AND PROPERLY COMPILING WITH YOUR CODE, ARE IMMEDIATELY "DONE" AND WORK EXACTLY AS YOU WANT TO
 - false
-- Libraries in C++ are not universally interchangeable
-- A library compiled for windows with MSVC wont necessarily link or run on Linux with GCC, since name mangling, ABI conventions and calling conventions can different between compilers
-- And OS-level dependencies can differ too
-- Thats part of why cross-platform projects need to rebuild libraries per target or use portable abstraction
+- Libraries being set up and compiling cleanly does not mean they're "done" or working exactly as intended.
+- Compiling only confirms syntax/types are valid, not that you're using the library correctly.
+- You still need to understand how the library works, since inccorrect usage can create silent bugs even though everything compiles fine.
+
+TRUE OR FALSE
+IN C++ ARE LIBRARIES UNIVERSALLY INTERCHANGEABLE? WILL THEY WORK THE SAME WITH ANY COMPILER OR OPERATING SYSTEM
+- a compiled library is tied to the compiler (and often the OS) that built it, because the internal detials, how function names get encoded (name mangling), how arguments get passed, how memory layouts work (ABI) aren't standardized across compilers.
+- so a .lib or .dll built with MSVC doesn't just plug into a GCC project on inux and work
+- Thats why cross-platform C++ projects usually rebuild libraries for each target compiler/OS, or use protable abstraction to sidesetep the issue.
 
 WHAT IS A PAIR, AND WHAT IS IT MADE UP OF 
 - a pair is just a container that hold s two values
