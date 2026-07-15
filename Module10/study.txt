@@ -1,0 +1,120 @@
+TRUE OR FALSE
+LIBRARIES ARE EXISTING SOLUTIONS TO PROBLEMS THAT YOU CAN INTERGRATE INTO YOUR OWN PRGRAM
+- true
+
+TRUE OR FALSE
+LIBRARIES, ONCE SETUP AND PROPERLY COMPILING WITH YOUR CODE, ARE IMMEDIATELY "DONE" AND WORK EXACTLY AS YOU WANT TO
+- false
+- Libraries in C++ are not universally interchangeable
+- A library compiled for windows with MSVC wont necessarily link or run on Linux with GCC, since name mangling, ABI conventions and calling conventions can different between compilers
+- And OS-level dependencies can differ too
+- Thats part of why cross-platform projects need to rebuild libraries per target or use portable abstraction
+
+WHAT IS A PAIR, AND WHAT IS IT MADE UP OF 
+- a pair is just a container that hold s two values
+- They can be access as .first and .second.
+- They dont have to be different types even, but they can be like (pair<string, int>).
+-  A map's key/value entries are actually built out of pairs under the hood
+
+WHAT IS THE DIFFERENCE BETWEEN A KEY AND A VALUE IN A MAP
+- The key is unique and used to look things up (like an ID or index),
+- And the value is the data associated with that key.
+- So a map lets you go "give me the key, and ill hand you the value instead of searching by position like an array.
+
+WHAT ARE TWO WAYS WE CAN ADD KEY/VALUE PAIRS TO A MAP
+- subscript operator
+	- myMap["key"] = value
+		- If the key doesn't exist, its created
+		- If it does exist, the value is overwritten
+- .emplace()
+	- myMap.emplace("key", value)
+		- Constructs the pair directly in place
+		- If the key already exists, emplace does nothing (it wont overwrite)
+
+WHAT ARE TWO WAYS WE CAN ACCESS VALUES FROM A MAP
+1. SUBSCRIPT OPERATOR
+	- myMap["key"]
+		- returns the value for that key.
+2. .find("key")
+	- returns an iterator to the the key/vbalue pair if the key exists, or myMap.end() if it doesnt
+
+WHAT HAPPENS IF WE TRY TO ACCESS A KEY THAT DOESNT EXISTS
+- myMap["key"]
+	- silently inserts a new entry with a default constructed value (0, empty string, etc) if the key doesnt exists
+	- This is a common silent bug source
+- myMap.find("key")
+	- Returns an iterator to the pair if found, or myMap.end() if not found.
+	- doesnt insert anything
+	- check with if (myMap.find("key") != myMap.end()).
+
+CAN YOU HAVE DUPLICATE KEYS IN A MAP
+- No
+- Keys are unique in a std::map if you try to insert a duplicate key with emplace, its a no-operation
+- If youy use [] with an existing key, it woverwrites the value rather than creating a second entry
+
+CAN YOU HAVE DUPLICATE VALUES IN A MAP?
+- values have no uniqueness constraint at all, only keys do
+
+TRUE OR FALSE
+MAP ARE CONTIGUOUS, JUST LIKE ARRAYS
+- no 
+- Maps are not contiguous in memory like arrays are.
+- Elements can live scattered across memory , connected though pointers/nodes structure tahter than sitting in one continuous block
+- Its a node based rather than index base
+- Thats why we can do pointer arithmetic or random access indexing like myMap[3] to get the "third element", theres no contiguous block to jump around in.
+
+TYPICAL INDEX-BASE LOOPS DONT WORK WITH MAPS, WHAT SHOULD WE DO INSTEAD
+1. range-based for loop
+	
+	for (const auto& pair : mapName)
+
+	- iteratores over every key/value pair, giving you .first and .second directly
+
+2. iterator-based looping
+
+	for (map<string, int>::iterator it = mapName.begin(); it != allRools.end(); ++it)
+
+	- map<string, int>::iterator it = allRolls.begin() — declares an iterator and points it at the first element
+	- it != allRolls.end() — the loop condition, keeps going until you hit the "one past the last" sentinel
+	- ++it — moves the iterator forward one element each pass
+	- it->first and it->second — since it points at a pair, you use -> instead of . to access the pair's members (because it is technically a pointer-like object, not the pair itself)
+
+HOW SHOULD WE INITIALIZE AN ITERATOR TO THE FIRST ELEMENT OF A CONTAINER
+- myMap.begin() returns an iterator pointing to the first element.
+- Combine with a type declaration (or auto) to actually store it like
+
+	auto it = myMap.begin();
+
+HOW DO WE CHECK IF WE HAVE REACHED THE END OF A CONTAINER
+	
+	it != allRolls.end()
+
+- is the check, comparing your current iterator against the sentinal that .end() returns
+- .end() doesnt point to a real element, it represents "one past the last one" so the moment your iterator equals it you know you've walked off the container and the loop stops
+
+WHAT IS THE STANDARD SETUP FOR OF AN ITERATOR-BASED FOR LOOP
+
+	for (map<string, int>::iterator it = mapName.begin(); it != mapName.end(); ++ it)
+
+- init: map<string, int>:: iterator it = mapName.begin()
+- condition: it != mapName.end()
+increment: +=it
+
+WHAT DOES THE AUTO KEYWORD DO
+- auto tells the compiler to deduce the variable's type at compile time based on whatever is being initialized with.
+- So its not auto doing the work at runtime, its the compiler figuring out the type when your code compiles, then substituting in the real type
+
+WHAT MUST HAPPEN IN ORDER TO USE THE AUTO KEYWORD
+- auto requries initialization fo the variable or it will error out
+- Meaning
+
+	auto Name = "nick"
+
+- auto will now deduce that nick is a const char*
+
+ON THE FILP SIDE, WHEN CANT WE USE THE AUTO KEYWORD
+- AUTO requires:
+	- an initializer on the same line, so the compiler has a value to deduce the type from
+- Auto cant be used:
+	for things with no immediate value to deduce from, like function parameters in a normal declaration, or a variable declared without initalization (auto x)
+	
