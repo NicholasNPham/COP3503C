@@ -31,5 +31,6 @@
     <Text Include="dictionary.txt" />
     <Text Include="zybook1.txt" />
     <Text Include="zybook2.txt" />
+    <Text Include="study.txt" />
   </ItemGroup>
 </Project>
