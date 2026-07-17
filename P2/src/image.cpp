@@ -38,6 +38,36 @@ bool Image::read(string filename)
 	return true;
 }
 
+bool Image::write(string filename)
+{
+	ofstream file(filename, ios::binary); // OPEN IN BINARY MODE	
+
+	if (!file.is_open())
+	{
+		cout << "Could not open: " << filename << endl;
+		return false;
+	}
+
+	file.write(&header.idLength, sizeof(header.idLength));
+	file.write(&header.colorMapType, sizeof(header.colorMapType));
+	file.write(&header.imageType, sizeof(header.imageType));
+	file.write(reinterpret_cast<char*>(&header.colorMapOrigin), sizeof(header.colorMapOrigin));
+	file.write(reinterpret_cast<char*>(&header.colorMapLength), sizeof(header.colorMapLength));
+	file.write(&header.colorMapDepth, sizeof(header.colorMapDepth));
+	file.write(reinterpret_cast<char*>(&header.xOrigin), sizeof(header.xOrigin));
+	file.write(reinterpret_cast<char*>(&header.yOrigin), sizeof(header.yOrigin));
+	file.write(reinterpret_cast<char*>(&header.imageWidth), sizeof(header.imageWidth));
+	file.write(reinterpret_cast<char*>(&header.imageHeight), sizeof(header.imageHeight));
+	file.write(&header.pixelDepth, sizeof(header.pixelDepth));
+	file.write(&header.imageDescriptor, sizeof(header.imageDescriptor));
+
+	file.write(reinterpret_cast<char*>(pixels.data()), pixels.size());
+
+	cout << "Write Operation Successful" << endl;
+	return true;
+}
+
+// accessors -------------------------------------------
 short Image::getWidth()
 {
 	return header.imageWidth;
@@ -46,4 +76,65 @@ short Image::getWidth()
 short Image::getHeight()
 {
 	return header.imageHeight;
+}
+
+vector<unsigned char> Image::getPixelVector()
+{
+	return pixels;
+}
+
+Header Image::getHeader()
+{
+	return header;
+}
+
+
+
+// outside functions -----------------------------------
+
+bool compareImages(Image& img1, Image& img2)
+{
+	if (img1.getPixelVector() == img2.getPixelVector() && img1.getHeader() == img2.getHeader())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+bool runSingleTest(string img1, string img2, string testNum)
+{
+	
+	Image image1;
+	image1.read(img1);
+
+	Image image2;
+	image2.read(img2);
+
+	bool compareTest = compareImages(image1, image2);
+
+	if (compareTest)
+	{
+		cout << testNum << " ......Passed!" << endl;
+	}
+	else
+	{
+		cout << testNum << " ......Failed!" << endl;
+	}
+
+	return compareTest;
+}
+
+void runAllTests()
+{
+	int passedCount = 0;
+	
+	passedCount += runSingleTest("output/car_copy.tga", "input/car.tga", "Test #2");
+
+
+	cout << "Test results: " << passedCount << " / 11" << endl;
+
 }
