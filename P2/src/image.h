@@ -48,7 +48,7 @@ struct Header
 class Image
 {
 	Header header;
-	std::vector<unsigned char> pixels;
+	std::vector<unsigned char> pixelData;
 public:
 	bool read(string filename);
 	bool write(string filename);
@@ -56,15 +56,15 @@ public:
 	// accessors ----------------------
 	short getWidth();
 	short getHeight();
-	unsigned char getPixel(int pixelIndex, int channel);
-	vector<unsigned char> getPixelVector();
+	unsigned char getChannel(int pixelIndex, int channel);
+	vector<unsigned char> getChannelDataVector();
 	Header getHeader();
 
 	// mutator ------------------------
-	void setPixel(int pixelIndex, int channel, unsigned char newPixelValue);
+	void setChannel(int pixelIndex, int channel, unsigned char newPixelValue);
 
 };
 
 bool compareImages(Image& img1, Image& img2);
-bool runSingleTest(Image& img1, Image& img2, string testNum);
+bool runSingleTest(string img1, string img2, string testNum);
 void runAllTests();

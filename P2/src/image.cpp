@@ -28,10 +28,10 @@ bool Image::read(string filename)
 
 	// ALLOCATING ELEMENTS FOR VECTOR
 	int pixelCount = header.imageWidth * header.imageHeight * 3;
-	pixels.resize(pixelCount);
+	pixelData.resize(pixelCount);
 	// PASS RAW POINTER TO FILE.READ()
 	// Starts with pixel[0] pixel[786431]
-	file.read(reinterpret_cast<char*>(pixels.data()), pixelCount);
+	file.read(reinterpret_cast<char*>(pixelData.data()), pixelCount);
 
 
 	cout << "Read Operation Successful" << endl;
@@ -61,7 +61,7 @@ bool Image::write(string filename)
 	file.write(&header.pixelDepth, sizeof(header.pixelDepth));
 	file.write(&header.imageDescriptor, sizeof(header.imageDescriptor));
 
-	file.write(reinterpret_cast<char*>(pixels.data()), pixels.size());
+	file.write(reinterpret_cast<char*>(pixelData.data()), pixelData.size());
 
 	cout << "Write Operation Successful" << endl;
 	return true;
@@ -78,17 +78,17 @@ short Image::getHeight()
 	return header.imageHeight;
 }
 
-unsigned char Image::getPixel(int pixelIndex, int channel)
+unsigned char Image::getChannel(int pixelIndex, int channel)
 {
 
 	// first calulates the index
 	// then returns the value of that index (0-255)
-	return pixels[pixelIndex * 3 + channel];
+	return pixelData[pixelIndex * 3 + channel];
 }
 
-vector<unsigned char> Image::getPixelVector()
+vector<unsigned char> Image::getChannelDataVector()
 {
-	return pixels;
+	return pixelData;
 }
 
 Header Image::getHeader()
@@ -98,11 +98,11 @@ Header Image::getHeader()
 
 // mutator ---------------------------------------------
 
-void Image::setPixel(int pixelIndex, int channel, unsigned char newPixelValue)
+void Image::setChannel(int pixelIndex, int channel, unsigned char newPixelValue)
 {
 	// first calculates the index
 	// then sets the pixelvalue of that channel to the newPixel value 
-	pixels[pixelIndex * 3 + channel] = newPixelValue;
+	pixelData[pixelIndex * 3 + channel] = newPixelValue;
 
 }
 
@@ -110,7 +110,7 @@ void Image::setPixel(int pixelIndex, int channel, unsigned char newPixelValue)
 
 bool compareImages(Image& img1, Image& img2)
 {
-	if (img1.getPixelVector() == img2.getPixelVector() && img1.getHeader() == img2.getHeader())
+	if (img1.getChannelDataVector() == img2.getChannelDataVector() && img1.getHeader() == img2.getHeader())
 	{
 		return true;
 	}
