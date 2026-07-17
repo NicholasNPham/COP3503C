@@ -78,6 +78,14 @@ short Image::getHeight()
 	return header.imageHeight;
 }
 
+unsigned char Image::getPixel(int pixelIndex, int channel)
+{
+
+	// first calulates the index
+	// then returns the value of that index (0-255)
+	return pixels[pixelIndex * 3 + channel];
+}
+
 vector<unsigned char> Image::getPixelVector()
 {
 	return pixels;
@@ -86,6 +94,16 @@ vector<unsigned char> Image::getPixelVector()
 Header Image::getHeader()
 {
 	return header;
+}
+
+// mutator ---------------------------------------------
+
+void Image::setPixel(int pixelIndex, int channel, unsigned char newPixelValue)
+{
+	// first calculates the index
+	// then sets the pixelvalue of that channel to the newPixel value 
+	pixels[pixelIndex * 3 + channel] = newPixelValue;
+
 }
 
 // outside functions -----------------------------------
@@ -132,7 +150,7 @@ void runAllTests()
 	
 	passedCount += runSingleTest("output/car_copy.tga", "input/car.tga", "Test #2");
 
-
+	cout << endl;
 	cout << "Test results: " << passedCount << " / 11" << endl;
 
 }
