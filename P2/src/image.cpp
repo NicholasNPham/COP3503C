@@ -88,8 +88,6 @@ Header Image::getHeader()
 	return header;
 }
 
-
-
 // outside functions -----------------------------------
 
 bool compareImages(Image& img1, Image& img2)
