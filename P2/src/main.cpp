@@ -99,6 +99,18 @@ void task6()
 	cout << "Task 6 complete" << endl;
 }
 
+void task7()
+{
+	Image img;
+	img.read("input/car.tga");
+
+	Image result = scaleBlueRed(img);
+
+	result.write("output/part7.tga");
+
+	cout << "Task 7 complete" << endl;
+}
+
 int main()
 {
 	task1();
@@ -107,6 +119,7 @@ int main()
 	task4();
 	task5();
 	task6();
+	task7();
 
 	runAllTests();
 

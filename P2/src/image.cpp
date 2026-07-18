@@ -312,6 +312,35 @@ Image addGreen(const Image& img)
 	return result;
 }
 
+Image scaleBlueRed(const Image& img)
+{
+	Image result;
+	result.setHeader(img.getHeader());
+
+	vector<unsigned char> resultVector = img.getChannelDataVector();
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = 0; pixel < numOfPixels; pixel++)
+	{
+		int blueChannelVal = img.getChannel(pixel, 0) * 0;
+		int redChannelVal = img.getChannel(pixel, 2) * 4;
+
+		if (redChannelVal > 255)
+		{
+			redChannelVal = 255;
+		}
+		unsigned char blueModifiedVal = static_cast<unsigned char>(blueChannelVal);
+		resultVector[pixel * 3 + 0] = blueModifiedVal;
+
+		unsigned char redModifiedVal = static_cast<unsigned char>(redChannelVal);
+		resultVector[pixel * 3 + 2] = redModifiedVal;
+	}
+
+	result.setChannelDataVector(resultVector);
+	return result;
+}
+
 // test functions --------------------------------------
 
 bool compareImages(Image& img1, Image& img2)
@@ -363,6 +392,7 @@ void runAllTests()
 	passedCount += runSingleTest("output/part4.tga", "examples/EXAMPLE_part4.tga", "Test #4");
 	passedCount += runSingleTest("output/part5.tga", "examples/EXAMPLE_part5.tga", "Test #5");
 	passedCount += runSingleTest("output/part6.tga", "examples/EXAMPLE_part6.tga", "Test #6");
+	passedCount += runSingleTest("output/part7.tga", "examples/EXAMPLE_part7.tga", "Test #7");
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 11" << endl;

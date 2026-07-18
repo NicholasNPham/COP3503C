@@ -75,6 +75,7 @@ Image subtract(const Image& img1, const Image& img2);
 Image screen(const Image& img1, const Image& img2);
 Image overlay(const Image& img1, const Image& img2);
 Image addGreen(const Image& ing);
+Image scaleBlueRed(const Image& img);
 
 // test functions ---------------------
 bool compareImages(Image& img1, Image& img2);
