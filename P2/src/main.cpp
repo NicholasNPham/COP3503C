@@ -2,31 +2,29 @@
 #include "image.h"
 using namespace std;
 
-// just for testing
-void testReadWrite()
+// task functions -----------
+
+void task1()
 {
-	Image image1;
-	image1.read("input/car.tga");
+	Image img1;
+	Image img2;
 
-	cout << "Height: " << image1.getHeight() << endl;
-	cout << "Width: " << image1.getWidth() << endl;
+	img1.read("input/layer1.tga");
+	img2.read("input/pattern1.tga");
 
-	image1.write("output/car_copy.tga");
+	Image result = multiply(img1, img2);
 
-	Image image2;
-	image2.read("output/car_copy.tga");
+	result.write("output/part1.tga");
 
-
-	cout << compareImages(image1, image2) << endl;
-
-
-	runAllTests();
+	cout << "Task 1 complete" << endl;
 }
 
 
 int main()
 {
+	task1();
 
+	runAllTests();
 
 	return 0;
 }

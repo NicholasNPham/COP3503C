@@ -197,9 +197,12 @@ bool runSingleTest(string img1, string img2, string testNum)
 
 void runAllTests()
 {
+	cout << endl;
+	cout << "Reading all files for testing..." << endl;
 	int passedCount = 0;
 	
-	passedCount += runSingleTest("output/car_copy.tga", "input/car.tga", "Test #2");
+	cout << endl;
+	passedCount += runSingleTest("output/part1.tga", "examples/EXAMPLE_part1.tga", "Test #1");
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 11" << endl;
