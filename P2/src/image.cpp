@@ -200,6 +200,45 @@ Image subtract(const Image& img1, const Image& img2)
 	return result;
 }
 
+Image screen(const Image& img1, const Image& img2)
+{
+	Image result;
+	result.setHeader(img1.getHeader());
+
+	vector<unsigned char> resultVector;
+	int resultWidth = result.getWidth();
+	int resultHeight = result.getHeight();
+
+	int pixelCount = resultWidth * resultHeight * 3;
+	resultVector.resize(pixelCount);
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = 0; pixel < numOfPixels; pixel++)
+	{
+		for (unsigned int channel = 0; channel < 3; channel++)
+		{
+			// Get img values
+			float img1ChanVal = img1.getChannel(pixel, channel) / 255.0f;
+			float img2ChanVal = img2.getChannel(pixel, channel) / 255.0f;
+			// subtract (a, b)
+			float subtractedChannelA = 1 - img1ChanVal;
+			float subtractedChannelB = 1 - img2ChanVal;
+			//multiply a and b
+			float multipliedChannelAB = subtractedChannelA * subtractedChannelB;
+			//subtract 1 - combined float
+			float subtractedCombinedAB = 1 - multipliedChannelAB;
+			// denormalize
+			float normalImgVal = subtractedCombinedAB * 255.0f;
+			//round
+			unsigned char resultVal = static_cast<unsigned char>(normalImgVal + 0.5f);
+			// assign new value to target channel
+			resultVector[pixel * 3 + channel] = resultVal;
+		}
+	}
+	result.setChannelDataVector(resultVector);
+	return result;
+}
 
 // test functions --------------------------------------
 
@@ -248,7 +287,7 @@ void runAllTests()
 	cout << endl;
 	passedCount += runSingleTest("output/part1.tga", "examples/EXAMPLE_part1.tga", "Test #1");
 	passedCount += runSingleTest("output/part2.tga", "examples/EXAMPLE_part2.tga", "Test #2");
-
+	passedCount += runSingleTest("output/part3.tga", "examples/EXAMPLE_part3.tga", "Test #3");
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 11" << endl;

@@ -34,10 +34,31 @@ void task2()
 	cout << "Task 2 complete" << endl;
 }
 
+void task3()
+{
+	Image img1;
+	Image img2;
+	Image img3;
+	
+	img1.read("input/layer1.tga");
+	img2.read("input/pattern2.tga");
+	img3.read("input/text.tga");
+
+	Image tempImg = multiply(img1, img2);
+
+	Image result = screen(tempImg, img3);
+
+	result.write("output/part3.tga");
+
+	cout << "Task 3 complete" << endl;
+
+}
+
 int main()
 {
 	task1();
 	task2();
+	task3();
 
 	runAllTests();
 
