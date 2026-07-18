@@ -54,11 +54,47 @@ void task3()
 
 }
 
+void task4()
+{
+	Image img1;
+	Image img2;
+	Image img3;
+
+	img1.read("input/layer2.tga");
+	img2.read("input/circles.tga");
+	img3.read("input/pattern2.tga");
+
+	Image tempImg = multiply(img1, img2);
+	Image result = subtract(img3, tempImg);
+
+	result.write("output/part4.tga");
+
+	cout << "Task 4 complete" << endl;
+}
+
+void task5()
+{
+	Image img1;
+	Image img2;
+
+	img1.read("input/layer1.tga");
+	img2.read("input/pattern1.tga");
+
+	Image result = overlay(img1, img2);
+
+	result.write("output/part5.tga");
+	
+	cout << "Task 5 complete" << endl;
+}
+
 int main()
 {
 	task1();
 	task2();
 	task3();
+	task4();
+	task5();
+
 
 	runAllTests();
 

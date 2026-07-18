@@ -240,6 +240,54 @@ Image screen(const Image& img1, const Image& img2)
 	return result;
 }
 
+Image overlay(const Image& img1, const Image& img2)
+{
+	Image result;
+	result.setHeader(img1.getHeader());
+
+	vector<unsigned char> resultVector;
+	int resultWidth = result.getWidth();
+	int resultHeight = result.getHeight();
+
+	int pixelCount = resultWidth * resultHeight * 3;
+	resultVector.resize(pixelCount);
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = 0; pixel < numOfPixels; pixel++)
+	{
+		for (unsigned int channel = 0; channel < 3; channel++)
+		{
+			// Get img values
+			float img1ChanVal = img1.getChannel(pixel, channel) / 255.0f;
+			float img2ChanVal = img2.getChannel(pixel, channel) / 255.0f;
+
+			float normalizedImgVal = 0;
+
+			// check float b/img2
+			if (img2ChanVal <= 0.5)
+			{
+				normalizedImgVal = 2 * img1ChanVal * img2ChanVal;
+			}
+			else
+			{
+				normalizedImgVal = 1 - 2 * (1 - img1ChanVal) * (1 - img2ChanVal);
+			}
+
+			// denormalize 
+			float denormalizedImgVal = normalizedImgVal * 255.0f;
+			//round
+			unsigned char resultVal = static_cast<unsigned char>(denormalizedImgVal + 0.5f);
+			// assign new value to target channel
+			resultVector[pixel * 3 + channel] = resultVal;
+		}
+	}
+
+	result.setChannelDataVector(resultVector);
+	return result;
+}
+
+
 // test functions --------------------------------------
 
 bool compareImages(Image& img1, Image& img2)
@@ -288,6 +336,8 @@ void runAllTests()
 	passedCount += runSingleTest("output/part1.tga", "examples/EXAMPLE_part1.tga", "Test #1");
 	passedCount += runSingleTest("output/part2.tga", "examples/EXAMPLE_part2.tga", "Test #2");
 	passedCount += runSingleTest("output/part3.tga", "examples/EXAMPLE_part3.tga", "Test #3");
+	passedCount += runSingleTest("output/part4.tga", "examples/EXAMPLE_part4.tga", "Test #4");
+	passedCount += runSingleTest("output/part5.tga", "examples/EXAMPLE_part5.tga", "Test #5");
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 11" << endl;
