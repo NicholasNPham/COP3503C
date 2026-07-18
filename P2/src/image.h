@@ -76,6 +76,7 @@ Image screen(const Image& img1, const Image& img2);
 Image overlay(const Image& img1, const Image& img2);
 Image addGreen(const Image& ing);
 Image scaleBlueRed(const Image& img);
+Image greyScaleIntensity(const Image& img, int channel);
 
 // test functions ---------------------
 bool compareImages(Image& img1, Image& img2);

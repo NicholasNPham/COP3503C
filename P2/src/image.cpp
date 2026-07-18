@@ -341,6 +341,33 @@ Image scaleBlueRed(const Image& img)
 	return result;
 }
 
+Image greyScaleIntensity(const Image& img, int targetChannel)
+{
+	Image result;
+	result.setHeader(img.getHeader());
+
+	vector<unsigned char> resultVector = img.getChannelDataVector();
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = 0; pixel < numOfPixels; pixel++)
+	{
+		int targetChannelVal = img.getChannel(pixel, targetChannel);
+
+		for (unsigned int channel = 0; channel < 3; channel++)
+		{
+			if (channel != targetChannel)
+			{
+				unsigned char modifiedVal = static_cast<unsigned char>(targetChannelVal);
+				resultVector[pixel * 3 + channel] = modifiedVal;
+			}
+		}
+	}
+
+	result.setChannelDataVector(resultVector);
+	return result;
+}
+
 // test functions --------------------------------------
 
 bool compareImages(Image& img1, Image& img2)
@@ -393,8 +420,11 @@ void runAllTests()
 	passedCount += runSingleTest("output/part5.tga", "examples/EXAMPLE_part5.tga", "Test #5");
 	passedCount += runSingleTest("output/part6.tga", "examples/EXAMPLE_part6.tga", "Test #6");
 	passedCount += runSingleTest("output/part7.tga", "examples/EXAMPLE_part7.tga", "Test #7");
+	passedCount += runSingleTest("output/part8_r.tga", "examples/EXAMPLE_part8_r.tga", "Test #8a");
+	passedCount += runSingleTest("output/part8_g.tga", "examples/EXAMPLE_part8_g.tga", "Test #8b");
+	passedCount += runSingleTest("output/part8_b.tga", "examples/EXAMPLE_part8_b.tga", "Test #8c");
 
 	cout << endl;
-	cout << "Test results: " << passedCount << " / 11" << endl;
+	cout << "Test results: " << passedCount << " / 13" << endl;
 
 }

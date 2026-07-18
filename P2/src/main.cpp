@@ -111,6 +111,22 @@ void task7()
 	cout << "Task 7 complete" << endl;
 }
 
+void task8()
+{
+	Image img;
+	img.read("input/car.tga");
+
+	Image result1 = greyScaleIntensity(img, 2);
+	Image result2 = greyScaleIntensity(img, 1);
+	Image result3 = greyScaleIntensity(img, 0);
+
+	result1.write("output/part8_r.tga");
+	result2.write("output/part8_g.tga");
+	result3.write("output/part8_b.tga");
+
+	cout << "Task 8 Complete" << endl;
+}
+
 int main()
 {
 	task1();
@@ -120,6 +136,7 @@ int main()
 	task5();
 	task6();
 	task7();
+	task8();
 
 	runAllTests();
 
