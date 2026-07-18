@@ -54,14 +54,16 @@ public:
 	bool write(string filename);
 
 	// accessors ----------------------
-	short getWidth();
-	short getHeight();
-	unsigned char getChannel(int pixelIndex, int channel);
-	vector<unsigned char> getChannelDataVector();
-	Header getHeader();
+	short getWidth() const;
+	short getHeight() const;
+	unsigned char getChannel(int pixelIndex, int channel) const;
+	vector<unsigned char> getChannelDataVector() const;
+	Header getHeader() const;
 
 	// mutator ------------------------
 	void setChannel(int pixelIndex, int channel, unsigned char newPixelValue);
+	void setChannelDataVector(const vector<unsigned char>& newChannelDataVector);
+	void setHeader(const Header& newHeader);
 
 };
 

@@ -68,17 +68,17 @@ bool Image::write(string filename)
 }
 
 // accessors -------------------------------------------
-short Image::getWidth()
+short Image::getWidth() const
 {
 	return header.imageWidth;
 }
 
-short Image::getHeight()
+short Image::getHeight() const
 {
 	return header.imageHeight;
 }
 
-unsigned char Image::getChannel(int pixelIndex, int channel)
+unsigned char Image::getChannel(int pixelIndex, int channel) const
 {
 
 	// first calulates the index
@@ -86,12 +86,12 @@ unsigned char Image::getChannel(int pixelIndex, int channel)
 	return pixelData[pixelIndex * 3 + channel];
 }
 
-vector<unsigned char> Image::getChannelDataVector()
+vector<unsigned char> Image::getChannelDataVector() const
 {
 	return pixelData;
 }
 
-Header Image::getHeader()
+Header Image::getHeader() const
 {
 	return header;
 }
@@ -104,6 +104,16 @@ void Image::setChannel(int pixelIndex, int channel, unsigned char newPixelValue)
 	// then sets the pixelvalue of that channel to the newPixel value 
 	pixelData[pixelIndex * 3 + channel] = newPixelValue;
 
+}
+
+void Image::setChannelDataVector(const vector<unsigned char>& newChannelDataVector)
+{
+	pixelData = newChannelDataVector;
+}
+
+void Image::setHeader(const Header& newHeader)
+{
+	header = newHeader;
 }
 
 // outside functions -----------------------------------
