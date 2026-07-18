@@ -67,6 +67,14 @@ public:
 
 };
 
+// outside functions ------------------
+
+// edit functions ---------------------
+
+Image multiply(const Image& img1, const Image& img2);
+
+// test functions ---------------------
+
 bool compareImages(Image& img1, Image& img2);
 bool runSingleTest(string img1, string img2, string testNum);
 void runAllTests();

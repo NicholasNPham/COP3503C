@@ -118,6 +118,47 @@ void Image::setHeader(const Header& newHeader)
 
 // outside functions -----------------------------------
 
+// image edit functions --------------------------------
+
+Image multiply(const Image& img1, const Image& img2)
+{
+	Image result;
+	result.setHeader(img1.getHeader());
+
+	vector<unsigned char> resultVector;
+	int resultWidth = result.getWidth();
+	int resultHeight = result.getHeight();
+
+	int pixelCount = resultWidth * resultHeight * 3;
+	resultVector.resize(pixelCount);
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = 0; pixel < numOfPixels; pixel++)
+	{
+		for (unsigned int channel = 0; channel < 3; channel++)
+		{
+			// Get img values
+			float img1ChanVal = img1.getChannel(pixel, channel) / 255.0f;
+			float img2ChanVal = img2.getChannel(pixel, channel) / 255.0f;
+			// multiply
+			float multipledImgVal = img1ChanVal * img2ChanVal;
+			// normalize 
+			float normalImgVal = multipledImgVal * 255.0f;
+			//round
+			unsigned char resultVal = static_cast<unsigned char>(normalImgVal + 0.5f);
+			// assign new value to target channel
+			resultVector[pixel * 3 + channel] = resultVal;
+
+		}
+	}
+
+	result.setChannelDataVector(resultVector);
+	return result;
+}
+
+// test functions --------------------------------------
+
 bool compareImages(Image& img1, Image& img2)
 {
 	if (img1.getChannelDataVector() == img2.getChannelDataVector() && img1.getHeader() == img2.getHeader())

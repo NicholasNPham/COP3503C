@@ -2,7 +2,8 @@
 #include "image.h"
 using namespace std;
 
-int main()
+// just for testing
+void testReadWrite()
 {
 	Image image1;
 	image1.read("input/car.tga");
@@ -20,6 +21,12 @@ int main()
 
 
 	runAllTests();
+}
+
+
+int main()
+{
+
 
 	return 0;
 }
