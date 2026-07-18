@@ -157,6 +157,50 @@ Image multiply(const Image& img1, const Image& img2)
 	return result;
 }
 
+Image subtract(const Image& img1, const Image& img2)
+{
+	Image result;
+	result.setHeader(img1.getHeader());
+
+	vector<unsigned char> resultVector;
+	int resultWidth = result.getWidth();
+	int resultHeight = result.getHeight();
+
+	int pixelCount = resultWidth * resultHeight * 3;
+	resultVector.resize(pixelCount);
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = 0; pixel < numOfPixels; pixel++)
+	{
+		for (unsigned int channel = 0; channel < 3; channel++)
+		{
+			// Get img values img2 = bottom, img1 = top
+			int img1ChanVal = img1.getChannel(pixel, channel);
+			int img2ChanVal = img2.getChannel(pixel, channel);
+			// subtract
+			int subtractVal = img2ChanVal - img1ChanVal;
+
+			if (subtractVal < 0)
+			{
+				subtractVal = 0;
+			}
+			else if (subtractVal > 255)
+			{
+				subtractVal = 255;
+			}
+
+			unsigned char resultVal = static_cast<unsigned char>(subtractVal);
+
+			// assign new value to target channel
+			resultVector[pixel * 3 + channel] = resultVal;
+		}
+	}
+	result.setChannelDataVector(resultVector);
+	return result;
+}
+
+
 // test functions --------------------------------------
 
 bool compareImages(Image& img1, Image& img2)
@@ -203,6 +247,8 @@ void runAllTests()
 	
 	cout << endl;
 	passedCount += runSingleTest("output/part1.tga", "examples/EXAMPLE_part1.tga", "Test #1");
+	passedCount += runSingleTest("output/part2.tga", "examples/EXAMPLE_part2.tga", "Test #2");
+
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 11" << endl;
