@@ -287,6 +287,30 @@ Image overlay(const Image& img1, const Image& img2)
 	return result;
 }
 
+Image addGreen(const Image& img)
+{
+	Image result;
+	result.setHeader(img.getHeader());
+
+	vector<unsigned char> resultVector = img.getChannelDataVector();
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = 0; pixel < numOfPixels; pixel++)
+	{
+		int greenChannelVal = img.getChannel(pixel, 1) + 200;
+
+		if (greenChannelVal > 255)
+		{
+			greenChannelVal = 255;			
+		}
+		unsigned char modifiedVal = static_cast<unsigned char>(greenChannelVal);
+		resultVector[pixel * 3 + 1] = modifiedVal;
+	}
+
+	result.setChannelDataVector(resultVector);
+	return result;
+}
 
 // test functions --------------------------------------
 
@@ -338,6 +362,7 @@ void runAllTests()
 	passedCount += runSingleTest("output/part3.tga", "examples/EXAMPLE_part3.tga", "Test #3");
 	passedCount += runSingleTest("output/part4.tga", "examples/EXAMPLE_part4.tga", "Test #4");
 	passedCount += runSingleTest("output/part5.tga", "examples/EXAMPLE_part5.tga", "Test #5");
+	passedCount += runSingleTest("output/part6.tga", "examples/EXAMPLE_part6.tga", "Test #6");
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 11" << endl;
