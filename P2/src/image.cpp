@@ -368,6 +368,41 @@ Image greyScaleIntensity(const Image& img, int targetChannel)
 	return result;
 }
 
+Image combineRGB(const Image& img1, const Image& img2, const Image& img3)
+{
+	Image result;
+	result.setHeader(img1.getHeader());
+
+	vector<unsigned char> resultVector = img1.getChannelDataVector();
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = 0; pixel < numOfPixels; pixel++)
+	{
+		// blue -----
+		int blueChannelVal = img1.getChannel(pixel, 0);
+
+		unsigned char blueModifiedVal = static_cast<unsigned char>(blueChannelVal);
+		resultVector[pixel * 3 + 0] = blueModifiedVal;
+
+		// green ----
+		int greenChannelVal = img2.getChannel(pixel, 1);
+		
+		unsigned char greenModifiedVal = static_cast<unsigned char>(greenChannelVal);
+		resultVector[pixel * 3 + 1] = greenModifiedVal;
+		
+		// red ------
+		int redChannelVal = img3.getChannel(pixel, 2);
+
+		unsigned char redModifiedVal = static_cast<unsigned char>(redChannelVal);
+		resultVector[pixel * 3 + 2] = redModifiedVal;
+	}
+
+	result.setChannelDataVector(resultVector);
+	return result;
+}
+
+
 // test functions --------------------------------------
 
 bool compareImages(Image& img1, Image& img2)
@@ -423,6 +458,7 @@ void runAllTests()
 	passedCount += runSingleTest("output/part8_r.tga", "examples/EXAMPLE_part8_r.tga", "Test #8a");
 	passedCount += runSingleTest("output/part8_g.tga", "examples/EXAMPLE_part8_g.tga", "Test #8b");
 	passedCount += runSingleTest("output/part8_b.tga", "examples/EXAMPLE_part8_b.tga", "Test #8c");
+	passedCount += runSingleTest("output/part9.tga", "examples/EXAMPLE_part9.tga", "Test #9");
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 13" << endl;

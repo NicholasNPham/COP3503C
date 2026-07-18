@@ -124,7 +124,24 @@ void task8()
 	result2.write("output/part8_g.tga");
 	result3.write("output/part8_b.tga");
 
-	cout << "Task 8 Complete" << endl;
+	cout << "Task 8 complete" << endl;
+}
+
+void task9()
+{
+	Image img1;
+	Image img2;
+	Image img3;
+
+	img1.read("input/layer_blue.tga");
+	img2.read("input/layer_green.tga");
+	img3.read("input/layer_red.tga");
+
+	Image result = combineRGB(img1, img2, img3);
+
+	result.write("output/part9.tga");
+
+	cout << "Task 9 complete" << endl;
 }
 
 int main()
@@ -137,6 +154,8 @@ int main()
 	task6();
 	task7();
 	task8();
+	task9();
+
 
 	runAllTests();
 
