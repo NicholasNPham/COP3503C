@@ -427,7 +427,6 @@ Image rotate180(const Image& img)
 	return result;
 }
 
-
 // test functions --------------------------------------
 
 bool compareImages(Image& img1, Image& img2)
