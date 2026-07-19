@@ -25,10 +25,31 @@
   <ItemGroup>
     <Text Include="notes.txt" />
     <Text Include="src\readme.txt" />
+    <Text Include="output\readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="output\part1.tga" />
+    <Image Include="output\part3.tga" />
+    <Image Include="output\part2.tga" />
+    <Image Include="output\part4.tga" />
+    <Image Include="output\part5.tga" />
+    <Image Include="output\part6.tga" />
+    <Image Include="output\part7.tga" />
+    <Image Include="input\car.tga" />
+    <Image Include="input\circles.tga" />
+    <Image Include="input\layer_blue.tga" />
+    <Image Include="input\layer_green.tga" />
+    <Image Include="input\layer_red.tga" />
+    <Image Include="input\layer1.tga" />
+    <Image Include="input\layer2.tga" />
+    <Image Include="input\pattern1.tga" />
+    <Image Include="input\pattern2.tga" />
+    <Image Include="input\text.tga" />
+    <Image Include="input\text2.tga" />
   </ItemGroup>
 </Project>
