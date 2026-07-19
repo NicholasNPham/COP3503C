@@ -78,6 +78,7 @@ Image addGreen(const Image& ing);
 Image scaleBlueRed(const Image& img);
 Image greyScaleIntensity(const Image& img, int channel);
 Image combineRGB(const Image& img1, const Image& img2, const Image& img3);
+Image rotate180(const Image& img);
 
 // test functions ---------------------
 bool compareImages(Image& img1, Image& img2);

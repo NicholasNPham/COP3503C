@@ -144,6 +144,18 @@ void task9()
 	cout << "Task 9 complete" << endl;
 }
 
+void task10()
+{
+	Image img;
+	img.read("input/text2.tga");
+	
+	Image result = rotate180(img);
+
+	result.write("output/part10.tga");
+
+	cout << "Task 10 complete" << endl;
+}
+
 int main()
 {
 	task1();
@@ -155,6 +167,7 @@ int main()
 	task7();
 	task8();
 	task9();
+	task10();
 
 
 	runAllTests();

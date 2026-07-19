@@ -402,6 +402,31 @@ Image combineRGB(const Image& img1, const Image& img2, const Image& img3)
 	return result;
 }
 
+Image rotate180(const Image& img)
+{
+	Image result;
+	result.setHeader(img.getHeader());
+
+	vector<unsigned char> resultVector = img.getChannelDataVector();
+
+	unsigned int numOfPixels = static_cast<unsigned int>(resultVector.size() / 3);
+
+	for (unsigned int pixel = numOfPixels; pixel > 0; pixel--) // numOfPixel = 4
+	{
+		unsigned int sourceIndex = pixel - 1; // index 3
+		unsigned int destinationIndex = numOfPixels - 1 - sourceIndex; // 4 - 1 - 3 = 0
+	
+		for (unsigned int channel = 0; channel < 3; channel++) // 0 - 2
+		{
+			//                0           * 3 +    0                          3            0
+			resultVector[destinationIndex * 3 + channel] = img.getChannel(sourceIndex, channel);
+		}
+	}
+
+	result.setChannelDataVector(resultVector);
+	return result;
+}
+
 
 // test functions --------------------------------------
 
@@ -459,6 +484,7 @@ void runAllTests()
 	passedCount += runSingleTest("output/part8_g.tga", "examples/EXAMPLE_part8_g.tga", "Test #8b");
 	passedCount += runSingleTest("output/part8_b.tga", "examples/EXAMPLE_part8_b.tga", "Test #8c");
 	passedCount += runSingleTest("output/part9.tga", "examples/EXAMPLE_part9.tga", "Test #9");
+	passedCount += runSingleTest("output/part10.tga", "examples/EXAMPLE_part10.tga", "Test #10");
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 13" << endl;
