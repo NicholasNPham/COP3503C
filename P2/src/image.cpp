@@ -427,6 +427,61 @@ Image rotate180(const Image& img)
 	return result;
 }
 
+// extra credit ----------------------------------------
+void placeImage(vector<unsigned char>& result, const Image& source, int rowOffset, int colOffset, int outputWidth)
+{
+	// loop through source image height
+	for (unsigned int sourceRow = 0; sourceRow < static_cast<unsigned int>(source.getHeight()); sourceRow++)
+	{
+		// loop though source image width
+		for (unsigned int sourceCol = 0; sourceCol < static_cast<unsigned int>(source.getWidth()); sourceCol++)
+		{
+			// nested loop gives up x and y
+
+			// vars for result vector with x, y offset 
+			unsigned int destinationRow = sourceRow + rowOffset;
+			unsigned int destinationCol = sourceCol + colOffset;
+
+			// because image is a vector not a chart, we get the index of the vector as if it was a chart
+			unsigned int resultFlatIndex = destinationRow * outputWidth + destinationCol;
+			// same thing as above but for source image 
+			unsigned int sourceFlatIndex = sourceRow * source.getWidth() + sourceCol;
+
+			// copied from rotate 180
+			for (unsigned int channel = 0; channel < 3; channel++) 
+			{
+				result[resultFlatIndex * 3 + channel] = source.getChannel(sourceFlatIndex, channel);
+			}
+		}
+	}
+}
+
+Image extraCredit(const Image& img1, const Image& img2, const Image& img3, const Image& img4)
+{
+	Image result;
+	Header resultHeader;
+	
+	resultHeader = img1.getHeader();
+
+	resultHeader.imageWidth *= 2;
+	resultHeader.imageHeight *= 2;
+
+	result.setHeader(resultHeader);
+
+	vector<unsigned char> resultVector;
+	int pixelCount = resultHeader.imageWidth * resultHeader.imageHeight * 3;
+	resultVector.resize(pixelCount);
+
+	placeImage(resultVector, img1, 512, 0, resultHeader.imageWidth);
+	placeImage(resultVector, img2, 512, 512, resultHeader.imageWidth);
+	placeImage(resultVector, img3, 0, 0, resultHeader.imageWidth);
+	placeImage(resultVector, img4, 0, 512, resultHeader.imageWidth);
+
+	result.setChannelDataVector(resultVector);
+	return result;
+}
+
+
 // test functions --------------------------------------
 
 bool compareImages(Image& img1, Image& img2)
@@ -484,6 +539,7 @@ void runAllTests()
 	passedCount += runSingleTest("output/part8_b.tga", "examples/EXAMPLE_part8_b.tga", "Test #8c");
 	passedCount += runSingleTest("output/part9.tga", "examples/EXAMPLE_part9.tga", "Test #9");
 	passedCount += runSingleTest("output/part10.tga", "examples/EXAMPLE_part10.tga", "Test #10");
+	passedCount += runSingleTest("output/extracredit.tga", "examples/EXAMPLE_extracredit.tga", "Test #11");
 
 	cout << endl;
 	cout << "Test results: " << passedCount << " / 13" << endl;

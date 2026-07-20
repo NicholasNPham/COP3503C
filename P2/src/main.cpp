@@ -156,6 +156,23 @@ void task10()
 	cout << "Task 10 complete" << endl;
 }
 
+void task11ExtraCredit()
+{
+	Image img1;
+	Image img2;
+	Image img3;
+	Image img4;
+
+	img1.read("input/car.tga");
+	img2.read("input/circles.tga");
+	img3.read("input/text.tga");
+	img4.read("input/pattern1.tga");
+
+	Image result = extraCredit(img1, img2, img3, img4);
+
+	result.write("output/extracredit.tga");
+}
+
 int main()
 {
 	task1();
@@ -168,7 +185,7 @@ int main()
 	task8();
 	task9();
 	task10();
-
+	task11ExtraCredit();
 
 	runAllTests();
 

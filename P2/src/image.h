@@ -80,6 +80,10 @@ Image greyScaleIntensity(const Image& img, int channel);
 Image combineRGB(const Image& img1, const Image& img2, const Image& img3);
 Image rotate180(const Image& img);
 
+// extra credit -----------------------
+void placeImage(vector<unsigned char>& result, const Image& source, int rowOffset, int colOffset, int outputWidth);
+Image extraCredit(const Image& img1, const Image& img2, const Image& img3, const Image& img4);
+
 // test functions ---------------------
 bool compareImages(Image& img1, Image& img2);
 bool runSingleTest(string img1, string img2, string testNum);
