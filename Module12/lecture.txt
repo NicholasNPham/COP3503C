@@ -34,9 +34,91 @@ STEPS FOR USING EXTERNAL LIBRARIES
 INSTALLATION: EASY / PREFERRED MODE
 - what you want to encounter
 	1. download an installer program
-	2. Run, wiat a little but then its done automagically 
+	2. Run, wait a little but then its done automagically 
 - Whats often the case:
 	1. Download this zip file
 	2. Extract to some folder.
 	3. Tell your operating system where to find that folder ( or reference that location when building a project)
+
+INSTALLATION: DEVELOPER MODE
+1. figure out which verison to download
+	- Which operating system?
+	- Which compiler?
+	- Pre-compiled library or the source code?
+	- Choose wisely, or it'll break later!
+2. Download and extract .zip file to some location
+3. Run a script using python via a command-line interface
+4. Realize you dont have python
+5. install python
+6. Run original installation command again
+7. Realize you didnt install correct version of python
+8. Go back to the documentation an learn which version of Python you need
+9. Install that
+10. Realize you cant have the old version and the new version installed withotu some isues
+11. Uninstall the new one
+12. Go bakc to step whatever and resume setup of the original tool
+13. Success maybe, hopefully
+
+INTEGRATING INTO A PROJECT
+- this is where it can get a little ugly...
+- Every library is different, you just have to sort it out.
+- Easy mode
+	- Installation include a sample project or some default settings you can use
+	- There could be a makefile, or some program you can run, and assuming Part 1 was done correctly, it "just works"
+	- Open up taht project and start writing your own code. 
+
+BUILDING A PROJECT: DEVELOPER EDITION
+- first, what files (library files and headers) do you need?
+- set your project to reference those files.
+- Set your project to reference the location of those files
+- Your IDE may have settings for all of these, or you can learn the different compiler options for a command-line bu9ild
+
+THERE ISNT A UNIVERSAL STANDARD
+- not all libraries will work with all compilers
+	- They may not work easily.
+- There is often a path of least resistance:
+	- for best results, use compiler on operating system
+- If you cant or dont want to follow the suggestions
+	- You're of the notepad or bust mindset
+- Sometimes there are biable alternatives... and sometimes there arent
+
+API (APPLICATION PROGRAMMING INTERFACE)
+- The structure of the code you have access to its API
+- What header files do you need to #include?
+	- These are a "table of contents" to indicate what is in those libraries you referenced.
+	- Suprise header files arnt just for rritating students
+- What namespaces are in thsoe headers?
+- What classes/functions are in those namespaces? That's what the library can do.
+- Not all APIs are created equally... some are easy to use and understand
+- Not all APIs are crated equally... some are easy to use and understand, have good documentation
+- Others? not so much, bad documentation,. confunsing naming conventions, "unclean" code etc
+
+HOW DO YOU KNOW YOU'RE DOING IT RIGHT?
+- does it compile? your compiler will tell you if its broken
+	- actually fixing that problem could be compilcated
+	- Missing a path? might be a simple file not found error.
+	- Didnt set a property? code you didnt write generates errors - how do you even begin to fix that? (easier said than done: set it property!)
+- Until you do it (and possibly fall flat on your face), you dont know
+- Read the documentation to see what you may have missed
+- Sometimes the error isnt apparent - the fastest solution is to start from the beginning and recheck everything
+
+IS WORKING WITH A LIBRARY ALWAYS THIS BAD?
+- yes and no. Some languages are better than others
+- The nature of C++ makes it more "hands on" process
+	- In C++ you have more control and power but more responsibility.
+- A langauge like python is easier to use in many ways
+	- There a standardized system of importing packages and modules (library isnt used as often)
+
+A NECESSARY EVIL
+- The inital setup of a project, or a tool chain, is nearly always a pain
+- THIS IS UNAVOIDABLE.
+- you cannot run away from this
+- Sometimes you get to use tools that "just work" and it's a wornderful, glorious thing
+- For all those other times.. you have to live with it and just deal.
+	- download yet another update, another driver, install another version of another library etc
+- You will get more comfirtable navigating this space as you do it more frequently.
+
+
+
+
 
