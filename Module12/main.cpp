@@ -1,21 +1,55 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+using namespace std;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode({ 200, 200 }), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+
+    sf::RenderWindow window(sf::VideoMode({ 1200, 800 }), "COP3503 is awesome!");
+
+    sf::Texture cardTexture;
+    cardTexture.loadFromFile("cards/2_of_clubs.png");
+    sf::Texture cardTexture2;
+    cardTexture2.loadFromFile("cards/4_of_hearts.png");
+
+
+    sf::Sprite card(cardTexture);
+    sf::Sprite card2(cardTexture2);
 
     while (window.isOpen())
     {
+
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
 
+        // 1. Clear anything that was previously rendered -- do this once
         window.clear();
-        window.draw(shape);
+
+        // 2. Draw anything that we want to appear on screen
+        for (int i = 0; i < 10; i++)
+        {
+            if (i % 2 == 0)
+            {
+            card.setPosition({ (float)i * 50, (float)i*25});
+            window.draw(card);
+            }
+            else
+            {
+                card2.setPosition({ (float)i * 50, (float)i * 25 });
+                window.draw(card2);
+            }
+        }
+
+        
+        
+
+        // 3. Copy anything that was drawn to the display device (monitor) -- do this only once 
         window.display();
+
     }
+
+    return 0;
 }
