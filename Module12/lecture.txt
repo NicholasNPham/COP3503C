@@ -1,0 +1,42 @@
+LIBRARIES
+
+WHAT ARE LIBRARIES
+- definition 1:
+	- libraries are code soluitions to some type of problem
+		- graphic funct9ionality, networking functionality, support for external hardware devices
+- definition 2:
+	- A library file sometimes called and archive. Reusable code (ie classes and functions) compiled into a single file.
+- Remember compiling code into object fiels, and then an exectuable?
+- We can compile code into into a library instead of an executable, and import that library into other projects.
+
+WHY USE LIBRARIES
+- C++ (especially namespace std) has lot of functionality,, but its core computational processes are:
+	- Primitive types, storage containers
+	- Data structures like vectors and maps
+	- File I/O
+	- Iterators over containers
+- These are solid components of any application.
+- Applications ofthen need functionality beyond this.
+
+EXAMPLES GOING BEYOND THE CORE
+- communicating with a website
+- drawing 2d or 3d graphics
+- building a user interface
+	- needs a graphics library plus the UI-specific funtionality
+- Working with audio or video files
+- Some larger libraries are made up of multiple smaller library files 
+
+STEPS FOR USING EXTERNAL LIBRARIES
+1. install the thing.
+2. intergrate it into a project
+3. Write code to utilize it
+
+INSTALLATION: EASY / PREFERRED MODE
+- what you want to encounter
+	1. download an installer program
+	2. Run, wiat a little but then its done automagically 
+- Whats often the case:
+	1. Download this zip file
+	2. Extract to some folder.
+	3. Tell your operating system where to find that folder ( or reference that location when building a project)
+
