@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
 
-    sf::RenderWindow window(sf::VideoMode({ 1200, 800 }), "COP3503 is awesome!");
+    sf::RenderWindow window(sf::VideoMode(1200, 800), "COP3503 is awesome!");
 
     sf::Texture cardTexture;
     cardTexture.loadFromFile("cards/2_of_clubs.png");
@@ -18,10 +18,10 @@ int main()
 
     while (window.isOpen())
     {
-
-        while (const std::optional event = window.pollEvent())
+        sf::Event event;
+        while (window.pollEvent(event))
         {
-            if (event->is<sf::Event::Closed>())
+            if (event.type == sf::Event::Closed)
                 window.close();
         }
 
@@ -33,18 +33,15 @@ int main()
         {
             if (i % 2 == 0)
             {
-            card.setPosition({ (float)i * 50, (float)i*25});
+            card.setPosition(i * 50, i*25);
             window.draw(card);
             }
             else
             {
-                card2.setPosition({ (float)i * 50, (float)i * 25 });
+                card2.setPosition(i * 50, i * 25);
                 window.draw(card2);
             }
         }
-
-        
-        
 
         // 3. Copy anything that was drawn to the display device (monitor) -- do this only once 
         window.display();
