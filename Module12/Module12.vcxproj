@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="lecture.txt" />
@@ -212,6 +213,9 @@
     <Image Include="cards\queen_of_hearts.png" />
     <Image Include="cards\queen_of_spades.png" />
     <Image Include="cards\red_joker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
