@@ -1,10 +1,10 @@
 #pragma once
 class Tile
 {
-	bool mineFlag;
-	bool flaggedFlag;
-	bool revealFlag;
-	int adjacentMines;
+	bool _mine;
+	bool _flagged;
+	bool _revealed;
+	int _adjacentMines;
 public:
 	Tile();
 
