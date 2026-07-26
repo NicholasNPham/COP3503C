@@ -45,4 +45,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="boards\config.cfg" />
+    <None Include="boards\lots_o_mines.brd" />
+    <None Include="boards\recursion_test.brd" />
+    <None Include="boards\testboard1.brd" />
+    <None Include="boards\testboard2.brd" />
+    <None Include="boards\testboard3.brd" />
+  </ItemGroup>
 </Project>

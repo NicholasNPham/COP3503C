@@ -15,6 +15,7 @@ class Board
 	bool _gameOver;
 	bool _gameLost;
 	bool _debugMode;
+	void buildGrid();
 public:
 	Board();
 	void loadConfigFile(string filename);
@@ -28,6 +29,8 @@ public:
 	int getColCount() const;
 	int getMineMinusFlagCount() const;
 	const Tile& getTileState(int row, int col) const;
+	void printBoard() const;
+	void printBoardDebug() const;
 
 	// Mutators ------------------------
 	void revealTile(int row, int col);
