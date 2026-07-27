@@ -115,19 +115,24 @@ void Game::run()
 
 				if (row >= 0 && row < _board.getRowCount() && col >= 0 && col < _board.getColCount())
 				{
-					if (_event.mouseButton.button == sf::Mouse::Left)
+
+					if (!_board.getIfGameOver())
 					{
-						_board.revealTile(row, col);
-					}
-					else if (_event.mouseButton.button == sf::Mouse::Right)
-					{
-						_board.toggleFlagPosition(row, col);
+						if (_event.mouseButton.button == sf::Mouse::Left)
+						{
+							_board.revealTile(row, col);
+							_board.checkAndSetWin();
+
+						}
+						else if (_event.mouseButton.button == sf::Mouse::Right)
+						{
+							_board.toggleFlagPosition(row, col);
+						}
 					}
 				}
-				
 			}
 		}
-		_window.clear();
+		_window.clear(sf::Color::White);
 		drawBoard();
 		_window.display();
 	}
