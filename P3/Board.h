@@ -27,6 +27,8 @@ public:
 	// Acessors ------------------------
 	int getRowCount() const;
 	int getColCount() const;
+	bool getIfGameOver() const;
+	bool getIfGameLost() const;
 	int getMineMinusFlagCount() const;
 	const Tile& getTileState(int row, int col) const;
 	void printBoard() const;
@@ -35,7 +37,7 @@ public:
 	// Mutators ------------------------
 	void revealTile(int row, int col);
 	void toggleFlagPosition(int row, int col);
-	bool checkWin();
+	bool checkAndSetWin();
 	void toggleDebug();
 };
 

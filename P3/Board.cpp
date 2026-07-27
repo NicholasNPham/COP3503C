@@ -154,6 +154,14 @@ int Board::getColCount() const {
 	return _numOfCols;
 }
 
+bool Board::getIfGameOver() const {
+	return _gameOver;
+}
+
+bool Board::getIfGameLost() const {
+	return _gameLost;
+}
+
 int Board::getMineMinusFlagCount() const {
 	return _mineMinusFlagCount;
 }
@@ -258,6 +266,13 @@ void Board::revealTile(int row, int col)
 	}
 	// reveal selected tile after guard check
 	_gridOfTiles[row][col].reveal();
+
+	if (_gridOfTiles[row][col].isMine())
+	{
+		_gameOver = true;
+		_gameLost = true;
+	}
+
 	// check if tile adj mines are 0 means its safe
 	if (_gridOfTiles[row][col].getAdjacentMines() == 0)
 	{
@@ -315,7 +330,7 @@ void Board::toggleFlagPosition(int row, int col)
 	}
 }
 
-bool Board::checkWin()
+bool Board::checkAndSetWin()
 {
 	for (int row = 0; row < _numOfRows; row++)
 	{
@@ -327,6 +342,7 @@ bool Board::checkWin()
 			}
 		}
 	}
+	_gameOver = true;
 	return true;
 }
 
