@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c3b85829-952e-408e-a495-320fb1a0dbd9}</ProjectGuid>
-    <RootNamespace>Module12</RootNamespace>
+    <ProjectGuid>{e1dc3258-d577-4ee9-aa83-2bf82d5ecf41}</ProjectGuid>
+    <RootNamespace>P3</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)EXTERNAL\SFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -151,75 +151,47 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Card.cpp" />
-    <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="lecture.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="cards\10_of_clubs.png" />
-    <Image Include="cards\10_of_diamonds.png" />
-    <Image Include="cards\10_of_hearts.png" />
-    <Image Include="cards\10_of_spades.png" />
-    <Image Include="cards\2_of_clubs.png" />
-    <Image Include="cards\2_of_diamonds.png" />
-    <Image Include="cards\2_of_hearts.png" />
-    <Image Include="cards\2_of_spades.png" />
-    <Image Include="cards\3_of_clubs.png" />
-    <Image Include="cards\3_of_diamonds.png" />
-    <Image Include="cards\3_of_hearts.png" />
-    <Image Include="cards\3_of_spades.png" />
-    <Image Include="cards\4_of_clubs.png" />
-    <Image Include="cards\4_of_diamonds.png" />
-    <Image Include="cards\4_of_hearts.png" />
-    <Image Include="cards\4_of_spades.png" />
-    <Image Include="cards\5_of_clubs.png" />
-    <Image Include="cards\5_of_diamonds.png" />
-    <Image Include="cards\5_of_hearts.png" />
-    <Image Include="cards\5_of_spades.png" />
-    <Image Include="cards\6_of_clubs.png" />
-    <Image Include="cards\6_of_diamonds.png" />
-    <Image Include="cards\6_of_hearts.png" />
-    <Image Include="cards\6_of_spades.png" />
-    <Image Include="cards\7_of_clubs.png" />
-    <Image Include="cards\7_of_diamonds.png" />
-    <Image Include="cards\7_of_hearts.png" />
-    <Image Include="cards\7_of_spades.png" />
-    <Image Include="cards\8_of_clubs.png" />
-    <Image Include="cards\8_of_diamonds.png" />
-    <Image Include="cards\8_of_hearts.png" />
-    <Image Include="cards\8_of_spades.png" />
-    <Image Include="cards\9_of_clubs.png" />
-    <Image Include="cards\9_of_diamonds.png" />
-    <Image Include="cards\9_of_hearts.png" />
-    <Image Include="cards\9_of_spades.png" />
-    <Image Include="cards\ace_of_clubs.png" />
-    <Image Include="cards\ace_of_diamonds.png" />
-    <Image Include="cards\ace_of_hearts.png" />
-    <Image Include="cards\ace_of_spades.png" />
-    <Image Include="cards\black_joker.png" />
-    <Image Include="cards\card_back.png" />
-    <Image Include="cards\jack_of_clubs.png" />
-    <Image Include="cards\jack_of_diamonds.png" />
-    <Image Include="cards\jack_of_hearts.png" />
-    <Image Include="cards\jack_of_spades.png" />
-    <Image Include="cards\king_of_clubs.png" />
-    <Image Include="cards\king_of_diamonds.png" />
-    <Image Include="cards\king_of_hearts.png" />
-    <Image Include="cards\king_of_spades.png" />
-    <Image Include="cards\queen_of_clubs.png" />
-    <Image Include="cards\queen_of_diamonds.png" />
-    <Image Include="cards\queen_of_hearts.png" />
-    <Image Include="cards\queen_of_spades.png" />
-    <Image Include="cards\red_joker.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Card.h" />
-    <ClInclude Include="Deck.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Tile.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="boards\config.cfg" />
+    <None Include="boards\lots_o_mines.brd" />
+    <None Include="boards\recursion_test.brd" />
+    <None Include="boards\testboard1.brd" />
+    <None Include="boards\testboard2.brd" />
+    <None Include="boards\testboard3.brd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\debug.png" />
+    <Image Include="images\digits.png" />
+    <Image Include="images\face_happy.png" />
+    <Image Include="images\face_lose.png" />
+    <Image Include="images\face_win.png" />
+    <Image Include="images\flag.png" />
+    <Image Include="images\mine.png" />
+    <Image Include="images\number_1.png" />
+    <Image Include="images\number_2.png" />
+    <Image Include="images\number_3.png" />
+    <Image Include="images\number_4.png" />
+    <Image Include="images\number_5.png" />
+    <Image Include="images\number_6.png" />
+    <Image Include="images\number_7.png" />
+    <Image Include="images\number_8.png" />
+    <Image Include="images\test_1.png" />
+    <Image Include="images\test_2.png" />
+    <Image Include="images\test_3.png" />
+    <Image Include="images\tile_hidden.png" />
+    <Image Include="images\tile_revealed.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
