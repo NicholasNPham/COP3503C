@@ -10,7 +10,10 @@ class Game
 	Board _board;
 	void loadTextures();
 	void drawBoard();
-	void drawTile();
+	void drawFace();
+	void drawButtons();
+	void drawCounter();
+	bool isInside(int mouseX, int mouseY, int bx, int by, int width, int height);
 public:
 	Game();
 	void run();

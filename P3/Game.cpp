@@ -71,6 +71,127 @@ void Game::drawBoard()
 	}
 }
 
+void Game::drawFace()
+{
+
+	sf::Sprite sprite;
+	string faceKey;
+
+	if (!_board.getIfGameOver())
+	{
+		faceKey = "happyFace";
+	}
+	else
+	{
+		// game is over: won or lost?
+		if (_board.getIfGameLost())
+		{
+			faceKey = "sadFace";
+		}
+		else
+		{
+			faceKey = "winFace";
+		}
+	}
+
+
+	int x = (_board.getColCount() / 2) * 32 - 32;
+	int y = _board.getRowCount() * 32;
+
+	sprite.setTexture(_tm.getTexture(faceKey));
+	sprite.setPosition(x, y);
+	_window.draw(sprite);
+
+}
+
+void Game::drawButtons()
+{
+	sf::Sprite sprite;
+
+	int debugXPos = _board.getColCount() * 32 - 256;
+	int debugYPos = _board.getRowCount() * 32;
+
+	sprite.setTexture(_tm.getTexture("debug"));
+	sprite.setPosition(debugXPos, debugYPos);
+	_window.draw(sprite);
+
+	int test1XPos = _board.getColCount() * 32 - 192;
+	int test1YPos = _board.getRowCount() * 32;
+
+	sprite.setTexture(_tm.getTexture("test1"));
+	sprite.setPosition(test1XPos, test1YPos);
+	_window.draw(sprite);
+
+	int test2XPos = _board.getColCount() * 32 - 128;
+	int test2YPos = _board.getRowCount() * 32;
+
+	sprite.setTexture(_tm.getTexture("test2"));
+	sprite.setPosition(test2XPos, test2YPos);
+	_window.draw(sprite);
+
+	int test3XPos = _board.getColCount() * 32 - 64;
+	int test3YPos = _board.getRowCount() * 32;
+
+	sprite.setTexture(_tm.getTexture("test3"));
+	sprite.setPosition(test3XPos, test3YPos);
+	_window.draw(sprite);
+}
+
+void Game::drawCounter()
+{
+	int count = _board.getMineMinusFlagCount();
+
+	bool negCount = false;
+
+	if (count < 0)
+	{
+		negCount = true;
+		count *= -1;
+	}
+
+	int hundreds = (count / 100) % 10;
+	int tens = (count / 10) % 10;
+	int ones = count % 10;
+
+	sf::Sprite sprite;
+	sprite.setTexture(_tm.getTexture("digits"));
+
+	if (!negCount)
+	{
+	// hundreds
+		sprite.setTextureRect(sf::IntRect(hundreds * 21, 0, 21, 32));
+		sprite.setPosition(33, _board.getRowCount() * 32);
+		_window.draw(sprite);
+	}
+	else
+	{
+		sprite.setTextureRect(sf::IntRect(10 * 21, 0, 21, 32));
+		sprite.setPosition(33, _board.getRowCount() * 32);
+		_window.draw(sprite);
+	}
+
+	// tenths
+	sprite.setTextureRect(sf::IntRect(tens * 21, 0, 21, 32));
+	sprite.setPosition(54, _board.getRowCount() * 32);
+	_window.draw(sprite);
+
+	//ones
+	sprite.setTextureRect(sf::IntRect(ones * 21, 0, 21, 32));
+	sprite.setPosition(75, _board.getRowCount() * 32);
+	_window.draw(sprite);
+
+
+}
+
+bool Game::isInside(int mouseX, int mouseY, int bx, int by, int width, int height)
+{
+	return mouseX >= bx &&
+		mouseX < bx + width &&
+		mouseY >= by &&
+		mouseY < by + height;
+}
+
+// public ----------------------------------
 Game::Game()
 {
 	_board.loadConfigFile("boards/config.cfg");
@@ -130,10 +251,38 @@ void Game::run()
 						}
 					}
 				}
+				else
+				{
+					// face position
+					int faceXPos = (_board.getColCount() / 2) * 32 - 32;
+					int faceYPos = _board.getRowCount() * 32;
+
+					if (isInside(_event.mouseButton.x, _event.mouseButton.y, faceXPos, faceYPos, 64, 64))
+					{
+						_board.resetGame();
+					}
+					
+					// debug button
+					int debugXPos = _board.getColCount() * 32 - 256;
+					int debugYPos = _board.getRowCount() * 32;
+					if (isInside(_event.mouseButton.x, _event.mouseButton.y, debugXPos, debugYPos, 64, 64) && !_board.getIfGameOver())
+					{
+						_board.toggleDebug();
+					}
+
+
+
+
+					//isInside(int mouseX, int mouseY, int bx, int by, int width, int height);
+					//isInside(int mouseX, int mouseY, int bx, int by, int width, int height);
+				}
 			}
 		}
 		_window.clear(sf::Color::White);
 		drawBoard();
+		drawFace();
+		drawCounter();
+		drawButtons();
 		_window.display();
 	}
 }
