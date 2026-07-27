@@ -171,6 +171,28 @@
     <None Include="boards\testboard2.brd" />
     <None Include="boards\testboard3.brd" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\debug.png" />
+    <Image Include="images\digits.png" />
+    <Image Include="images\face_happy.png" />
+    <Image Include="images\face_lose.png" />
+    <Image Include="images\face_win.png" />
+    <Image Include="images\flag.png" />
+    <Image Include="images\mine.png" />
+    <Image Include="images\number_1.png" />
+    <Image Include="images\number_2.png" />
+    <Image Include="images\number_3.png" />
+    <Image Include="images\number_4.png" />
+    <Image Include="images\number_5.png" />
+    <Image Include="images\number_6.png" />
+    <Image Include="images\number_7.png" />
+    <Image Include="images\number_8.png" />
+    <Image Include="images\test_1.png" />
+    <Image Include="images\test_2.png" />
+    <Image Include="images\test_3.png" />
+    <Image Include="images\tile_hidden.png" />
+    <Image Include="images\tile_revealed.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

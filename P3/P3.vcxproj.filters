@@ -53,4 +53,66 @@
     <None Include="boards\testboard2.brd" />
     <None Include="boards\testboard3.brd" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="images\debug.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\digits.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\face_happy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\face_lose.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\face_win.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\flag.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\mine.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\number_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\number_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\number_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\number_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\number_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\number_6.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\number_7.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\number_8.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\test_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\test_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\test_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\tile_hidden.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="images\tile_revealed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

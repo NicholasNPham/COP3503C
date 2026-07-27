@@ -292,6 +292,15 @@ void Board::revealTile(int row, int col)
 
 void Board::toggleFlagPosition(int row, int col)
 {
+	if (
+		row < 0 ||
+		row >= _numOfRows ||
+		col < 0 ||
+		col >= _numOfCols)
+	{
+		return;
+	}
+
 	if (_gridOfTiles[row][col].isRevealed() == false)
 	{
 		_gridOfTiles[row][col].toggleFlag();
