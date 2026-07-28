@@ -1,0 +1,48 @@
+19.1 SORTING: INTRODUCTION
+- Sorting is the process of converting a list of elements into ascending (or descending) order.
+- For example, given a list of numbers {17, 3, 44, 6, 9}, the list after sorting is {3, 6, 9, 17, 44}.
+- You may have carried out sorting when arranging papers in alphabetical order, or arranging envelopes to have ascending zip codes
+- The challenge of sorting is that a program can't see the entire list to know where to move an element, instead, a program is limited to simpler steps, typically obseriving or swapping just two elmetns at a time.
+- So sorting just by swapping values is an important part of sorting alorithms
+- Sorting Rules
+	- It can be ascending and descending order
+	- Numbers are a given
+	- Characters are sorted by alphabetical order, really ascii value
+	- When its a character of strings, they are sorting by the first character alphabetical order
+	- when one string is a prefix of another, the shorter one comes first
+- Sorting full algorithm
+	- Compare the two strings characters by charac ter, startting at index 0
+	- At each position, if the characters differ, the string with the smaller character comes first, stop you have your answer
+	- If the characters are the same, move to the next position and repeat.
+	- If you reach the end of one string before finding any difference (one string ran out of characters), the shorter string comes first. This is the prefix chase, like great and greater
+	- If both strings are identical in every character and the same length, they're equal
+
+19.2 SEARCHING AND ALGORITHMS
+- An algorithm is a sequence of steps for accomplishing a task
+- A linear search is a search algorithm that starts from the beginning of a list, and checks each element until the search key is found or the end of the list is reached.
+
+RUNTIME
+- an algorith,s runtime is the time the algorith, takes to execute
+- If each comparision takes 1 microsect, a linear search is up to 1s to search a list with 1,000,000 elements 10 s for 10,000,000 elements, and so on:
+- Ex:
+	- Searching Amazon's store which has more than 200 million items, could require more than 3 minutes
+- An algorithm, typically uses a number of steps proportional to the size of the input.
+- For a list with 32 elements, linear search requires at most 32 comparisons
+	- 1 comparisons if the seach key is found at index
+	- 2 if found at index 1, and so on, up to 32 comparisons if the search key is not found.
+- For the seach key is not found. For a list with N elemetns, linear search thus requires at most N comparisons.
+- The algorithm is said to require "on the order" of N comparisons
+
+19.3 SELECTION SORT
+- Selection sort is a sorting algorithm that treats the input as two parts, a sorted part and an unsorted part, and repeatedly selects that proper next value to move from the unsorted part to the end of the sorted part
+
+RUNTIME
+- Selection sort may require a large number of comparisons
+- The seletion sort algorith, runtime is O(n^2).
+- If a list of N elements, the outer loop executes N - 1 times. 
+- For each of those N - 1 outer loop executions, the inner loop executes an average of (n/2) times.
+- So the total number of comparisons is proportional to (n - 1) * (n / 2) or O(N^2).
+- Other sorting algorith,s involving more complex algorith,s but have faster execution times
+- When sorting a list with 50 elements, indexSmallest will be assigned to a minium of how many elements minus 1 times
+	- If a list has 50 elements, a minimum comparisons will be 49 times. 
+- When comparing speeds Largest O(N^2) / Smallest O(N^2)
