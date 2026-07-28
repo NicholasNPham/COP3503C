@@ -219,16 +219,6 @@ Game::Game()
 	loadTextures();
 
 	_board.resetGame();
-
-	//// TEMP: reveal all for drawBoard testing, delete later
-	//for (int row = 0; row < _board.getRowCount(); row++)
-	//{
-	//	for (int col = 0; col < _board.getColCount(); col++)
-	//	{
-	//		_board.toggleFlagPosition(row, col);
-	//	}
-	//}
-
 }
 
 void Game::run()
