@@ -1,0 +1,25 @@
+19.4 INSERTION SORT
+- Insertion sort is a sorting algoritm that treats the input as two parts, a sorted part and an unsorted part, and repeatedly inserts the next value from the unsorted part into the correct location in the sorted part
+- In the worst case, assuming each comparison takes 1 µs, how long will insertion sort algorithm take to sort a list of 10 elements?
+	- calculate using n * (n+1) / 2
+
+19.5 BINARY SEARCH
+- Linear Search may require searching all list elements, which can lead to long runtimes.
+- For example, searching all list elements, which cal lead to long runtimes.
+- For example,. searching for a contact on a smartphone one by one can be time consuming.
+- Because a constact list is sorted, a faster search, known as a binary search, checks the middle contact first.
+- If the desired contact comes alphabetically before the middle contact, binary seach will then search the first half and otherwise the last half.- Each step reduces the contacts that need to be searched by half.
+
+- Binary Search is a faster algorithm for searching a list if the list's elements are sorted and directly accessible (such as an array)
+- Binary search first checks the middle element of the list. 
+- If the search key is found, the algorithm returns the matching location
+- If the search key is not found, the algorithm repeats the search on the remianing left sublist ( if the seach key was less than the middle element) or the remianing right sublist (if the seach key was greater than the middle element)
+
+- to check how many checks will be needed in a n elements array
+	- log(32) / log(2) 
+	- For example of n = 32
+		- log (32) = 1.5051499783199059760686944736225
+		- log (2) = 0.30102999566398119521373889472449
+		- 1.5051499783199059760686944736225 / 0.30102999566398119521373889472449 = 5
+
+- To determine what is the runtime the math goes log2(n) + 1
