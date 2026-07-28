@@ -1,0 +1,127 @@
+SORTING
+
+WHY SORT YOUR DATA (OR ANYTHING ELSE)
+- Easy answer: to more easily ( or quickly!) find something
+- Storing data is just the first step.
+	- We have arrays, linked lists, maps, and so on
+- Finding one element in unsorted data is time consuming
+- Generally speaking, this is how we use data
+	- Step 1. Store the data
+	- Step 2. Access the data
+	- Step 3. Use the data
+
+SORTING EXAMPLES
+- By numerical value (ascending, low to high, or descending, high to low
+- Sort a list of items for sale, by price or other attributs:
+	- Physical attributes like size or weight
+	- Rating, find the best (or worst) reviewed products first
+	- Time ending (think of auctions or limited-duration sales)
+- Vehicles sorted by mileage
+- Books sorted by publication date
+- Names strings, sorting in alphabetical order
+
+SORTING ALGORITHMS
+- bubble sort, selection sort, insertion sort -> naive sorting algorithm
+- quicksort, merge sort, heap sort, std::sort
+- Why so many sorting algorithms
+	- They werent developed at the same time
+	- They differ in complexity (ease of implementation and performance)
+
+BUBBLE SORT
+- A very simple algorithm: easy to implement,inefficient
+- Sometimes referred to as a naive algorithm - not terrible intelligent, uses brute force to get the job done
+- Like bubbles mopve though water values "bubble" though a container to their destination
+- "Fine" for small data sets, infrequent sorts
+- Eclipsed by just about every other algorithm
+
+BUBBLE SORT ALGORITHM
+- Compare each pair of adjacent elements, starting from the beginning of the lsit
+	- If they are in reverse order, swap them
+- If at least one change was made to the list ( at least one pair of values swapped) then repeat step one
+	- else the list is sorted youre all done
+
+SORTING ALGORITHM: EYEBALL SORT
+- Humans can bery quickly assess a wide variety of inputs
+- Is A taller than B (and C and D and E)?
+- Does it look likely to rain today
+- Which shirt matches these paints
+- Is that (not to large) group of values in order?
+- Is your significant other acting strangly today?
+
+THE HUMAN BRAIN CAN INTUIT MANY THINGS
+- Computers algorithms are terrible at doing that
+- An algorithm can't just know if something is sorted, or complete, or a match
+	- It must calcualte, compare, verify
+	- It must prove that something is equal to some particular result
+	- Or prove statistical approximation: based on factors x, y, and z, it is 80% likely to rain today
+	- Humans can  provide numeric approximations, but were not very good at it (without training
+
+SELECTION SORTS
+- better than bubble sort in some scenarios
+- Still not very efficent (especially on large data sets)
+- "selects" an index, finds the best value for it, swaps the value into that index
+	- Finds the best value for element[0], then never check [0] again (repeat for all indices)
+- Avoids re-sorting or re-checking values (somewhat)
+- Implement some "intelligent thought" to the sorting process - but just barely!
+
+SELECTION SORT ALGORITHM
+- Conceptually, a list of values canbe split into two parts
+	- Sorted portion: initially empty (nothing has been sorted yet)
+	- Unsorted portion: The rest of the list
+- From the unsorted values, find the highest or lowerst value (depending on the sorting order) track its location/index
+- Add that value to the end of the sorted array
+- Repeat until the list is sorted
+	- First pass swaps into list[0], second pass into list[1], etc. 
+
+INSERTION SORT
+- somewhat a hybrid betwene Bubble and selection
+	- A bit of bubble: values "bubble" to the proper location
+	- A bit of selection: values are sorted one index at a time
+- More effective than bubble sort
+- Usually more effective than selection sort
+
+INSERTION SORT ALGORITHM
+- Conceptually, split data into two parts (sound familiar?)
+	- Sorted portion: start with just one value, the first element
+	- Unsorted portion: the rest of the list
+- While there are elements in the unsorted list:
+	- Add first unsorted element to the end of the sorted list.
+	- Move this element foward (by swapping) as long as:
+		- It is not the first element (can't swap with list[-1]) AND 
+		- It is less than the element which precides it
+
+SEARCHING
+- the reasony we sort, is to make finding faster
+- Imaging an array of 1M unsorted elements
+- Where is the thing youre searching for
+- No way of knowning ,,, have to search one at a time, from the beginning
+- We call this linear or sequential searching
+	- For small collections, no big deal
+	- For large collections, or frequent searches, less than idea
+
+BINARY SEARCH
+- Binary searching greatly reduces the time to find sometihng
+- A "divide-and-conquer" approach
+- Split the data into two halves
+	- Perform a broad search to eliminate one half
+	- Split that half into two more halves, and search
+	- Repeat until found (or no more seaches possible
+- Data must be sorted
+
+BINARY SEACH ALGORITHM EXPLAINED
+- a large part of this process is defining the search area
+	- Initially it will be the entire list
+	- If the seach is unsuccessful, refine/reduce the seach area
+- The seach area is 3 index values
+	- A minimum index (initially zero - the start of the array)
+	- A maximum index (initially numberOfElements - 1)
+	- A mid index (min + (max - min) / 2)
+- As long as minIndex <= maxIndex, repeat the process
+- if the middle element is equal to your search term, stop
+- Else if the seach term is less than the middle:
+	- New search area is first (lower) half of the remaining data
+	- max and mid index values are reduce
+- Else, if the search term is greater than the middle:
+	- New search area is the second (upper) half of the remaining data
+	- min and mid index values are increased 
+
