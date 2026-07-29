@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 void PrintNumbers(vector<int>& numbers)
@@ -27,7 +28,7 @@ void BubbleSort(vector<int>& numbers)
 				int temp = numbers[i];
 				numbers[i] = numbers[i + 1];
 				numbers[i + 1] = temp;
-		
+
 				swapWasMade = true;
 			}
 		}
@@ -45,7 +46,7 @@ void SelectionSort(vector<int>& numbers)
 	for (unsigned int i = 0; i < numbers.size() - 1; i++)
 	{
 		int minIndex = i; // ---> assuming this is the smallest numbers location
-		int sortedIndex = i; 
+		int sortedIndex = i;
 		for (int j = i + 1; j < numbers.size(); j++)
 		{
 			if (numbers[j] < numbers[minIndex])
@@ -59,7 +60,7 @@ void SelectionSort(vector<int>& numbers)
 			int temp = numbers[minIndex];
 			numbers[minIndex] = numbers[sortedIndex];
 			numbers[sortedIndex] = temp;
-		
+
 			count += 1;
 			cout << "Swapped: " << count << " times" << endl;
 		}
@@ -118,14 +119,18 @@ int main()
 	//PrintNumbers(numbers);
 	//cout << endl;
 
-	InsertionSort(numbers);
-	cout << "Insertion Sorted: " << endl;
-	PrintNumbers(numbers);
+	//InsertionSort(numbers);
+	//cout << "Insertion Sorted: " << endl;
+	//PrintNumbers(numbers);
+	//cout << endl;
+
+	vector<int> sorted = numbers;      // copy, not sort's return value
+	sort(sorted.begin(), sorted.end()); // sorts the copy in place
+
+	cout << "Sorted: " << endl;
+	PrintNumbers(sorted);
 	cout << endl;
-
-
-
-
-
+	
+	return 0;
 
 }

@@ -1,5 +1,6 @@
 //#include <iostream>
 //#include <vector>
+//#include <algorithm>
 //using namespace std;
 //
 //void PrintNumbers(vector<int>& numbers)
@@ -90,7 +91,7 @@
 //	}
 //}
 //
-//int demo1()
+//int demo2()
 //{
 //
 //	int arr[] = { 24, 35, 15, 49, 45, 36, 19, 43, 40, 28,
@@ -118,14 +119,14 @@
 //	//PrintNumbers(numbers);
 //	//cout << endl;
 //
-//	InsertionSort(numbers);
-//	cout << "Insertion Sorted: " << endl;
-//	PrintNumbers(numbers);
-//	cout << endl;
+//	//InsertionSort(numbers);
+//	//cout << "Insertion Sorted: " << endl;
+//	//PrintNumbers(numbers);
+//	//cout << endl;
 //
+//	sort(numbers.begin(), numbers.end());
 //
 //
 //	return 0;
-//
 //
 //}
