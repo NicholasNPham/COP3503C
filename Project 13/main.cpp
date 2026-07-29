@@ -91,16 +91,56 @@ void InsertionSort(vector<int>& numbers)
 	}
 }
 
+bool BinarySearch(vector<int>& numbers, int val)
+{
+	int numTries = 0;
+	int lowIndex = 0, highIndex = numbers.size() - 1;
+
+	while (lowIndex <= highIndex)
+	{
+		numTries++;
+		int midPoint = lowIndex + (highIndex - lowIndex) / 2;
+		if (numbers[midPoint] == val)
+		{
+			cout << "Found " << val << " in " << numTries << " searches!" << endl;
+			return true;
+		}
+		else if (numbers[midPoint] > val)
+		{
+			highIndex = midPoint - 1;
+		}
+		else if (numbers[midPoint] < val)
+		{
+			lowIndex = midPoint + 1;
+		}
+	}
+
+	cout << "After " << numTries << " searches, the value " << val << " was not found in the list" << endl;
+	return false;
+}
+
+bool LinearSearch(vector<int>& numbers, int val)
+{
+	for (unsigned int i = 0; i < numbers.size(); i++)
+	{
+		if (numbers[i] == val)
+		{
+			cout << "Found " << val << " in " << i + 1 << " searches!" << endl;
+			return true;
+		}
+	}
+	cout << "After " << numbers.size() << "  searches, the value " << val << " was not found in the list." << endl;
+	return false;
+}
+
 int main()
 {
 
-	int arr[] = { 24, 35, 15, 49, 45, 36, 19, 43, 40, 28,
-				  12, 16, 44, 18, 24, 26, 26, 35, 37, 30,
-				  7, 17, 4, 45, 13, 7, 41, 29, 26, 19 };
+	int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 	vector<int> numbers;
 
-	for (int i = 0; i < 30; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		numbers.push_back(arr[i]);
 	}
@@ -124,13 +164,31 @@ int main()
 	//PrintNumbers(numbers);
 	//cout << endl;
 
-	vector<int> sorted = numbers;      // copy, not sort's return value
-	sort(sorted.begin(), sorted.end()); // sorts the copy in place
+	//vector<int> sorted = numbers;      // copy, not sort's return value
+	//sort(sorted.begin(), sorted.end()); // sorts the copy in place
 
-	cout << "Sorted: " << endl;
-	PrintNumbers(sorted);
-	cout << endl;
-	
+	//cout << "Sorted: " << endl;
+	//PrintNumbers(sorted);
+	//cout << endl;
+
+	while (true)
+	{
+		int input;
+		cin >> input;
+		if (input == -1)
+		{
+			break;
+		}
+
+		cout << "Binary Search: ";
+		BinarySearch(numbers, input);
+		cout << "Linear Search: ";
+		LinearSearch(numbers, input);
+
+	}
+
+
+
 	return 0;
 
 }
