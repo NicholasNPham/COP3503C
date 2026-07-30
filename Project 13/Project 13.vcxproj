@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="lecture1.txt" />
+    <Text Include="study.txt" />
     <Text Include="zybook1.txt" />
     <Text Include="zybook2.txt" />
   </ItemGroup>
