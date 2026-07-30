@@ -1,0 +1,71 @@
+WHY DO WE SORT DATA?
+- Enables faster searching
+	- Sorted data is a prerequisite for binary search
+- Makes processing easier:
+	- instantly find min/max, detect duplicate, merge datasets in order
+- Makes data easier for humans to work with (alphabetized, chronological, etc.)
+- Unsorted dta forces a full scan (check everything); sorted data lets you skip large chunks
+
+WHAT CAN WE SORT
+- Sortability depends on comparability, not data type
+- Anything with a defined way to determine "less than / equal to / greater than" between two elements can be sorted.
+- Applies to ints, chars, strings, and custom objects (e.g. Student sorted by GPA, name, or ID) as long as a comparison rule is define
+
+WHAT DOES IT MEAN TO SORT IN ASCENDING ORDER?
+- Arranging elements from smallest to largest ( or A to Z for letters )
+- Each elements is < or equal to the one after it
+
+WHAT DOES IT MEAN TO SORT IN DESCENDING ORDER?
+- Arranging elements from largest to smallest ( or z to a for letters )
+- Each element is > or equal to the one after it. 
+
+ARE ALL SORTING ALGORITHMS THE SAME?
+- No. They all produce the same end result ( a sorted list), but differ in
+	- Time complexity
+		- best/average/worst case performance depends on input (e.g. already sorted vs reversed sorted)
+	- Space complixity 
+		- In-place (little extra memory) vs needing extra space
+	- Stability
+		- Whether equal elements keep their original relative order
+	- Method
+		- Swapping adjacent elements (bubble sort), divide and conquer (merge sort), building a sorted section incrementally (insertion sort( etc
+
+WHY IS THERE SO MANY SORTING ALGORITHMS
+- No single algorithm is best for every situation
+- Different algorithm optimized for differnet contraints: input size, available memory, whether data is nearly sorted already, and whether statbility is required
+- Example:
+	- Insertion sort can outperform mege sort on small or nearly - sorted data despite worse worse-case complexity
+	- An in place algorithm is preferred when memory is tight
+
+TRUE OR FALSE? IF THE DATA IS SORTED, ANY SORTING ALGORITHM WILL BE ABLE TO TELL VERY QUICKLY
+- False, "any" means every single algorithm, and thats not the case
+- Some algorithms (e.g. insertion sort, bubble sort with early-exit_ can detect sorted data quickly, often in O(n), because they check adjacent elements and can stop early if nothing needs stopping.
+- Other algorithms (e.g. selection sort, standed merge sort) always run their full process regardless of input, they have not built in way to detect the data is already sorted
+- So the ability to detect sorted data quickly depends on the specific algoritm, not all of them can do it. 
+
+WHAT IS LINEAR, OR SEQUENTIAL SORT?
+- Checks each element in a list one at a time, in order, comparing it to the target value
+- Continues until it finds a match or reaches the end of the list with no match
+- In the worst case (value not present, or at the very end) it must check every single element 
+
+WHAT IS BINARY SEARCH?
+- Repeatedly splits the search range in half and compares the target to the middle element
+- If arget is greater than the middle, discard the lower hlaf and sarch the upper half; if less, discard the upper half and search the lower half
+- Repeats this halving process on the remaining range until the target is found or the range shrinks to nothing
+- Each comparison eliminates half of the remaining data, that's what makes it fast
+
+IN ORDER TO PERFORM A BINARY SEARCH, WHAT MUST BE TRUE ABOUT THE DATA?
+- the data must be sorted
+- binary search works by eliminating half the remaining data based on a comparison to the middle element, this only works if you can trusst thateverything on one side is smaller and everything on the other side is larger
+- If the data isn't sorted that guarentee brakes, and the "wrong half" could still contain the target, causing binary search to miss it (a false negative)
+
+WHICH SEARCH IS FASTER
+- binary search in general
+- Binary search is O(logn), linear search is O(n)m as the list grows larger, binary search needs far fewer comparisons
+- Linear search can technically "win" in a specific edge case (target is the very irst element), but that's a best-case scenario for linear search, not the general comparison
+
+IS IT ALWAYS FASTER
+- No, binary search is not always faster
+- If the data isnt already sorted, youd have to sort it first, and that sorting cost (typically O(nlogn)) can eat up or exceed the benefit, especially for a one-time search 
+- For small lists, the advantage of binary search is negligible, the over head of compuing midpoints doesnt buy you much when theres only a handful of lements to check
+
