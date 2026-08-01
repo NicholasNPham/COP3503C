@@ -15,8 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Module 14.cpp">
+    <Text Include="lecture1.txt" />
+    <Text Include="lecture2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hero.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Hero.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

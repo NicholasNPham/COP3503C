@@ -15,8 +15,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Project 13.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="zybook1.txt" />
+    <Text Include="zybook2.txt" />
+    <Text Include="lecture1.txt" />
+    <Text Include="study.txt" />
   </ItemGroup>
 </Project>
