@@ -146,16 +146,70 @@ int main()
 		numbers.push_back(arr[i]);
 	}
 
-
+	std::sort(numbers.begin(), numbers.end(), [](int a, int b) 
+		{
+			return a > b;
+		});
+	cout << "Sorting in descending order..." << endl;
+	PrintNumbers(numbers);
+	cout << endl << endl;
 	std::sort(numbers.begin(), numbers.end());
+	cout << "Sorting in ascending order..." << endl;
 	PrintNumbers(numbers);
 	cout << endl;
+
 
 	vector<Hero> heroes;
 	heroes.push_back(Hero("Thor", 50, 125));
 	heroes.push_back(Hero("Spider-Man", 35, 70));
 	heroes.push_back(Hero("Batman", 20, 40));
 	heroes.push_back(Hero("Wolverine", 30, 55));
+
+
+	auto lambda = [](Hero& h1, Hero& h2) {return h1.get_hitpoints() < h2.get_hitpoints(); };
+	std::sort(heroes.begin(), heroes.end(), lambda);
+	for (unsigned i = 0; i < heroes.size(); i++)
+	{
+		heroes[i].PrintInfo();
+	}
+	cout << endl << endl;
+	
+	std::sort(heroes.begin(), heroes.end(), [](Hero& h1, Hero& h2) {return h1.get_name() < h2.get_name(); });
+	for (unsigned i = 0; i < heroes.size(); i++)
+	{
+		heroes[i].PrintInfo();
+	}
+
+	string input;
+	getline(cin, input);
+	auto result = std::find_if(heroes.begin(), heroes.end(), [input](Hero& h) {return h.get_name() == input; });
+	if (result != heroes.end())
+	{
+		cout << endl;
+		cout << "Found " << input << "!" << endl;
+		result->PrintInfo();
+	}
+	else
+	{
+		cout << "Search term not found" << endl;
+	}
+
+	bool found = false;
+	for (unsigned int i = 0; i < heroes.size(); i++)
+	{
+		if (heroes[i].get_name() == "Wolverine")
+		{
+			cout << endl;
+			heroes[i].PrintInfo();
+			found = true;
+			break;
+		}
+	}
+	if (!found)
+	{
+		cout << "Search term not found" << endl;
+	}
+
 
 	return 0;
 
