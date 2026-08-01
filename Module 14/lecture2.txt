@@ -1,0 +1,94 @@
+THE BASIC OF BITS AND BYTES
+- A bit (or binary digit) is a bisic unit of data in computing
+- A bit can have a value of 0, or 1.
+	- Unlike a a decimal digit, which has a value of 0-9
+- A byte is made of 8 bits (commonly, though other sizes exist)
+- Data types are (usually) made of multiple bytes
+- A char is 1 byte, or an 8-bit integer (everything is a number, either integral or floating-point value)
+- A short is typically 2 bytes or a 16-bit integer
+- an int is typically 4 bytes or a 32-bit integer
+
+CALCUALTING DECIMAL VALUES
+- in a base 10, or decimal, numbing system, place values are based on powers of 10
+- Decimal value: 8935
+	- 8 * 10^3 + 9 * 10^2 + 3 * 10^1 + 5 * 10^0
+	- 8 * 1000 + 9 * 100 + 3 * 10 + 5 * 1
+	- 8000 + 900 + 30 + 5
+	- 8935
+
+BINARY NUMBERING
+- in a base 2, or binary, numbering system, place values are based on powers of 2
+- binary value: 1011
+	- 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 1 * 2^0
+	- 1 * 8 + 0 * 4 + 1 * 2 + 1 * 1
+	- 8 + 0 + 2 + 1
+	- 11
+
+DECIMAL AND BINARY COMBINED
+- 11111111 in decimal is 11111111
+- 11111111 in binary is 255
+	- 1 * 2^7 + 1 * 2^6 + 1 * 2^5 + 1 * 2^4 + 1 * 2^3 + 1 * 2^2 + 1 * 2^1 + 1 * 2^0
+	- 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1
+	- =255
+
+OUR CODE MODIFIES BITS INDIRECTLY
+- Code ultimately turns into bit operations, for example : int x  = 5
+- A compiler translates this to instructions:
+	- Set some bits to the binary equivalent of 5
+	- 0101, plus 28 leading zeroes for a 32-bit integer
+- Whether youre aware of it or not, this is always happening
+- Most computational processing (i.e our code) ultimately ends up as:
+	- Set some bits to a value
+	- Check if these bits are equal to a value
+	- If so, set some bits, or check some other bits
+
+WE CAN MODIFY BITS DIRECTLY
+- We typically writes "high level" code
+- We can use bitwise operators to work on a lower level
+- This can give us more control over how a computer... computes
+
+OR |
+- combine bits of two values by comparing pairs of bits from each
+- If either of the two bits are 1, the resulting bit is 1
+- Used to combine groups of bits together, or turn bits on
+
+AND &
+- if Both bits are 1, the final result is 1.
+- useful for checking if a particualr bit is turned on
+
+EXCLUSIVE OR, XOR ^
+- if exactly one of the two bits are 1, the final result is 1
+- if both are 0, the result is 0
+- If both are 1, the result is 0
+
+NEGATION ~
+- an unary operator - it only has one opearnd
+- Inverts all of the bits of a value - 0s become 1, and 1s become 0
+
+LEFT SHIFT << AND RIGHT SHIFT >>
+- bit shifting moves every bit in a value left or right a number of times specified by the right-hand operand
+
+RIGHT-SHIFTING: DIVIDE BY 2^N
+- the same concept as left shift in reverse
+
+BIT FIELD
+- a bit field is, generally, just a collection of bits that are stored together
+- basic data types can be sued for this purpose (everything is made of bits!)
+
+GOAL: STORE 8 BOOLEAN VALUES 
+- 1 bool variable = 1 byte
+- 8 bool variable = 8 bytes
+- 1 unsigned char (made of 8 bits) = 1 byte 
+- One unsigned char as a bit field can store up to 8 bool values, for 1/8 of the memory
+
+TURNING OFF BITS REQUIRES MORE WORK
+- start with the bits you want to turn off (just the 4 bit in this case so a value of 4
+- negate that value (flip 0s to 1s and 1s to 0s)
+- And with the value we want to modify (AND requires BOTH bits to be turned on)
+
+BIT FIELDS AND ENUMERATIONS
+- an enumeration (enum) can help with identifying bits
+- Instead of bit 4, bit 32, bit 128
+
+
+
