@@ -1,0 +1,102 @@
+FUNCTION POINTERS
+
+FUNCTIONS HAVE MEMORY ADDRESSES
+- the name of a function is a pointer to its address
+- Calling a function retrieves and executes the instructions at that memory address
+- You can store that address with a function pointer
+	- Use it later, passing to other functions or classes
+	- For the same reasons you would use any kind of pointer (and some others)
+
+MORE FUNCTION POINTER EXAMPLES
+- in short:
+	- Copy the function prototype and 
+		1. Replace the function name with -> (*YOUR_VARIABLE_NAME)
+		2. Remove the name of any parameters (int a, float b) -> (int a, float b)
+- The syntax is kind of gross, but... its the way these things work.
+- There are other C++ features that cna help alleviate this
+
+RECAP
+- functions have memory addresses like our variables
+	- Function pointers let us store those addresses for later use
+- Function pointer allow you use functions as data
+- All operations that apply to data can now apply to functions
+	- Storing functions in containers
+	- Passing functions to functions
+	- Share them with other code on our programs
+- They are very effective when building systems that allow for combinations of operations
+
+-----
+FUNCTORS
+WHAT IS A FUNCTIOR (OR FUNCTION OBJECT)
+- a class that can act like a function
+- It can do this by overloading operator() - the call operator.
+	- This lets you invoke, or call, the object as you would a function
+
+STL, ITERATORS, AND CUSTOM FUNCTIONS
+- A lot of STL functionality uses iterators over some range of elmeents.
+- The function requires an operation to perform on those elements
+- Formally, the operation is called a predicate
+- Short version: a predicate is a function (or functor) that returns a bool
+
+TEMPLATES AND STD::FUNCTIONS
+- a lot of STL functionality uses iterators over some range of elements
+
+WHAT IS STD::FUNCTION
+- Wrapper class: a clean interface around some functionality
+- Encapsulates some callable element, anything that can be called/invoked:
+	- function pointers, functors, even lambda expression (more on these later!)
+
+-----
+LAMBDA EXPRESSIONS
+
+LAMBDA EXPRESSIONS (LAMBDAS)
+- anonymous functions - functions without a name.
+	- They aren't formally declared like other functions
+- Essentially dynamic function objects - no class needed
+- Good if you need a custom function, and want to control where its used
+	- Keeps functionality "localized" to only where you need it
+
+LAMBDA: SYNTACTIC SUGAR FOR FUNCTORS
+- syntactic sugar: A nicer, easier alternative for an existing language feature (or for some other languages)
+- Code that isnt strictly necessary but is nice to have
+	- The code equivalent of candy - tasty, but we dont need it!
+- Just affects how you the programmer, writes some parts of your code
+- Some languages (especially newer ones) are "sweeter" than others
+	- C++ has gotten sweeter over time, but was never designed to be a sugary language
+
+LAMBDA EXPRESSION SYNTAX
+
+	[capture clause](parameters)->returntype(optional)
+	{
+	}
+
+- parameters: just like a function write your parameters here
+- ReturnType: just like a function (you can omit it, and the compiler deduces the type- like use auto keyword)
+- [capture clause]: How does the expression access variables from the surrounding scope? (more on this later - it can be empty)
+
+CREATING AND STORING LAMBDA VARIABLES
+- Lambda variables can be created for reuse, but they most be storing using
+	1. The auto keyword
+	2. Templates, or std::function (which uses templates)
+- Why? they have a type, but ... it's not meant for humans
+
+CAPTURING LOCAL VARIABLES
+- A lambda expression can use variables declared outside of it.
+- It has to "import" those variables through the capture clause
+	- [] no access to locals (the default)
+	- [=] capture by value. Access, but no modification
+	- [&] capture by reference, allows access/modification
+
+FUNCTION POINTERS VS FUNCTORS VS LAMBDAS
+- Function pointers are the original - still useful, but might feel a little outdated.
+- Functors are better alternatives
+	- Syntax is cleaner, less headache
+	- You may have lots of small triveral classes floating around
+- Lambdas are good when you need "disposable" functions that wont live on
+- Fundamentally, they are all very similar
+
+PROGRAMMING IS ALWAYS ABOUT DOING SOMETHING WITH DATA
+- Our program operates on data (whether primitive types or objects)
+- Treating a set of instructions (i.e. functions) as data allows for more complex applications
+- In the same way you might read data from a file, instead of hard-coding some values
+- You can pass sets of instructions around, to avoid "hard coding" specific function names
