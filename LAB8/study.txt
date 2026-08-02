@@ -1,0 +1,72 @@
+WHAT IS A BIT?
+- a bit is the smallest unit of data in computing
+- A bit can hold exactly one of two values : 0 or 1
+- 8 bits = 1 byte
+
+WHAT VALUES CAN A BIT HAVE?
+- a bit can have a value of 0 or 1 thats it.
+
+WHAT NUMBERING SYSTEM (BASE) DOES BINARY USE?
+- binary uses base 2, meaning each place value is a power of 2
+- The "base" of a number systekm tells you how many unique digits are available
+	- base 10 (decimal) has 10 unique digits : 0,1,2,3,4,5,6,7,8,9
+	- base 2 (binary) has 2 unique digits : 0,1
+- Thats why a bit can only be 0 or 1, a bit is just a single digit in base 2
+
+WHAT DOES "AND"  DO WHEN COMBINING TWO VALUES?
+- returns 1 only when both bits are 1
+- Otherwise return 0
+- Truth table: 0&0 = 0
+			   0&1 = 0
+			   1&0 = 0
+			   1&1 = 1
+
+WHAT DOES OR "OR" DO WHEN COMBINING TWO VALUES?
+- returns 1 when at least one bit is 1
+- only returns 0 when both bits are 0
+- Truth table: 0&0 = 0
+			   0&1 = 1
+			   1&0 = 1
+			   1&1 = 1
+
+WHAT DOES "XOR" DO WHEN COMBINING TWO VALUES?
+- returns 1 when the bits are different
+- returns 0 when the bits are the same
+- Truth table: 0&0 = 0
+			   0&1 = 1
+			   1&0 = 1
+			   1&1 = 0
+- different from OR only on the 1,1 case (XOR returns 0, OR returns 1)
+
+
+WHAT DOES NEGATE DO WHEN USED ON A VARIABLE?
+- Flips a single bit: 0 -> 1, 1 -> 0
+
+WHAT IS BIT-SHIFTING?
+- bit-shifting means moving all of the bits in value over by a specified number of positions
+- Vacated spots get filled in with 0
+
+HOW DOES A LIFT-SHIFT WORK?
+- Shifting bits left by n positions = multiplying the value byt 2^n
+- Example: 0001 (1) shifted left by 1 -> 0010 (2) which is 1 x 2^1
+- vacated spots on the right fills with 0
+
+HOW DOES RIGHT SHIFTING WORK?
+- shifting bits right by n positions = dividing the value by 2^n
+- Example: 0010 (2) shifted by 1 -> 0001 (1), which is 2 / 2^1
+- Vacated spot on the left fills with 0
+
+LEFT AND RIGHT SHIFTING IS THE EQUIVALENT OF MULTIPLYING OR DIVIDING BYT WHAT?
+- LEFT multiply by 2^n
+- RIGHT divide by 2^n
+
+WHAT IS A BIT FIELD, AND WHY MIGHT WE USE ONE?
+- A bit field is a collection of bits stored togetherm used to pack multiple boolean flags into individual bits of a single variable
+- Why use one: memory efficiency, a normal bool takes 1 full byte even though it needs 1 bit, so 8 separate bools = 8 bytes wasted, while a bit field packs those same 9 flags into just 1 byte
+
+HOW MANY BINARY VLAUES (I.E. BOOLEAN) CAN BE STORED IN AN 8-BIT VARIABLE? IN A 16-BIT VALUE? A 32-BIT VARIABLE?
+- since 1 bit can store exactly 1 boolean value"
+	- 8 bits variable -> 8 booleans
+	- 16 bit variable -> 16 booleans
+	- 32 bit variable -> booleans
+
