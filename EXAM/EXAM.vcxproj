@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{08163b87-e2b5-43cc-a0e8-af9a4a2ec1a7}</ProjectGuid>
-    <RootNamespace>LAB8</RootNamespace>
+    <ProjectGuid>{4a546622-c906-4744-a98b-522974d3b62a}</ProjectGuid>
+    <RootNamespace>EXAM</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,16 +139,10 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Color.cpp" />
-    <ClCompile Include="LAB8.cpp" />
+    <ClCompile Include="EXAM.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="colors1.txt" />
-    <Text Include="colors2.txt" />
-    <Text Include="study.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Color.h" />
+    <Text Include="examstudy.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

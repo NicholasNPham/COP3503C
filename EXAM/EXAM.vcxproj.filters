@@ -15,21 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LAB8.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
+    <ClCompile Include="EXAM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="colors1.txt" />
-    <Text Include="colors2.txt" />
-    <Text Include="study.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <Text Include="examstudy.txt" />
   </ItemGroup>
 </Project>

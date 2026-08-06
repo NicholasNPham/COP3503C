@@ -20,7 +20,7 @@ BINARY NUMBERING
 - in a base 2, or binary, numbering system, place values are based on powers of 2
 - binary value: 1011
 	- 1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 1 * 2^0
-	- 1 * 8 + 0 * 4 + 1 * 2 + 1 * 1
+	- 1 * 8   + 0 * 4   + 1 * 2   + 1 * 1
 	- 8 + 0 + 2 + 1
 	- 11
 
@@ -89,6 +89,8 @@ TURNING OFF BITS REQUIRES MORE WORK
 BIT FIELDS AND ENUMERATIONS
 - an enumeration (enum) can help with identifying bits
 - Instead of bit 4, bit 32, bit 128
+
+
 
 
 

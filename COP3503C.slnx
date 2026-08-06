@@ -3,6 +3,8 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
+  <Project Path="EXAM/EXAM.vcxproj" Id="4a546622-c906-4744-a98b-522974d3b62a" />
   <Project Path="LAB8/LAB8.vcxproj" Id="08163b87-e2b5-43cc-a0e8-af9a4a2ec1a7" />
+  <Project Path="Module14/Module 14.vcxproj" Id="d4c9c4bf-0a96-423a-bcf7-f8266e9ec004" />
   <Project Path="P3/P3.vcxproj" Id="e1dc3258-d577-4ee9-aa83-2bf82d5ecf41" />
 </Solution>

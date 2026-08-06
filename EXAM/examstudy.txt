@@ -1,0 +1,152 @@
+ITERATORS
+- Utilizing iterator objects to traverse a collection of data? begin() at the beginning, increment your iterator with the ++ operator, and if you've reached the end() you've gone too far.
+	- begin() returns an iterator to the first element in the container
+	- end() returns an iterator to one-past-the-last element. It does not point to a real element, it's a sentinal marking the boundry
+	- Dereferencing end() compiles fine but its undefined behavior at runtime, theres no valid element there.
+	- The stopping condition it != end() merrors the classic i < size pattern from array loop: you stop before touching invlaid memory, never at or after it.
+	- For an empty container, begin() == end() immediately, so a loop using this pattern just doesn't execute, no special-casing needed.
+	- ++it means "advance to the next element," but the actualy mechanism depends on the container:
+		- vector: continguous memory, so ++it does real pointer arithmetic (add sizeof(T) to the address)
+		- list: nodes scattered in memory, so ++it follows the "next" pointer stored in the current node instead of doing math.
+		- The syntax ++it stays the ame across containers, but what happens underneath is completely different, Thats the abstraction iteratore gives you. 
+- Initialize an iterator to the first element of a container
+	- syntax:
+		
+		auto iter = vectorName.begin();
+
+	- To point to an iterator at the frist element of a container, call .begin() on it.
+	- you need both the declaration (naming the variable) and the intitalization, missing either piece means it won't compile or won't do what you want.
+	- Auto is preferred since spelling out the full iterator type (like std::vector<int>::iterator) gets long and ugly fast.
+- Understand which element the iterator returned by the end() function references 
+	- end() returns a sentinel iterator, one-past-the-last-element. It does not point to the last real element, and does NOT point to any valid data at all.
+	- Concretely: if a vector has 3 ints starting at address 1000 (4 bytes each), begin() points to 1000, the last real element is at 1008, and end() points to 1012, and address the vector doesnt actually own
+	- Dereferencing endf() is undefined behavior. There's no guarentee what's at that meneory location, could be garbage, could belong to something else, could crash. The compiler wont stop you because the syntax is legal, it's a runtime problem.
+	- End()'s entire purpose is to be a stopping condition (it != end()), never something you actaully read from
+- Advance iterators using the increment operators
+	- ++it is defined for every container type, the syntax is uniform across vector, list, map, etc. Thats the abstraction iterators provide
+	- vector: pointer arithmetic, address + sizeof(T), because elements are contiguous in memory
+	- list: follows the "next" pointer stored in the current node, because nodes are scattered in memory.
+	- Map (tree-based): navigates node connection (child/parent pointers) to find the next element in sored order, more compex that list since it's not just one straight cain, but same underlying idea, no address math, follow the structure.
+	- You never need to know or care which mechanism is happening when you write the code, ++it looks the same either way. Thats the point
+
+POINTERS, DYTNAMIC MEMORY
+- What is a pointer, what does it do? (A magical, mysterious thing, that does... stuff? The bane of students everywhere?)
+	- A pointer is a variable whose value is a memory address, not a regular value like an int or char.
+	- int* p == & x; - here & is the address-of operator. It gets the memory address where x lives and stores that address into p.
+	- * shows up in two different roles depending on context
+		- in a declaration (int* p), * marks the TYPE, saying "p is a pointer to an int"
+		- outside a declaration (*p), * is the dereference opeator, meaning "go to the address stored in p, and give me the value sitting there."
+	- Concrete example: if x lives at memory address 1000 and holds the value 5: 
+		- p equals 1000 (the address)
+		- *p equals 5 (the value at that address, same as x itself)
+	- A pointer and the variable it points to are two separate things: the pointer holds an address, dereferencing it gets you to the actual data
+- How can you create NEW memory dynamically?
+	- new is the keyword used to allocate memory on the heap at runtime.
+	- new int allocates space for one int (4 bytes) on the heap and returns the address of that space, meaning it returns a poitner, specifically and int*
+	- syntax: int* p = new int; - p now holds the address of the freshly allocated int. You can assign into it with *p = 5;
+	- The pointer's type muist match what new is creating, but because the type tells the compiler how many bytes to read/write when dereferencing.
+	- Example of what goes wrong with a mismatch: double* p = new int; allocates only 4 bytes (for the int), but p is typed as pointing to a double, which is typically 8 bytes. dereferencing p woudl read those 4 bytes puls 4 more bytes of memory you down own, memory you don't own, could be garbage or someone else's data. That's undefined behavoir.
+	- Bottom line: the type isn't decoartion, it's a contract about size and interpretation of the bytes at that address
+- How can you DELETE memory that is no longer needed?
+	- delete frees memory allocated with new. Heap memory doesnt clean itself up automatically like stack memory does, you must free it manually.
+	- Forgetting to delete = memory leak. The memory is gone, it's just unreachable once you lose the pointer holding tis address.
+	- Leak in loops compound fast and can exhaust memory, crashing the program
+- What's the difference between delete and delete[]?
+	- array allocation; int* p = new int[10]; creates 10 continguous ints, p points to the first one
+	- must match: new -> delete, new[] -> delete[] never mix them
+	- Plain delete only knows how to clean up one element. Using it on an array (delete p; intead of delete[] p;) causes undefined behavior, likely leaks the reast and if the array holds objects with destructors, may only destruct the first one
+- What is nullptr?should you use for initialization?
+	- Uninitalized pointer shold garbage addresses, not "nothing". Dereferencing one is undefined behavior, unpredictable and hard to debug.
+	- Nullptr is defined, safe value meaning "points to nothing" always initialize pointers to nullptr, if you dont have a real address yet: int* p = nullptr;
+	- Lets you safely check before dereferencing: if (p != nullptr_ {...}. This only works because you deliveratly set it to nullptr, an uninitialized pointer would give garbage that isn't nullptr but also isn't valid.
+
+REFERENCES
+- what are they?
+	- A reference is an alias, another name for an existing variable's memory. Not a separate variable, no separate address.
+	- int& ref = x; binds ref to x peranently, at declaration only
+	- After that, ref = y; its not a rebind its a value copy: it copies y's value into x's memory (since ref IS x) ref still refers to x forever.
+	- = means different things depending on context: at declaration it binds, afterward it's just normal value assignment
+- Why references are better than pointers
+	- A reference MUST be initialized at declaration, int& ref; (no initializer) doesn't even compile. Pointers can be uninitalized (int* ref; (no initializer) doesnt even compile. Pointers can be left uninitalized (int* p;) which holds garbage
+	- This means references can never be left uninitialized (int* p;), which holds garbage.
+	- This means references can never be "null" or "unbound", they're guarenteed by the compiler to always refere to something valid.
+	- No need for null-checks like if (ref != nullptr), that state literally can't happen with reference, elminating a whole class of bugs pointers are prone to.
+- Why are they not better than pointers (Never! Okay, that's not true...)
+	- References can never be rebound after initialization. If you need something that can change what it refers to over time (e.g. walking though a linked list, p = p->next;), you need a pointer, a reference cant do that job
+	- References can never represent "nothing" if you need to express an optional or possibly-absent value, use a poitner with nullptr, A reference has no equivalent "null" state
+- When cant you use a reference?
+	- When you need to change what something refers to after the fact (e.g., iterating/walking a data structure like a linked list). References can't rebind, pointers can.
+	- When you need to represent "nothing" or an optional/absent value. References must always refer to something valid, only pointers can be nullptr.
+
+WHAT ARE THE BIG THREE AND WHY ARE THEY IMPORTANT?
+- The Big Three: copy constructor, copy assignment operator, destructor.
+- If a class manages a resource needing manual cleanup (e.g., heap memory via new), and you don't write these yourself, the compiler generates default versions that do a SHALLOW copy, copying the pointer's address, not the data it points to.
+- Shallow copy danger: two objects end up with pointers to the SAME memory. When both go out of scope, both destructors call delete on the same address, double delete, undefined behavior, crash or heap corruption.
+- Also dangerous in between: if one object's memory is freed first, the other object's pointer becomes a dangling pointer, using it is undefined behavior.
+- Fix: write your own copy constructor (and copy assignment operator) to do a DEEP copy, allocate new memory, and copy the actual values over. Now each object owns its own separate memory, no collision.
+- Rule of Three: if you need to write ONE of these three custom, you almost always need to write ALL three, they all deal with the same resource-management problem together.
+
+CODE ORGANIZATION / COMPILATION
+- Understand the difference between source and header files
+	- .h files hold declarations: function prototypes, class definitions (member variables, function signatures), no implementation.
+	- .cpp files hold implmentations: the actual function bodies, the real working code.
+	- You #include the .h file (not the .cpp) wherever you need to use a class/function, this lets multiple files "see" the same declaration safely.
+	- Declarations can be duplicated across files with no problem, they're just promises about what exists. implementations can only exist Once, in one.cpp file.
+	- If implementation code got included into multple .cpp files (e.g., by including .cpp directly), the linker would find multiple definitions of the same function and fail with multiple definition error. Program never even builds, this is a link-time error, not a runtime crash.
+- What's a translation unit?
+	- A translation unit is a .cpp file after the preprocessor expands all its #includes pasting in the full text of included headers
+	- Each .cpp file forms its own separate translation unit, compiled independently into its own object file (.o)
+	- Each .cpp file forms its own separate translation unit, compiled independently into its own object file (.o)
+	- Multiple .cpp files can #include the same header safely (declarations only), each becomes its own translation unit. They only get combined togehter at the linking stage, which is also where "multiple definition" confilcts would surface.
+- What's the three-step process to building a C++ program?
+	- Three-step build process
+		- Preprocess: handles #include (pastes in header contents), #define macros, conditional compilation (#ifdef, etc). Produces expanded source code.
+		- Compile: translates each expanded translation unit into machine code, producing an object file (.o) per .cpp file. Not yet runnable, may reference things defined elsewhere.
+		- Link: combines all the separate object files into one final executable, resolving references between them (e.g., connecting a function call to its actual implementation in another file).
+
+CLASSES, OBJECT-ORIENTED PROGRAMMING
+- what are classes and why do we create them
+	-  A class bundles two things together, data (member variables) and behavior (member functions/methods).
+	- Encapsulation: making data private and controlling access through the classes own functions (e.g. setAge()_ lets the class enforce rules/validation before data changes.
+	- Without encasulation, a bare public variable can be set to anything by any code, no validation, no protection, data can end up in an invalid state
+- what is the purpose of a constructor
+	- A constructor initializes an object's member variables. It runs automatically the moment an object is created, never called manually like a regular function. No return type, not even void.
+	- Every class gets a compiler-generated default constructor if you don't write one yourself.
+	- That default constructor's behavior depends on member type:
+		- Class-type members (e.g., string): properly initialized, by calling their own default constructors.
+		- Primitive/built-in members (int, double, pointers, etc): left uninitialized, garbage values.
+	This is a strong reason to write your own constructor, to guarantee primitive members start at sane values instead of garbage.
+- What is the purpose of a copy constructor, and when does it get called?
+	- Purpose: without a custom one, the default copy constructor does a shallow copy (copies pointer addresses, not the data). Dangerous if the class manages heap memory, leads to double-delete/dangling pointers (see Big Three). A custom copy constructor does a deep copy: allocates new memory, copies actual values, so each object owns independent memory.
+	- Three triggers for a copy constructor to run:
+		- Direct initialization from an existing object: Dog d2 = d1; or Dog d2(d1);
+		- Passing an object BY VALUE into a function (not by reference/pointer)
+		- Returning an object BY VALUE from a function
+- what is the purpose of a destructor and when does it get called
+	- Purpose: cleans up resources the object was responsible for, typically calling delete/delete[] on any heap memory it allocated (via new in the constructor), closing file handles, etc.
+	- Stack objects: destructor runs automatically the moment the object goes out of scope (function returns or enclosing {} block ends).
+	- Heap objects (new): destructor only runs when YOU manually call delete/delete[] on the pointer. Forgetting this means the destructor never runs, resources leak.
+
+COMMAND-LINE COMPILING
+- why build code from a command line?
+	- Command-line builds (e.g., g++ + Makefile) aren't tied to a specific IDE, work the same on any machine/OS with the right tools installed.
+	- IDE project files (like .sln/.vcxproj) are IDE-specific and may not work on other machines or OSes.
+	- 0This portability is why graders, automated grading systems, and CI/CD pipelines rely on command-line builds, consistent, repeatable, no human needs to click through an IDE.
+- WHAT IS A MAKE FILE
+	- A Makefile is a set of rules telling the make program how to build a project, including dependencies between files.
+	- make checks timestamps: if a .cpp file hasn't changed since its last compile, it skips recompiling it and reuses the existing .o file.
+	- Only changed files (and things depending on them) get recompiled, then everything is relinked into the executable. Saves significant time on large projects instead of rebuilding everything from scratch every time.
+-What are command-line arguments
+	- Received via int main(int argc, char* argv[]).
+	- argc = argument count (how many total entries in argv).
+	- argv = array of C-strings, the actual argument text.
+	- argv[0] is always the program's own name/path, NOT something the user typed as an argument. So running ./myprogram hello world gives argc = 3, with argv[1] = "hello", argv[2] = "world".
+	- To loop through just user-supplied arguments, start at index 1, not 0.
+
+EXTERNAL LIBRARIES
+- True or false: Libraries are existing solutions to problems that you can integrate into your own program.
+	- True
+- True or false: libraries, once setup and properly compiling with your code, are immediately "done" and work exactly as you want them to.
+	- false
+- In C++, are libraries universally interchangeable? That is, will they work the same with any compiler or operating system? (The answer may not be the same in other languages!)
+	- no
