@@ -146,7 +146,73 @@ COMMAND-LINE COMPILING
 EXTERNAL LIBRARIES
 - True or false: Libraries are existing solutions to problems that you can integrate into your own program.
 	- True
+	- True. Libraries package up solutions to problems that have already been solved (e.g., SFML handles graphics rendering, input, window management).
+	- Avoids "reinventing the wheel", some problems (low-level graphics, OS/hardware interaction) are genuinely hard and already solved well by mature, tested libraries. Rewriting from scratch would waste time and likely be buggier.
 - True or false: libraries, once setup and properly compiling with your code, are immediately "done" and work exactly as you want them to.
 	- false
+	- False. Successfully compiling/linking a library just means the plumbing works, your code CAN call into it. It doesn't mean the library automatically behaves exactly how you want.
+	- You still have to learn the library's API, write your own code using it correctly, and often work around its quirks/limitations to get the actual behavior you need (e.g., SFML compiling cleanly still required writing your own drawing/game logic on top of it).
 - In C++, are libraries universally interchangeable? That is, will they work the same with any compiler or operating system? (The answer may not be the same in other languages!)
-	- no
+	- False, not interchangeable. Different compilers (and platforms) can have different ABI (Application Binary Interface) expectations, how data structures are laid out, calling conventions, name-mangling.
+	- A library built for one compiler/platform combo may fail to link, or worse, link but crash/corrupt memory at runtime, if used with a mismatched compiler.
+	- Real example: SFML ships separate pre-built binaries per compiler/platform (e.g., vc15 for Visual Studio), you have to use the one matching your actual toolchain.
+
+FILE I/O
+- How do you read and write binary data using fstream/ostream/istream objects?
+	- ifstream for reading, ofstream for writing, fstream for both.
+	- open in binary mode with std::ios::binary flag: std::ofstream outFile("data.bin", std::ios::binary);
+	- use .read() and .write() for binary data, NOT <</>> (those are for text/formatted I/O)
+- What are the parameters of read()? write()? Why are they the same?
+	- read(char* buffer, streamsize), write(const char* buffer, streamsize count)
+- Why use binary versus a plain text file?
+	- binary is more compact and faster
+- explain the purpose of a header in a binary file
+	- A header is metadata stored at the start of the file, describing the data that follows (e.g. width, height, format)
+	- The program reading the file needs this info FIRST, since raw bytes alone have no build-in meaning, the header tells the reader how to interpret them before it process the actual data
+
+INHERITANCE
+- What is the concept of inheritance?
+	- Inheritance lets a derived class (e.g., Circle) inherit member variables and functions from a base class (e.g.), build on top of it instead of rewriting everything.
+	- Exception: private base class members are NOT directly accessible by derived classes, even though they're technically part of the object.
+	- Protected access level exist for this: aaccessible by the class itself and derived classes, but still blocked from outside code (unlike public).
+- What is the concept of polymorphism?
+	- A base class pointer/reference can point to any derived class object and calling a function though it runs the derived  class specific version, determined at runtime, not the pointers declared type
+	- Requires the base class function to be marked virtual. Without virtual, the base class's version always run regardless of the actual object type, polymorphism doesnt work.
+- Understand that polymorphism allows a single base class pointer to point to ALL classes derived from the base class.
+
+DATA STRUCTURES
+- Understand the basic ideas behind vectors, linked lists, and maps
+	- Vector: contiguous memory. Fast random access by index (direct address math, O(1)). Slow insertion in the middle, everything after the insertion point must shift over (O(n)).
+	- Linked list: nodes scattered in memory, connected via next pointers. Fast insertion anywhere, just adjust a couple pointers, no shifting (O(1) once you're at the spot). Slow access to a specific position, must traverse node by node from the start (O(n)).
+	- Map: typically a tree (red-black tree), not contiguous, not a simple chain. Keeps elements sorted by key automatically. Searching uses binary-search-like logic: each step eliminates about half the remaining possibilities, so search is O(log n), much faster than a linked list's full traversal, though not as instant as a vector's direct indexing.
+- Explain how the various “map” classes (map, unordered_map, multimap) store pair objects, which consist of a key and a value.
+	- map: red-black tree, sorted by key. Search is O(log n), multiple comparison steps walking down the tree.
+	- unordered_map: hash table. A hash function converts the key into a number (index), letting you jump nearly straight to the right spot in one calculation. Search is typically O(1), faster than map since there's no walking/comparing needed. Tradeoff: no guaranteed order when iterating, keys are NOT sorted.
+	- multimap: like map (sorted, tree-based), but allows DUPLICATE keys, multiple pairs can share the same key. Regular map requires unique keys.
+
+OPERATORS 
+- Overloading operators – equality, assignment, less than, greater than, etc... why would you do it? (To customize your code, show off your mad skillz, or confuse your teammates by overloading operator-() to add values instead!)
+	- Primitive types (int, double, etc) have built-in operators. Class types don't, the compiler has no idea what "equal" or "less than" means for a custom class, you must define it yourself by overloading the operator.
+	- Example: bool operator==(const Point& other) const { return (x == other.x) && (y == other.y); }
+	- Return type for comparison operators (==, <, >) is bool, needed so results can be used directly in if statements and conditions.
+	- Inside the function, plain member names (x, y) refer to the current object (left side of the operator), other.x/other.y refer to the object being compared against.
+- HOW would you do it?
+	- Parameter is typically const ClassName& other, not ClassName other, to avoid an unnecessary copy (which would trigger the copy constructor). const ensures the function can't accidentally modify the object being compared.
+	- General syntax: ReturnType operator<symbol>(const ClassName& other) const { ... }, the const at the end means the function won't modify the current object either, appropriate for comparisons.
+	- Define the operator's logic based on what "equal", "less than", etc actually means for your class, usually comparing relevant member variables.
+
+FUNCTION POINTERS
+- What is a function pointer? How do you pass functions around?
+	-Function pointers
+	- A function pointer holds the ADDRESS of a function (not data), letting you store "which function to call" and pass it around like any other pointer.
+	- Lets you inject custom behavior into a function without rewriting it. Example: a sort() function can accept a comparison function pointer, letting the same sort() implementation do ascending, descending, or any custom order, just by passing a different function pointer each call.
+	- Syntax: bool (*funcPtr)(int, int) = compare; reads as "funcPtr is a pointer to a function taking two ints, returning bool." Parentheses around *funcPtr are required, without them the meaning changes entirely.
+- What's a function object? (Simple - any class with operator() overloaded)
+	- A function object is a class that overloads operator(), letting an object of that class be CALLED using function-call syntax: add(3, 4), even though add is technically an object, not a function.
+	- Advantage over a function pointer: a function object is a full class, so it can carry its own state via member variables, configurable data that persists across calls. A function pointer just points to fixed code, no state, no memory.
+	- Example: MultiplyBy timesThree(3); timesThree(10); returns 30, the factor (3) is stored as a member variable and reused every call.
+
+TEMPLATES
+- A function object is a class that overloads operator(), letting an object of that class be CALLED using function-call syntax: add(3, 4), even though add is technically an object, not a function.
+- Advantage over a function pointer: a function object is a full class, so it can carry its own state via member variables, configurable data that persists across calls. A function pointer just points to fixed code, no state, no memory.
+- Example: MultiplyBy timesThree(3); timesThree(10); returns 30, the factor (3) is stored as a member variable and reused every call.
